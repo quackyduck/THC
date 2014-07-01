@@ -1,0 +1,24 @@
+* Case
+	* Id
+	* Building Id
+	* More General Info
+	* Description
+	* Comments
+	* Photos
+
+* Photo
+	* Id
+	* Case Id
+	* Caption
+
+* Comment
+	* Id
+	* Case Id
+	* Text
+
+* User
+	* Id
+	* Name
+	* Address
+	* Lat
+	* Long
