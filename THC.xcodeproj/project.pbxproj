@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */; };
+		0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */; };
+		0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2EF03E19663E9D00FED705 /* MapKit.framework */; };
 		0AF08BB21964EC94002761B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB11964EC94002761B9 /* Foundation.framework */; };
 		0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB31964EC94002761B9 /* CoreGraphics.framework */; };
 		0AF08BB61964EC94002761B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB51964EC94002761B9 /* UIKit.framework */; };
@@ -36,6 +39,10 @@
 
 /* Begin PBXFileReference section */
 		02E9147714AE45B28801C32B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggregateMapViewController.h; sourceTree = "<group>"; };
+		0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggregateMapViewController.m; sourceTree = "<group>"; };
+		0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AggregateMapViewController.xib; sourceTree = "<group>"; };
+		0A2EF03E19663E9D00FED705 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0ACDC5B94E4440D4A15CFB87 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF08BAE1964EC94002761B9 /* THC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF08BB11964EC94002761B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */,
 				0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */,
 				0AF08BB61964EC94002761B9 /* UIKit.framework in Frameworks */,
 				0AF08BB21964EC94002761B9 /* Foundation.framework in Frameworks */,
@@ -106,6 +114,7 @@
 		0AF08BB01964EC94002761B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A2EF03E19663E9D00FED705 /* MapKit.framework */,
 				0AF08BB11964EC94002761B9 /* Foundation.framework */,
 				0AF08BB31964EC94002761B9 /* CoreGraphics.framework */,
 				0AF08BB51964EC94002761B9 /* UIKit.framework */,
@@ -164,6 +173,9 @@
 				0AF08BE31964F16F002761B9 /* LoginViewController.h */,
 				0AF08BE41964F16F002761B9 /* LoginViewController.m */,
 				0AF08BE51964F16F002761B9 /* LoginViewController.xib */,
+				0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */,
+				0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */,
+				0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +274,7 @@
 				0AF08BBC1964EC94002761B9 /* InfoPlist.strings in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
+				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +329,7 @@
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
+				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
