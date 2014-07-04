@@ -24,6 +24,8 @@
 		0AF08BD71964EC94002761B9 /* THCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF08BD61964EC94002761B9 /* THCTests.m */; };
 		0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF08BE41964F16F002761B9 /* LoginViewController.m */; };
 		0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF08BE51964F16F002761B9 /* LoginViewController.xib */; };
+		377D16A91967342A004E4E67 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D16A71967342A004E4E67 /* CameraViewController.m */; };
+		377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D16A81967342A004E4E67 /* CameraViewController.xib */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,9 @@
 		0AF08BE31964F16F002761B9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0AF08BE41964F16F002761B9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		0AF08BE51964F16F002761B9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		377D16A61967342A004E4E67 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		377D16A71967342A004E4E67 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		377D16A81967342A004E4E67 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +181,9 @@
 				0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */,
 				0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */,
 				0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */,
+				377D16A61967342A004E4E67 /* CameraViewController.h */,
+				377D16A71967342A004E4E67 /* CameraViewController.m */,
+				377D16A81967342A004E4E67 /* CameraViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -275,6 +283,7 @@
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
+				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
