@@ -31,6 +31,12 @@
 		377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D16B21967BE1D004E4E67 /* ViolationSubmissionViewController.m */; };
 		377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D16B31967BE1D004E4E67 /* ViolationSubmissionViewController.xib */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
+		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
+		87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A9884F1968C09500EDE34F /* CaseTableViewController.xib */; };
+		87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A988531968C0A400EDE34F /* CaseDetailViewController.m */; };
+		87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A988541968C0A400EDE34F /* CaseDetailViewController.xib */; };
+		87A9885A1968C0D700EDE34F /* CaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A988581968C0D700EDE34F /* CaseCell.m */; };
+		87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A988591968C0D700EDE34F /* CaseCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +84,15 @@
 		377D16B11967BE1D004E4E67 /* ViolationSubmissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationSubmissionViewController.h; sourceTree = "<group>"; };
 		377D16B21967BE1D004E4E67 /* ViolationSubmissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationSubmissionViewController.m; sourceTree = "<group>"; };
 		377D16B31967BE1D004E4E67 /* ViolationSubmissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViolationSubmissionViewController.xib; sourceTree = "<group>"; };
+		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
+		87A9884E1968C09500EDE34F /* CaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseTableViewController.m; sourceTree = "<group>"; };
+		87A9884F1968C09500EDE34F /* CaseTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseTableViewController.xib; sourceTree = "<group>"; };
+		87A988521968C0A400EDE34F /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
+		87A988531968C0A400EDE34F /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
+		87A988541968C0A400EDE34F /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
+		87A988571968C0D700EDE34F /* CaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCell.h; sourceTree = "<group>"; };
+		87A988581968C0D700EDE34F /* CaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCell.m; sourceTree = "<group>"; };
+		87A988591968C0D700EDE34F /* CaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +215,12 @@
 				377D16B11967BE1D004E4E67 /* ViolationSubmissionViewController.h */,
 				377D16B21967BE1D004E4E67 /* ViolationSubmissionViewController.m */,
 				377D16B31967BE1D004E4E67 /* ViolationSubmissionViewController.xib */,
+				87A9884D1968C09500EDE34F /* CaseTableViewController.h */,
+				87A9884E1968C09500EDE34F /* CaseTableViewController.m */,
+				87A9884F1968C09500EDE34F /* CaseTableViewController.xib */,
+				87A988521968C0A400EDE34F /* CaseDetailViewController.h */,
+				87A988531968C0A400EDE34F /* CaseDetailViewController.m */,
+				87A988541968C0A400EDE34F /* CaseDetailViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -207,6 +228,9 @@
 		0AF08BE11964F120002761B9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				87A988571968C0D700EDE34F /* CaseCell.h */,
+				87A988581968C0D700EDE34F /* CaseCell.m */,
+				87A988591968C0D700EDE34F /* CaseCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -296,12 +320,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AF08BBC1964EC94002761B9 /* InfoPlist.strings in Resources */,
+				87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */,
+				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
+				87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +387,9 @@
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
 				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
+				87A9885A1968C0D700EDE34F /* CaseCell.m in Sources */,
+				87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */,
+				87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
