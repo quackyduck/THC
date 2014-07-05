@@ -26,6 +26,8 @@
 		0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF08BE51964F16F002761B9 /* LoginViewController.xib */; };
 		377D16A91967342A004E4E67 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D16A71967342A004E4E67 /* CameraViewController.m */; };
 		377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D16A81967342A004E4E67 /* CameraViewController.xib */; };
+		377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D16AD1967BD38004E4E67 /* PhotoDescriptionViewController.m */; };
+		377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D16AE1967BD38004E4E67 /* PhotoDescriptionViewController.xib */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,9 @@
 		377D16A61967342A004E4E67 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		377D16A71967342A004E4E67 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		377D16A81967342A004E4E67 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		377D16AC1967BD38004E4E67 /* PhotoDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDescriptionViewController.h; sourceTree = "<group>"; };
+		377D16AD1967BD38004E4E67 /* PhotoDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDescriptionViewController.m; sourceTree = "<group>"; };
+		377D16AE1967BD38004E4E67 /* PhotoDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoDescriptionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +189,9 @@
 				377D16A61967342A004E4E67 /* CameraViewController.h */,
 				377D16A71967342A004E4E67 /* CameraViewController.m */,
 				377D16A81967342A004E4E67 /* CameraViewController.xib */,
+				377D16AC1967BD38004E4E67 /* PhotoDescriptionViewController.h */,
+				377D16AD1967BD38004E4E67 /* PhotoDescriptionViewController.m */,
+				377D16AE1967BD38004E4E67 /* PhotoDescriptionViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -283,6 +291,7 @@
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
+				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
