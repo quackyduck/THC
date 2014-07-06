@@ -10,6 +10,7 @@
 
 @interface PhotoDescriptionViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextView *violLationDescriptionTextView;
 @end
 
 @implementation PhotoDescriptionViewController
