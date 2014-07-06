@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 //#import <CoreLocation/CoreLocation.h>
 
-@interface AggregateMapViewController : UIViewController // <CLLocationManagerDelegate>
+@interface AggregateMapViewController : UIViewController <UITextFieldDelegate>
 
 @end

@@ -1,19 +1,18 @@
 //
-//  PhotoDescriptionViewController.m
+//  ViolationDescriptionViewController.m
 //  THC
 //
-//  Created by Hunaid Hussain on 7/4/14.
+//  Created by Hunaid Hussain on 7/6/14.
 //  Copyright (c) 2014 THC. All rights reserved.
 //
 
-#import "PhotoDescriptionViewController.h"
+#import "ViolationDescriptionViewController.h"
 
-@interface PhotoDescriptionViewController ()
+@interface ViolationDescriptionViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextView *violLationDescriptionTextView;
 @end
 
-@implementation PhotoDescriptionViewController
+@implementation ViolationDescriptionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

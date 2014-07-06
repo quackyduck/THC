@@ -36,6 +36,10 @@
 		377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D16AE1967BD38004E4E67 /* PhotoDescriptionViewController.xib */; };
 		377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D16B21967BE1D004E4E67 /* ViolationSubmissionViewController.m */; };
 		377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D16B31967BE1D004E4E67 /* ViolationSubmissionViewController.xib */; };
+		377D170C1969E75F004E4E67 /* ViolationDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D170A1969E75F004E4E67 /* ViolationDescriptionViewController.m */; };
+		377D170D1969E75F004E4E67 /* ViolationDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D170B1969E75F004E4E67 /* ViolationDescriptionViewController.xib */; };
+		377D17101969E7BA004E4E67 /* ViolationSubmissionForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */; };
+		377D17131969E7D7004E4E67 /* AddressForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D17121969E7D7004E4E67 /* AddressForm.m */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
 		87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A9884F1968C09500EDE34F /* CaseTableViewController.xib */; };
@@ -101,6 +105,13 @@
 		377D16B11967BE1D004E4E67 /* ViolationSubmissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationSubmissionViewController.h; sourceTree = "<group>"; };
 		377D16B21967BE1D004E4E67 /* ViolationSubmissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationSubmissionViewController.m; sourceTree = "<group>"; };
 		377D16B31967BE1D004E4E67 /* ViolationSubmissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViolationSubmissionViewController.xib; sourceTree = "<group>"; };
+		377D17091969E75F004E4E67 /* ViolationDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationDescriptionViewController.h; sourceTree = "<group>"; };
+		377D170A1969E75F004E4E67 /* ViolationDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationDescriptionViewController.m; sourceTree = "<group>"; };
+		377D170B1969E75F004E4E67 /* ViolationDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViolationDescriptionViewController.xib; sourceTree = "<group>"; };
+		377D170E1969E7BA004E4E67 /* ViolationSubmissionForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationSubmissionForm.h; sourceTree = "<group>"; };
+		377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationSubmissionForm.m; sourceTree = "<group>"; };
+		377D17111969E7D7004E4E67 /* AddressForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressForm.h; sourceTree = "<group>"; };
+		377D17121969E7D7004E4E67 /* AddressForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressForm.m; sourceTree = "<group>"; };
 		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
 		87A9884E1968C09500EDE34F /* CaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseTableViewController.m; sourceTree = "<group>"; };
 		87A9884F1968C09500EDE34F /* CaseTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseTableViewController.xib; sourceTree = "<group>"; };
@@ -224,6 +235,9 @@
 				0AF08BE31964F16F002761B9 /* LoginViewController.h */,
 				0AF08BE41964F16F002761B9 /* LoginViewController.m */,
 				0AF08BE51964F16F002761B9 /* LoginViewController.xib */,
+				0A122E981969C2D4005894EB /* SignupViewController.h */,
+				0A122E991969C2D4005894EB /* SignupViewController.m */,
+				0A122E9A1969C2D4005894EB /* SignupViewController.xib */,
 				0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */,
 				0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */,
 				0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */,
@@ -242,9 +256,9 @@
 				87A988521968C0A400EDE34F /* CaseDetailViewController.h */,
 				87A988531968C0A400EDE34F /* CaseDetailViewController.m */,
 				87A988541968C0A400EDE34F /* CaseDetailViewController.xib */,
-				0A122E981969C2D4005894EB /* SignupViewController.h */,
-				0A122E991969C2D4005894EB /* SignupViewController.m */,
-				0A122E9A1969C2D4005894EB /* SignupViewController.xib */,
+				377D17091969E75F004E4E67 /* ViolationDescriptionViewController.h */,
+				377D170A1969E75F004E4E67 /* ViolationDescriptionViewController.m */,
+				377D170B1969E75F004E4E67 /* ViolationDescriptionViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -270,6 +284,10 @@
 				0A122E911969A5D3005894EB /* Comment.m */,
 				0A122E931969A5F7005894EB /* Building.h */,
 				0A122E941969A5F7005894EB /* Building.m */,
+				377D170E1969E7BA004E4E67 /* ViolationSubmissionForm.h */,
+				377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */,
+				377D17111969E7D7004E4E67 /* AddressForm.h */,
+				377D17121969E7D7004E4E67 /* AddressForm.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -358,6 +376,7 @@
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
+				377D170D1969E75F004E4E67 /* ViolationDescriptionViewController.xib in Resources */,
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
@@ -413,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377D17131969E7D7004E4E67 /* AddressForm.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
@@ -420,6 +440,7 @@
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
 				0A122E951969A5F7005894EB /* Building.m in Sources */,
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
+				377D170C1969E75F004E4E67 /* ViolationDescriptionViewController.m in Sources */,
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,
@@ -427,6 +448,7 @@
 				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
 				87A9885A1968C0D700EDE34F /* CaseCell.m in Sources */,
 				87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */,
+				377D17101969E7BA004E4E67 /* ViolationSubmissionForm.m in Sources */,
 				87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
