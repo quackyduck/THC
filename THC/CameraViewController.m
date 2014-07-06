@@ -7,9 +7,14 @@
 //
 
 #import "CameraViewController.h"
+#import "ViolationDescriptionViewController.h"
 
 @interface CameraViewController ()
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIBarButtonItem *nextButton;
+@property (strong, nonatomic) UIImagePickerController *picker;
+
 - (IBAction)onClick:(UIButton *)sender;
 - (IBAction)pickImageFromLibrary:(UIButton *)sender;
 - (IBAction)cancel:(UIButton *)sender;
@@ -30,6 +35,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self initializeView];
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma create view elements
+- (void) initializeView {
+    
+    //[self createTitleLabel];
+    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -39,20 +60,32 @@
                                                     otherButtonTitles: nil];
         
         [myAlertView show];
+    } else {
+        self.picker = [[UIImagePickerController alloc] init];
+        self.picker.delegate = self;
+        //self.picker.allowsEditing = YES;
+        self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.picker.showsCameraControls = YES;
         
+        [self presentViewController:self.picker animated:YES completion:NULL];
+        
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+        [cancelButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+        self.navigationItem.leftBarButtonItem = cancelButton;
+        
+        self.nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(onNext)];
+        [self.nextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+        //self.nextButton.enabled = NO;
+        self.navigationItem.rightBarButtonItem = self.nextButton;
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    return;
 }
 
 #pragma ImagePicker Delegate Protocols
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = chosenImage;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -61,31 +94,33 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
+    self.nextButton.enabled = YES;
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 #pragma Action outlets
 - (IBAction)onClick:(UIButton *)sender {
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:self.picker animated:YES completion:NULL];
 }
 
 - (IBAction)pickImageFromLibrary:(UIButton *)sender {
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:self.picker animated:YES completion:NULL];
 }
 
 - (IBAction)cancel:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)onNext {
+    
+    ViolationDescriptionViewController *vdc = [[ViolationDescriptionViewController alloc] init];
+    [self.navigationController pushViewController:vdc animated:YES];
+}
+
 @end

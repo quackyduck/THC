@@ -25,7 +25,9 @@
                   clientKey:@"29l3eEqh8bXXBziYQhYVLwApxK8IaIxBjjYRNrha"];
     
     AggregateMapViewController *aggregateViewController = [[AggregateMapViewController alloc] init];
-    self.window.rootViewController = aggregateViewController;
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:aggregateViewController];
+
+    self.window.rootViewController = nvc;
     
     return YES;
 }

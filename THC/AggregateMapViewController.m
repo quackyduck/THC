@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "LoginViewController.h"
 #import "SignupViewController.h"
+#import "CameraViewController.h"
 #import <Parse/Parse.h>
 
 @interface AggregateMapViewController ()
@@ -62,7 +63,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
+    
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         NSLog(@"Logged in user %@", currentUser.username);
@@ -79,6 +83,11 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -86,7 +95,8 @@
 }
 
 - (IBAction)onNewReport:(id)sender {
-    NSLog(@"Create new report.");
+    CameraViewController *cvc = [[CameraViewController alloc] init];
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 
 - (void)onCaseMenu:(id)sender {
