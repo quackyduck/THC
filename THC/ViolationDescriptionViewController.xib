@@ -15,24 +15,38 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VIOLATION DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tx1-cd-IIa">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIOLATION DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tx1-cd-IIa">
                     <rect key="frame" x="0.0" y="63" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="eeW-z3-nua"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Describe the violation that you are reporting..." translatesAutoresizingMaskIntoConstraints="NO" id="rzi-9s-1x9">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Describe the violation that you are reporting..." translatesAutoresizingMaskIntoConstraints="NO" id="rzi-9s-1x9">
                     <rect key="frame" x="0.0" y="93" width="320" height="236"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="236" id="BI7-0v-1yw"/>
+                    </constraints>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="rzi-9s-1x9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1nb-D8-DXz"/>
+                <constraint firstItem="Tx1-cd-IIa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Vv-TR-Zje"/>
+                <constraint firstAttribute="trailing" secondItem="Tx1-cd-IIa" secondAttribute="trailing" id="8v0-Xo-51W"/>
+                <constraint firstItem="Tx1-cd-IIa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="63" id="LgV-eC-P5D"/>
+                <constraint firstItem="rzi-9s-1x9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="93" id="cws-X7-8l5"/>
+                <constraint firstAttribute="trailing" secondItem="rzi-9s-1x9" secondAttribute="trailing" id="mNC-rh-ocI"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
