@@ -8,6 +8,11 @@
 
 #import <Parse/Parse.h>
 
+typedef enum {
+    caseOpen,
+    caseClosed
+} status;
+
 @interface Case : PFObject<PFSubclassing>
 
 + (NSString *)parseClassName;
@@ -22,5 +27,6 @@
 @property (retain) NSString *languageSpoken;
 @property (retain) NSString *description;
 @property (retain) NSString *userId;
+@property status status;
 
 @end

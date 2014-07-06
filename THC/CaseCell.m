@@ -27,6 +27,24 @@
 {
     //Figure out a better case ID?
     self.caseIdLabel.text = myCase.objectId;
+    //Use buildingId to query for building name
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    NSString *stringFromDate = [formatter stringFromDate:myCase.createdAt];
+
+    self.timestampLabel.text = [NSString stringWithFormat:@"Created on %@", stringFromDate];
+    switch (myCase.status) {
+        case caseOpen:
+            self.statusLabel.text = @"Status: Open";
+            break;
+        case caseClosed:
+            self.statusLabel.text = @"Status: Closed";
+            break;
+        default:
+            break;
+    }
     
 //    Query Parse for earliest image associated with this case ID
     

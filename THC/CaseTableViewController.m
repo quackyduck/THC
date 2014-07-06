@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *caseTableView;
 
 @property (nonatomic, strong) NSArray* cases;
-@property (strong, nonatomic) UISearchBar* searchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) CaseCell* stubCell;
 

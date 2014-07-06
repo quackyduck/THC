@@ -25,5 +25,6 @@
 @dynamic languageSpoken;
 @dynamic description;
 @dynamic userId;
+@dynamic status;
 
 @end
