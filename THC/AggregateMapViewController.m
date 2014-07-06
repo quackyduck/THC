@@ -9,6 +9,7 @@
 #import "AggregateMapViewController.h"
 #import <MapKit/MapKit.h>
 #import "LoginViewController.h"
+#import "SignupViewController.h"
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -37,6 +38,8 @@
     
 }
 - (IBAction)onSignup:(id)sender {
+    SignupViewController *signupViewController = [[SignupViewController alloc] init];
+    [self presentViewController:signupViewController animated:YES completion:nil];
 }
 
 -(void)zoomInToMyLocation

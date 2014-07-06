@@ -45,11 +45,15 @@
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
                                             NSLog(@"Logged in successfully.");
+                                            [self dismissViewControllerAnimated:YES completion:nil];
                                         } else {
                                             // The login failed.
                                             NSLog(@"Error %@", error);
                                         }
                                     }];
+}
+- (IBAction)onDismiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
