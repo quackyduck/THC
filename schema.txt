@@ -16,6 +16,13 @@
 	* Case Id
 	* Text
 
+* Building
+	* Id
+	* Street address
+	* City
+	* State
+	* zip
+
 * User
 	* Id
 	* Name
