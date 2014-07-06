@@ -7,15 +7,25 @@
 //
 
 #import "AppDelegate.h"
+#import "AggregateMapViewController.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    [Parse setApplicationId:@"LDONnFMwKr6gOONmf4dmh347jRYFw9EUbnmO2Jrv" clientKey:@"cVUNYLp5iFllkcfTfOqSnPzRl3Ind2wCRBiAlTJD"];
+    
+    
+    AggregateMapViewController *aggregateViewController = [[AggregateMapViewController alloc] init];
+    self.window.rootViewController = aggregateViewController;
+    
+    
+    
     return YES;
 }
 

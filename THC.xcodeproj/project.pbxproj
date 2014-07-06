@@ -10,6 +10,7 @@
 		0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A122E8E1969A5BF005894EB /* PhotoInfo.m */; };
 		0A122E921969A5D3005894EB /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A122E911969A5D3005894EB /* Comment.m */; };
 		0A122E951969A5F7005894EB /* Building.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A122E941969A5F7005894EB /* Building.m */; };
+		0A122E971969ACF8005894EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A122E961969ACF8005894EB /* CoreLocation.framework */; };
 		0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */; };
 		0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */; };
 		0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2EF03E19663E9D00FED705 /* MapKit.framework */; };
@@ -61,6 +62,7 @@
 		0A122E911969A5D3005894EB /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		0A122E931969A5F7005894EB /* Building.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Building.h; sourceTree = "<group>"; };
 		0A122E941969A5F7005894EB /* Building.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Building.m; sourceTree = "<group>"; };
+		0A122E961969ACF8005894EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggregateMapViewController.h; sourceTree = "<group>"; };
 		0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggregateMapViewController.m; sourceTree = "<group>"; };
 		0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AggregateMapViewController.xib; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A122E971969ACF8005894EB /* CoreLocation.framework in Frameworks */,
 				0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */,
 				0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */,
 				0AF08BB61964EC94002761B9 /* UIKit.framework in Frameworks */,
@@ -156,6 +159,7 @@
 		0AF08BB01964EC94002761B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A122E961969ACF8005894EB /* CoreLocation.framework */,
 				0A2EF03E19663E9D00FED705 /* MapKit.framework */,
 				0AF08BB11964EC94002761B9 /* Foundation.framework */,
 				0AF08BB31964EC94002761B9 /* CoreGraphics.framework */,
