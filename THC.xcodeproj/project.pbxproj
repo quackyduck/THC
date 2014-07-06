@@ -224,6 +224,9 @@
 				0AF08BE31964F16F002761B9 /* LoginViewController.h */,
 				0AF08BE41964F16F002761B9 /* LoginViewController.m */,
 				0AF08BE51964F16F002761B9 /* LoginViewController.xib */,
+				0A122E981969C2D4005894EB /* SignupViewController.h */,
+				0A122E991969C2D4005894EB /* SignupViewController.m */,
+				0A122E9A1969C2D4005894EB /* SignupViewController.xib */,
 				0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */,
 				0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */,
 				0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */,
@@ -242,9 +245,6 @@
 				87A988521968C0A400EDE34F /* CaseDetailViewController.h */,
 				87A988531968C0A400EDE34F /* CaseDetailViewController.m */,
 				87A988541968C0A400EDE34F /* CaseDetailViewController.xib */,
-				0A122E981969C2D4005894EB /* SignupViewController.h */,
-				0A122E991969C2D4005894EB /* SignupViewController.m */,
-				0A122E9A1969C2D4005894EB /* SignupViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
