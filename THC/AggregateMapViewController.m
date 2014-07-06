@@ -10,12 +10,14 @@
 #import <MapKit/MapKit.h>
 #import "LoginViewController.h"
 #import "SignupViewController.h"
+#import <Parse/Parse.h>
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-//@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -25,10 +27,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        self.locationManager = [[CLLocationManager alloc] init];
-//        self.locationManager.delegate = self;
-//        [self.locationManager setDistanceFilter:CLLocationDistanceMax];
-//        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        self.loginButton = [[UIButton alloc] init];
+        self.loginButton.hidden = NO;
+        self.loginButton.enabled = YES;
     }
     return self;
 }
@@ -42,7 +43,7 @@
     [self presentViewController:signupViewController animated:YES completion:nil];
 }
 
--(void)zoomInToMyLocation
+-(void)zoomInToTenderloin
 {
     MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
     region.center.latitude = 37.785134;
@@ -56,7 +57,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self zoomInToMyLocation];
+    [self zoomInToTenderloin];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        NSLog(@"Logged in user %@", currentUser.username);
+        self.signupButton.hidden = YES;
+        [self.loginButton setTitle:@"Cases" forState:UIControlStateNormal];
+        [self.loginButton removeTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
+        [self.loginButton addTarget:self action:@selector(onCaseMenu:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else {
+        NSLog(@"No user logged in.");
+        [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
+        [self.loginButton removeTarget:self action:@selector(onCaseMenu:) forControlEvents:UIControlEventTouchUpInside];
+        [self.loginButton addTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,5 +86,20 @@
 }
 
 - (IBAction)onNewReport:(id)sender {
+    NSLog(@"Create new report.");
 }
+
+- (void)onCaseMenu:(id)sender {
+    NSLog(@"Load case menu.");
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+}
+
+- (IBAction)onTap:(UITapGestureRecognizer *)sender {
+    [self.searchBar resignFirstResponder];
+}
+
+
 @end
