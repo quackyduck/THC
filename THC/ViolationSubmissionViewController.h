@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FXForms.h"
 
-@interface ViolationSubmissionViewController : UIViewController
+@interface ViolationSubmissionViewController : UIViewController <FXFormControllerDelegate>
+
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) FXFormController *formController;
 
 @end

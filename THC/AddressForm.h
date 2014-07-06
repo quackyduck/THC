@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FXForms.h"
 
-@interface AddressForm : NSObject
+
+@interface AddressForm : NSObject <FXForm>
+
+@property (strong, nonatomic) NSString    *hotelName;
+@property (strong, nonatomic) NSString    *other;
 
 @end
