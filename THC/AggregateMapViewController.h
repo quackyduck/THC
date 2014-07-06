@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import <CoreLocation/CoreLocation.h>
 
-@interface AggregateMapViewController : UIViewController
+@interface AggregateMapViewController : UIViewController // <CLLocationManagerDelegate>
 
 @end

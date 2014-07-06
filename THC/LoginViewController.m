@@ -7,8 +7,11 @@
 //
 
 #import "LoginViewController.h"
+#import <Parse/Parse.h>
 
 @interface LoginViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @end
 
@@ -33,6 +36,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onLogin:(id)sender {
+    
+    [PFUser logInWithUsernameInBackground:self.emailTextField.text
+                                 password:self.passwordTextField.text
+                                    block:^(PFUser *user, NSError *error) {
+                                        if (user) {
+                                            NSLog(@"Logged in successfully.");
+                                        } else {
+                                            // The login failed.
+                                            NSLog(@"Error %@", error);
+                                        }
+                                    }];
 }
 
 @end
