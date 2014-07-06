@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Case.h"
 
 @interface CaseDetailViewController : UIViewController
+
+- (id)initWithCase:(Case *)myCase;
 
 @end

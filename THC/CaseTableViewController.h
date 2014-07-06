@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CaseTableViewController : UIViewController
+@interface CaseTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @end

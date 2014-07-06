@@ -8,6 +8,19 @@
 
 #import <Parse/Parse.h>
 
-@interface Case : PFObject
+@interface Case : PFObject<PFSubclassing>
+
++ (NSString *)parseClassName;
+
+@property (retain) NSString *caseId;
+@property (retain) NSString *buildingId;
+@property (retain) NSString *name;
+@property (retain) NSString *address;
+@property (retain) NSString *unit;
+@property (retain) NSString *phoneNumber;
+@property (retain) NSString *email;
+@property (retain) NSString *languageSpoken;
+@property (retain) NSString *description;
+@property (retain) NSString *userId;
 
 @end

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Case.h"
 
 @interface CaseCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *caseFirstImageView;
+@property (weak, nonatomic) IBOutlet UILabel *caseIdLabel;
+
+- (void)initWithCase:(Case*)myCase;
 
 @end

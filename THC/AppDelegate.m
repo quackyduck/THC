@@ -7,13 +7,22 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import "Case.h"
+#import "CaseTableViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+    [Case registerSubclass];
+    [Parse setApplicationId:@"rW4V8SnA9hN7UOqTYFsYOqVcwbPzjybEo2ej9c0F"
+                  clientKey:@"29l3eEqh8bXXBziYQhYVLwApxK8IaIxBjjYRNrha"];
+    
+    self.window.rootViewController = [[CaseTableViewController alloc] init];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

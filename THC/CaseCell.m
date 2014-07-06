@@ -7,6 +7,7 @@
 //
 
 #import "CaseCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation CaseCell
 
@@ -20,6 +21,18 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)initWithCase:(Case*)myCase;
+{
+    //Figure out a better case ID?
+    self.caseIdLabel.text = myCase.objectId;
+    
+//    Query Parse for earliest image associated with this case ID
+    
+//    [self.caseFirstImageView setImageWithURL:nil];
+//    self.profileImageView.layer.cornerRadius = 5;
+//    self.profileImageView.clipsToBounds = YES;
 }
 
 @end

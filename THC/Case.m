@@ -7,7 +7,23 @@
 //
 
 #import "Case.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Case
+
++ (NSString *)parseClassName {
+    return @"Case";
+}
+
+@dynamic caseId;
+@dynamic buildingId;
+@dynamic name;
+@dynamic address;
+@dynamic unit;
+@dynamic phoneNumber;
+@dynamic email;
+@dynamic languageSpoken;
+@dynamic description;
+@dynamic userId;
 
 @end
