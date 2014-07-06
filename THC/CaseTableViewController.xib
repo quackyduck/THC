@@ -23,7 +23,7 @@
                     <segments>
                         <segment title="New Cases"/>
                         <segment title="My Cases"/>
-                        <segment title="Search by #"/>
+                        <segment title="All"/>
                     </segments>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-lI-G25">

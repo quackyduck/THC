@@ -30,9 +30,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.caseControl addTarget:self
-                             action:@selector(onCaseControlChange)
-                   forControlEvents:UIControlEventValueChanged];
+        
     }
     return self;
 }
@@ -53,21 +51,27 @@
     self.navigationItem.rightBarButtonItem = reportButton;
     self.navigationItem.title = @"Cases";
     
+    [self.caseControl addTarget:self
+                         action:@selector(onCaseControlChange)
+               forControlEvents:UIControlEventValueChanged];
+    
     // Set Up Search Bar
-    // temp values
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10.0, 0.0, 200.0, 44.0)];
-    self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.searchBar setKeyboardType:UIKeyboardTypeWebSearch];
     self.searchBar.delegate = self;
-    UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 230.0, 44.0)];
-    [searchBarView addSubview:self.searchBar];
-    self.searchBar.alpha = 0;
     
     //Create test case (ha!)
 //    Case* myCase = [Case object];
+//    myCase.caseId = @"test1";
 //    myCase.buildingId = @"xyz";
 //    myCase.name = @"New Case";
 //    myCase.address = @"Easy Street";
+//    myCase.unit = @"C16";
+//    myCase.phoneNumber = @"123-456-7890";
+//    myCase.email = @"test@aol.com";
+//    myCase.languageSpoken = @"Klingon";
+//    myCase.description = @"blah";
+//    myCase.userId = @"xyz";
+//    myCase.status = caseOpen;
 //    [myCase saveInBackground];
     
     [self loadEntries];
@@ -140,12 +144,7 @@
             PFQuery *query = [Case query];
             [query orderByDescending:@"createdAt"];
             query.limit = 10;
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error) {
-                    self.cases = objects;
-                    [self.caseTableView reloadData];
-                }
-            }];
+            [self queryForCases:query];
         }
             break;
         case 1:
@@ -153,22 +152,30 @@
             //Get my cases
             PFQuery *query = [Case query];
             [query whereKey:@"userId" equalTo:@"get current user"];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error) {
-                    self.cases = objects;
-                    [self.caseTableView reloadData];
-                }
-            }];
+            [self queryForCases:query];
         }
             break;
         case 2:
-            //Show search bar?
-            self.searchBar.alpha = 1;
+        {
+            PFQuery *query = [Case query];
+            //ALL THE CASES!!
+            [self queryForCases:query];
+        }
             break;
             
         default:
             break;
     }
+}
+
+- (void)queryForCases:(PFQuery *)query
+{
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.cases = objects;
+            [self.caseTableView reloadData];
+        }
+    }];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -196,12 +203,7 @@
 	
     PFQuery *query = [Case query];
     [query whereKey:@"caseId" equalTo:searchBar.text];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            self.cases = objects;
-            [self.caseTableView reloadData];
-        }
-    }];
+    [self queryForCases:query];
 }
 
 - (void)onLogOut
