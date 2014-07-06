@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViolationDescriptionViewController : UIViewController
+@interface ViolationDescriptionViewController : UIViewController <UITextViewDelegate>
 
 @end
