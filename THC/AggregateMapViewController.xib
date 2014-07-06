@@ -17,11 +17,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PFC-2y-Xzj">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PFC-2y-Xzj">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fJ-V0-HsU">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fJ-V0-HsU">
                     <rect key="frame" x="20" y="20" width="55" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Sign Up">
@@ -31,7 +31,7 @@
                         <action selector="onSignup:" destination="-1" eventType="touchUpInside" id="lfB-h0-nZV"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnz-xk-ue8">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnz-xk-ue8">
                     <rect key="frame" x="257" y="20" width="43" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Log In">
@@ -41,8 +41,30 @@
                         <action selector="onLogin:" destination="-1" eventType="touchUpInside" id="xF7-ag-8Um"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufj-ND-L24">
+                    <rect key="frame" x="218" y="518" width="82" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="New Report">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onNewReport:" destination="-1" eventType="touchUpInside" id="iU8-3e-NMG"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="PFC-2y-Xzj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5PO-7C-WOb"/>
+                <constraint firstAttribute="trailing" secondItem="PFC-2y-Xzj" secondAttribute="trailing" id="8I3-me-IZ4"/>
+                <constraint firstItem="Vnz-xk-ue8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="S74-xw-l1T"/>
+                <constraint firstAttribute="bottom" secondItem="PFC-2y-Xzj" secondAttribute="bottom" id="SOm-dC-4ah"/>
+                <constraint firstAttribute="bottom" secondItem="Ufj-ND-L24" secondAttribute="bottom" constant="20" id="Xuu-cD-a0C"/>
+                <constraint firstItem="7fJ-V0-HsU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="c0O-tT-VSP"/>
+                <constraint firstAttribute="trailing" secondItem="Ufj-ND-L24" secondAttribute="trailing" constant="20" id="eCA-VZ-oWh"/>
+                <constraint firstItem="PFC-2y-Xzj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hOh-Bt-aif"/>
+                <constraint firstItem="7fJ-V0-HsU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="pPs-iO-S7v"/>
+                <constraint firstAttribute="trailing" secondItem="Vnz-xk-ue8" secondAttribute="trailing" constant="20" id="zE1-9y-cod"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

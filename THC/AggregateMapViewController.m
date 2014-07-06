@@ -65,4 +65,6 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onNewReport:(id)sender {
+}
 @end
