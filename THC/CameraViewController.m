@@ -82,6 +82,7 @@
     return;
 }
 
+#pragma mark -
 #pragma ImagePicker Delegate Protocols
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
@@ -119,7 +120,11 @@
 
 - (void)onNext {
     
+    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 0);
+
     ViolationDescriptionViewController *vdc = [[ViolationDescriptionViewController alloc] init];
+    [vdc setImageData:imageData];
+    
     [self.navigationController pushViewController:vdc animated:YES];
 }
 
