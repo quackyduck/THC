@@ -23,5 +23,6 @@
 // Removing notes until we find a suitable place/reason to put this back
 //@property (strong, nonatomic) NSString       *notes;
 
+- (void)printFormContents;
 
 @end
