@@ -53,17 +53,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+#pragma Dynamic Form Changes
+
+- (void)addOtherLanguage:(UITableViewCell<FXFormFieldCell> *)cell {
+    ViolationSubmissionForm *form =  (ViolationSubmissionForm *) cell.field.form;
+    if ([form.languagesSpoken isEqualToString:@"Other"]) {
+        form.showOtherLanguage = YES;
+        self.formController.form = self.formController.form;
+        [self.tableView reloadData];
+    }
+}
+
 - (void)changeAddress {
-    NSLog(@"ChangeAddress!!");
     ViolationSubmissionForm *form =  (ViolationSubmissionForm *) self.formController.form;
     if ([form.addressForm.hotelName isEqualToString:@"Other"]) {
-        NSLog(@"Reloading the table!!");
         form.addressForm.showOtherAddress = YES;
         self.formController.form = self.formController.form;
         [self.tableView reloadData];
-    } else {
-        NSLog(@"Not Reloading the table!!");
-
     }
 }
 

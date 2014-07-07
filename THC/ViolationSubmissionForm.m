@@ -9,59 +9,38 @@
 #import "ViolationSubmissionForm.h"
 #import "AddressForm.h"
 
+#define kFirstName   @{FXFormFieldKey: @"firstName", FXFormFieldTitle:@"First Name:", FXFormFieldHeader: @"Tell us about yourself", @"textField.autocapitalizationType": @(UITextAutocapitalizationTypeWords)}
+#define kLastName    @{FXFormFieldKey: @"lastName", FXFormFieldTitle:@"Last Name:", @"textField.autocapitalizationType": @(UITextAutocapitalizationTypeWords)}
+#define kUnit        @{FXFormFieldKey: @"unitName", FXFormFieldTitle:@"Unit Number:"}
+#define kAddress     @{FXFormFieldKey: @"addressForm", FXFormFieldTitle:@"Your Address", FXFormFieldInline: @YES, }
+#define kPhone       @{FXFormFieldKey: @"phoneNumber", FXFormFieldTitle:@"Phone Number:", FXFormFieldHeader: @"Your Contact Information", FXFormFieldTitle: @"Phone", FXFormFieldType: FXFormFieldTypeNumber}
+#define kEmail       @{FXFormFieldKey: @"email", FXFormFieldTitle:@"Email:"}
+#define kLanguages   @{FXFormFieldKey: @"languagesSpoken", FXFormFieldTitle:@"Languages Spoken:", FXFormFieldHeader: @"Your Language", FXFormFieldOptions: @[@"English", @"Spanish", @"Chinese", @"Cantonese", @"Vietnamese", @"Fillipino", @"Punjabi", @"Hindi", @"Korean", @"Malay", @"Other"], FXFormFieldCell: [FXFormOptionPickerCell class], FXFormFieldAction: @"addOtherLanguage:"}
+#define kOtherLang   @{FXFormFieldKey: @"otherLanguage", FXFormFieldTitle:@"Other Language:"}
+
+#define kSubmit      @{FXFormFieldTitle: @"Submit", FXFormFieldHeader: @"", FXFormFieldHeader: @"", FXFormFieldAction: @"submitViolationSubmissionForm:"}
+
 @implementation ViolationSubmissionForm
 
 - (NSArray *)fields
 {
-    return @[
-                          
-             // Personal Info
-             @{FXFormFieldKey: @"firstName", FXFormFieldHeader: @"Tell us about yourself", @"textField.autocapitalizationType": @(UITextAutocapitalizationTypeWords)},
-             
-             @{FXFormFieldKey: @"lastName", @"textField.autocapitalizationType": @(UITextAutocapitalizationTypeWords)},
-             
-             //we don't need to modify these fields at all, so we'll
-             //just refer to them by name to use the default settings
-             
-             @"unitNum",
-             
-             //@"addressForm",
-             
-             @{FXFormFieldKey: @"addressForm", FXFormFieldInline: @YES, },
-             
-             /*
-              @{FXFormFieldKey: @"addressForm",
-              FXFormFieldOptions: @[@"Allstar Hotel", @"Boyd Hotel", @"Caldrake Hotel", @"Edgeworth Hotel", @"Elk Hotel", @"Galvin Apartments", @"Graystone Hotel", @"Hartland Hotel", @"Hotel Union", @"Jefferson Hotel", @"Mayfair Hotel", @"Mission Hotel", @"Pierre Hotel", @"Pierre Hotel", @"Raman Hotel", @"Royan Hotel", @"Seneca Hotel", @"Vincent Hotel"],
-              FXFormFieldCell: [FXFormOptionPickerCell class]
-              },
-              */
-             
-             //@{FXFormFieldKey: @"addressForm"},
-             
-             //@{FXFormFieldKey: @"phone", FXFormFieldType: FXFormFieldTypeNumber},
-             @{FXFormFieldKey: @"phoneNumber", FXFormFieldTitle: @"Phone", FXFormFieldType: FXFormFieldTypeNumber},
-             //@"phoneNumber",
-
-             @"email",
-             
-             @{FXFormFieldKey: @"languagesSpoken",
-               FXFormFieldOptions: @[@"English", @"Spanish", @"Chinese", @"Cantonese", @"Vietnamese", @"Fillipino", @"Punjabi", @"Hindi", @"Korean", @"Malay", @"Other"],
-               //FXFormFieldTypeDefault: @"English",
-               FXFormFieldCell: [FXFormOptionPickerCell class]},
-             
-             
-             //@{FXFormFieldKey: @"notes", FXFormFieldType: FXFormFieldTypeLongText, FXFormFieldHeader: @"Additional Details"},
-             
-             ];
-}
+    
+    NSArray *fieldsArray;
+    if (!self.showOtherLanguage) {
+        fieldsArray = [NSArray arrayWithObjects:kFirstName, kLastName, kUnit, kAddress, kPhone, kEmail, kLanguages, nil];
+    } else {
+        fieldsArray = [NSArray arrayWithObjects:kFirstName, kLastName, kUnit, kAddress, kPhone, kEmail, kLanguages, kOtherLang, nil];
+    }
+    
+    return fieldsArray;
+ }
 
 - (NSArray *)extraFields
 {
-    return @[
-             
-             @{FXFormFieldTitle: @"Submit", FXFormFieldHeader: @"", FXFormFieldAction: @"submitViolationSubmissionForm:"},
-             
-             ];
+    NSArray *extraFieldsArray;
+    extraFieldsArray = [NSArray arrayWithObjects:kSubmit, nil];
+
+    return extraFieldsArray;
 }
 
 - (void)printFormContents {

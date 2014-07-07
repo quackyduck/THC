@@ -8,13 +8,23 @@
 
 #import "AddressForm.h"
 
+#define kHotel          @{FXFormFieldKey: @"hotelName", FXFormFieldOptions: @[@"Allstar Hotel", @"Boyd Hotel", @"Caldrake Hotel", @"Edgeworth Hotel", @"Elk Hotel", @"Galvin Apartments", @"Graystone Hotel", @"Hartland Hotel", @"Hotel Union", @"Jefferson Hotel", @"Mayfair Hotel", @"Mission Hotel", @"Pierre Hotel", @"Pierre Hotel", @"Raman Hotel", @"Royan Hotel", @"Seneca Hotel", @"Vincent Hotel", @"Other"], FXFormFieldCell: [FXFormOptionPickerCell class], FXFormFieldAction: @"changeAddress"}
+#define kOtherAddress   @{FXFormFieldKey: @"otherAddress", FXFormFieldKey: @"otherAddress"}
+
+
 @implementation AddressForm
 
 - (NSArray *)fields
 {
-    NSLog(@"In adress field");
+    NSArray *fieldsArray;
     if (self.showOtherAddress) {
-        NSLog(@"Showing other adress field");
+        fieldsArray = [NSArray arrayWithObjects:kHotel, kOtherAddress, nil];
+    } else {
+        fieldsArray = [NSArray arrayWithObjects:kHotel, nil];
+    }
+    return fieldsArray;
+    
+    if (self.showOtherAddress) {
         return @[
                  @{FXFormFieldKey: @"hotelName", FXFormFieldOptions: @[@"Allstar Hotel", @"Boyd Hotel", @"Caldrake Hotel", @"Edgeworth Hotel", @"Elk Hotel", @"Galvin Apartments", @"Graystone Hotel", @"Hartland Hotel", @"Hotel Union", @"Jefferson Hotel", @"Mayfair Hotel", @"Mission Hotel", @"Pierre Hotel", @"Pierre Hotel", @"Raman Hotel", @"Royan Hotel", @"Seneca Hotel", @"Vincent Hotel", @"Other"],
                    FXFormFieldCell: [FXFormOptionPickerCell class], FXFormFieldAction: @"changeAddress"
@@ -22,36 +32,10 @@
                  @{FXFormFieldKey: @"otherAddress", FXFormFieldKey: @"otherAddress"},
                  ];
     } else {
-        NSLog(@"Not Showing other adress field");
         return @[
                  @{FXFormFieldKey: @"hotelName", FXFormFieldOptions: @[@"Allstar Hotel", @"Boyd Hotel", @"Caldrake Hotel", @"Edgeworth Hotel", @"Elk Hotel", @"Galvin Apartments", @"Graystone Hotel", @"Hartland Hotel", @"Hotel Union", @"Jefferson Hotel", @"Mayfair Hotel", @"Mission Hotel", @"Pierre Hotel", @"Pierre Hotel", @"Raman Hotel", @"Royan Hotel", @"Seneca Hotel", @"Vincent Hotel", @"Other"],
                    FXFormFieldCell: [FXFormOptionPickerCell class], FXFormFieldAction: @"changeAddress"
                    },
-                 ];
-    }
-
-}
-
-/*
-- (NSDictionary *)hotelNameField
-{
-    return @{
-             FXFormFieldOptions: @[@"Allstar Hotel", @"Boyd Hotel", @"Caldrake Hotel", @"Edgeworth Hotel", @"Elk Hotel", @"Galvin Apartments", @"Graystone Hotel", @"Hartland Hotel", @"Hotel Union", @"Jefferson Hotel", @"Mayfair Hotel", @"Mission Hotel", @"Pierre Hotel", @"Pierre Hotel", @"Raman Hotel", @"Royan Hotel", @"Seneca Hotel", @"Vincent Hotel", @"Other"],
-             FXFormFieldCell: [FXFormOptionPickerCell class],
-             };
-}
- */
-
-
-- (NSArray *)excludedFields {
-    if (!self.showOtherAddress) {
-        return @[
-                 @"otherAddress",
-                 @"showOtherAddress",
-                 ];
-    } else {
-        return @[
-                 @"showOtherAddress",
                  ];
     }
 

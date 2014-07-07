@@ -8,16 +8,17 @@
 
 #import "OtherAddress.h"
 
+#define kStreet   @{FXFormFieldKey: @"streetName", FXFormFieldTitle: @"Street:", FXFormFieldInline: @YES}
+#define kCity     @{FXFormFieldKey: @"city", FXFormFieldTitle: @"City:", FXFormFieldInline: @YES}
+#define kState    @{FXFormFieldKey: @"state", FXFormFieldTitle: @"State:", FXFormFieldInline: @YES}
+#define kZip      @{FXFormFieldKey: @"zip", FXFormFieldTitle: @"Zip:", FXFormFieldType: FXFormFieldTypeNumber, FXFormFieldInline: @YES}
+
 @implementation OtherAddress
 
 - (NSArray *)fields
 {
-    return @[
-            @{FXFormFieldKey: @"streetName", FXFormFieldTitle: @"Street", FXFormFieldInline: @YES},
-            @{FXFormFieldKey: @"city", FXFormFieldInline: @YES},
-            @{FXFormFieldKey: @"state", FXFormFieldInline: @YES},
-            @{FXFormFieldKey: @"zip", FXFormFieldType: FXFormFieldTypeNumber, FXFormFieldInline: @YES},
-             ];
+    NSArray *fieldsArray = [NSArray arrayWithObjects:kStreet, kCity, kState, kZip, nil];
+    return fieldsArray;
 }
 
 

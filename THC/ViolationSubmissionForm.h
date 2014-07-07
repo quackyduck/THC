@@ -19,6 +19,9 @@
 @property (strong, nonatomic) NSString       *phoneNumber;
 @property (strong, nonatomic) NSString       *email;
 @property (strong, nonatomic) NSString       *languagesSpoken;
+@property (strong, nonatomic) NSString       *otherLanguage;
+@property (assign)            BOOL           showOtherLanguage;
+
 
 // Removing notes until we find a suitable place/reason to put this back
 //@property (strong, nonatomic) NSString       *notes;
