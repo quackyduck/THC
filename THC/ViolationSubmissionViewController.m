@@ -71,6 +71,7 @@
      */
     
     [[[UIAlertView alloc] initWithTitle:@"Violation Submitted" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark -

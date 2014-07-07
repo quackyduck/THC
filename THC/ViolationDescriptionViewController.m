@@ -128,8 +128,8 @@
     
     ViolationSubmissionViewController * vsc = [[ViolationSubmissionViewController alloc] init];
     
-    [vsc setImageData:self.imageData];
-    [vsc setViolationDescription:self.violLationDescriptionTextView.text];
+    //[vsc setImageData:self.imageData];
+    //[vsc setViolationDescription:self.violLationDescriptionTextView.text];
     
     [self.navigationController pushViewController:vsc animated:YES];
     
