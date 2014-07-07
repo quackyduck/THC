@@ -38,7 +38,10 @@
              
              //@{FXFormFieldKey: @"addressForm"},
              
-             @{FXFormFieldKey: @"phone", FXFormFieldType: FXFormFieldTypeNumber},
+             //@{FXFormFieldKey: @"phone", FXFormFieldType: FXFormFieldTypeNumber},
+             @{FXFormFieldKey: @"phoneNumber", FXFormFieldTitle: @"Phone", FXFormFieldType: FXFormFieldTypeNumber},
+             //@"phoneNumber",
+
              @"email",
              
              @{FXFormFieldKey: @"languagesSpoken",
@@ -59,6 +62,20 @@
              @{FXFormFieldTitle: @"Submit", FXFormFieldHeader: @"", FXFormFieldAction: @"submitViolationSubmissionForm:"},
              
              ];
+}
+
+- (void)printFormContents {
+    
+    NSLog(@"First Name: %@, Last Name: %@", self.firstName, self.lastName);
+    NSLog(@"Unit Number: %@", self.unitNum);
+    if ([self.addressForm.hotelName isEqualToString:@""]) {
+        NSLog(@"Address Other: %@", self.addressForm.other);
+    } else {
+    NSLog(@"Address: %@", self.addressForm.hotelName);
+    }
+    NSLog(@"Phone Number: %@", self.phoneNumber);
+    NSLog(@"Email: %@", self.email);
+    NSLog(@"Language Spoken %@", self.languagesSpoken);
 }
 
 @end

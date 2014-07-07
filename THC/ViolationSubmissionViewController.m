@@ -54,7 +54,7 @@
 {
     //we can lookup the form from the cell if we want, like this:
     ViolationSubmissionForm *form =  (ViolationSubmissionForm *) cell.field.form;
-    
+    [form printFormContents];
     //we can then perform validation, etc
     /*
      if (form.agreedToTerms)
