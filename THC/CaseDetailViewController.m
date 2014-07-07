@@ -7,6 +7,8 @@
 //
 
 #import "CaseDetailViewController.h"
+#import "PhotoInfo.h"
+#import "Note.h"
 
 @interface CaseDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -18,11 +20,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *noteTextField;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *testImageView;
+@property (weak, nonatomic) IBOutlet UILabel *testNoteLabel;
 
 @property (strong, nonatomic) Case *currentCase;
 
 - (IBAction)onEdit:(UIButton *)sender;
 - (IBAction)onSendNote:(UIButton *)sender;
+- (IBAction)onTap:(id)sender;
+
+- (void)willShowKeyboard:(NSNotification *)notification;
+- (void)willHideKeyboard:(NSNotification *)notification;
+
 @end
 
 @implementation CaseDetailViewController
@@ -31,14 +39,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        // Register the methods for the keyboard hide/show events
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
 
 - (id)initWithCase:(Case *)myCase
 {
-    self = [super initWithNibName:@"CaseDetailViewController" bundle:nil];
+    self = [self initWithNibName:@"CaseDetailViewController" bundle:nil];
     if (self) {
         self.currentCase = myCase;
     }
@@ -56,6 +66,38 @@
     self.phoneLabel.text = self.currentCase.phoneNumber;
     self.descriptionLabel.text = self.currentCase.description;
     
+    //Get first note
+    PFQuery *noteQuery = [Note query];
+    [noteQuery whereKey:@"caseId" equalTo:self.currentCase.caseId];
+    [noteQuery orderByDescending:@"createdAt"];
+    noteQuery.limit = 1;//For now
+    [noteQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if (objects.count > 0)
+            {
+                Note* note = objects[0];
+                self.testNoteLabel.text = note.text;
+            }
+        }
+    }];
+    
+    //Get first image to show
+    PFQuery *query = [PhotoInfo query];
+    [query whereKey:@"caseId" equalTo:self.currentCase.caseId];
+    [query orderByAscending:@"createdAt"];
+    query.limit = 1;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if (objects.count > 0)
+            {
+                PhotoInfo* photoObject = objects[0];
+                PFFile *photo = photoObject.image;
+                NSData *imageData = [photo getData];
+                UIImage *image = [UIImage imageWithData:imageData];
+                [self.testImageView setImage:image];
+            }
+        }
+    }];
     
     //Change this dynamically once notes are working
     [self.scrollView setContentSize:CGSizeMake(320, 724)];
@@ -67,9 +109,66 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)willShowKeyboard:(NSNotification *)notification {
+    self.noteTextField.text = @"";
+    
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // Get the keyboard height and width from the notification
+    // Size varies depending on OS, language, orientation
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    NSLog(@"Height: %f Width: %f", kbSize.height, kbSize.width);
+    
+    // Get the animation duration and curve from the notification
+    NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = durationValue.doubleValue;
+    NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveValue.intValue;
+    
+    // Move the view with the same duration and animation curve so that it will match with the keyboard animation
+    [UIView animateWithDuration:animationDuration
+                          delay:0.0
+                        options:(animationCurve << 16)
+                     animations:^{
+                         self.scrollView.frame = CGRectMake(0, self.view.frame.size.height - kbSize.height - self.scrollView.frame.size.height, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+                     }
+                     completion:nil];
+}
+
+- (void)willHideKeyboard:(NSNotification *)notification {
+    self.noteTextField.text = @"Add a note...";
+    
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // Get the animation duration and curve from the notification
+    NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = durationValue.doubleValue;
+    NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveValue.intValue;
+    
+    // Move the view with the same duration and animation curve so that it will match with the keyboard animation
+    [UIView animateWithDuration:animationDuration
+                          delay:0.0
+                        options:(animationCurve << 16)
+                     animations:^{
+                         self.scrollView.frame = CGRectMake(0, self.view.frame.size.height - self.scrollView.frame.size.height, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+                     }
+                     completion:nil];
+}
+
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES];
+}
+
 - (IBAction)onEdit:(UIButton *)sender {
 }
 
 - (IBAction)onSendNote:(UIButton *)sender {
+    Note* note = [Note object];
+    note.caseId = self.currentCase.caseId;
+    note.text = self.noteTextField.text;;
+    [note saveInBackground];
+    [self.view endEditing:YES];
 }
+
 @end

@@ -54,11 +54,14 @@
     query.limit = 1;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            PhotoInfo* photoObject = objects[0];
-            PFFile *photo = photoObject.image;
-            NSData *imageData = [photo getData];
-            UIImage *image = [UIImage imageWithData:imageData];
-            [self.caseFirstImageView setImage:image];
+            if (objects.count > 0)
+            {
+                PhotoInfo* photoObject = objects[0];
+                PFFile *photo = photoObject.image;
+                NSData *imageData = [photo getData];
+                UIImage *image = [UIImage imageWithData:imageData];
+                [self.caseFirstImageView setImage:image];
+            }
         }
     }];
 }

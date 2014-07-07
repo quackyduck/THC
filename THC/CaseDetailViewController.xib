@@ -14,17 +14,18 @@
                 <outlet property="phoneLabel" destination="Kal-jP-mFE" id="vL9-69-CxC"/>
                 <outlet property="scrollView" destination="wnf-Ok-zRM" id="MjB-OZ-AZI"/>
                 <outlet property="testImageView" destination="0Iy-C7-3xd" id="dQd-Nx-3kr"/>
+                <outlet property="testNoteLabel" destination="3mc-OM-of4" id="y7r-5a-I12"/>
                 <outlet property="unitLabel" destination="bAq-20-rmH" id="3jG-7z-EPq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="587"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="wnf-Ok-zRM">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="587"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="ZVC-0N-S5C">
@@ -139,17 +140,34 @@
                                     <rect key="frame" x="20" y="460" width="93" height="84"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3mc-OM-of4">
+                                    <rect key="frame" x="20" y="581" width="271" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
                             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                         </view>
                     </subviews>
+                    <gestureRecognizers/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="pse-A2-ltt" appends="YES" id="O8b-u5-kj2"/>
+            </connections>
         </view>
+        <tapGestureRecognizer id="pse-A2-ltt">
+            <connections>
+                <action selector="onTap:" destination="-1" id="6pM-Jo-Sij"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>
