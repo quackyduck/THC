@@ -7,7 +7,17 @@
 //
 
 #import "Building.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Building
+
++ (NSString *)parseClassName {
+    return @"Building";
+}
+
+@dynamic streetAddress;
+@dynamic city;
+@dynamic state;
+@dynamic zip;
 
 @end
