@@ -78,11 +78,11 @@
 #pragma public functions
 
 -(void) setImageData:(NSData *) imageData {
-    self.imageData = imageData;
+    _imageData = imageData;
 }
 
 -(void) setViolationDescription:(NSString *) description {
-    self.violationDescription = description;
+    _violationDescription = description;
 }
 
 @end

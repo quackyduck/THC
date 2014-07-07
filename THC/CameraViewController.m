@@ -15,7 +15,7 @@
 @property (strong, nonatomic) UIBarButtonItem *nextButton;
 @property (strong, nonatomic) UIImagePickerController *picker;
 
-@property (strong, nonatomic) NSData *imageData;
+@property (retain, nonatomic) NSData *imageData;
 
 - (IBAction)onClick:(UIButton *)sender;
 - (IBAction)pickImageFromLibrary:(UIButton *)sender;
@@ -125,11 +125,8 @@
 
 - (void)onNext {
     
-    //NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 0);
-
     ViolationDescriptionViewController *vdc = [[ViolationDescriptionViewController alloc] init];
-    //NSLog(@"imge data: %@", self.imageData);
-    //[vdc setImageData:nil];
+    [vdc setImageData:self.imageData];
     
     [self.navigationController pushViewController:vdc animated:YES];
 }

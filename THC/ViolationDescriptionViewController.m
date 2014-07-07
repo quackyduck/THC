@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *violLationDescriptionTextView;
 @property (strong, nonatomic) UIBarButtonItem *nextButton;
 
-@property (strong, nonatomic) NSData *imageData;
+@property (retain, nonatomic) NSData *imageData;
 
 @end
 
@@ -109,11 +109,11 @@
 #pragma public functions
 
 -(NSData *) getImageData {
-    return self.imageData;
+    return _imageData;
 }
 
 -(void) setImageData:(NSData *) imageData {
-    self.imageData = imageData;
+    _imageData = imageData;
 }
 
 
@@ -128,8 +128,8 @@
     
     ViolationSubmissionViewController * vsc = [[ViolationSubmissionViewController alloc] init];
     
-    //[vsc setImageData:self.imageData];
-    //[vsc setViolationDescription:self.violLationDescriptionTextView.text];
+    [vsc setImageData:self.imageData];
+    [vsc setViolationDescription:self.violLationDescriptionTextView.text];
     
     [self.navigationController pushViewController:vsc animated:YES];
     
