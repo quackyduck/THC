@@ -9,6 +9,7 @@
 #import "CaseTableViewController.h"
 #import "CaseCell.h"
 #import "Case.h"
+#import "PhotoInfo.h"
 #import "CaseDetailViewController.h"
 #import <Parse/Parse.h>
 
@@ -73,6 +74,18 @@
 //    myCase.userId = @"xyz";
 //    myCase.status = caseOpen;
 //    [myCase saveInBackground];
+    
+    //Test photo
+//    UIImage *test = [UIImage imageNamed:@"Test Photo"];
+//    UIImageView *testImageView = [[UIImageView alloc] initWithImage:test];
+//    PhotoInfo* testPhoto = [PhotoInfo object];
+//    testPhoto.caseId = @"test1";
+//    testPhoto.caption = @"CAPTION!!";
+//    
+//    NSData* data = UIImageJPEGRepresentation(testImageView.image, 0.5f);
+//    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:data];
+//    testPhoto.image = imageFile;
+//    [testPhoto saveInBackground];
     
     [self loadEntries];
 }
@@ -140,7 +153,7 @@
     switch (self.caseControl.selectedSegmentIndex) {
         case 0:
         {
-            //Get 10 newest cases
+            //Get 10 newest cases, should we instead just look for open cases?
             PFQuery *query = [Case query];
             [query orderByDescending:@"createdAt"];
             query.limit = 10;
@@ -151,7 +164,7 @@
         {
             //Get my cases
             PFQuery *query = [Case query];
-            [query whereKey:@"userId" equalTo:@"get current user"];
+            [query whereKey:@"userId" equalTo:@"TODO: get current user"];
             [self queryForCases:query];
         }
             break;

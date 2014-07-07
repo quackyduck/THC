@@ -8,6 +8,7 @@
 
 #import "CaseCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "PhotoInfo.h"
 
 @implementation CaseCell
 
@@ -26,7 +27,7 @@
 - (void)initWithCase:(Case*)myCase;
 {
     //Figure out a better case ID?
-    self.caseIdLabel.text = myCase.objectId;
+    self.caseIdLabel.text = [NSString stringWithFormat:@"#%@", myCase.caseId];
     //Use buildingId to query for building name
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeStyle:NSDateFormatterNoStyle];
@@ -46,11 +47,20 @@
             break;
     }
     
-//    Query Parse for earliest image associated with this case ID
-    
-//    [self.caseFirstImageView setImageWithURL:nil];
-//    self.profileImageView.layer.cornerRadius = 5;
-//    self.profileImageView.clipsToBounds = YES;
+    //Get first image to show
+    PFQuery *query = [PhotoInfo query];
+    [query whereKey:@"caseId" equalTo:myCase.caseId];
+    [query orderByAscending:@"createdAt"];
+    query.limit = 1;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            PhotoInfo* photoObject = objects[0];
+            PFFile *photo = photoObject.image;
+            NSData *imageData = [photo getData];
+            UIImage *image = [UIImage imageWithData:imageData];
+            [self.caseFirstImageView setImage:image];
+        }
+    }];
 }
 
 @end

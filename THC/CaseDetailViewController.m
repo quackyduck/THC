@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITextField *noteTextField;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIImageView *testImageView;
 
 @property (strong, nonatomic) Case *currentCase;
 
@@ -53,6 +55,10 @@
     self.emailLabel.text = self.currentCase.email;
     self.phoneLabel.text = self.currentCase.phoneNumber;
     self.descriptionLabel.text = self.currentCase.description;
+    
+    
+    //Change this dynamically once notes are working
+    [self.scrollView setContentSize:CGSizeMake(320, 724)];
 }
 
 - (void)didReceiveMemoryWarning

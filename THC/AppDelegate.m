@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "Case.h"
+#import "PhotoInfo.h"
 #import "CaseTableViewController.h"
 #import "AggregateMapViewController.h"
 
@@ -21,6 +22,7 @@
     [self.window makeKeyAndVisible];
     
     [Case registerSubclass];
+    [PhotoInfo registerSubclass];
     [Parse setApplicationId:@"rW4V8SnA9hN7UOqTYFsYOqVcwbPzjybEo2ej9c0F"
                   clientKey:@"29l3eEqh8bXXBziYQhYVLwApxK8IaIxBjjYRNrha"];
     
