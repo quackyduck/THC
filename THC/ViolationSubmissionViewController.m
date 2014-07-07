@@ -53,6 +53,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)changeAddress {
+    NSLog(@"ChangeAddress!!");
+    ViolationSubmissionForm *form =  (ViolationSubmissionForm *) self.formController.form;
+    if ([form.addressForm.hotelName isEqualToString:@"Other"]) {
+        NSLog(@"Reloading the table!!");
+        form.addressForm.showOtherAddress = YES;
+        self.formController.form = self.formController.form;
+        [self.tableView reloadData];
+    } else {
+        NSLog(@"Not Reloading the table!!");
+
+    }
+}
+
 - (void)submitViolationSubmissionForm:(UITableViewCell<FXFormFieldCell> *)cell
 {
     //we can lookup the form from the cell if we want, like this:

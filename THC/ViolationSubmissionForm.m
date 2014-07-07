@@ -27,7 +27,7 @@
              
              //@"addressForm",
              
-             @{FXFormFieldKey: @"addressForm", FXFormFieldInline: @YES},
+             @{FXFormFieldKey: @"addressForm", FXFormFieldInline: @YES, },
              
              /*
               @{FXFormFieldKey: @"addressForm",
@@ -69,7 +69,7 @@
     NSLog(@"First Name: %@, Last Name: %@", self.firstName, self.lastName);
     NSLog(@"Unit Number: %@", self.unitNum);
     if ([self.addressForm.hotelName isEqualToString:@""]) {
-        NSLog(@"Address Other: %@", self.addressForm.other);
+        //NSLog(@"Address Other: %@", self.addressForm.other);
     } else {
     NSLog(@"Address: %@", self.addressForm.hotelName);
     }

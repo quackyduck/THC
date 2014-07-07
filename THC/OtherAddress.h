@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FXForms.h"
 
-@interface OtherAddress : NSObject
+@interface OtherAddress : NSObject <FXForm>
+
+@property (strong, nonatomic) NSString    *streetName;
+@property (strong, nonatomic) NSString    *city;
+@property (strong, nonatomic) NSString    *state;
+@property (strong, nonatomic) NSString    *zip;
 
 @end

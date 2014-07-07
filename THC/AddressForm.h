@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "FXForms.h"
+#import "OtherAddress.h"
 
 
 @interface AddressForm : NSObject <FXForm>
 
-@property (strong, nonatomic) NSString    *hotelName;
-@property (strong, nonatomic) NSString    *other;
+@property (strong, nonatomic) NSString      *hotelName;
+@property (strong, nonatomic) OtherAddress  *otherAddress;
+@property (assign)            BOOL          showOtherAddress;
 
 @end

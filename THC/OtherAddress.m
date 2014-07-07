@@ -10,4 +10,15 @@
 
 @implementation OtherAddress
 
+- (NSArray *)fields
+{
+    return @[
+            @{FXFormFieldKey: @"streetName", FXFormFieldTitle: @"Street", FXFormFieldInline: @YES},
+            @{FXFormFieldKey: @"city", FXFormFieldInline: @YES},
+            @{FXFormFieldKey: @"state", FXFormFieldInline: @YES},
+            @{FXFormFieldKey: @"zip", FXFormFieldType: FXFormFieldTypeNumber, FXFormFieldInline: @YES},
+             ];
+}
+
+
 @end
