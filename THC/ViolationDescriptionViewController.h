@@ -10,4 +10,7 @@
 
 @interface ViolationDescriptionViewController : UIViewController <UITextViewDelegate>
 
+-(NSData *) getImageData;
+-(void) setImageData:(NSData *) imageData;
+
 @end

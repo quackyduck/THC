@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *violLationDescriptionTextView;
 @property (strong, nonatomic) UIBarButtonItem *nextButton;
 
+@property (strong, nonatomic) NSData *imageData;
 
 @end
 
@@ -104,6 +105,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark -
+#pragma public functions
+
+-(NSData *) getImageData {
+    return self.imageData;
+}
+
+-(void) setImageData:(NSData *) imageData {
+    self.imageData = imageData;
+}
+
+
+#pragma mark -
 #pragma  button actions
 
 -(void) onCancel {
@@ -113,6 +127,10 @@
 -(void) onNext {
     
     ViolationSubmissionViewController * vsc = [[ViolationSubmissionViewController alloc] init];
+    
+    [vsc setImageData:self.imageData];
+    [vsc setViolationDescription:self.violLationDescriptionTextView.text];
+    
     [self.navigationController pushViewController:vsc animated:YES];
     
 }

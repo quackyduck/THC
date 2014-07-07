@@ -14,4 +14,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FXFormController *formController;
 
+-(void) setImageData:(NSData *) imageData;
+-(void) setViolationDescription:(NSString *) description;
+
 @end

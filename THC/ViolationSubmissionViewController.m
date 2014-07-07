@@ -11,6 +11,9 @@
 
 @interface ViolationSubmissionViewController ()
 
+@property (strong, nonatomic) NSData    *imageData;
+@property (strong, nonatomic) NSString  *violationDescription;
+
 @end
 
 @implementation ViolationSubmissionViewController
@@ -68,6 +71,17 @@
      */
     
     [[[UIAlertView alloc] initWithTitle:@"Violation Submitted" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+}
+
+#pragma mark -
+#pragma public functions
+
+-(void) setImageData:(NSData *) imageData {
+    self.imageData = imageData;
+}
+
+-(void) setViolationDescription:(NSString *) description {
+    self.violationDescription = description;
 }
 
 @end
