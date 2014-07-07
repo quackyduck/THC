@@ -39,6 +39,7 @@
 		377D170D1969E75F004E4E67 /* ViolationDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D170B1969E75F004E4E67 /* ViolationDescriptionViewController.xib */; };
 		377D17101969E7BA004E4E67 /* ViolationSubmissionForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */; };
 		377D17131969E7D7004E4E67 /* AddressForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D17121969E7D7004E4E67 /* AddressForm.m */; };
+		377D1716196AF9F0004E4E67 /* OtherAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D1715196AF9F0004E4E67 /* OtherAddress.m */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
 		87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A9884F1968C09500EDE34F /* CaseTableViewController.xib */; };
@@ -110,6 +111,8 @@
 		377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationSubmissionForm.m; sourceTree = "<group>"; };
 		377D17111969E7D7004E4E67 /* AddressForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressForm.h; sourceTree = "<group>"; };
 		377D17121969E7D7004E4E67 /* AddressForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressForm.m; sourceTree = "<group>"; };
+		377D1714196AF9F0004E4E67 /* OtherAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherAddress.h; sourceTree = "<group>"; };
+		377D1715196AF9F0004E4E67 /* OtherAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherAddress.m; sourceTree = "<group>"; };
 		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
 		87A9884E1968C09500EDE34F /* CaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseTableViewController.m; sourceTree = "<group>"; };
 		87A9884F1968C09500EDE34F /* CaseTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseTableViewController.xib; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */,
 				377D17111969E7D7004E4E67 /* AddressForm.h */,
 				377D17121969E7D7004E4E67 /* AddressForm.m */,
+				377D1714196AF9F0004E4E67 /* OtherAddress.h */,
+				377D1715196AF9F0004E4E67 /* OtherAddress.m */,
 				87A9885F196A3BE000EDE34F /* Note.h */,
 				87A98860196A3BE000EDE34F /* Note.m */,
 			);
@@ -449,6 +454,7 @@
 				87A9885A1968C0D700EDE34F /* CaseCell.m in Sources */,
 				87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */,
 				377D17101969E7BA004E4E67 /* ViolationSubmissionForm.m in Sources */,
+				377D1716196AF9F0004E4E67 /* OtherAddress.m in Sources */,
 				87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
