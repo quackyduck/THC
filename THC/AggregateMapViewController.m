@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "SignupViewController.h"
 #import "CameraViewController.h"
+#import "CaseTableViewController.h"
 #import <Parse/Parse.h>
 
 @interface AggregateMapViewController ()
@@ -101,6 +102,8 @@
 
 - (void)onCaseMenu:(id)sender {
     NSLog(@"Load case menu.");
+    CaseTableViewController *caseViewController = [[CaseTableViewController alloc] init];
+    [self.navigationController presentViewController:caseViewController animated:YES completion:nil];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
