@@ -23,4 +23,17 @@
 @dynamic latitude;
 @dynamic longitude;
 
+- (NSString *)title {
+    return self.buildingName;
+}
+
+- (NSString *)subtitle {
+    return self.streetAddress;
+}
+
+- (CLLocationCoordinate2D) coordinate {
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(self.latitude, self.longitude);
+    return coords;
+}
+
 @end

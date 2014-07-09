@@ -13,6 +13,7 @@
 #import "CameraViewController.h"
 #import "CaseTableViewController.h"
 #import <Parse/Parse.h>
+#import "Building.h"
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -82,6 +83,21 @@
         [self.loginButton removeTarget:self action:@selector(onCaseMenu:) forControlEvents:UIControlEventTouchUpInside];
         [self.loginButton addTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Building"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
+        if (!error) {
+            NSLog(@"Successfully retrieved %d buildings.", buildings.count);
+            for (Building *buliding in buildings) {
+                [self.mapView addAnnotation:buliding];
+            }
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -7,8 +7,10 @@
 //
 
 #import <Parse/Parse.h>
+#import <MapKit/MapKit.h>
 
-@interface Building : PFObject<PFSubclassing>
+
+@interface Building : PFObject <PFSubclassing, MKAnnotation>
 
 + (NSString *)parseClassName;
 
