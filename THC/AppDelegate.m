@@ -11,8 +11,10 @@
 #import "Case.h"
 #import "PhotoInfo.h"
 #import "Note.h"
+#import "Building.h"
 #import "CaseTableViewController.h"
 #import "AggregateMapViewController.h"
+
 
 @implementation AppDelegate
 
@@ -25,6 +27,8 @@
     [Case registerSubclass];
     [PhotoInfo registerSubclass];
     [Note registerSubclass];
+    [Building registerSubclass];
+    
     [Parse setApplicationId:@"rW4V8SnA9hN7UOqTYFsYOqVcwbPzjybEo2ej9c0F"
                   clientKey:@"29l3eEqh8bXXBziYQhYVLwApxK8IaIxBjjYRNrha"];
     

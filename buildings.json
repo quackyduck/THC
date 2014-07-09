@@ -1,0 +1,155 @@
+{ "results": [
+  {
+    "streetAddress": "2791 16th St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94103",
+    "buildingName": "Allstar Hotel",
+    "longitude": -122.4152256,
+    "latitude": 37.7653226
+  },
+  {
+  	"streetAddress": "41 Jones St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94102",
+    "buildingName": "Boyd Hotel",
+    "longitude": -122.412423,
+    "latitude": 37.781633
+  },
+  {
+  	"streetAddress": "1541 California St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94109",
+    "buildingName": "Caldrake Arms Hotel",
+    "longitude": -122.41966,
+    "latitude": 37.790372
+  },
+  {
+  	"streetAddress": "770 O'Farrel St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94109",
+    "buildingName": "Edgeworth Hotel",
+    "longitude": -122.417449,
+    "latitude": 37.785514
+  },
+  {
+  	"streetAddress": "670 Eddy St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94109",
+    "buildingName": "Elk Hotel",
+    "longitude": -122.418823,
+    "latitude": 37.783411
+  },
+  {
+  	"streetAddress": "785 Brannan St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94103",
+    "buildingName": "Galvin Apartments",
+    "longitude": -122.4027935,
+    "latitude": 37.7733888
+  },
+  {
+  	"streetAddress": "66 Geary St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94108",
+    "buildingName": "Graystone Hotel",
+    "longitude": -122.404464,
+    "latitude": 37.7881069
+  },
+  {
+  	"streetAddress": "909 Geary St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94109",
+    "buildingName": "Hartland Hotel",
+    "longitude": -122.4183278,
+    "latitude": 37.7859015
+  },
+  {
+  	"streetAddress": "811 Geary St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94109",
+    "buildingName": "Hotel Union",
+    "longitude": -122.416679,
+    "latitude": 37.786066
+  },
+  {
+  	"streetAddress": "440 Eddy St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94109",
+    "buildingName": "Jefferson Hotel",
+    "longitude": -122.4150185,
+    "latitude": 37.7839128
+  },
+  {
+  	"streetAddress": "626 Polk St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94102",
+    "buildingName": "Mayfair Hotel",
+    "longitude": -122.4188978,
+    "latitude": 37.7827316
+  },
+  {
+  	"streetAddress": "520 South Van Ness Ave",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94110",
+    "buildingName": "Mission Hotel",
+    "longitude": -122.4178955,
+    "latitude": 37.7646199
+  },
+  {
+  	"streetAddress": "540 Jones St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94102",
+    "buildingName": "Pierre Hotel",
+    "longitude": -122.412782,
+    "latitude": 37.7863619
+  },
+  {
+  	"streetAddress": "1011 Howard St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94103",
+    "buildingName": "Raman Hotel",
+    "longitude": -122.407345,
+    "latitude": 37.779275
+  },
+  {
+  	"streetAddress": "405 Valencia St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94103",
+    "buildingName": "Royan Hotel",
+    "longitude": -122.4220305,
+    "latitude": 37.766443
+  },
+  {
+  	"streetAddress": "34 6th St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94103",
+    "buildingName": "Seneca Hotel",
+    "longitude": -122.4099335,
+    "latitude": 37.7814735
+  },
+  {
+  	"streetAddress": "459 Turk St",
+    "city": "San Francisco",
+    "state": "California",
+    "zip": "94102",
+    "buildingName": "Vincent Hotel",
+    "longitude": -122.416494,
+    "latitude": 37.782196
+  }]
+}

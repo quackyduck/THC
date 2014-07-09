@@ -19,5 +19,8 @@
 @dynamic city;
 @dynamic state;
 @dynamic zip;
+@dynamic buildingName;
+@dynamic latitude;
+@dynamic longitude;
 
 @end

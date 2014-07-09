@@ -16,5 +16,8 @@
 @property (retain) NSString *city;
 @property (retain) NSString *state;
 @property (retain) NSString *zip;
+@property (retain) NSString *buildingName;
+@property (nonatomic, assign) double latitude;
+@property (nonatomic, assign) double longitude;
 
 @end
