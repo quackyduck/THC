@@ -118,7 +118,7 @@
 - (void)onCaseMenu:(id)sender {
     NSLog(@"Load case menu.");
     CaseTableViewController *caseViewController = [[CaseTableViewController alloc] init];
-    [self.navigationController presentViewController:caseViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:caseViewController animated:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
