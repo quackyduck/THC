@@ -100,41 +100,46 @@
 
     Case* newCase = [Case object];
     
+    NSLog(@"case id %@", newCase.objectId);
     PhotoInfo* photoInfo = [PhotoInfo object];
     photoInfo.caseId = newCase.objectId;
     photoInfo.caption = nil;
     PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
     photoInfo.image = imageFile;
     
-    //NSLog(@"testPhoto: %@", photoInfo);
-    [photoInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    Building *building = self.addressForm.hotelBuildings[self.addressForm.hotelName];
+    
+    if (building) {
+        newCase.buildingId = building.objectId;
+        newCase.address = building.streetAddress;
+    } else {
+        newCase.address = self.addressForm.otherAddress.streetName;
+    }
+    newCase.name = @"New Case";
+    newCase.caseId = newCase.objectId;
+    newCase.unit = self.unitNum;
+    newCase.phoneNumber = self.phoneNumber;
+    newCase.email = self.email;
+    newCase.languageSpoken = self.languagesSpoken;
+    newCase.description = description;
+    newCase.userId = userId;
+    newCase.status = caseOpen;
+    
+    
+    [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         if (succeeded) {
-            // Create the case and add the image
-            //myCase.caseId = @"test1";
-            Building *building = self.addressForm.hotelBuildings[self.addressForm.hotelName];
-            
-            if (building) {
-                newCase.buildingId = building.objectId;
-                newCase.address = building.streetAddress;
-            } else {
-                newCase.address = self.addressForm.otherAddress.streetName;
-            }
-            newCase.name = @"New Case";
+            photoInfo.caseId = newCase.objectId;
             newCase.caseId = newCase.objectId;
-            newCase.unit = self.unitNum;
-            newCase.phoneNumber = self.phoneNumber;
-            newCase.email = self.email;
-            newCase.languageSpoken = self.languagesSpoken;
-            newCase.description = description;
-            newCase.userId = userId;
             newCase.status = caseOpen;
-            [newCase saveInBackgroundWithBlock:^(BOOL caseSuccess, NSError *caseError) {
+            [photoInfo saveInBackgroundWithBlock:^(BOOL caseSuccess, NSError *caseError) {
                 if (caseSuccess) {
-                        [[[UIAlertView alloc] initWithTitle:@"Violation Submitted" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                    newCase.caseId = photoInfo.objectId;
+                    [newCase saveInBackground];
+                    [[[UIAlertView alloc] initWithTitle:@"Violation Submitted" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
                 } else if (caseError) {
                     [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Case" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
-
+                    
                 }
                 
             }];
