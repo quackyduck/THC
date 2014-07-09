@@ -13,8 +13,10 @@
 
 @interface AddressForm : NSObject <FXForm>
 
-@property (strong, nonatomic) NSString      *hotelName;
-@property (strong, nonatomic) OtherAddress  *otherAddress;
-@property (assign)            BOOL          showOtherAddress;
+@property (strong, nonatomic) NSString       *hotelName;
+@property (strong, nonatomic) OtherAddress   *otherAddress;
+@property (assign)            BOOL           showOtherAddress;
+@property (strong, nonatomic) NSMutableArray *hotelBuildingNames;
+@property (strong, nonatomic) NSMutableDictionary  *hotelBuildings;
 
 @end

@@ -21,11 +21,14 @@
 @property (strong, nonatomic) NSString       *languagesSpoken;
 @property (strong, nonatomic) NSString       *otherLanguage;
 @property (assign)            BOOL           showOtherLanguage;
+@property (strong, nonatomic) NSMutableArray *hotelBuildingNames;
 
 
 // Removing notes until we find a suitable place/reason to put this back
 //@property (strong, nonatomic) NSString       *notes;
 
 - (void)printFormContents;
+
+- (void)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData;
 
 @end
