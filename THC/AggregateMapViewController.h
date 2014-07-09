@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <CoreLocation/CoreLocation.h>
+#import <Mapkit/MapKit.h>
 
-@interface AggregateMapViewController : UIViewController <UITextFieldDelegate>
+@interface AggregateMapViewController : UIViewController <UITextFieldDelegate, MKMapViewDelegate>
 
 @end

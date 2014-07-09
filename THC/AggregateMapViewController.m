@@ -60,6 +60,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.mapView.delegate = self;
     [self zoomInToTenderloin];
     
 }
@@ -84,11 +85,10 @@
         [self.loginButton addTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Building"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
         if (!error) {
-            NSLog(@"Successfully retrieved %d buildings.", buildings.count);
+            NSLog(@"Successfully retrieved %lu buildings.", (unsigned long)buildings.count);
             for (Building *buliding in buildings) {
                 [self.mapView addAnnotation:buliding];
             }
@@ -96,8 +96,6 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-    
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -116,6 +114,7 @@
     [self.navigationController pushViewController:cvc animated:YES];
 }
 
+
 - (void)onCaseMenu:(id)sender {
     NSLog(@"Load case menu.");
     CaseTableViewController *caseViewController = [[CaseTableViewController alloc] init];
@@ -128,6 +127,25 @@
 
 - (IBAction)onTap:(UITapGestureRecognizer *)sender {
     [self.searchBar resignFirstResponder];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationIdentifier"];
+    annotationView.canShowCallout = YES;
+    
+    UIImage *buildingImage = [UIImage imageNamed:@"building"];
+    CGSize newSize = CGSizeMake(30, 30);
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [buildingImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    annotationView.image = newImage;
+    
+    return annotationView;
+
 }
 
 

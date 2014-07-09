@@ -15,6 +15,7 @@
 		0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */; };
 		0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */; };
 		0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2EF03E19663E9D00FED705 /* MapKit.framework */; };
+		0AE370B4196D16DB00E80E88 /* building.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE370B3196D16DB00E80E88 /* building.png */; };
 		0AF08BB21964EC94002761B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB11964EC94002761B9 /* Foundation.framework */; };
 		0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB31964EC94002761B9 /* CoreGraphics.framework */; };
 		0AF08BB61964EC94002761B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB51964EC94002761B9 /* UIKit.framework */; };
@@ -76,6 +77,7 @@
 		0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AggregateMapViewController.xib; sourceTree = "<group>"; };
 		0A2EF03E19663E9D00FED705 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0ACDC5B94E4440D4A15CFB87 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AE370B3196D16DB00E80E88 /* building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = building.png; sourceTree = "<group>"; };
 		0AF08BAE1964EC94002761B9 /* THC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF08BB11964EC94002761B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0AF08BB31964EC94002761B9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -206,6 +208,7 @@
 		0AF08BB81964EC94002761B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0AE370B3196D16DB00E80E88 /* building.png */,
 				0AF08BB91964EC94002761B9 /* THC-Info.plist */,
 				0AF08BBA1964EC94002761B9 /* InfoPlist.strings */,
 				0AF08BBD1964EC94002761B9 /* main.m */,
@@ -374,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AE370B4196D16DB00E80E88 /* building.png in Resources */,
 				0A122E9C1969C2D4005894EB /* SignupViewController.xib in Resources */,
 				0AF08BBC1964EC94002761B9 /* InfoPlist.strings in Resources */,
 				87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */,
