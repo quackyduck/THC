@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Mapkit/MapKit.h>
 
-@interface AggregateMapViewController : UIViewController <UITextFieldDelegate, MKMapViewDelegate>
+@interface AggregateMapViewController : UIViewController <UITextFieldDelegate, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end

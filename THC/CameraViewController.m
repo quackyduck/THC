@@ -16,6 +16,8 @@
 @property (strong, nonatomic) UIImagePickerController *picker;
 
 @property (retain, nonatomic) NSData *imageData;
+@property (retain, nonatomic) UIImage *image;
+
 
 - (IBAction)onClick:(UIButton *)sender;
 - (IBAction)pickImageFromLibrary:(UIButton *)sender;
@@ -32,6 +34,12 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad
@@ -53,35 +61,57 @@
     
     //[self createTitleLabel];
     
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        
-        [myAlertView show];
-    } else {
-        self.picker = [[UIImagePickerController alloc] init];
-        self.picker.delegate = self;
-        //self.picker.allowsEditing = YES;
-        self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        self.picker.showsCameraControls = YES;
-        
-        [self presentViewController:self.picker animated:YES completion:NULL];
-        
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
-        [cancelButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-        self.navigationItem.leftBarButtonItem = cancelButton;
-        
-        self.nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(onNext)];
-        [self.nextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-        //self.nextButton.enabled = NO;
-        self.navigationItem.rightBarButtonItem = self.nextButton;
-    }
+//    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        
+//        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                              message:@"Device has no camera"
+//                                                             delegate:nil
+//                                                    cancelButtonTitle:@"OK"
+//                                                    otherButtonTitles: nil];
+//        
+//        [myAlertView show];
+//    } else {
+//        self.picker = [[UIImagePickerController alloc] init];
+//        self.picker.delegate = self;
+//        //self.picker.allowsEditing = YES;
+//        self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        self.picker.showsCameraControls = YES;
+//        
+//        [self presentViewController:self.picker animated:YES completion:NULL];
+//        
+//        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+//        [cancelButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+//        self.navigationItem.leftBarButtonItem = cancelButton;
+//        
+//        self.nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(onNext)];
+//        [self.nextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+//        //self.nextButton.enabled = NO;
+//        self.navigationItem.rightBarButtonItem = self.nextButton;
+//    }
+    
+    self.picker = [[UIImagePickerController alloc] init];
+    self.picker.delegate = self;
+    //self.picker.allowsEditing = YES;
+    self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.picker.showsCameraControls = YES;
+    
+    self.imageView.image = self.image;
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+    [cancelButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
+    self.nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(onNext)];
+    [self.nextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor blackColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    //self.nextButton.enabled = NO;
+    self.navigationItem.rightBarButtonItem = self.nextButton;
+
     
     return;
+}
+
+- (void)setImage:(UIImage *)image {
+    _image = image;
+    _imageData = UIImageJPEGRepresentation(image, 0);
 }
 
 #pragma mark -

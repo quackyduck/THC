@@ -10,4 +10,6 @@
 
 @interface CameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+- (void)setImage:(UIImage *)image;
+
 @end
