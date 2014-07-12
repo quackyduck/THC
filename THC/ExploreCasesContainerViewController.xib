@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExploreCasesContainerViewController">
             <connections>
+                <outlet property="CasesTabButton" destination="tkK-OR-UqU" id="TIP-a0-geV"/>
+                <outlet property="containerView" destination="kXw-q9-bcB" id="Xgl-FR-QTb"/>
+                <outlet property="createReportButton" destination="JnP-tK-Jis" id="rLQ-tv-YYt"/>
+                <outlet property="createReportView" destination="Dbv-eO-KOP" id="uyC-P2-IFv"/>
+                <outlet property="exploreTabButton" destination="f4d-eh-wMR" id="WiF-Ez-kh4"/>
+                <outlet property="tabBar" destination="rIb-9c-qT8" id="Gz8-1S-nK1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +19,81 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIb-9c-qT8">
+                    <rect key="frame" x="0.0" y="20" width="320" height="60"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4d-eh-wMR">
+                            <rect key="frame" x="42" y="15" width="52" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Explore">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onShowExploreViewController:" destination="-1" eventType="touchUpInside" id="QaD-ka-3YN"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkK-OR-UqU">
+                            <rect key="frame" x="220" y="15" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Cases">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onShowCasesViewController:" destination="-1" eventType="touchUpInside" id="QfO-WC-va2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.1960784495" green="0.32549020649999999" blue="0.68235296010000002" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="WAA-OS-3lw"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXw-q9-bcB">
+                    <rect key="frame" x="10" y="80" width="300" height="428"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="42R-VX-Dip"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dbv-eO-KOP">
+                    <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnP-tK-Jis">
+                            <rect key="frame" x="105" y="15" width="110" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="+ Create Report">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.1960784495" green="0.32549020649999999" blue="0.68235296010000002" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="Gzx-Kn-v5s"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.1960784495" green="0.32549020649999999" blue="0.68235296010000002" alpha="1" colorSpace="deviceRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Dbv-eO-KOP" secondAttribute="trailing" id="0Jr-fN-892"/>
+                <constraint firstAttribute="trailing" secondItem="kXw-q9-bcB" secondAttribute="trailing" constant="10" id="4bB-o2-7Af"/>
+                <constraint firstItem="Dbv-eO-KOP" firstAttribute="top" secondItem="kXw-q9-bcB" secondAttribute="bottom" id="M4D-5C-r2A"/>
+                <constraint firstAttribute="bottom" secondItem="Dbv-eO-KOP" secondAttribute="bottom" id="SDE-lX-iJZ"/>
+                <constraint firstItem="Dbv-eO-KOP" firstAttribute="top" secondItem="kXw-q9-bcB" secondAttribute="bottom" id="VOb-RS-tig"/>
+                <constraint firstItem="Dbv-eO-KOP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZL9-YX-JcC"/>
+                <constraint firstAttribute="centerX" secondItem="kXw-q9-bcB" secondAttribute="centerX" id="buA-UY-02T"/>
+                <constraint firstItem="kXw-q9-bcB" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="bottom" id="cok-Xn-yFK"/>
+                <constraint firstItem="rIb-9c-qT8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dMZ-SB-dW5"/>
+                <constraint firstAttribute="trailing" secondItem="rIb-9c-qT8" secondAttribute="trailing" id="dek-sA-rHC"/>
+                <constraint firstItem="rIb-9c-qT8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="hrg-zy-AzJ"/>
+                <constraint firstItem="kXw-q9-bcB" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="bottom" id="qEg-dj-ZSq"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

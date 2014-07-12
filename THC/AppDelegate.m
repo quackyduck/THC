@@ -12,8 +12,9 @@
 #import "PhotoInfo.h"
 #import "Note.h"
 #import "Building.h"
-#import "CaseTableViewController.h"
-#import "AggregateMapViewController.h"
+//#import "CaseTableViewController.h"
+//#import "AggregateMapViewController.h"
+#import "ExploreCasesContainerViewController.h"
 
 
 @implementation AppDelegate
@@ -32,10 +33,13 @@
     [Parse setApplicationId:@"rW4V8SnA9hN7UOqTYFsYOqVcwbPzjybEo2ej9c0F"
                   clientKey:@"29l3eEqh8bXXBziYQhYVLwApxK8IaIxBjjYRNrha"];
     
-    AggregateMapViewController *aggregateViewController = [[AggregateMapViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:aggregateViewController];
+//    AggregateMapViewController *aggregateViewController = [[AggregateMapViewController alloc] init];
+//    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:aggregateViewController];
 
-    self.window.rootViewController = nvc;
+    ExploreCasesContainerViewController *xvc = [[ExploreCasesContainerViewController alloc] init];
+    
+    
+    self.window.rootViewController = xvc;
     
     return YES;
 }
