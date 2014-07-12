@@ -45,6 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     
     AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
     CaseTableViewController *casesViewController = self.tabViewControllers[1];
@@ -56,6 +57,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)show:(UIViewController *)newChild andRemove:(UIViewController *)oldChild {
