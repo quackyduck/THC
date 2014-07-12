@@ -9,8 +9,10 @@
 #import "CaseTableViewController.h"
 #import "CaseCell.h"
 #import "Case.h"
+#import "CameraLauncher.h"
 #import "PhotoInfo.h"
 #import "CaseDetailViewController.h"
+#import "AggregateMapViewController.h"
 #import <Parse/Parse.h>
 
 @interface CaseTableViewController ()
@@ -144,7 +146,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.cases[indexPath.row]];
+    CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.cases[indexPath.row] isNewCase:NO];
     [self.navigationController pushViewController:detailvc animated:YES];
 }
 
@@ -164,7 +166,8 @@
         {
             //Get my cases
             PFQuery *query = [Case query];
-            [query whereKey:@"userId" equalTo:@"TODO: get current user"];
+            PFUser *user = [PFUser currentUser];
+            [query whereKey:@"userId" equalTo:user.objectId];
             [self queryForCases:query];
         }
             break;
@@ -221,12 +224,17 @@
 
 - (void)onLogOut
 {
+    [PFUser logOut];
+    AggregateMapViewController *aggregateViewController = [[AggregateMapViewController alloc] init];
+    [self.navigationController pushViewController:aggregateViewController animated:YES];
+    
 }
 
 - (void)onReport
 {
-//    ComposeViewController *composeVC = [[ComposeViewController alloc] init];
-//    [self.navigationController pushViewController:composeVC animated:YES];
+    CameraLauncher *launcher = [[CameraLauncher alloc] init];
+    [self.navigationController pushViewController:launcher animated:YES];
+    [launcher launchCamera];
 }
 
 @end

@@ -11,6 +11,6 @@
 
 @interface CaseDetailViewController : UIViewController
 
-- (id)initWithCase:(Case *)myCase;
+- (id)initWithCase:(Case *)myCase isNewCase:(BOOL)newCase;
 
 @end

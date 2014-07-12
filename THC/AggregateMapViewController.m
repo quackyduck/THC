@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "LoginViewController.h"
 #import "SignupViewController.h"
-#import "CameraViewController.h"
+#import "CameraLauncher.h"
 #import "CaseTableViewController.h"
 #import <Parse/Parse.h>
 #import "Building.h"
@@ -110,10 +110,9 @@
 }
 
 - (IBAction)onNewReport:(id)sender {
-    
-    [self launchCamera];
-//    CameraViewController *cvc = [[CameraViewController alloc] init];
-//    [self.navigationController pushViewController:cvc animated:YES];
+    CameraLauncher *launcher = [[CameraLauncher alloc] init];
+    [self.navigationController pushViewController:launcher animated:YES];
+    [launcher launchCamera];
 }
 
 
@@ -148,40 +147,6 @@
     
     return annotationView;
 
-}
-
-- (void) launchCamera {
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        
-        [myAlertView show];
-    } else {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        //picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        //picker.showsCameraControls = YES;
-        
-        [self presentViewController:picker animated:YES completion:NULL];
-    }
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-    CameraViewController *cvc = [[CameraViewController alloc] init];
-    [cvc setImage:chosenImage];
-    
-    [self.navigationController pushViewController:cvc animated:YES];
-    
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FXForms.h"
+#import "Case.h"
 
 @interface ViolationSubmissionViewController : UIViewController <FXFormControllerDelegate>
 
@@ -16,5 +17,6 @@
 
 -(void) setImageData:(NSData *) imageData;
 -(void) setViolationDescription:(NSString *) description;
+-(void) setCase:(Case *) myCase;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Case.h"
 #import "FXForms.h"
 #import "AddressForm.h"
 
@@ -29,6 +30,7 @@
 
 - (void)printFormContents;
 
-- (void)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData;
+- (void)updateCase:(Case *) myCase;
+- (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData;
 
 @end

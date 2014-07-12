@@ -8,6 +8,8 @@
 
 #import "ViolationSubmissionViewController.h"
 #import "ViolationSubmissionForm.h"
+#import "CaseDetailViewController.h"
+#import "Building.h"
 #import <Parse/Parse.h>
 
 
@@ -16,6 +18,7 @@
 
 @property (strong, nonatomic) NSData    *imageData;
 @property (strong, nonatomic) NSString  *violationDescription;
+@property (strong, nonatomic) Case      *myCase;
 
 @end
 
@@ -43,7 +46,34 @@
     self.formController = [[FXFormController alloc] init];
     self.formController.tableView = self.tableView;
     self.formController.delegate = self;
-    self.formController.form = [[ViolationSubmissionForm alloc] init];
+    if (self.myCase) //This is the edit form
+    {
+        ViolationSubmissionForm* populatedForm = [[ViolationSubmissionForm alloc] init];
+        populatedForm.firstName = self.myCase.name;
+        populatedForm.lastName = self.myCase.name;
+        populatedForm.unitNum = self.myCase.unit;
+        populatedForm.phoneNumber = self.myCase.phoneNumber;
+        populatedForm.email = self.myCase.email;
+        populatedForm.languagesSpoken = self.myCase.languageSpoken;
+        
+        PFQuery *query = [Building query];
+        [query whereKey:@"objectId" equalTo:self.myCase.buildingId];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count > 0)
+                {
+                    populatedForm.addressForm.hotelName = ((Building*)objects[0]).buildingName;
+                } else
+                {
+                    populatedForm.addressForm.otherAddress.streetName = self.myCase.address;
+                }
+            }
+        }];
+        self.formController.form = populatedForm;
+    } else
+    {
+        self.formController.form = [[ViolationSubmissionForm alloc] init];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,7 +121,17 @@
     //we can lookup the form from the cell if we want, like this:
     ViolationSubmissionForm *form =  (ViolationSubmissionForm *) cell.field.form;
     [form printFormContents];
-    [form createCaseWithDescription:self.violationDescription andImageData:self.imageData];
+    if (self.myCase) //case was already created, just update it
+    {
+        [form updateCase:self.myCase];
+        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.myCase isNewCase:NO];
+        [self.navigationController pushViewController:detailvc animated:YES];
+    } else
+    {
+        Case* createdCase = [form createCaseWithDescription:self.violationDescription andImageData:self.imageData];
+        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
+        [self.navigationController pushViewController:detailvc animated:YES];
+    }
     //we can then perform validation, etc
     /*
      if (form.agreedToTerms)
@@ -105,7 +145,6 @@
      */
     
 //    [[[UIAlertView alloc] initWithTitle:@"Violation Submitted" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark -
@@ -117,6 +156,10 @@
 
 -(void) setViolationDescription:(NSString *) description {
     _violationDescription = description;
+}
+
+-(void) setCase:(Case *) myCase {
+    _myCase = myCase;
 }
 
 @end

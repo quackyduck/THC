@@ -8,7 +8,6 @@
 
 #import "ViolationSubmissionForm.h"
 #import "AddressForm.h"
-#import "Case.h"
 #import "PhotoInfo.h"
 #import "Building.h"
 
@@ -70,7 +69,31 @@
     NSLog(@"Language Spoken %@", self.languagesSpoken);
 }
 
-- (void)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData {
+- (void)updateCase:(Case *) myCase {
+    
+    Building *building = self.addressForm.hotelBuildings[self.addressForm.hotelName];
+    
+    if (building) {
+        myCase.buildingId = building.objectId;
+        myCase.address = building.streetAddress;
+    } else {
+        myCase.address = self.addressForm.otherAddress.streetName;
+    }
+    myCase.unit = self.unitNum;
+    myCase.phoneNumber = self.phoneNumber;
+    myCase.email = self.email;
+    myCase.languageSpoken = self.languagesSpoken;
+    
+    [myCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [[[UIAlertView alloc] initWithTitle:@"Case Updated" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        } else if (error) {
+            [[[UIAlertView alloc] initWithTitle:@"Could not update case" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        }
+    }];
+}
+
+- (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData {
 
     
     NSString *userId = nil;
@@ -147,6 +170,7 @@
             [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Photo" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
         }
     }];
+    return newCase;
     
 }
 

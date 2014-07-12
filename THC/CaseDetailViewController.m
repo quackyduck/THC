@@ -7,8 +7,10 @@
 //
 
 #import "CaseDetailViewController.h"
+#import "ViolationSubmissionViewController.h"
 #import "PhotoInfo.h"
 #import "Note.h"
+#import "Building.h"
 
 @interface CaseDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -21,8 +23,17 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *testImageView;
 @property (weak, nonatomic) IBOutlet UILabel *testNoteLabel;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+
+//Confirmation View Elements
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundBuildingImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *checkMarkImageView;
+@property (weak, nonatomic) IBOutlet UILabel *buildingNameLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *confirmationHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIView *confirmationView;
 
 @property (strong, nonatomic) Case *currentCase;
+@property (assign) BOOL isNewCase;
 
 - (IBAction)onEdit:(UIButton *)sender;
 - (IBAction)onSendNote:(UIButton *)sender;
@@ -46,11 +57,12 @@
     return self;
 }
 
-- (id)initWithCase:(Case *)myCase
+- (id)initWithCase:(Case *)myCase isNewCase:(BOOL)newCase
 {
     self = [self initWithNibName:@"CaseDetailViewController" bundle:nil];
     if (self) {
         self.currentCase = myCase;
+        self.isNewCase = newCase;
     }
     return self;
 }
@@ -99,8 +111,37 @@
         }
     }];
     
+    if (self.isNewCase)
+    {
+       UIImage* checkImage = [UIImage imageNamed:@"Confirmation"];
+       [self.checkMarkImageView setImage:checkImage];
+        
+        //Get building
+//        PFQuery *buildingQuery = [Building query];
+//        [buildingQuery whereKey:@"buildingName" equalTo:@"Hotel Union"];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                if (objects.count > 0)
+//                {
+//                    self.buildingNameLabel.text = ((Building*)objects[0]).buildingName;
+//                    
+//                    //Get building photo from Building object??
+//                } else
+//                {
+//                    self.buildingNameLabel.text = self.currentCase.address;
+//                    
+//                    //Use stock building photo
+//                }
+//            }
+//        }];
+    } else
+    {
+        self.confirmationView.hidden = YES;
+        self.confirmationHeightConstraint.constant = 0.0f;
+    }
+    
     //Change this dynamically once notes are working
-    [self.scrollView setContentSize:CGSizeMake(320, 724)];
+    [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -161,6 +202,9 @@
 }
 
 - (IBAction)onEdit:(UIButton *)sender {
+    ViolationSubmissionViewController * vsc = [[ViolationSubmissionViewController alloc] init];
+    [vsc setCase:self.currentCase];
+    [self.navigationController pushViewController:vsc animated:YES];
 }
 
 - (IBAction)onSendNote:(UIButton *)sender {
