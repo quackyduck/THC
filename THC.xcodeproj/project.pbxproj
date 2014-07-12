@@ -12,6 +12,8 @@
 		0A122E971969ACF8005894EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A122E961969ACF8005894EB /* CoreLocation.framework */; };
 		0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A122E991969C2D4005894EB /* SignupViewController.m */; };
 		0A122E9C1969C2D4005894EB /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A122E9A1969C2D4005894EB /* SignupViewController.xib */; };
+		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
+		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */; };
 		0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */; };
 		0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2EF03E19663E9D00FED705 /* MapKit.framework */; };
@@ -73,6 +75,9 @@
 		0A122E981969C2D4005894EB /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		0A122E991969C2D4005894EB /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		0A122E9A1969C2D4005894EB /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
+		0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCasesContainerViewController.h; sourceTree = "<group>"; };
+		0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCasesContainerViewController.m; sourceTree = "<group>"; };
+		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
 		0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggregateMapViewController.h; sourceTree = "<group>"; };
 		0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggregateMapViewController.m; sourceTree = "<group>"; };
 		0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AggregateMapViewController.xib; sourceTree = "<group>"; };
@@ -270,6 +275,9 @@
 				377D170B1969E75F004E4E67 /* ViolationDescriptionViewController.xib */,
 				87373A1E196F9DC000B93FBB /* CameraLauncher.h */,
 				87373A1F196F9DC000B93FBB /* CameraLauncher.m */,
+				0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */,
+				0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */,
+				0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -394,6 +402,7 @@
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
+				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
 				87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +469,7 @@
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,
 				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
+				0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */,
 				87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */,
 				87A9885A1968C0D700EDE34F /* CaseCell.m in Sources */,
 				87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */,
