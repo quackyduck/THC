@@ -46,11 +46,10 @@
 {
     [super viewDidLoad];
     
-    AggregateMapViewController *mapViewController = (AggregateMapViewController *)self.tabViewControllers[0];
-    mapViewController.view.frame = self.containerView.bounds;
-    [self.containerView addSubview:mapViewController.view];
-    [self addChildViewController:mapViewController];
-    [mapViewController didMoveToParentViewController:self];
+    AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
+    CaseTableViewController *casesViewController = self.tabViewControllers[1];
+    
+    [self show:mapsViewController andRemove:casesViewController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,31 +58,43 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)show:(UIViewController *)newChild andRemove:(UIViewController *)oldChild {
+
+    [oldChild.view removeFromSuperview];
+    [oldChild removeFromParentViewController];
+    
+    UIColor *backgroundColor;
+    
+    if ([newChild isKindOfClass:[AggregateMapViewController class]]) {
+        backgroundColor = [UIColor colorWithRed:50/255.0f green:83/255.0f blue:174/255.0f alpha:1.0f];
+    } else {
+        backgroundColor = [UIColor colorWithRed:27/255.0f green:40/255.0f blue:85/255.0f alpha:1.0f];
+    }
+    
+    self.tabBar.backgroundColor = backgroundColor;
+    self.createReportView.backgroundColor = backgroundColor;
+    self.view.backgroundColor = backgroundColor;
+    
+    newChild.view.frame = self.containerView.bounds;
+    [self.containerView addSubview:newChild.view];
+    [self addChildViewController:newChild];
+    [newChild didMoveToParentViewController:self];
+}
+
 - (IBAction)onShowExploreViewController:(id)sender {
+    
     AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
     CaseTableViewController *casesViewController = self.tabViewControllers[1];
     
-    [casesViewController.view removeFromSuperview];
-    [casesViewController removeFromParentViewController];
-    
-    mapsViewController.view.frame = self.containerView.bounds;
-    [self.containerView addSubview:mapsViewController.view];
-    [self addChildViewController:mapsViewController];
-    [mapsViewController didMoveToParentViewController:self];
+    [self show:mapsViewController andRemove:casesViewController];
     
 }
 
 - (IBAction)onShowCasesViewController:(id)sender {
+
     AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
     CaseTableViewController *casesViewController = self.tabViewControllers[1];
     
-    [mapsViewController.view removeFromSuperview];
-    [mapsViewController removeFromParentViewController];
-    
-    
-    casesViewController.view.frame = self.containerView.bounds;
-    [self.containerView addSubview:casesViewController.view];
-    [self addChildViewController:casesViewController];
-    [casesViewController didMoveToParentViewController:self];
+    [self show:casesViewController andRemove:mapsViewController];
 }
 @end
