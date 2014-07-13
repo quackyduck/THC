@@ -9,15 +9,15 @@
 #import "ExploreCasesContainerViewController.h"
 #import "AggregateMapViewController.h"
 #import "CaseTableViewController.h"
+#import "ExploreTabBarItem.h"
 
 @interface ExploreCasesContainerViewController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *createReportView;
-@property (weak, nonatomic) IBOutlet UIView *tabBar;
+@property (weak, nonatomic) IBOutlet ExploreTabBarItem *exploreTabBar;
 @property (weak, nonatomic) IBOutlet UIButton *createReportButton;
-@property (weak, nonatomic) IBOutlet UIButton *exploreTabButton;
-@property (weak, nonatomic) IBOutlet UIButton *CasesTabButton;
 @property (strong, nonatomic) NSArray *tabViewControllers;
+@property (weak, nonatomic) IBOutlet UIView *containerBackgroundView;
 
 - (IBAction)onShowExploreViewController:(id)sender;
 - (IBAction)onShowCasesViewController:(id)sender;
@@ -70,15 +70,21 @@
     [oldChild removeFromParentViewController];
     
     UIColor *backgroundColor;
+    UIColor *tabColor;
+    
+    UIColor* exploreBlue = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+    UIColor* casesBlue = [UIColor colorWithRed: 0.106f green: 0.157f blue: 0.333f alpha: 1];
     
     if ([newChild isKindOfClass:[AggregateMapViewController class]]) {
-        backgroundColor = [UIColor colorWithRed:50/255.0f green:83/255.0f blue:174/255.0f alpha:1.0f];
+        backgroundColor = casesBlue;
+        tabColor = exploreBlue;
     } else {
-        backgroundColor = [UIColor colorWithRed:27/255.0f green:40/255.0f blue:85/255.0f alpha:1.0f];
+        backgroundColor = exploreBlue;
+        tabColor = casesBlue;
     }
-    
-    self.tabBar.backgroundColor = backgroundColor;
-    self.createReportView.backgroundColor = backgroundColor;
+
+    self.containerBackgroundView.backgroundColor = tabColor;
+    self.createReportView.backgroundColor = tabColor;
     self.view.backgroundColor = backgroundColor;
     
     newChild.view.frame = self.containerView.bounds;

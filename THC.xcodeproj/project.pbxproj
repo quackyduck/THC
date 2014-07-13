@@ -15,6 +15,7 @@
 		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
 		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355919721499008A5FC7 /* CreateReportButton.m */; };
+		0A28355D1972DCB4008A5FC7 /* ExploreTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355C1972DCB4008A5FC7 /* ExploreTabBarItem.m */; };
 		0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */; };
 		0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */; };
 		0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2EF03E19663E9D00FED705 /* MapKit.framework */; };
@@ -81,6 +82,8 @@
 		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
 		0A28355819721499008A5FC7 /* CreateReportButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateReportButton.h; sourceTree = "<group>"; };
 		0A28355919721499008A5FC7 /* CreateReportButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateReportButton.m; sourceTree = "<group>"; };
+		0A28355B1972DCB4008A5FC7 /* ExploreTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTabBarItem.h; sourceTree = "<group>"; };
+		0A28355C1972DCB4008A5FC7 /* ExploreTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTabBarItem.m; sourceTree = "<group>"; };
 		0A2EF03919663E2A00FED705 /* AggregateMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggregateMapViewController.h; sourceTree = "<group>"; };
 		0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggregateMapViewController.m; sourceTree = "<group>"; };
 		0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AggregateMapViewController.xib; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 				87A988591968C0D700EDE34F /* CaseCell.xib */,
 				0A28355819721499008A5FC7 /* CreateReportButton.h */,
 				0A28355919721499008A5FC7 /* CreateReportButton.m */,
+				0A28355B1972DCB4008A5FC7 /* ExploreTabBarItem.h */,
+				0A28355C1972DCB4008A5FC7 /* ExploreTabBarItem.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
 				377D170C1969E75F004E4E67 /* ViolationDescriptionViewController.m in Sources */,
 				87A98861196A3BE000EDE34F /* Note.m in Sources */,
+				0A28355D1972DCB4008A5FC7 /* ExploreTabBarItem.m in Sources */,
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,
