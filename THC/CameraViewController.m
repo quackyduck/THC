@@ -120,6 +120,8 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = chosenImage;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+
     
     self.imageData = UIImageJPEGRepresentation(chosenImage, 0);
 
