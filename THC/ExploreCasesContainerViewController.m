@@ -18,9 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *createReportButton;
 @property (strong, nonatomic) NSArray *tabViewControllers;
 @property (weak, nonatomic) IBOutlet UIView *containerBackgroundView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
+- (IBAction)onTapTabBar:(UITapGestureRecognizer *)sender;
 
-- (IBAction)onShowExploreViewController:(id)sender;
-- (IBAction)onShowCasesViewController:(id)sender;
 - (IBAction)onCreateReport:(id)sender;
 
 
@@ -93,21 +93,20 @@
     [newChild didMoveToParentViewController:self];
 }
 
-- (IBAction)onShowExploreViewController:(id)sender {
+- (IBAction)onTapTabBar:(UITapGestureRecognizer *)sender {
     
-    AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
-    CaseTableViewController *casesViewController = self.tabViewControllers[1];
-    
-    [self show:mapsViewController andRemove:casesViewController];
-    
-}
-
-- (IBAction)onShowCasesViewController:(id)sender {
-
-    AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
-    CaseTableViewController *casesViewController = self.tabViewControllers[1];
-    
-    [self show:casesViewController andRemove:mapsViewController];
+    CGPoint location = [sender locationInView:self.exploreTabBar];
+    if (location.x > 160) {
+        self.exploreTabBar.tabSelected = 1;
+        AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
+        CaseTableViewController *casesViewController = self.tabViewControllers[1];
+        [self show:casesViewController andRemove:mapsViewController];
+    } else {
+        self.exploreTabBar.tabSelected = 0;
+        AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
+        CaseTableViewController *casesViewController = self.tabViewControllers[1];
+        [self show:mapsViewController andRemove:casesViewController];
+    }
 }
 
 - (IBAction)onCreateReport:(id)sender {

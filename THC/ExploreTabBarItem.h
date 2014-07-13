@@ -10,4 +10,6 @@
 
 @interface ExploreTabBarItem : UIView
 
+@property (nonatomic, assign) int tabSelected;
+
 @end
