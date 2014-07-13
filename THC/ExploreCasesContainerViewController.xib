@@ -70,6 +70,9 @@
                             <state key="normal">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="onCreateReport:" destination="-1" eventType="touchUpInside" id="Cxl-Iv-fMe"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.1960784495" green="0.32549020649999999" blue="0.68235296010000002" alpha="1" colorSpace="deviceRGB"/>

@@ -29,6 +29,10 @@
     UIColor* peaGreen = [UIColor colorWithRed: 0.949f green: 1 blue: 0.831f alpha: 1];
     UIColor* exploreBlue = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
     
+    if (self.state == UIControlStateHighlighted) {
+        peaGreen = [UIColor colorWithRed: 0.949f green: 1 blue: 0.831f alpha: 0.5f];
+    }
+    
     //// Rectangle Drawing
     CGRect rectangleRect = rect;
     UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: rectangleRect cornerRadius: 5];
@@ -50,5 +54,19 @@
 
 }
 
+-(void)setHighlighted:(BOOL)value {
+    [super setHighlighted:value];
+    [self setNeedsDisplay];
+}
+
+-(void)setSelected:(BOOL)value {
+    [super setSelected:value];
+    [self setNeedsDisplay];
+}
+
+-(void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    [self setNeedsDisplay];
+}
 
 @end

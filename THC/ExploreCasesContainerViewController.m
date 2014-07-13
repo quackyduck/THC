@@ -17,12 +17,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *createReportButton;
 @property (weak, nonatomic) IBOutlet UIButton *exploreTabButton;
 @property (weak, nonatomic) IBOutlet UIButton *CasesTabButton;
+@property (strong, nonatomic) NSArray *tabViewControllers;
+
 - (IBAction)onShowExploreViewController:(id)sender;
 - (IBAction)onShowCasesViewController:(id)sender;
+- (IBAction)onCreateReport:(id)sender;
 
-//@property (strong, nonatomic) AggregateMapViewController *mapViewController;
-//@property (strong, nonatomic) CaseTableViewController *caseTableViewController;
-@property (strong, nonatomic) NSArray *tabViewControllers;
+
 
 @end
 
@@ -101,5 +102,9 @@
     CaseTableViewController *casesViewController = self.tabViewControllers[1];
     
     [self show:casesViewController andRemove:mapsViewController];
+}
+
+- (IBAction)onCreateReport:(id)sender {
+    NSLog(@"Create new report.");
 }
 @end
