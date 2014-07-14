@@ -20,6 +20,7 @@
 #define kEmail       @{FXFormFieldKey: @"email", FXFormFieldTitle:@"Email:"}
 #define kLanguages   @{FXFormFieldKey: @"languagesSpoken", FXFormFieldTitle:@"Languages Spoken:", FXFormFieldHeader: @"Your Language", FXFormFieldOptions: @[@"English", @"Spanish", @"Chinese", @"Cantonese", @"Vietnamese", @"Fillipino", @"Punjabi", @"Hindi", @"Korean", @"Malay", @"Other"], FXFormFieldCell: [FXFormOptionPickerCell class], FXFormFieldAction: @"addOtherLanguage:"}
 #define kOtherLang   @{FXFormFieldKey: @"otherLanguage", FXFormFieldTitle:@"Other Language:"}
+#define kDescription @{FXFormFieldKey: @"description", FXFormFieldTitle:@"Describe your Violation:", FXFormFieldType: FXFormFieldTypeLongText}
 
 #define kSubmit      @{FXFormFieldTitle: @"Submit", FXFormFieldHeader: @"", FXFormFieldHeader: @"", FXFormFieldAction: @"submitViolationSubmissionForm:"}
 
@@ -39,9 +40,9 @@
     
     NSArray *fieldsArray;
     if (!self.showOtherLanguage) {
-        fieldsArray = [NSArray arrayWithObjects:kFirstName, kLastName, kUnit, kAddress, kPhone, kEmail, kLanguages, nil];
+        fieldsArray = [NSArray arrayWithObjects:kFirstName, kLastName, kUnit, kAddress, kPhone, kEmail, kLanguages, kDescription, nil];
     } else {
-        fieldsArray = [NSArray arrayWithObjects:kFirstName, kLastName, kUnit, kAddress, kPhone, kEmail, kLanguages, kOtherLang, nil];
+        fieldsArray = [NSArray arrayWithObjects:kFirstName, kLastName, kUnit, kAddress, kPhone, kEmail, kLanguages, kOtherLang, kDescription, nil];
     }
     
     return fieldsArray;

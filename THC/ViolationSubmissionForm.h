@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSString       *otherLanguage;
 @property (assign)            BOOL           showOtherLanguage;
 @property (strong, nonatomic) NSMutableArray *hotelBuildingNames;
+@property (strong, nonatomic) NSString       *description;
 
 
 // Removing notes until we find a suitable place/reason to put this back

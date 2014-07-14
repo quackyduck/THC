@@ -16,15 +16,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="dHK-4j-3wj">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="488"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eoc-jz-znD">
+                    <rect key="frame" x="0.0" y="488" width="320" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjF-1T-bJe">
+                            <rect key="frame" x="6" y="5" width="70" height="70"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                    </subviews>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="dHK-4j-3wj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="H7L-R5-Jz0"/>
-                <constraint firstAttribute="bottom" secondItem="dHK-4j-3wj" secondAttribute="bottom" id="Hbb-4I-G0R"/>
+                <constraint firstAttribute="bottom" secondItem="dHK-4j-3wj" secondAttribute="bottom" constant="80" id="Hbb-4I-G0R"/>
                 <constraint firstItem="dHK-4j-3wj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OUL-z7-zGI"/>
                 <constraint firstAttribute="trailing" secondItem="dHK-4j-3wj" secondAttribute="trailing" id="bwv-PI-KPd"/>
             </constraints>
@@ -32,4 +42,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="camera.png" width="1200" height="1200"/>
+    </resources>
 </document>

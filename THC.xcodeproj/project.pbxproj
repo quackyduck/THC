@@ -45,6 +45,15 @@
 		377D17101969E7BA004E4E67 /* ViolationSubmissionForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */; };
 		377D17131969E7D7004E4E67 /* AddressForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D17121969E7D7004E4E67 /* AddressForm.m */; };
 		377D1716196AF9F0004E4E67 /* OtherAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D1715196AF9F0004E4E67 /* OtherAddress.m */; };
+		37BD74B519739633004BD913 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74B419739633004BD913 /* camera.png */; };
+		37BD74B91974274A004BD913 /* AsseptPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD74B81974274A004BD913 /* AsseptPicker.m */; };
+		37BD74BC1974276B004BD913 /* AssetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD74BB1974276B004BD913 /* AssetWrapper.m */; };
+		37BD74BF197427D5004BD913 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD74BE197427D5004BD913 /* PhotoCell.m */; };
+		37BD74C1197427F9004BD913 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74C0197427F9004BD913 /* PhotoCell.xib */; };
+		37BD74C519742839004BD913 /* AlbumListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD74C319742839004BD913 /* AlbumListController.m */; };
+		37BD74C619742839004BD913 /* AlbumListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74C419742839004BD913 /* AlbumListController.xib */; };
+		37BD74CA19742864004BD913 /* PhotoCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD74C819742864004BD913 /* PhotoCollectionController.m */; };
+		37BD74CB19742864004BD913 /* PhotoCollectionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74C919742864004BD913 /* PhotoCollectionController.xib */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
@@ -127,6 +136,20 @@
 		377D17121969E7D7004E4E67 /* AddressForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressForm.m; sourceTree = "<group>"; };
 		377D1714196AF9F0004E4E67 /* OtherAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherAddress.h; sourceTree = "<group>"; };
 		377D1715196AF9F0004E4E67 /* OtherAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherAddress.m; sourceTree = "<group>"; };
+		37BD74B419739633004BD913 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		37BD74B71974274A004BD913 /* AsseptPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsseptPicker.h; sourceTree = "<group>"; };
+		37BD74B81974274A004BD913 /* AsseptPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsseptPicker.m; sourceTree = "<group>"; };
+		37BD74BA1974276B004BD913 /* AssetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetWrapper.h; sourceTree = "<group>"; };
+		37BD74BB1974276B004BD913 /* AssetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetWrapper.m; sourceTree = "<group>"; };
+		37BD74BD197427D5004BD913 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		37BD74BE197427D5004BD913 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		37BD74C0197427F9004BD913 /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
+		37BD74C219742839004BD913 /* AlbumListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumListController.h; sourceTree = "<group>"; };
+		37BD74C319742839004BD913 /* AlbumListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumListController.m; sourceTree = "<group>"; };
+		37BD74C419742839004BD913 /* AlbumListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumListController.xib; sourceTree = "<group>"; };
+		37BD74C719742864004BD913 /* PhotoCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionController.h; sourceTree = "<group>"; };
+		37BD74C819742864004BD913 /* PhotoCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionController.m; sourceTree = "<group>"; };
+		37BD74C919742864004BD913 /* PhotoCollectionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCollectionController.xib; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
@@ -208,6 +231,7 @@
 		0AF08BB71964EC94002761B9 /* THC */ = {
 			isa = PBXGroup;
 			children = (
+				37BD74B61974271E004BD913 /* Camera */,
 				0AF08BE21964F127002761B9 /* Models */,
 				0AF08BE11964F120002761B9 /* Views */,
 				0AF08BE01964F11A002761B9 /* Controllers */,
@@ -222,6 +246,7 @@
 		0AF08BB81964EC94002761B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37BD74B419739633004BD913 /* camera.png */,
 				0AE370B3196D16DB00E80E88 /* building.png */,
 				0AF08BB91964EC94002761B9 /* THC-Info.plist */,
 				0AF08BBA1964EC94002761B9 /* InfoPlist.strings */,
@@ -284,6 +309,12 @@
 				0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */,
 				0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */,
 				0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */,
+				37BD74C219742839004BD913 /* AlbumListController.h */,
+				37BD74C319742839004BD913 /* AlbumListController.m */,
+				37BD74C419742839004BD913 /* AlbumListController.xib */,
+				37BD74C719742864004BD913 /* PhotoCollectionController.h */,
+				37BD74C819742864004BD913 /* PhotoCollectionController.m */,
+				37BD74C919742864004BD913 /* PhotoCollectionController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +329,9 @@
 				0A28355919721499008A5FC7 /* CreateReportButton.m */,
 				0A28355B1972DCB4008A5FC7 /* ExploreTabBarItem.h */,
 				0A28355C1972DCB4008A5FC7 /* ExploreTabBarItem.m */,
+				37BD74BD197427D5004BD913 /* PhotoCell.h */,
+				37BD74BE197427D5004BD913 /* PhotoCell.m */,
+				37BD74C0197427F9004BD913 /* PhotoCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -321,6 +355,17 @@
 				87A98860196A3BE000EDE34F /* Note.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		37BD74B61974271E004BD913 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				37BD74B71974274A004BD913 /* AsseptPicker.h */,
+				37BD74B81974274A004BD913 /* AsseptPicker.m */,
+				37BD74BA1974276B004BD913 /* AssetWrapper.h */,
+				37BD74BB1974276B004BD913 /* AssetWrapper.m */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,13 +451,17 @@
 				87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */,
 				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
+				37BD74CB19742864004BD913 /* PhotoCollectionController.xib in Resources */,
+				37BD74C619742839004BD913 /* AlbumListController.xib in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
+				37BD74C1197427F9004BD913 /* PhotoCell.xib in Resources */,
 				377D170D1969E75F004E4E67 /* ViolationDescriptionViewController.xib in Resources */,
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
 				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
+				37BD74B519739633004BD913 /* camera.png in Resources */,
 				87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37BD74CA19742864004BD913 /* PhotoCollectionController.m in Sources */,
 				377D17131969E7D7004E4E67 /* AddressForm.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
@@ -473,7 +523,10 @@
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
 				0A122E951969A5F7005894EB /* Building.m in Sources */,
 				0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */,
+				37BD74BC1974276B004BD913 /* AssetWrapper.m in Sources */,
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
+				37BD74C519742839004BD913 /* AlbumListController.m in Sources */,
+				37BD74BF197427D5004BD913 /* PhotoCell.m in Sources */,
 				377D170C1969E75F004E4E67 /* ViolationDescriptionViewController.m in Sources */,
 				87A98861196A3BE000EDE34F /* Note.m in Sources */,
 				0A28355D1972DCB4008A5FC7 /* ExploreTabBarItem.m in Sources */,
@@ -488,6 +541,7 @@
 				377D17101969E7BA004E4E67 /* ViolationSubmissionForm.m in Sources */,
 				377D1716196AF9F0004E4E67 /* OtherAddress.m in Sources */,
 				87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */,
+				37BD74B91974274A004BD913 /* AsseptPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
