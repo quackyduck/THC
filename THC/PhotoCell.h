@@ -10,4 +10,9 @@
 
 @interface PhotoCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedView;
+
+- (void)selectCell:(BOOL)selected;
+
 @end

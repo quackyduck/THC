@@ -28,4 +28,16 @@
 }
 */
 
+- (void)selectCell:(BOOL)selected {
+    if (selected) {
+        NSLog(@"Adding selected view %@", self.selectedView);
+        [self.selectedView setHidden:NO];
+        [self.imageView addSubview:self.selectedView];
+    }
+    else {
+        [self.selectedView setHidden:YES];
+    }
+    [self setNeedsDisplay];
+}
+
 @end

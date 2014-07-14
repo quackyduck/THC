@@ -54,6 +54,7 @@
 		37BD74C619742839004BD913 /* AlbumListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74C419742839004BD913 /* AlbumListController.xib */; };
 		37BD74CA19742864004BD913 /* PhotoCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD74C819742864004BD913 /* PhotoCollectionController.m */; };
 		37BD74CB19742864004BD913 /* PhotoCollectionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74C919742864004BD913 /* PhotoCollectionController.xib */; };
+		37BD74CD19742BB1004BD913 /* SelectionIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74CC19742BB1004BD913 /* SelectionIndicator.png */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
@@ -150,6 +151,8 @@
 		37BD74C719742864004BD913 /* PhotoCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionController.h; sourceTree = "<group>"; };
 		37BD74C819742864004BD913 /* PhotoCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionController.m; sourceTree = "<group>"; };
 		37BD74C919742864004BD913 /* PhotoCollectionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCollectionController.xib; sourceTree = "<group>"; };
+		37BD74CC19742BB1004BD913 /* SelectionIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectionIndicator.png; sourceTree = "<group>"; };
+		37BD74CF19742C22004BD913 /* PhotoPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPicker.h; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
@@ -231,6 +234,7 @@
 		0AF08BB71964EC94002761B9 /* THC */ = {
 			isa = PBXGroup;
 			children = (
+				37BD74CE19742C0A004BD913 /* Protocol */,
 				37BD74B61974271E004BD913 /* Camera */,
 				0AF08BE21964F127002761B9 /* Models */,
 				0AF08BE11964F120002761B9 /* Views */,
@@ -246,6 +250,7 @@
 		0AF08BB81964EC94002761B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37BD74CC19742BB1004BD913 /* SelectionIndicator.png */,
 				37BD74B419739633004BD913 /* camera.png */,
 				0AE370B3196D16DB00E80E88 /* building.png */,
 				0AF08BB91964EC94002761B9 /* THC-Info.plist */,
@@ -368,6 +373,14 @@
 			name = Camera;
 			sourceTree = "<group>";
 		};
+		37BD74CE19742C0A004BD913 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				37BD74CF19742C22004BD913 /* PhotoPicker.h */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -448,6 +461,7 @@
 				0AE370B4196D16DB00E80E88 /* building.png in Resources */,
 				0A122E9C1969C2D4005894EB /* SignupViewController.xib in Resources */,
 				0AF08BBC1964EC94002761B9 /* InfoPlist.strings in Resources */,
+				37BD74CD19742BB1004BD913 /* SelectionIndicator.png in Resources */,
 				87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */,
 				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,

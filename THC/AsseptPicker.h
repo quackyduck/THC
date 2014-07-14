@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface AsseptPicker : NSObject
+
+@property (nonatomic, strong)     ALAssetsLibrary   *assetsLibrary;
+@property (nonatomic, readonly)   NSArray           *selectedAssets;
+@property (nonatomic, readwrite)  NSUInteger        selectedCount;
+@property (nonatomic, readwrite)  NSInteger         selectionLimit;
+//@property (nonatomic, readwrite)  AssetPickingState state;
+
+- (void)changeSelectionState:(BOOL)selected forAsset:(ALAsset *)asset;
 
 @end

@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface AssetWrapper : NSObject
+
+@property (nonatomic, strong, readonly) ALAsset *asset;
+@property (nonatomic, getter = isSelected) BOOL selected;
+
++ (AssetWrapper *)wrapperWithAsset:(ALAsset *)asset;
+
+- (id)initWithAsset:(ALAsset *)asset;
 
 @end
