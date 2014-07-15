@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoPicker.h"
 
-@interface AlbumListController : UIViewController
+@class AsseptPicker;
+
+@interface AlbumListController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) AsseptPicker *assetPicker;
+@property (weak, nonatomic) id<PhotoPicker> delegate;
 
 @end

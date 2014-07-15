@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "FXForms.h"
 #import "Case.h"
+#import "AsseptPicker.h"
+#import "PhotoPicker.h"
 
-@interface ViolationSubmissionViewController : UIViewController <FXFormControllerDelegate>
+@interface ViolationSubmissionViewController : UIViewController <FXFormControllerDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker>
+
+@property (nonatomic, strong) AsseptPicker *assetPicker;
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FXFormController *formController;

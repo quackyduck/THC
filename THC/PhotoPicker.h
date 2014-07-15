@@ -10,4 +10,11 @@
 
 @protocol PhotoPicker <NSObject>
 
+- (void) finishedPhotoPicker:(UIViewController *) picker withCameraTakenImages:(NSArray *) selectedImages;
+- (void) finishedPhotoPicker:(UIViewController *) picker withUserSelectedAssets:(NSArray *) selectedAssets;
+
+@optional
+- (void) swapToCameraFromPhotoPicker:(UIViewController *)picker;
+- (void) cancelPhotoPicker:(UIViewController *) picker;
+
 @end

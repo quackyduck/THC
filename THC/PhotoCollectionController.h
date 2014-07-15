@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "PhotoPicker.h"
 
-@interface PhotoCollectionController : UIViewController
+@class AsseptPicker;
+
+@interface PhotoCollectionController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (nonatomic, strong) AsseptPicker *assetPicker;
+@property (nonatomic, strong) ALAssetsGroup *assetsGroup; // Model (a specific, filtered, group of assets).
+@property (nonatomic, weak) id<PhotoPicker> delegate;
+
 
 @end

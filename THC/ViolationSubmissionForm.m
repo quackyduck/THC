@@ -20,7 +20,7 @@
 #define kEmail       @{FXFormFieldKey: @"email", FXFormFieldTitle:@"Email:"}
 #define kLanguages   @{FXFormFieldKey: @"languagesSpoken", FXFormFieldTitle:@"Languages Spoken:", FXFormFieldHeader: @"Your Language", FXFormFieldOptions: @[@"English", @"Spanish", @"Chinese", @"Cantonese", @"Vietnamese", @"Fillipino", @"Punjabi", @"Hindi", @"Korean", @"Malay", @"Other"], FXFormFieldCell: [FXFormOptionPickerCell class], FXFormFieldAction: @"addOtherLanguage:"}
 #define kOtherLang   @{FXFormFieldKey: @"otherLanguage", FXFormFieldTitle:@"Other Language:"}
-#define kDescription @{FXFormFieldKey: @"description", FXFormFieldTitle:@"Describe your Violation:", FXFormFieldType: FXFormFieldTypeLongText}
+#define kDescription @{FXFormFieldKey: @"description", FXFormFieldTitle:@"", FXFormFieldHeader: @"Describe the Violation:", FXFormFieldType: FXFormFieldTypeLongText}
 
 #define kSubmit      @{FXFormFieldTitle: @"Submit", FXFormFieldHeader: @"", FXFormFieldHeader: @"", FXFormFieldAction: @"submitViolationSubmissionForm:"}
 
