@@ -8,6 +8,7 @@
 
 #import "CaseDetailViewController.h"
 #import "ViolationSubmissionViewController.h"
+#import "ExploreCasesContainerViewController.h"
 #import "PhotoInfo.h"
 #import "Note.h"
 #import "Building.h"
@@ -38,6 +39,7 @@
 - (IBAction)onEdit:(UIButton *)sender;
 - (IBAction)onSendNote:(UIButton *)sender;
 - (IBAction)onTap:(id)sender;
+- (IBAction)onPan:(id)sender;
 
 - (void)willShowKeyboard:(NSNotification *)notification;
 - (void)willHideKeyboard:(NSNotification *)notification;
@@ -143,6 +145,10 @@
     //Change this dynamically once notes are working
     [self.scrollView setContentSize:CGSizeMake(self.contentView.frame.size.width, self.contentView.frame.size.height)];
 }
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = NO;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -199,6 +205,13 @@
 
 - (IBAction)onTap:(id)sender {
     [self.view endEditing:YES];
+}
+
+- (IBAction)onPan:(id)sender {
+    if (self.isNewCase) {
+        ExploreCasesContainerViewController *topLevelController = [[ExploreCasesContainerViewController alloc] init];
+        [self presentViewController:topLevelController animated:YES completion:nil];
+    }
 }
 
 - (IBAction)onEdit:(UIButton *)sender {

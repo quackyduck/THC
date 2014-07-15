@@ -37,9 +37,8 @@
         
         AggregateMapViewController *mapViewController = [[AggregateMapViewController alloc] init];
         CaseTableViewController *casesViewController = [[CaseTableViewController alloc] init];
-        self.tabViewControllers = @[mapViewController, casesViewController];
-        
-        
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:casesViewController];
+        self.tabViewControllers = @[mapViewController, nvc];
     }
     return self;
 }
@@ -50,9 +49,9 @@
     [self setNeedsStatusBarAppearanceUpdate];
     
     AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
-    CaseTableViewController *casesViewController = self.tabViewControllers[1];
+    UINavigationController *nvc = self.tabViewControllers[1];
     
-    [self show:mapsViewController andRemove:casesViewController];
+    [self show:mapsViewController andRemove:nvc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,13 +99,13 @@
     if (location.x > 160) {
         self.exploreTabBar.tabSelected = 1;
         AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
-        CaseTableViewController *casesViewController = self.tabViewControllers[1];
-        [self show:casesViewController andRemove:mapsViewController];
+        UINavigationController *nvc = self.tabViewControllers[1];
+        [self show:nvc andRemove:mapsViewController];
     } else {
         self.exploreTabBar.tabSelected = 0;
         AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
-        CaseTableViewController *casesViewController = self.tabViewControllers[1];
-        [self show:mapsViewController andRemove:casesViewController];
+        UINavigationController *nvc = self.tabViewControllers[1];
+        [self show:mapsViewController andRemove:nvc];
     }
 }
 

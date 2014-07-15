@@ -333,6 +333,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="pse-A2-ltt" appends="YES" id="O8b-u5-kj2"/>
+                <outletCollection property="gestureRecognizers" destination="ogh-qj-yfW" appends="YES" id="ECK-Vh-EEO"/>
             </connections>
         </view>
         <tapGestureRecognizer id="pse-A2-ltt">
@@ -340,5 +341,10 @@
                 <action selector="onTap:" destination="-1" id="6pM-Jo-Sij"/>
             </connections>
         </tapGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="ogh-qj-yfW">
+            <connections>
+                <action selector="onPan:" destination="-1" id="Hg9-sH-1jl"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
 </document>

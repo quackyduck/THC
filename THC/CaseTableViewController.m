@@ -62,6 +62,8 @@
     [self.searchBar setKeyboardType:UIKeyboardTypeWebSearch];
     self.searchBar.delegate = self;
     
+    self.navigationController.navigationBar.hidden = YES;
+    
     //Create test case (ha!)
 //    Case* myCase = [Case object];
 //    myCase.caseId = @"test1";
@@ -94,6 +96,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    self.navigationController.navigationBar.hidden = YES;
     [self loadEntries];
 }
 
@@ -147,7 +150,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.cases[indexPath.row] isNewCase:NO];
-    [self presentViewController:detailvc animated:YES completion:nil];
+    [self.navigationController pushViewController:detailvc animated:YES];
 }
 
 - (void)onCaseControlChange
