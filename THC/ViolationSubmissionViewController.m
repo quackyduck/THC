@@ -236,6 +236,8 @@
     } else
     {
         Case* createdCase = [form createCaseWithDescription:self.violationDescription andImageData:self.imageData];
+//        Case* createdCase = [form createCaseWithDescription:form.description andImageData:self.imageData];
+
         CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
         [self presentViewController:detailvc animated:YES completion:nil];
     }
