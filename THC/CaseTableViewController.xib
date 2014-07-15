@@ -14,11 +14,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="512"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HuE-fQ-4oa">
-                    <rect key="frame" x="20" y="155" width="280" height="29"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HuE-fQ-4oa">
+                    <rect key="frame" x="20" y="56" width="280" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
                         <segment title="New Cases"/>
@@ -26,20 +26,32 @@
                         <segment title="All"/>
                     </segments>
                 </segmentedControl>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-lI-G25">
-                    <rect key="frame" x="0.0" y="208" width="320" height="512"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-lI-G25">
+                    <rect key="frame" x="0.0" y="100" width="320" height="412"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpg-A9-twR">
-                    <rect key="frame" x="0.0" y="85" width="320" height="44"/>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wpg-A9-twR">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="6U0-lI-G25" secondAttribute="trailing" id="01u-CO-dJZ"/>
+                <constraint firstItem="wpg-A9-twR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="47U-mS-yUF"/>
+                <constraint firstAttribute="bottom" secondItem="6U0-lI-G25" secondAttribute="bottom" id="E7E-Ow-xmb"/>
+                <constraint firstItem="HuE-fQ-4oa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="LUT-Pe-VM7"/>
+                <constraint firstItem="wpg-A9-twR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aMv-dC-FsL"/>
+                <constraint firstAttribute="trailing" secondItem="HuE-fQ-4oa" secondAttribute="trailing" constant="20" id="maI-59-Lfy"/>
+                <constraint firstItem="6U0-lI-G25" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="osu-1N-eBV"/>
+                <constraint firstAttribute="trailing" secondItem="wpg-A9-twR" secondAttribute="trailing" id="psh-fG-j33"/>
+                <constraint firstItem="6U0-lI-G25" firstAttribute="top" secondItem="HuE-fQ-4oa" secondAttribute="bottom" constant="16" id="uQk-MR-l7i"/>
+                <constraint firstItem="HuE-fQ-4oa" firstAttribute="top" secondItem="wpg-A9-twR" secondAttribute="bottom" constant="12" id="zDH-YS-TwT"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
 </document>
