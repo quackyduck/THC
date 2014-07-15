@@ -125,12 +125,12 @@
     {
         [form updateCase:self.myCase];
         CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.myCase isNewCase:NO];
-        [self.navigationController pushViewController:detailvc animated:YES];
+        [self presentViewController:detailvc animated:YES completion:nil];
     } else
     {
         Case* createdCase = [form createCaseWithDescription:self.violationDescription andImageData:self.imageData];
         CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
-        [self.navigationController pushViewController:detailvc animated:YES];
+        [self presentViewController:detailvc animated:YES completion:nil];
     }
     //we can then perform validation, etc
     /*

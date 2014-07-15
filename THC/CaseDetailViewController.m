@@ -204,7 +204,7 @@
 - (IBAction)onEdit:(UIButton *)sender {
     ViolationSubmissionViewController * vsc = [[ViolationSubmissionViewController alloc] init];
     [vsc setCase:self.currentCase];
-    [self.navigationController pushViewController:vsc animated:YES];
+    [self presentViewController:vsc animated:YES completion:nil];
 }
 
 - (IBAction)onSendNote:(UIButton *)sender {

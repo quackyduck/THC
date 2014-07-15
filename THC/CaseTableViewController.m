@@ -147,7 +147,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.cases[indexPath.row] isNewCase:NO];
-    [self.navigationController pushViewController:detailvc animated:YES];
+    [self presentViewController:detailvc animated:YES completion:nil];
 }
 
 - (void)onCaseControlChange
