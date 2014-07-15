@@ -94,7 +94,7 @@
     }];
 }
 
-- (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData {
+- (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError {
 
     
     NSString *userId = nil;
@@ -159,8 +159,14 @@
             [photoInfo saveInBackgroundWithBlock:^(BOOL caseSuccess, NSError *caseError) {
                 if (caseSuccess) {
                     newCase.caseId = photoInfo.objectId;
-                    [newCase saveInBackground];
-                    [[[UIAlertView alloc] initWithTitle:@"Violation Submitted" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                    [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
+                        if (updateSucceeded) {
+                            completion(newCase);
+                        } else
+                        {
+                            onError(caseUpdateError);
+                        }
+                    }];
                 } else if (caseError) {
                     [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Case" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
                     

@@ -235,11 +235,12 @@
         [self presentViewController:detailvc animated:YES completion:nil];
     } else
     {
-        Case* createdCase = [form createCaseWithDescription:self.violationDescription andImageData:self.imageData];
-//        Case* createdCase = [form createCaseWithDescription:form.description andImageData:self.imageData];
-
-        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
-        [self presentViewController:detailvc animated:YES completion:nil];
+        [form createCaseWithDescription:self.violationDescription andImageData:self.imageData completion:^(Case* createdCase){
+            CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
+            [self presentViewController:detailvc animated:YES completion:nil];
+        } error:^(NSError * onError) {
+            NSLog(@"Error creating Case!");
+        }];
     }
     //we can then perform validation, etc
     /*

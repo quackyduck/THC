@@ -32,6 +32,6 @@
 - (void)printFormContents;
 
 - (void)updateCase:(Case *) myCase;
-- (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData;
+- (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))error;
 
 @end
