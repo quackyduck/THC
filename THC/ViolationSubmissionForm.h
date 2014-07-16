@@ -33,5 +33,7 @@
 
 - (void)updateCase:(Case *) myCase;
 - (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))error;
+- (Case*)createCaseWithDescription:(NSString *) description andImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;
+- (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;
 
 @end

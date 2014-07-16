@@ -25,6 +25,7 @@
 @dynamic languageSpoken;
 @dynamic description;
 @dynamic userId;
+@dynamic photoIdList;
 @dynamic status;
 
 @end

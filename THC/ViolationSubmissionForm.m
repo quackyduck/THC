@@ -139,13 +139,13 @@
     } else {
         newCase.address = self.addressForm.otherAddress.streetName;
     }
-    newCase.name = @"New Case";
+    newCase.name = [NSString stringWithFormat:@"%@, %@", self.lastName, self.firstName];
     newCase.caseId = newCase.objectId;
     newCase.unit = self.unitNum;
     newCase.phoneNumber = self.phoneNumber;
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
-    newCase.description = description;
+    newCase.description = self.description;
     newCase.userId = userId;
     newCase.status = caseOpen;
     
@@ -173,6 +173,173 @@
                 }
                 
             }];
+        } else if (error) {
+            [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Photo" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        }
+    }];
+    return newCase;
+    
+}
+
+- (Case*)createCaseWithDescription:(NSString *) description andImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError {
+    
+    
+    NSString *userId = nil;
+    if ([PFUser currentUser]) {
+        userId = [[PFUser currentUser] objectId];
+    }
+    
+    
+    Case* newCase = [Case object];
+    
+    NSLog(@"case id %@", newCase.objectId);
+    PhotoInfo* photoInfo = [PhotoInfo object];
+    photoInfo.caseId = newCase.objectId;
+    photoInfo.caption = nil;
+    int imageIndex = 0;
+    NSMutableArray *pFFileList = [NSMutableArray array];
+    for (NSData *imageData in  imageDataList) {
+        PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"Image_%d", imageIndex] data:imageData];
+        [pFFileList addObject:imageFile];
+    }
+    photoInfo.imageList = pFFileList;
+    
+//    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
+//    photoInfo.image = imageFile;
+    
+    Building *building = self.addressForm.hotelBuildings[self.addressForm.hotelName];
+    
+    if (building) {
+        newCase.buildingId = building.objectId;
+        newCase.address = building.streetAddress;
+    } else {
+        newCase.address = self.addressForm.otherAddress.streetName;
+    }
+    newCase.name = [NSString stringWithFormat:@"%@, %@", self.lastName, self.firstName];
+    newCase.caseId = newCase.objectId;
+    newCase.unit = self.unitNum;
+    newCase.phoneNumber = self.phoneNumber;
+    newCase.email = self.email;
+    newCase.languageSpoken = self.languagesSpoken;
+    newCase.description = self.description;
+    newCase.userId = userId;
+    newCase.status = caseOpen;
+    
+    
+    [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (succeeded) {
+            photoInfo.caseId = newCase.objectId;
+            newCase.caseId = newCase.objectId;
+            newCase.status = caseOpen;
+            [photoInfo saveInBackgroundWithBlock:^(BOOL caseSuccess, NSError *caseError) {
+                if (caseSuccess) {
+                    newCase.caseId = photoInfo.objectId;
+                    [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
+                        if (updateSucceeded) {
+                            completion(newCase);
+                        } else
+                        {
+                            onError(caseUpdateError);
+                        }
+                    }];
+                } else if (caseError) {
+                    [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Case" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                    
+                }
+                
+            }];
+        } else if (error) {
+            [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Photo" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        }
+    }];
+    return newCase;
+    
+}
+
+
+- (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError {
+    
+    
+    NSString *userId = nil;
+    if ([PFUser currentUser]) {
+        userId = [[PFUser currentUser] objectId];
+    }
+    
+    
+    Case* newCase = [Case object];
+    
+    NSLog(@"case id %@", newCase.objectId);
+    
+    Building *building = self.addressForm.hotelBuildings[self.addressForm.hotelName];
+    
+    if (building) {
+        newCase.buildingId = building.objectId;
+        newCase.address = building.streetAddress;
+    } else {
+        newCase.address = self.addressForm.otherAddress.streetName;
+    }
+    newCase.name = [NSString stringWithFormat:@"%@, %@", self.lastName, self.firstName];
+    newCase.caseId = newCase.objectId;
+    newCase.unit = self.unitNum;
+    newCase.phoneNumber = self.phoneNumber;
+    newCase.email = self.email;
+    newCase.languageSpoken = self.languagesSpoken;
+    newCase.description = self.description;
+    newCase.userId = userId;
+    newCase.status = caseOpen;
+    
+    
+    [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (succeeded) {
+            
+            NSMutableArray *photoObjectList = [NSMutableArray array];
+            
+            NSUInteger imageIndex = 1;
+            for (NSData *imageData in  imageDataList) {
+                PhotoInfo* photoInfo = [PhotoInfo object];
+                photoInfo.caseId = newCase.objectId;
+                photoInfo.caption = nil;
+                PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"Image_%lu", (unsigned long)imageIndex] data:imageData];
+                photoInfo.image = imageFile;
+                photoInfo.caseId = newCase.objectId;
+                
+                [photoObjectList addObject:photoInfo];
+                
+                 ++imageIndex;
+
+            }
+            
+            
+            newCase.status = caseOpen;
+            [PFObject saveAllInBackground:photoObjectList block:^(BOOL photoSuccess, NSError *photoError) {
+                if (photoSuccess) {
+                    NSMutableArray *photoIdList = [NSMutableArray array];
+                    for (PhotoInfo *photoInfo in photoObjectList) {
+                        [photoIdList addObject:photoInfo.objectId];
+                        newCase.caseId = photoInfo.objectId;
+
+                    }
+                    newCase.photoIdList = photoIdList;
+                    NSLog(@"submitting case with %d photos", [photoIdList count]);
+//                    newCase.caseId = photoInfo.objectId;
+                    [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
+                        if (updateSucceeded) {
+                            completion(newCase);
+                        } else
+                        {
+                            onError(caseUpdateError);
+                        }
+                    }];
+                } else if (photoError) {
+                    [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Case" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                    
+                }
+
+            }];
+            
+
         } else if (error) {
             [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Photo" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
         }

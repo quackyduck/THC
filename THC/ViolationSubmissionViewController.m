@@ -238,12 +238,28 @@
         [self.navigationController popViewControllerAnimated:YES];
     } else
     {
-        [form createCaseWithDescription:self.violationDescription andImageData:self.imageData completion:^(Case* createdCase){
+        NSMutableArray *imageDataList = nil;
+
+        if ([self.imagesInScroll count]) {
+            imageDataList = [NSMutableArray array];
+            for (UIImageView *imageView in self.imagesInScroll) {
+                NSData  *imageData = UIImageJPEGRepresentation(imageView.image, 0);
+                [imageDataList addObject:imageData];
+            }
+        }
+        [form createCaseWithDescription:self.violationDescription withImageDataList:imageDataList completion:^(Case* createdCase){
             CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
             [self presentViewController:detailvc animated:YES completion:nil];
         } error:^(NSError * onError) {
             NSLog(@"Error creating Case!");
         }];
+        
+//        [form createCaseWithDescription:self.violationDescription andImageData:self.imageData completion:^(Case* createdCase){
+//            CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
+//            [self presentViewController:detailvc animated:YES completion:nil];
+//        } error:^(NSError * onError) {
+//            NSLog(@"Error creating Case!");
+//        }];
     }
     //we can then perform validation, etc
     /*

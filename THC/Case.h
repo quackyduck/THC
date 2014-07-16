@@ -27,6 +27,7 @@ typedef enum {
 @property (retain) NSString *languageSpoken;
 @property (retain) NSString *description;
 @property (retain) NSString *userId;
+@property (retain) NSArray  *photoIdList;
 @property status status;
 
 @end
