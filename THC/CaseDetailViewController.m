@@ -147,6 +147,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self viewDidLoad];
     self.navigationController.navigationBar.hidden = NO;
 }
 
@@ -217,7 +218,7 @@
 - (IBAction)onEdit:(UIButton *)sender {
     ViolationSubmissionViewController * vsc = [[ViolationSubmissionViewController alloc] init];
     [vsc setCase:self.currentCase];
-    [self presentViewController:vsc animated:YES completion:nil];
+    [self.navigationController pushViewController:vsc animated:YES];
 }
 
 - (IBAction)onSendNote:(UIButton *)sender {

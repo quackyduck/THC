@@ -17,8 +17,10 @@
 
 @interface CaseTableViewController ()
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *caseControl;
 @property (weak, nonatomic) IBOutlet UITableView *caseTableView;
+@property (weak, nonatomic) IBOutlet UILabel *allLabel;
+@property (weak, nonatomic) IBOutlet UILabel *openLabel;
+@property (weak, nonatomic) IBOutlet UILabel *myLabel;
 
 @property (nonatomic, strong) NSArray* cases;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -43,6 +45,19 @@
 {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAllTap:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.allLabel addGestureRecognizer:tapGestureRecognizer];
+    self.allLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *openTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onOpenTap:)];
+    openTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.openLabel addGestureRecognizer:openTapGestureRecognizer];
+    self.openLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *myTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onMyTap:)];
+    myTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.myLabel addGestureRecognizer:myTapGestureRecognizer];
+    self.myLabel.userInteractionEnabled = YES;
+    
     self.caseTableView.dataSource = self;
     self.caseTableView.delegate = self;
     [self.caseTableView registerNib:[UINib nibWithNibName:@"CaseCell" bundle:nil] forCellReuseIdentifier:@"CaseCell"];
@@ -53,10 +68,6 @@
     UIBarButtonItem *reportButton = [[UIBarButtonItem alloc] initWithTitle:@"Report" style:UIBarButtonItemStylePlain target:self action:@selector(onReport)];
     self.navigationItem.rightBarButtonItem = reportButton;
     self.navigationItem.title = @"Cases";
-    
-    [self.caseControl addTarget:self
-                         action:@selector(onCaseControlChange)
-               forControlEvents:UIControlEventValueChanged];
     
     // Set Up Search Bar
     [self.searchBar setKeyboardType:UIKeyboardTypeWebSearch];
@@ -153,40 +164,6 @@
     [self.navigationController pushViewController:detailvc animated:YES];
 }
 
-- (void)onCaseControlChange
-{
-    switch (self.caseControl.selectedSegmentIndex) {
-        case 0:
-        {
-            //Get 10 newest cases, should we instead just look for open cases?
-            PFQuery *query = [Case query];
-            [query orderByDescending:@"createdAt"];
-            query.limit = 10;
-            [self queryForCases:query];
-        }
-            break;
-        case 1:
-        {
-            //Get my cases
-            PFQuery *query = [Case query];
-            PFUser *user = [PFUser currentUser];
-            [query whereKey:@"userId" equalTo:user.objectId];
-            [self queryForCases:query];
-        }
-            break;
-        case 2:
-        {
-            PFQuery *query = [Case query];
-            //ALL THE CASES!!
-            [self queryForCases:query];
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
-
 - (void)queryForCases:(PFQuery *)query
 {
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -240,4 +217,44 @@
     [launcher launchCamera];
 }
 
+- (IBAction)onOpenTap:(id)sender {
+    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    self.openLabel.attributedText = [[NSAttributedString alloc] initWithString:@"Open Cases"
+                                                             attributes:underlineAttribute];
+    self.allLabel.text = @"All Cases"; // remove underline
+    self.myLabel.text = @"My Cases"; // remove underline
+    
+    //Get 10 newest cases, need to instead just look for open cases?
+    PFQuery *query = [Case query];
+    [query orderByDescending:@"createdAt"];
+    query.limit = 10;
+    [self queryForCases:query];
+}
+
+- (IBAction)onMyTap:(id)sender {
+    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    self.myLabel.attributedText = [[NSAttributedString alloc] initWithString:@"My Cases"
+                                                                   attributes:underlineAttribute];
+    self.openLabel.text = @"Open Cases"; // remove underline
+    self.allLabel.text = @"All Cases"; // remove underline
+    
+    //Get my cases
+    PFQuery *query = [Case query];
+    PFUser *user = [PFUser currentUser];
+    [query whereKey:@"userId" equalTo:user.objectId];
+    [self queryForCases:query];
+}
+
+- (IBAction)onAllTap:(id)sender {
+    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    self.allLabel.attributedText = [[NSAttributedString alloc] initWithString:@"All Cases"
+                                                                   attributes:underlineAttribute];
+    self.openLabel.text = @"Open Cases"; // remove underline
+    self.myLabel.text = @"My Cases"; // remove underline
+    
+    PFQuery *query = [Case query];
+    //ALL THE CASES!!
+    [self queryForCases:query];
+    
+}
 @end

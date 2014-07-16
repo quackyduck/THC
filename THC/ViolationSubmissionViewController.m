@@ -234,8 +234,8 @@
     if (self.myCase) //case was already created, just update it
     {
         [form updateCase:self.myCase];
-        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.myCase isNewCase:NO];
-        [self presentViewController:detailvc animated:YES completion:nil];
+//        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.myCase isNewCase:NO];
+        [self.navigationController popViewControllerAnimated:YES];
     } else
     {
         [form createCaseWithDescription:self.violationDescription andImageData:self.imageData completion:^(Case* createdCase){

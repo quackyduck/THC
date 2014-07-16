@@ -6,8 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaseTableViewController">
             <connections>
-                <outlet property="caseControl" destination="HuE-fQ-4oa" id="J9P-j4-MgI"/>
+                <outlet property="allLabel" destination="u9a-dW-MsE" id="Bfp-lM-mYe"/>
                 <outlet property="caseTableView" destination="6U0-lI-G25" id="Bgb-fO-fWS"/>
+                <outlet property="myLabel" destination="IyC-Tt-aRb" id="RVU-63-jQH"/>
+                <outlet property="openLabel" destination="xKu-Yh-6nG" id="hJX-fC-K6A"/>
                 <outlet property="searchBar" destination="wpg-A9-twR" id="iV4-Sx-GTQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,16 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="512"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HuE-fQ-4oa">
-                    <rect key="frame" x="20" y="56" width="280" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <segments>
-                        <segment title="New Cases"/>
-                        <segment title="My Cases"/>
-                        <segment title="All"/>
-                    </segments>
-                </segmentedControl>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-lI-G25">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-lI-G25">
                     <rect key="frame" x="0.0" y="100" width="320" height="412"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,19 +29,46 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sVN-vR-FNY">
+                    <rect key="frame" x="0.0" y="50" width="320" height="42"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All Cases" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9a-dW-MsE">
+                            <rect key="frame" x="20" y="10" width="72" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open Cases" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKu-Yh-6nG">
+                            <rect key="frame" x="118" y="10" width="84" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Cases" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyC-Tt-aRb">
+                            <rect key="frame" x="228" y="10" width="72" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6U0-lI-G25" secondAttribute="trailing" id="01u-CO-dJZ"/>
                 <constraint firstItem="wpg-A9-twR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="47U-mS-yUF"/>
                 <constraint firstAttribute="bottom" secondItem="6U0-lI-G25" secondAttribute="bottom" id="E7E-Ow-xmb"/>
-                <constraint firstItem="HuE-fQ-4oa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="LUT-Pe-VM7"/>
                 <constraint firstItem="wpg-A9-twR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aMv-dC-FsL"/>
-                <constraint firstAttribute="trailing" secondItem="HuE-fQ-4oa" secondAttribute="trailing" constant="20" id="maI-59-Lfy"/>
                 <constraint firstItem="6U0-lI-G25" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="osu-1N-eBV"/>
                 <constraint firstAttribute="trailing" secondItem="wpg-A9-twR" secondAttribute="trailing" id="psh-fG-j33"/>
-                <constraint firstItem="6U0-lI-G25" firstAttribute="top" secondItem="HuE-fQ-4oa" secondAttribute="bottom" constant="16" id="uQk-MR-l7i"/>
-                <constraint firstItem="HuE-fQ-4oa" firstAttribute="top" secondItem="wpg-A9-twR" secondAttribute="bottom" constant="12" id="zDH-YS-TwT"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

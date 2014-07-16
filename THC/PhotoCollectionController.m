@@ -115,7 +115,7 @@
 
 - (void)doneButtonAction:(id)sender
 {
-    NSLog(@"Picked %d images", [self.assetPicker.selectedAssets count]);
+    NSLog(@"Picked %lu images", (unsigned long)[self.assetPicker.selectedAssets count]);
     [self.delegate finishedPhotoPicker:self withUserSelectedAssets:self.assetPicker.selectedAssets];
 }
 
@@ -126,7 +126,7 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView*)cv numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"total fetched assets %d", [self.fetchedAssets count]);
+    NSLog(@"total fetched assets %lu", (unsigned long)[self.fetchedAssets count]);
     return [self.fetchedAssets count];
 }
 
@@ -227,7 +227,7 @@
         
         
         
-        NSLog(@"Selecting image for row %d", indexPath.row);
+        NSLog(@"Selecting image for row %ld", (long)indexPath.row);
         return [assetWrapper isSelected];
     }
 }
