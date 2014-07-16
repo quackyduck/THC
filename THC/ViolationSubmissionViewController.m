@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString                *violationDescription;
 @property (strong, nonatomic) Case                    *myCase;
 @property (strong, nonatomic) NSMutableArray          *imagesInScroll;
+@property (strong, nonatomic) NSMutableArray          *deleteImagesInScroll;
 @property (strong, nonatomic) UIImagePickerController *picker;
 @property (weak, nonatomic) IBOutlet UIScrollView     *scrollView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityView;
@@ -62,6 +63,7 @@
                                              selector:@selector(refreshForm)
                                                  name:@"Addresses Retrieved"
                                                object:nil];
+    
     
     // Create the FX form controller and specify the form entries
     self.formController = [[FXFormController alloc] init];
@@ -128,6 +130,8 @@
         
         //self.pageControl.numberOfPages = 0;
         self.imagesInScroll = [NSMutableArray array];
+        self.deleteImagesInScroll = [NSMutableArray array];
+
         
         CGSize contentSize = CGSizeZero;
         contentSize.width = 80;
@@ -149,7 +153,7 @@
         //NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
         
         UIImage *image = [UIImage imageNamed:@"camera"];
-        NSLog(@"camera image %@", image);
+//        NSLog(@"camera image %@", image);
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         imageView.frame = imageViewFrame;
@@ -180,7 +184,6 @@
     CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.scrollView];
     
     self.activityView.center = activityCenter;
-    NSLog(@"viewWillLayoutSubviews");
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -339,7 +342,7 @@
         for (ALAsset *asset in assets) {
             
 
-            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
+//            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
 
             CGRect imageViewFrame = CGRectInset(self.scrollView.bounds, padding, padding);
             NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
@@ -347,7 +350,7 @@
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index + padding;
-            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
+//            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
             
             //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
@@ -370,35 +373,22 @@
             deleteFrame.size.height = 4*padding;
             deleteFrame.size.width  = 4*padding;
             UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
-            NSLog(@"delete %@ %@", deleteImageView, deleteImageView.image);
-            //[imageView addSubview:deleteImageView];
+//            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
+            tap.numberOfTapsRequired = 1;
 
+            [deleteImageView addGestureRecognizer:tap];
+            deleteImageView.userInteractionEnabled = YES;
+            deleteImageView.tag = [self.imagesInScroll count];
             
             index++;
             
+            
             [self.scrollView addSubview:imageView];
+
             [self.scrollView addSubview:deleteImageView];
             [self.imagesInScroll addObject:imageView];
-            
-            
-//            UIImageView *deleteView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"delete"]];
-//            CGRect deleteFrame = imageView.frame;
-//            NSLog(@"imageView Frame: %@", NSStringFromCGRect(deleteFrame));
-//            NSLog(@"image size %f %f", image.size.width, image.size.height);
-//            deleteFrame.origin.x = deleteFrame.size.width - 30;
-//            deleteFrame.origin.y = deleteFrame.size.height > image.size.height ? deleteFrame.size.height - image.size.height - 10 : deleteFrame.origin.y + 10;
-//            deleteFrame.size.width = 30;
-//            deleteFrame.size.height = 30;
-//            deleteView.frame = deleteFrame;
-//            NSLog(@"delete Frame: %@", NSStringFromCGRect(deleteFrame));
-//            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeImage:)];
-//            tapGesture.numberOfTapsRequired = 1;
-//            tapGesture.enabled = YES;
-//            //[deleteView setUserInteractionEnabled:YES];
-//            //[self.imageView setUserInteractionEnabled:YES];
-//            [imageView addGestureRecognizer:tapGesture];
-//            [imageView addSubview:deleteView];
-//            [imageView setNeedsLayout];
+            [self.deleteImagesInScroll addObject:deleteImageView];
             
         }
         
@@ -465,7 +455,7 @@
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index + padding;
-            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
+//            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
             
             //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
             
@@ -480,30 +470,28 @@
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
             
-            CGRect deleteFrame = CGRectInset(imageView.bounds, width-padding, padding);
-            NSLog(@"scroll view frame %@", NSStringFromCGRect(deleteFrame));
-
+            CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
+            deleteFrame.origin.x += width - 4*padding;
+            deleteFrame.origin.y -= 2*padding;
+            deleteFrame.size.height = 4*padding;
+            deleteFrame.size.width  = 4*padding;
+            UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
+//            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
+            tap.numberOfTapsRequired = 1;
+            
+            [deleteImageView addGestureRecognizer:tap];
+            deleteImageView.userInteractionEnabled = YES;
+            deleteImageView.tag = [self.imagesInScroll count];
             
             index++;
             
             [self.scrollView addSubview:imageView];
+            [self.scrollView addSubview:deleteImageView];
             [self.imagesInScroll addObject:imageView];
+            [self.deleteImagesInScroll addObject:deleteImageView];
+
             
-//            CGFloat padding = 10.0;
-//            CGRect imageViewFrame = CGRectInset(self.scrollView.bounds, padding, padding);
-//            imageViewFrame.origin.x = self.scrollView.frame.size.width * index + padding;
-//            
-//            NSLog(@"camera imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
-//            
-//            //UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
-//            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//            imageView.frame = imageViewFrame;
-//            //imageView.contentMode = UIViewContentModeScaleAspectFit;
-//            
-//            index++;
-//            
-//            [self.scrollView addSubview:imageView];
-//            [self.imagesInScroll addObject:imageView];
         }
         
         [self.activityView stopAnimating];
@@ -550,6 +538,85 @@
 
 - (void)editForm {
     NSLog(@"To edit Form");
+}
+
+- (void)deleteImage:(UITapGestureRecognizer *) tap {
+//    NSLog(@"Deleteting image with tag %ld", (long)tap.view.tag);
+    //UIView *view = tap.view;
+//    CGPoint touchLocation = [tap locationInView:tap.view];
+    
+    
+
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+        
+        UIImageView *imageView = (UIImageView *)[self.imagesInScroll objectAtIndex:tap.view.tag];
+        CGRect frame = imageView.frame;
+        CGRect nextFrame;
+        [imageView removeFromSuperview];
+        [self.imagesInScroll removeObjectAtIndex:tap.view.tag];
+        
+        CGRect deleteImageFrame = tap.view.frame;
+        CGRect nextDeleteImageFrame;
+//        NSLog(@"1. deleteImagesInScroll count %lu", (unsigned long)[self.deleteImagesInScroll count]);
+        [self.deleteImagesInScroll removeObjectAtIndex:tap.view.tag];
+//        NSLog(@"2. deleteImagesInScroll count %lu", (unsigned long)[self.deleteImagesInScroll count]);
+
+        tap.view.alpha = 0;
+        //[tap.view removeFromSuperview];
+        
+        //    int index = 0;
+//        BOOL removedLastDeleteImage = NO;
+//        if (!removedLastDeleteImage) {
+//            UIImageView *lastDeleteImageView = [self.deleteImagesInScroll lastObject];
+//            [self.deleteImagesInScroll removeLastObject];
+//            [lastDeleteImageView removeFromSuperview];
+//            removedLastDeleteImage = YES;
+//        }
+        
+        // Move the remaiing images up.
+        
+        //    for (UIImageView *iv in self.imagesInScroll) {
+        for (NSUInteger i=tap.view.tag; i<[self.imagesInScroll count]; i++) {
+            
+            UIImageView *iv = [self.imagesInScroll objectAtIndex:i];
+            nextFrame = iv.frame;
+            iv.frame = frame;
+            frame = nextFrame;
+            
+            UIImageView *deleteImageView = [self.deleteImagesInScroll objectAtIndex:i];
+//            NSLog(@"deleteImagesInScroll count %lu", (unsigned long)[self.deleteImagesInScroll count]);
+            [self.scrollView bringSubviewToFront:deleteImageView];
+            
+            nextDeleteImageFrame = deleteImageView.frame;
+            deleteImageView.frame = deleteImageFrame;
+            deleteImageFrame = nextDeleteImageFrame;
+            deleteImageView.tag = i;
+            
+            
+            CGFloat padding = 5.0;
+            CGFloat width   = 70.0;
+            
+            CGSize contentSize = CGSizeZero;
+            //        contentSize.width = self.scrollView.frame.size.width * assets.count;
+            contentSize.width = (width + padding) * ([self.imagesInScroll count] + 1);
+            
+            contentSize.height = self.scrollView.frame.size.height;
+            self.scrollView.contentSize = contentSize;
+            
+            //        if (!removedLastDeleteImage) {
+            //            UIImageView *lastDeleteImageView = [self.deleteImagesInScroll lastObject];
+            //            [self.deleteImagesInScroll removeLastObject];
+            //            [lastDeleteImageView removeFromSuperview];
+            //            removedLastDeleteImage = YES;
+            //        }
+        }
+
+        
+    } completion:^(BOOL finished) {
+        [tap.view removeFromSuperview];
+        
+    }];
+
 }
 
 #pragma Image Removal
