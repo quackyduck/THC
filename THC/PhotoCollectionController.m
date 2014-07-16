@@ -57,11 +57,22 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"PhotoCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"PhotoCell"];
     
     
-    self.cameraPicker = [[UIImagePickerController alloc] init];
-    self.cameraPicker.delegate = self;
-    self.cameraPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    self.cameraPicker = [[UIImagePickerController alloc] init];
+//    self.cameraPicker.delegate = self;
+//    self.cameraPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    
+//    self.cameraPicker.showsCameraControls = YES;
+}
+
+- (UIImagePickerController *) getCameraPicker {
     
-    self.cameraPicker.showsCameraControls = YES;
+    if (!_cameraPicker) {
+        _cameraPicker = [[UIImagePickerController alloc] init];
+        _cameraPicker.delegate = self;
+        _cameraPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        _cameraPicker.showsCameraControls = YES;
+    }
+    return _cameraPicker;
 }
 
 - (void)didReceiveMemoryWarning
@@ -182,7 +193,20 @@
     if (indexPath.row == 0) {
         
         //[self.delegate swapToCameraFromPhotoPicker:self];
-        [self presentViewController:self.cameraPicker animated:YES completion:NULL];
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                  message:@"Device has no camera"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles: nil];
+            NSLog(@"Alert view: %@", myAlertView);
+            
+            [myAlertView show];
+        } else {
+            
+            [self presentViewController:[self getCameraPicker] animated:YES completion:NULL];
+        }
         
         // Launch the camera
         //        UIImage *cameraImage = [UIImage imageNamed:@"camera"];
