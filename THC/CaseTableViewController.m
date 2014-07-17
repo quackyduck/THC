@@ -19,13 +19,17 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *caseTableView;
 @property (weak, nonatomic) IBOutlet UILabel *allLabel;
+@property (weak, nonatomic) IBOutlet UIView *allView;
 @property (weak, nonatomic) IBOutlet UILabel *openLabel;
+@property (weak, nonatomic) IBOutlet UIView *openView;
 @property (weak, nonatomic) IBOutlet UILabel *myLabel;
+@property (weak, nonatomic) IBOutlet UIView *myView;
 
 @property (nonatomic, strong) NSArray* cases;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) CaseCell* stubCell;
+@property (strong, nonatomic) CALayer* bottomBorder;
 
 @end
 
@@ -74,33 +78,6 @@
     self.searchBar.delegate = self;
     
     self.navigationController.navigationBar.hidden = YES;
-    
-    //Create test case (ha!)
-//    Case* myCase = [Case object];
-//    myCase.caseId = @"test1";
-//    myCase.buildingId = @"xyz";
-//    myCase.name = @"New Case";
-//    myCase.address = @"Easy Street";
-//    myCase.unit = @"C16";
-//    myCase.phoneNumber = @"123-456-7890";
-//    myCase.email = @"test@aol.com";
-//    myCase.languageSpoken = @"Klingon";
-//    myCase.description = @"blah";
-//    myCase.userId = @"xyz";
-//    myCase.status = caseOpen;
-//    [myCase saveInBackground];
-    
-    //Test photo
-//    UIImage *test = [UIImage imageNamed:@"Test Photo"];
-//    UIImageView *testImageView = [[UIImageView alloc] initWithImage:test];
-//    PhotoInfo* testPhoto = [PhotoInfo object];
-//    testPhoto.caseId = @"test1";
-//    testPhoto.caption = @"CAPTION!!";
-//    
-//    NSData* data = UIImageJPEGRepresentation(testImageView.image, 0.5f);
-//    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:data];
-//    testPhoto.image = imageFile;
-//    [testPhoto saveInBackground];
     
     [self loadEntries];
 }
@@ -218,11 +195,10 @@
 }
 
 - (IBAction)onOpenTap:(id)sender {
-    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    self.openLabel.attributedText = [[NSAttributedString alloc] initWithString:@"Open Cases"
-                                                             attributes:underlineAttribute];
-    self.allLabel.text = @"All Cases"; // remove underline
-    self.myLabel.text = @"My Cases"; // remove underline
+    self.openLabel.textColor = [UIColor orangeColor];
+    self.allLabel.textColor = [UIColor grayColor];
+    self.myLabel.textColor = [UIColor grayColor];
+    [self addBottomBorder:self.openView];
     
     //Get 10 newest cases, need to instead just look for open cases?
     PFQuery *query = [Case query];
@@ -232,11 +208,10 @@
 }
 
 - (IBAction)onMyTap:(id)sender {
-    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    self.myLabel.attributedText = [[NSAttributedString alloc] initWithString:@"My Cases"
-                                                                   attributes:underlineAttribute];
-    self.openLabel.text = @"Open Cases"; // remove underline
-    self.allLabel.text = @"All Cases"; // remove underline
+    self.myLabel.textColor = [UIColor orangeColor];
+    self.allLabel.textColor = [UIColor grayColor];
+    self.openLabel.textColor = [UIColor grayColor];
+    [self addBottomBorder:self.myView];
     
     //Get my cases
     PFQuery *query = [Case query];
@@ -246,15 +221,26 @@
 }
 
 - (IBAction)onAllTap:(id)sender {
-    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    self.allLabel.attributedText = [[NSAttributedString alloc] initWithString:@"All Cases"
-                                                                   attributes:underlineAttribute];
-    self.openLabel.text = @"Open Cases"; // remove underline
-    self.myLabel.text = @"My Cases"; // remove underline
+    self.allLabel.textColor = [UIColor orangeColor];
+    self.openLabel.textColor = [UIColor grayColor];
+    self.myLabel.textColor = [UIColor grayColor];
+    [self addBottomBorder:self.allView];
     
     PFQuery *query = [Case query];
     //ALL THE CASES!!
     [self queryForCases:query];
     
 }
+
+- (void)addBottomBorder:(UIView*)superView {
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.frame = CGRectMake(0.0f, superView.frame.size.height - 1.0f, superView.frame.size.width, 1.0f);
+    bottomBorder.backgroundColor = [UIColor orangeColor].CGColor;
+    [superView.layer addSublayer:bottomBorder];
+    [self.bottomBorder removeFromSuperlayer];
+    self.bottomBorder = bottomBorder;
+}
+
+
+
 @end
