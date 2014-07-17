@@ -21,8 +21,8 @@ PODS:
   - Bolts (1.1.0)
   - Facebook-iOS-SDK (3.16):
     - Bolts
-  - FXForms (1.1.6)
   - HexColors (2.2.1)
+  - MBProgressHUD (0.8)
   - Parse (1.2.19):
     - Facebook-iOS-SDK (~> 3.11)
   - TSMessages (0.9.9):
@@ -30,7 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 2.2.4)
-  - FXForms
+  - MBProgressHUD
   - Parse
   - TSMessages
 
@@ -38,8 +38,8 @@ SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
   Facebook-iOS-SDK: 82ad03cb9ce568855057e20a099054cf1e34ef12
-  FXForms: 9387c60ee6f3e1c75e0f8998012acc1ce0ad8d0a
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
+  MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   Parse: ffebaecaddd32cb52671010f81567c298ff93d04
   TSMessages: 2999ef55e532378692e9d14d32da2bb60e285129
 
