@@ -202,7 +202,6 @@
         PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"Image_%d", imageIndex] data:imageData];
         [pFFileList addObject:imageFile];
     }
-    photoInfo.imageList = pFFileList;
     
 //    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
 //    photoInfo.image = imageFile;

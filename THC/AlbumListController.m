@@ -29,6 +29,7 @@
     if (self) {
         self.assetGroups = [NSMutableArray array];
         self.assetPicker = [[AsseptPicker alloc] init];
+        self.assetPicker.selectionLimit = 4;
     }
     return self;
 }

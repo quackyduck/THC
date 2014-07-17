@@ -10,6 +10,7 @@
 #import "AsseptPicker.h"
 #import "AssetWrapper.h"
 #import "PhotoCell.h"
+#import "TSMessage.h"
 
 
 @interface PhotoCollectionController ()
@@ -237,6 +238,10 @@
         
     } else {
         AssetWrapper *assetWrapper = self.fetchedAssets[indexPath.row-1];
+        if (![assetWrapper isSelected] && [self.assetPicker.selectedAssets count] == self.assetPicker.selectionLimit) {
+            [self maximumImageSelectionReached];
+            return NO;
+        }
         [assetWrapper setSelected:![assetWrapper isSelected]];
         [self.assetPicker changeSelectionState:[assetWrapper isSelected] forAsset:assetWrapper.asset];
         PhotoCell *cell = (PhotoCell *)[cv cellForItemAtIndexPath:indexPath];
@@ -269,6 +274,13 @@
     
 }
 
+#pragma Pop Over Messages
 
+- (void)maximumImageSelectionReached {
+    if ([TSMessage isNotificationActive] == NO) {
+        [TSMessage showNotificationInViewController:self title:@"Selection limit reached" subtitle:nil type:TSMessageNotificationTypeWarning duration:2.0];
+    }
+
+}
 
 @end
