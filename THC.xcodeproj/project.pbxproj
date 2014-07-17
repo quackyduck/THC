@@ -57,7 +57,6 @@
 		37BD74CD19742BB1004BD913 /* SelectionIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74CC19742BB1004BD913 /* SelectionIndicator.png */; };
 		37BD74D11974A65F004BD913 /* delete1.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74D01974A65F004BD913 /* delete1.png */; };
 		37BD74D5197594C4004BD913 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74D4197594C4004BD913 /* delete.png */; };
-		37BD74E5197882D6004BD913 /* FXForms.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD74E4197882D6004BD913 /* FXForms.m */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
@@ -158,8 +157,6 @@
 		37BD74CF19742C22004BD913 /* PhotoPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPicker.h; sourceTree = "<group>"; };
 		37BD74D01974A65F004BD913 /* delete1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete1.png; sourceTree = "<group>"; };
 		37BD74D4197594C4004BD913 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
-		37BD74E3197882D6004BD913 /* FXForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXForms.h; sourceTree = "<group>"; };
-		37BD74E4197882D6004BD913 /* FXForms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXForms.m; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
@@ -394,8 +391,6 @@
 		37BD74E2197882BC004BD913 /* FXForm */ = {
 			isa = PBXGroup;
 			children = (
-				37BD74E3197882D6004BD913 /* FXForms.h */,
-				37BD74E4197882D6004BD913 /* FXForms.m */,
 			);
 			name = FXForm;
 			sourceTree = "<group>";
@@ -563,7 +558,6 @@
 				37BD74C519742839004BD913 /* AlbumListController.m in Sources */,
 				37BD74BF197427D5004BD913 /* PhotoCell.m in Sources */,
 				377D170C1969E75F004E4E67 /* ViolationDescriptionViewController.m in Sources */,
-				37BD74E5197882D6004BD913 /* FXForms.m in Sources */,
 				87A98861196A3BE000EDE34F /* Note.m in Sources */,
 				0A28355D1972DCB4008A5FC7 /* ExploreTabBarItem.m in Sources */,
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
