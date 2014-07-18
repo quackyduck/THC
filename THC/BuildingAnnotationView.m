@@ -44,7 +44,7 @@
         [color2 setFill];
         [ovalPath fill];
         {
-            NSString* textContent = [NSString stringWithFormat:@"%d", self.numberOfCases];
+            NSString* textContent = [NSString stringWithFormat:@"%ld", (long)self.numberOfCases];
             NSMutableParagraphStyle* ovalStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
             ovalStyle.alignment = NSTextAlignmentCenter;
             

@@ -255,14 +255,14 @@
 - (void)removeSearchBar
 {
     // get the height of the search bar
-    float delta = self.searchBar.frame.size.width + 14;
+    CGFloat delta = self.searchBar.frame.size.width + 14.f;
 
     delta *= -1;
     
     // run animation 0.7 second and no delay
     [UIView animateWithDuration:0.7 delay: 0.0 options: UIViewAnimationOptionCurveEaseIn animations:^{
         // move search bar delta units up or down
-        self.searchBar.frame = CGRectOffset(self.searchBar.frame, delta, 0.0);
+        self.searchBar.frame = CGRectOffset(self.searchBar.frame, (float) delta, 0.0);
     } completion:^(BOOL finished) {
 //        self.searchBar.hidden = YES;
     }];
@@ -271,7 +271,7 @@
 
 - (IBAction)onSearchTap:(id)sender {
     // get the height of the search bar
-    float delta = self.searchBar.frame.size.width + 14;
+    CGFloat delta = self.searchBar.frame.size.width + 14;
     
     // if search bar was hidden then make it visible
     self.searchBar.hidden = NO;

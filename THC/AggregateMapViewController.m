@@ -148,7 +148,7 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 // The find succeeded.
-                NSLog(@"Successfully got %d cases for building %@", objects.count, building.buildingName);
+                NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
                 // Do something with the found objects
                 annotationView.numberOfCases = objects.count;
                 [annotationView setNeedsDisplay];

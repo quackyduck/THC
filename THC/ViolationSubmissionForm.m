@@ -321,7 +321,7 @@
 
                     }
                     newCase.photoIdList = photoIdList;
-                    NSLog(@"submitting case with %d photos", [photoIdList count]);
+                    NSLog(@"submitting case with %lu photos", (unsigned long)[photoIdList count]);
 //                    newCase.caseId = photoInfo.objectId;
                     [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
                         if (updateSucceeded) {
