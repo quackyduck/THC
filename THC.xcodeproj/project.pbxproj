@@ -39,6 +39,7 @@
 		0A3C8C4A1978C03A00ED1667 /* ic_photoGallery_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C361978C03A00ED1667 /* ic_photoGallery_active@2x.png */; };
 		0A3C8C4B1978C03A00ED1667 /* ic_photoGallery_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C371978C03A00ED1667 /* ic_photoGallery_inactive@2x.png */; };
 		0A3C8C4C1978C03A00ED1667 /* ic_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C381978C03A00ED1667 /* ic_search@2x.png */; };
+		0A3C8C4F1978E76000ED1667 /* BuildingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C8C4E1978E76000ED1667 /* BuildingAnnotationView.m */; };
 		0AE370B4196D16DB00E80E88 /* building.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE370B3196D16DB00E80E88 /* building.png */; };
 		0AF08BB21964EC94002761B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB11964EC94002761B9 /* Foundation.framework */; };
 		0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB31964EC94002761B9 /* CoreGraphics.framework */; };
@@ -140,6 +141,8 @@
 		0A3C8C361978C03A00ED1667 /* ic_photoGallery_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_photoGallery_active@2x.png"; sourceTree = "<group>"; };
 		0A3C8C371978C03A00ED1667 /* ic_photoGallery_inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_photoGallery_inactive@2x.png"; sourceTree = "<group>"; };
 		0A3C8C381978C03A00ED1667 /* ic_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_search@2x.png"; sourceTree = "<group>"; };
+		0A3C8C4D1978E76000ED1667 /* BuildingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingAnnotationView.h; sourceTree = "<group>"; };
+		0A3C8C4E1978E76000ED1667 /* BuildingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingAnnotationView.m; sourceTree = "<group>"; };
 		0ACDC5B94E4440D4A15CFB87 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE370B3196D16DB00E80E88 /* building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = building.png; sourceTree = "<group>"; };
 		0AF08BAE1964EC94002761B9 /* THC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -404,6 +407,8 @@
 				37BD74BD197427D5004BD913 /* PhotoCell.h */,
 				37BD74BE197427D5004BD913 /* PhotoCell.m */,
 				37BD74C0197427F9004BD913 /* PhotoCell.xib */,
+				0A3C8C4D1978E76000ED1667 /* BuildingAnnotationView.h */,
+				0A3C8C4E1978E76000ED1667 /* BuildingAnnotationView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -632,6 +637,7 @@
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
 				0A122E951969A5F7005894EB /* Building.m in Sources */,
+				0A3C8C4F1978E76000ED1667 /* BuildingAnnotationView.m in Sources */,
 				0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */,
 				37BD74BC1974276B004BD913 /* AssetWrapper.m in Sources */,
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
