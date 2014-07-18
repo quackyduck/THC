@@ -36,38 +36,57 @@
     
     //// Shadow Declarations
     UIColor* buttonShadow = shadow2Color;
-    CGSize buttonShadowOffset = CGSizeMake(1.5f, 1.5f);
+    CGSize buttonShadowOffset = CGSizeMake(1.1f, 1.1f);
     CGFloat buttonShadowBlurRadius = 1;
+    
+    //// Image Declarations
+    UIImage* btn_create_normal = [UIImage imageNamed: @"btn_create_normal"];
+    
+    
+    if (self.state == UIControlStateHighlighted) {
+        btn_create_normal = [UIImage imageNamed: @"btn_create_pressed"];
+        tHCOrange = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: .5f];
+    }
     
     //// Group
     {
-        //// Rectangle Drawing
-        UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(0.5f, 0.25f, 319, 49)];
+        //// buttonOutline Drawing
+        UIBezierPath* buttonOutlinePath = [UIBezierPath bezierPathWithRect: CGRectMake(rect.origin.x, rect.origin.y, 318, 48)];
         CGContextSaveGState(context);
         CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [buttonShadow CGColor]);
         [tHCButtonGray setFill];
-        [rectanglePath fill];
+        [buttonOutlinePath fill];
         CGContextRestoreGState(context);
         
         [buttonStrokeColor setStroke];
-        rectanglePath.lineWidth = 0.5f;
-        [rectanglePath stroke];
+        buttonOutlinePath.lineWidth = 0.5;
+        [buttonOutlinePath stroke];
         
-        
-        //// Create New Report Drawing
-        CGRect createNewReportRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width - 1, rect.size.height);
+        //// Group 2
         {
-            NSString* textContent = @"Create New Report";
-            NSMutableParagraphStyle* createNewReportStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-            createNewReportStyle.alignment = NSTextAlignmentCenter;
+            //// newReportText Drawing
+            CGRect newReportTextRect = CGRectMake(88.5f, 13.06f, 169, 22.38f);
+            {
+                NSString* textContent = @"Create New Report";
+                NSMutableParagraphStyle* newReportTextStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+                newReportTextStyle.alignment = NSTextAlignmentCenter;
+                
+                NSDictionary* newReportTextFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue-Medium" size: UIFont.labelFontSize], NSForegroundColorAttributeName: tHCOrange, NSParagraphStyleAttributeName: newReportTextStyle};
+                
+                [textContent drawInRect: CGRectOffset(newReportTextRect, 0, (CGRectGetHeight(newReportTextRect) - [textContent boundingRectWithSize: newReportTextRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: newReportTextFontAttributes context: nil].size.height) / 2) withAttributes: newReportTextFontAttributes];
+            }
             
-            NSDictionary* createNewReportFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue-Bold" size: UIFont.labelFontSize], NSForegroundColorAttributeName: tHCOrange, NSParagraphStyleAttributeName: createNewReportStyle};
             
-            [textContent drawInRect: CGRectOffset(createNewReportRect, 0, (CGRectGetHeight(createNewReportRect) - [textContent boundingRectWithSize: createNewReportRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: createNewReportFontAttributes context: nil].size.height) / 2) withAttributes: createNewReportFontAttributes];
+            //// image Drawing
+            UIBezierPath* imagePath = [UIBezierPath bezierPathWithRect: CGRectMake(61, 10.75, 22, 27)];
+            CGContextSaveGState(context);
+            [imagePath addClip];
+            CGContextScaleCTM(context, 1.0, -1.0);
+            CGContextDrawTiledImage(context, CGRectMake(61, 17, btn_create_normal.size.width, btn_create_normal.size.height), btn_create_normal.CGImage);
+            CGContextRestoreGState(context);
         }
+        
     }
-
-
 }
 
 -(void)setHighlighted:(BOOL)value {
