@@ -25,30 +25,46 @@
 - (void)drawRect:(CGRect)rect
 {
     
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
     //// Color Declarations
-    UIColor* peaGreen = [UIColor colorWithRed: 0.949f green: 1 blue: 0.831f alpha: 1];
-    UIColor* exploreBlue = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+    UIColor* tHCButtonGray = [UIColor colorWithRed: 0.965f green: 0.965f blue: 0.965f alpha: 1];
+    UIColor* tHCOrange = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+    UIColor* buttonStrokeColor = [UIColor colorWithRed: 0.882f green: 0.886f blue: 0.89f alpha: 1];
+    UIColor* shadow2Color = [UIColor colorWithRed: 0.725f green: 0.725f blue: 0.733f alpha: 1];
     
-    if (self.state == UIControlStateHighlighted) {
-        peaGreen = [UIColor colorWithRed: 0.949f green: 1 blue: 0.831f alpha: 0.5f];
-    }
+    //// Shadow Declarations
+    UIColor* buttonShadow = shadow2Color;
+    CGSize buttonShadowOffset = CGSizeMake(1.5f, 1.5f);
+    CGFloat buttonShadowBlurRadius = 1;
     
-    //// Rectangle Drawing
-    CGRect rectangleRect = rect;
-    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: rectangleRect cornerRadius: 5];
-    [peaGreen setFill];
-    [rectanglePath fill];
-    [UIColor.darkGrayColor setStroke];
-    rectanglePath.lineWidth = 1;
-    [rectanglePath stroke];
+    //// Group
     {
-        NSString* textContent = @"+ Create Report";
-        NSMutableParagraphStyle* rectangleStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-        rectangleStyle.alignment = NSTextAlignmentCenter;
+        //// Rectangle Drawing
+        UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(0.5f, 0.25f, 319, 49)];
+        CGContextSaveGState(context);
+        CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [buttonShadow CGColor]);
+        [tHCButtonGray setFill];
+        [rectanglePath fill];
+        CGContextRestoreGState(context);
         
-        NSDictionary* rectangleFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Futura-Medium" size: UIFont.buttonFontSize], NSForegroundColorAttributeName: exploreBlue, NSParagraphStyleAttributeName: rectangleStyle};
+        [buttonStrokeColor setStroke];
+        rectanglePath.lineWidth = 0.5f;
+        [rectanglePath stroke];
         
-        [textContent drawInRect: CGRectOffset(rectangleRect, 0, (CGRectGetHeight(rectangleRect) - [textContent boundingRectWithSize: rectangleRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: rectangleFontAttributes context: nil].size.height) / 2) withAttributes: rectangleFontAttributes];
+        
+        //// Create New Report Drawing
+        CGRect createNewReportRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width - 1, rect.size.height);
+        {
+            NSString* textContent = @"Create New Report";
+            NSMutableParagraphStyle* createNewReportStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+            createNewReportStyle.alignment = NSTextAlignmentCenter;
+            
+            NSDictionary* createNewReportFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue-Bold" size: UIFont.labelFontSize], NSForegroundColorAttributeName: tHCOrange, NSParagraphStyleAttributeName: createNewReportStyle};
+            
+            [textContent drawInRect: CGRectOffset(createNewReportRect, 0, (CGRectGetHeight(createNewReportRect) - [textContent boundingRectWithSize: createNewReportRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: createNewReportFontAttributes context: nil].size.height) / 2) withAttributes: createNewReportFontAttributes];
+        }
     }
 
 

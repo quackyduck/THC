@@ -14,6 +14,7 @@
 #import "CaseTableViewController.h"
 #import <Parse/Parse.h>
 #import "Building.h"
+#import "BuildingAnnotationView.h"
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -132,21 +133,40 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationIdentifier"];
+    static NSString* AnnotationIdentifier = @"Annotation";
+    BuildingAnnotationView *annotationView = (BuildingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
+    if (!annotationView) {
+        annotationView = [[BuildingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        annotationView.frame = CGRectMake(0, 0, 35, 35);
+        annotationView.backgroundColor = [UIColor clearColor];
+        
+        Building *building = (Building *)annotation;
+        
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Case"];
+        [query whereKey:@"buildingId" equalTo:building.objectId];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                // The find succeeded.
+                NSLog(@"Successfully got %d cases for building %@", objects.count, building.buildingName);
+                // Do something with the found objects
+                annotationView.numberOfCases = objects.count;
+                [annotationView setNeedsDisplay];
+                
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+        
+    }
+    else {
+        annotationView.annotation = annotation;
+    }
+    
     annotationView.canShowCallout = YES;
     
-    UIImage *buildingImage = [UIImage imageNamed:@"building"];
-    CGSize newSize = CGSizeMake(30, 30);
-    
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [buildingImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    annotationView.image = newImage;
-    
     return annotationView;
-
 }
 
 @end

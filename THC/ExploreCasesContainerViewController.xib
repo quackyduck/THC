@@ -6,12 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExploreCasesContainerViewController">
             <connections>
-                <outlet property="containerBackgroundView" destination="k5Q-5Q-aDo" id="ABg-Cl-PwI"/>
+                <outlet property="casesButton" destination="cyU-FI-FjR" id="Jpi-vs-efV"/>
                 <outlet property="containerView" destination="kXw-q9-bcB" id="Xgl-FR-QTb"/>
                 <outlet property="createReportButton" destination="JnP-tK-Jis" id="rLQ-tv-YYt"/>
-                <outlet property="createReportView" destination="Dbv-eO-KOP" id="uyC-P2-IFv"/>
-                <outlet property="exploreTabBar" destination="rIb-9c-qT8" id="kd2-54-RAu"/>
-                <outlet property="tapGestureRecognizer" destination="RaQ-XI-qRm" id="72Z-Yr-uoF"/>
+                <outlet property="dividerView" destination="pKt-p0-iF0" id="jQt-p4-nK6"/>
+                <outlet property="nearbyButton" destination="IJX-ie-rVn" id="mfX-sO-UYT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,84 +19,116 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIb-9c-qT8" customClass="ExploreTabBarItem">
-                    <rect key="frame" x="0.0" y="20" width="320" height="49"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.1960784495" green="0.32549020649999999" blue="0.68235296010000002" alpha="1" colorSpace="deviceRGB"/>
-                    <gestureRecognizers/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXw-q9-bcB">
+                    <rect key="frame" x="7" y="88" width="306" height="416"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.09803922474" green="0.70980393890000004" blue="0.94901967050000002" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="49" id="WAA-OS-3lw"/>
+                        <constraint firstAttribute="width" constant="306" id="Sqs-es-NmK"/>
                     </constraints>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="RaQ-XI-qRm" appends="YES" id="iP4-lJ-s4w"/>
-                    </connections>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dbv-eO-KOP">
-                    <rect key="frame" x="0.0" y="511" width="320" height="57"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIb-9c-qT8">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnP-tK-Jis" customClass="CreateReportButton">
-                            <rect key="frame" x="9" y="8" width="303" height="42"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJX-ie-rVn">
+                            <rect key="frame" x="10" y="42" width="142" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="303" id="Hhh-dJ-pF4"/>
+                                <constraint firstAttribute="width" constant="142" id="xhu-AC-gtZ"/>
                             </constraints>
-                            <state key="normal">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                            <state key="normal" title="Nearby" image="ic_nav_map_selected.png">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onCreateReport:" destination="-1" eventType="touchUpInside" id="Cxl-Iv-fMe"/>
+                                <action selector="onNearbyTab:" destination="-1" eventType="touchUpInside" id="F8c-tr-ooD"/>
                             </connections>
                         </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.1960784495" green="0.32549020649999999" blue="0.68235296010000002" alpha="1" colorSpace="deviceRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="57" id="Gzx-Kn-v5s"/>
-                        <constraint firstAttribute="trailing" secondItem="JnP-tK-Jis" secondAttribute="trailing" constant="8" id="XBN-a9-Z3Q"/>
-                        <constraint firstAttribute="bottom" secondItem="JnP-tK-Jis" secondAttribute="bottom" constant="7" id="fSR-NQ-m2l"/>
-                        <constraint firstItem="JnP-tK-Jis" firstAttribute="leading" secondItem="Dbv-eO-KOP" secondAttribute="leading" constant="9" id="jPd-Ia-fOt"/>
-                        <constraint firstItem="JnP-tK-Jis" firstAttribute="top" secondItem="Dbv-eO-KOP" secondAttribute="top" constant="8" id="ju5-mN-DgW"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k5Q-5Q-aDo">
-                    <rect key="frame" x="0.0" y="69" width="320" height="442"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXw-q9-bcB">
-                            <rect key="frame" x="7" y="0.0" width="306" height="442"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyU-FI-FjR">
+                            <rect key="frame" x="169" y="42" width="142" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="142" id="1DV-qJ-fwE"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                            <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                            <state key="normal" title="Cases" image="ic_nav_cases_selected.png">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onCasesTab:" destination="-1" eventType="touchUpInside" id="CPQ-Xr-Hpg"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKt-p0-iF0">
+                            <rect key="frame" x="160" y="36" width="1" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.87843143939971924" green="0.87843143939971924" blue="0.88627457618713379" alpha="1" colorSpace="deviceRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="6PN-ii-pge"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="1" id="DEF-AN-qBx"/>
+                                <constraint firstAttribute="width" constant="1" id="OqV-ok-T0O"/>
+                            </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.90588241820000004" green="0.90980398650000005" blue="0.91764712329999998" alpha="1" colorSpace="deviceRGB"/>
+                    <gestureRecognizers/>
                     <constraints>
-                        <constraint firstItem="kXw-q9-bcB" firstAttribute="top" secondItem="k5Q-5Q-aDo" secondAttribute="top" id="MyP-Pr-5Dk"/>
-                        <constraint firstAttribute="bottom" secondItem="kXw-q9-bcB" secondAttribute="bottom" id="fj2-fd-gRk"/>
-                        <constraint firstItem="kXw-q9-bcB" firstAttribute="leading" secondItem="k5Q-5Q-aDo" secondAttribute="leading" constant="7" id="gMf-nA-yUc"/>
-                        <constraint firstAttribute="trailing" secondItem="kXw-q9-bcB" secondAttribute="trailing" constant="7" id="zoi-bG-XcG"/>
+                        <constraint firstItem="IJX-ie-rVn" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="top" constant="42" id="6oZ-g3-zK6"/>
+                        <constraint firstAttribute="height" constant="88" id="7qn-QG-Mme"/>
+                        <constraint firstItem="cyU-FI-FjR" firstAttribute="leading" secondItem="pKt-p0-iF0" secondAttribute="trailing" constant="8" id="8c4-V6-wfj"/>
+                        <constraint firstItem="pKt-p0-iF0" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="top" constant="36" id="AH2-OF-XEo"/>
+                        <constraint firstAttribute="trailing" secondItem="cyU-FI-FjR" secondAttribute="trailing" constant="9" id="Ex9-jm-bVC"/>
+                        <constraint firstAttribute="width" constant="320" id="FMh-a6-Yjn"/>
+                        <constraint firstItem="cyU-FI-FjR" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="top" constant="42" id="Pi5-z2-FcC"/>
+                        <constraint firstItem="pKt-p0-iF0" firstAttribute="leading" secondItem="IJX-ie-rVn" secondAttribute="trailing" constant="8" id="PpD-xw-sob"/>
+                        <constraint firstAttribute="bottom" secondItem="pKt-p0-iF0" secondAttribute="bottom" constant="18" id="fgo-sU-MPN"/>
+                        <constraint firstItem="IJX-ie-rVn" firstAttribute="leading" secondItem="rIb-9c-qT8" secondAttribute="leading" constant="10" id="hvt-gm-qpj"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnP-tK-Jis" customClass="CreateReportButton">
+                    <rect key="frame" x="7" y="511" width="306" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="0mZ-SY-TQF"/>
+                        <constraint firstAttribute="width" constant="306" id="Hhh-dJ-pF4"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="306" id="ek3-O7-db6"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="nfC-UE-fB2"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCreateReport:" destination="-1" eventType="touchUpInside" id="Cxl-Iv-fMe"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="0.1960784495" green="0.32549020649999999" blue="0.68235296010000002" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.90588241820000004" green="0.90980398650000005" blue="0.91764712329999998" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Dbv-eO-KOP" secondAttribute="trailing" id="0Jr-fN-892"/>
-                <constraint firstItem="k5Q-5Q-aDo" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="bottom" id="PkH-Wa-DYK"/>
-                <constraint firstAttribute="bottom" secondItem="Dbv-eO-KOP" secondAttribute="bottom" id="SDE-lX-iJZ"/>
-                <constraint firstItem="Dbv-eO-KOP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZL9-YX-JcC"/>
-                <constraint firstItem="rIb-9c-qT8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dMZ-SB-dW5"/>
-                <constraint firstAttribute="trailing" secondItem="rIb-9c-qT8" secondAttribute="trailing" id="dek-sA-rHC"/>
-                <constraint firstItem="rIb-9c-qT8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="hrg-zy-AzJ"/>
-                <constraint firstAttribute="trailing" secondItem="k5Q-5Q-aDo" secondAttribute="trailing" id="jtH-19-eUu"/>
-                <constraint firstItem="Dbv-eO-KOP" firstAttribute="top" secondItem="k5Q-5Q-aDo" secondAttribute="bottom" id="pif-TG-tCy"/>
-                <constraint firstItem="k5Q-5Q-aDo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zQ5-K2-gtS"/>
+                <constraint firstItem="JnP-tK-Jis" firstAttribute="top" secondItem="kXw-q9-bcB" secondAttribute="bottom" constant="7" id="0nm-2w-deS"/>
+                <constraint firstAttribute="trailing" secondItem="rIb-9c-qT8" secondAttribute="trailing" id="1Na-UH-CXj"/>
+                <constraint firstAttribute="trailing" secondItem="kXw-q9-bcB" secondAttribute="trailing" constant="7" id="KwD-lo-JJw"/>
+                <constraint firstItem="rIb-9c-qT8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RH1-q4-gUK"/>
+                <constraint firstItem="JnP-tK-Jis" firstAttribute="top" secondItem="kXw-q9-bcB" secondAttribute="bottom" constant="7" id="a0L-yh-9BV"/>
+                <constraint firstItem="kXw-q9-bcB" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="bottom" id="a7R-BY-4VK"/>
+                <constraint firstAttribute="trailing" secondItem="JnP-tK-Jis" secondAttribute="trailing" constant="7" id="b1R-9a-mIe"/>
+                <constraint firstItem="kXw-q9-bcB" firstAttribute="top" secondItem="rIb-9c-qT8" secondAttribute="bottom" id="fU7-GU-tDk"/>
+                <constraint firstAttribute="bottom" secondItem="JnP-tK-Jis" secondAttribute="bottom" constant="7" id="fvX-ux-Rbv"/>
+                <constraint firstItem="kXw-q9-bcB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="7" id="oOd-0C-q1L"/>
+                <constraint firstItem="rIb-9c-qT8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="taX-Jq-ThF"/>
+                <constraint firstItem="JnP-tK-Jis" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="7" id="xHD-Jq-ZhL"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
-        <tapGestureRecognizer id="RaQ-XI-qRm">
-            <connections>
-                <action selector="onTapTabBar:" destination="-1" id="VKH-1C-AGN"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="ic_nav_cases_selected.png" width="22" height="26"/>
+        <image name="ic_nav_map_selected.png" width="22" height="26"/>
+    </resources>
 </document>
