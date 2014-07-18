@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -14,6 +14,7 @@
                 <outlet property="openLabel" destination="xKu-Yh-6nG" id="hJX-fC-K6A"/>
                 <outlet property="openView" destination="gBr-mV-rsc" id="MVT-zM-fhE"/>
                 <outlet property="searchBar" destination="wpg-A9-twR" id="iV4-Sx-GTQ"/>
+                <outlet property="searchImage" destination="mhl-qB-AYT" id="so3-wS-t9c"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,88 +23,75 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="512"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-lI-G25">
-                    <rect key="frame" x="0.0" y="100" width="320" height="412"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6U0-lI-G25">
+                    <rect key="frame" x="0.0" y="42" width="320" height="470"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wpg-A9-twR">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="WTN-fJ-kPo"/>
-                    </constraints>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVN-vR-FNY">
-                    <rect key="frame" x="0.0" y="50" width="320" height="42"/>
+                <view contentMode="scaleToFill" id="sVN-vR-FNY">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-ng-OE1">
+                        <view contentMode="scaleToFill" id="tY2-ng-OE1">
                             <rect key="frame" x="0.0" y="0.0" width="78" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9a-dW-MsE">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9a-dW-MsE">
                                     <rect key="frame" x="3" y="10" width="72" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <gestureRecognizers/>
-                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.97530995239999996" green="0.97530995239999996" blue="0.97530995239999996" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gBr-mV-rsc">
+                        <view contentMode="scaleToFill" id="gBr-mV-rsc">
                             <rect key="frame" x="78" y="0.0" width="87" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKu-Yh-6nG">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xKu-Yh-6nG">
                                     <rect key="frame" x="1" y="10" width="84" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <gestureRecognizers/>
-                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.97530995239999996" green="0.97530995239999996" blue="0.97530995239999996" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M7J-uh-zdp">
+                        <view contentMode="scaleToFill" id="M7J-uh-zdp">
                             <rect key="frame" x="165" y="0.0" width="87" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Cases" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyC-Tt-aRb">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Cases" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IyC-Tt-aRb">
                                     <rect key="frame" x="7" y="10" width="72" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <gestureRecognizers/>
-                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.97530995239999996" green="0.97530995239999996" blue="0.97530995239999996" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="mhl-qB-AYT">
+                            <rect key="frame" x="260" y="11" width="21" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <gestureRecognizers/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.97530995244565222" green="0.97530995244565222" blue="0.97530995244565222" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="42" id="KBf-Pa-eoc"/>
-                    </constraints>
                 </view>
+                <searchBar contentMode="redraw" id="wpg-A9-twR">
+                    <rect key="frame" x="-320" y="0.0" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="sVN-vR-FNY" secondAttribute="trailing" id="4vy-jN-ruv"/>
-                <constraint firstItem="wpg-A9-twR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6Rt-Ua-IdU"/>
-                <constraint firstItem="sVN-vR-FNY" firstAttribute="top" secondItem="wpg-A9-twR" secondAttribute="bottom" constant="6" id="APQ-8w-1OO"/>
-                <constraint firstAttribute="bottom" secondItem="6U0-lI-G25" secondAttribute="bottom" id="Otg-U7-GR5"/>
-                <constraint firstItem="6U0-lI-G25" firstAttribute="top" secondItem="sVN-vR-FNY" secondAttribute="bottom" constant="8" id="P2P-UP-wwt"/>
-                <constraint firstAttribute="trailing" secondItem="wpg-A9-twR" secondAttribute="trailing" id="e7k-F1-gui"/>
-                <constraint firstItem="6U0-lI-G25" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="f0m-s3-jSS"/>
-                <constraint firstAttribute="trailing" secondItem="6U0-lI-G25" secondAttribute="trailing" id="mhm-Mv-98f"/>
-                <constraint firstItem="sVN-vR-FNY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o2C-Uc-GFx"/>
-                <constraint firstItem="wpg-A9-twR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qqF-eL-Wij"/>
-            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

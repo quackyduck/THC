@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *openView;
 @property (weak, nonatomic) IBOutlet UILabel *myLabel;
 @property (weak, nonatomic) IBOutlet UIView *myView;
+@property (weak, nonatomic) IBOutlet UIImageView *searchImage;
 
 @property (nonatomic, strong) NSArray* cases;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -49,6 +50,10 @@
 {
     [super viewDidLoad];
     
+    self.searchBar.hidden = YES;
+    
+    self.searchImage.image = [UIImage imageNamed:@"Search"];
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAllTap:)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
     [self.allLabel addGestureRecognizer:tapGestureRecognizer];
@@ -61,6 +66,11 @@
     myTapGestureRecognizer.numberOfTapsRequired = 1;
     [self.myLabel addGestureRecognizer:myTapGestureRecognizer];
     self.myLabel.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *searchImageTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSearchTap:)];
+    searchImageTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.searchImage addGestureRecognizer:searchImageTapGestureRecognizer];
+    self.searchImage.userInteractionEnabled = YES;
     
     self.caseTableView.dataSource = self;
     self.caseTableView.delegate = self;
@@ -164,7 +174,8 @@
     [searchBar resignFirstResponder];
     self.caseTableView.allowsSelection = YES;
     self.caseTableView.scrollEnabled = YES;
-    [self loadEntries];
+    [self removeSearchBar];
+    
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -241,6 +252,36 @@
     self.bottomBorder = bottomBorder;
 }
 
+- (void)removeSearchBar
+{
+    // get the height of the search bar
+    float delta = self.searchBar.frame.size.width + 14;
+
+    delta *= -1;
+    
+    // run animation 0.7 second and no delay
+    [UIView animateWithDuration:0.7 delay: 0.0 options: UIViewAnimationOptionCurveEaseIn animations:^{
+        // move search bar delta units up or down
+        self.searchBar.frame = CGRectOffset(self.searchBar.frame, delta, 0.0);
+    } completion:^(BOOL finished) {
+//        self.searchBar.hidden = YES;
+    }];
+}
 
 
+- (IBAction)onSearchTap:(id)sender {
+    // get the height of the search bar
+    float delta = self.searchBar.frame.size.width + 14;
+    
+    // if search bar was hidden then make it visible
+    self.searchBar.hidden = NO;
+    [self.searchBar becomeFirstResponder];
+    
+    // run animation 0.7 second and no delay
+    [UIView animateWithDuration:0.5 delay: 0.0 options: UIViewAnimationOptionCurveEaseIn animations:^{
+        // move search bar delta units up or down
+        self.searchBar.frame = CGRectOffset(self.searchBar.frame, delta, 0.0);
+    } completion:nil];
+    
+}
 @end
