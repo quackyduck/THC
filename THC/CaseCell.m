@@ -69,9 +69,14 @@
             {
                 BuildingPhoto* photoObject = objects[0];
                 PFFile *photo = photoObject.image;
-                NSData *imageData = [photo getData];
-                UIImage *image = [UIImage imageWithData:imageData];
-                [self.caseFirstImageView setImage:image];
+                [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                    if (!photoError) {
+                        NSData *imageData = data;
+                        UIImage *image = [UIImage imageWithData:imageData];
+                        [self.caseFirstImageView setImage:image];
+                    }
+                }];
+                
             }
         }
     }];
