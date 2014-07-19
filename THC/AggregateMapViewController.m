@@ -18,10 +18,8 @@
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIButton *signupButton;
-@property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) NSMutableDictionary *buildingInfo;
 
 @end
 
@@ -31,9 +29,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.loginButton = [[UIButton alloc] init];
-        self.loginButton.hidden = NO;
-        self.loginButton.enabled = YES;
+        // init
+        self.buildingInfo = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -63,7 +60,6 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     [self zoomInToTenderloin];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,29 +70,23 @@
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         NSLog(@"Logged in user %@", currentUser.username);
-        self.signupButton.hidden = YES;
-        [self.loginButton setTitle:@"Cases" forState:UIControlStateNormal];
-        [self.loginButton removeTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
-        [self.loginButton addTarget:self action:@selector(onCaseMenu:) forControlEvents:UIControlEventTouchUpInside];
         
     } else {
         NSLog(@"No user logged in.");
-        [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
-        [self.loginButton removeTarget:self action:@selector(onCaseMenu:) forControlEvents:UIControlEventTouchUpInside];
-        [self.loginButton addTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     PFQuery *query = [PFQuery queryWithClassName:@"Building"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved %lu buildings.", (unsigned long)buildings.count);
-            for (Building *buliding in buildings) {
-                [self.mapView addAnnotation:buliding];
+            for (Building *building in buildings) {
+                [self.mapView addAnnotation:building];
             }
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -127,10 +117,6 @@
     [textField resignFirstResponder];
 }
 
-- (IBAction)onTap:(UITapGestureRecognizer *)sender {
-    [self.searchBar resignFirstResponder];
-}
-
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     static NSString* AnnotationIdentifier = @"Annotation";
@@ -142,14 +128,13 @@
         
         Building *building = (Building *)annotation;
         
-        
         PFQuery *query = [PFQuery queryWithClassName:@"Case"];
         [query whereKey:@"buildingId" equalTo:building.objectId];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 // The find succeeded.
                 NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
-                // Do something with the found objects
+//                [self.buildingInfo setValue:@(objects.count) forKey:building.objectId];
                 annotationView.numberOfCases = objects.count;
                 [annotationView setNeedsDisplay];
                 
@@ -158,6 +143,11 @@
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
+        
+        
+        
+        annotationView.numberOfCases = [[self.buildingInfo valueForKey:building.objectId] intValue];
+        [annotationView setNeedsDisplay];
         
     }
     else {
