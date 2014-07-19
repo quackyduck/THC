@@ -30,12 +30,35 @@
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-Aq-v4l">
+                        <rect key="frame" x="107" y="56" width="144" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Created" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Van-at-Vxh">
+                                <rect key="frame" x="8" y="0.0" width="50" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cft-fZ-peT">
+                                <rect key="frame" x="64" y="0.0" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="buildingNameLabel" destination="ye1-OO-vd4" id="ZkT-Og-JNV"/>
                 <outlet property="caseFirstImageView" destination="lgV-xF-Kf3" id="cYC-eM-3b0"/>
                 <outlet property="caseIdLabel" destination="wLv-O5-MYG" id="ZaS-U2-Xgk"/>
+                <outlet property="timeStampLabel" destination="cft-fZ-peT" id="GQs-by-lFO"/>
+                <outlet property="timestampBackgroudView" destination="g4P-Aq-v4l" id="SZO-YC-exL"/>
             </connections>
         </tableViewCell>
     </objects>

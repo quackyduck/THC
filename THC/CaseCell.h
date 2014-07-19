@@ -14,8 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *caseFirstImageView;
 @property (weak, nonatomic) IBOutlet UILabel *caseIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *buildingNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UIView *timestampBackgroudView;
+@property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
 
 - (void)initWithCase:(Case*)myCase;
 
