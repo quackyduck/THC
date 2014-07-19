@@ -19,6 +19,8 @@
 		0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */; };
 		0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */; };
 		0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2EF03E19663E9D00FED705 /* MapKit.framework */; };
+		0A2FFB3A197A2C320064E647 /* CaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB38197A2C320064E647 /* CaseViewController.m */; };
+		0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB39197A2C320064E647 /* CaseViewController.xib */; };
 		0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */; };
 		0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */; };
 		0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */; };
@@ -121,6 +123,9 @@
 		0A2EF03A19663E2A00FED705 /* AggregateMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggregateMapViewController.m; sourceTree = "<group>"; };
 		0A2EF03B19663E2A00FED705 /* AggregateMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AggregateMapViewController.xib; sourceTree = "<group>"; };
 		0A2EF03E19663E9D00FED705 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0A2FFB37197A2C320064E647 /* CaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseViewController.h; sourceTree = "<group>"; };
+		0A2FFB38197A2C320064E647 /* CaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseViewController.m; sourceTree = "<group>"; };
+		0A2FFB39197A2C320064E647 /* CaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseViewController.xib; sourceTree = "<group>"; };
 		0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_normal@2x.png"; sourceTree = "<group>"; };
 		0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_create_normal@2x.png"; sourceTree = "<group>"; };
@@ -390,6 +395,9 @@
 				37BD74C719742864004BD913 /* PhotoCollectionController.h */,
 				37BD74C819742864004BD913 /* PhotoCollectionController.m */,
 				37BD74C919742864004BD913 /* PhotoCollectionController.xib */,
+				0A2FFB37197A2C320064E647 /* CaseViewController.h */,
+				0A2FFB38197A2C320064E647 /* CaseViewController.m */,
+				0A2FFB39197A2C320064E647 /* CaseViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -567,6 +575,7 @@
 				0A3C8C4C1978C03A00ED1667 /* ic_search@2x.png in Resources */,
 				37BD74D11974A65F004BD913 /* delete1.png in Resources */,
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
+				0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
@@ -631,6 +640,7 @@
 			files = (
 				37BD74CA19742864004BD913 /* PhotoCollectionController.m in Sources */,
 				377D17131969E7D7004E4E67 /* AddressForm.m in Sources */,
+				0A2FFB3A197A2C320064E647 /* CaseViewController.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
