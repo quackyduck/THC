@@ -80,6 +80,7 @@
 		37BD74D5197594C4004BD913 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74D4197594C4004BD913 /* delete.png */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
+		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
 		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
 		87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A9884F1968C09500EDE34F /* CaseTableViewController.xib */; };
 		87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A988531968C0A400EDE34F /* CaseDetailViewController.m */; };
@@ -202,6 +203,8 @@
 		37BD74D4197594C4004BD913 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
+		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
+		87749378197A18420094B83E /* BuildingPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingPhoto.m; sourceTree = "<group>"; };
 		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
 		87A9884E1968C09500EDE34F /* CaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseTableViewController.m; sourceTree = "<group>"; };
 		87A9884F1968C09500EDE34F /* CaseTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseTableViewController.xib; sourceTree = "<group>"; };
@@ -430,6 +433,8 @@
 				377D1715196AF9F0004E4E67 /* OtherAddress.m */,
 				87A9885F196A3BE000EDE34F /* Note.h */,
 				87A98860196A3BE000EDE34F /* Note.m */,
+				87749377197A18420094B83E /* BuildingPhoto.h */,
+				87749378197A18420094B83E /* BuildingPhoto.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
+				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
 				0A122E951969A5F7005894EB /* Building.m in Sources */,
 				0A3C8C4F1978E76000ED1667 /* BuildingAnnotationView.m in Sources */,

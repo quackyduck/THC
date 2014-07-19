@@ -8,7 +8,8 @@
 
 #import "CaseCell.h"
 #import "UIImageView+AFNetworking.h"
-#import "PhotoInfo.h"
+#import "BuildingPhoto.h"
+#import "Building.h"
 
 @implementation CaseCell
 
@@ -26,9 +27,21 @@
 
 - (void)initWithCase:(Case*)myCase;
 {
-    //Figure out a better case ID?
-    self.caseIdLabel.text = [NSString stringWithFormat:@"#%@", myCase.caseId];
+    self.caseIdLabel.text = [NSString stringWithFormat:@"Case #%@", myCase.caseId];
+    
     //Use buildingId to query for building name
+    PFQuery *query = [Building query];
+    [query whereKey:@"objectId" equalTo:myCase.buildingId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if (objects.count > 0)
+            {
+                Building* building = objects[0];
+                self.buildingNameLabel.text = building.buildingName;
+            }
+        }
+    }];
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeStyle:NSDateFormatterNoStyle];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -48,15 +61,13 @@
     }
     
     //Get first image to show
-    PFQuery *query = [PhotoInfo query];
-    [query whereKey:@"caseId" equalTo:myCase.caseId];
-    [query orderByAscending:@"createdAt"];
-    query.limit = 1;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFQuery *photoQuery = [BuildingPhoto query];
+    [photoQuery whereKey:@"buildingId" equalTo:myCase.buildingId];
+    [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             if (objects.count > 0)
             {
-                PhotoInfo* photoObject = objects[0];
+                BuildingPhoto* photoObject = objects[0];
                 PFFile *photo = photoObject.image;
                 NSData *imageData = [photo getData];
                 UIImage *image = [UIImage imageWithData:imageData];
