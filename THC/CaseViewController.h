@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CaseViewController : UIViewController
+@class Case;
+@interface CaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+- (id)initWithCase:(Case *)caseInfo;
 
 @end

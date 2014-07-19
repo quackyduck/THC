@@ -11,9 +11,9 @@
 #import "Case.h"
 #import "CameraLauncher.h"
 #import "PhotoInfo.h"
-#import "CaseDetailViewController.h"
 #import "AggregateMapViewController.h"
 #import <Parse/Parse.h>
+#import "CaseViewController.h"
 
 @interface CaseTableViewController ()
 
@@ -92,6 +92,12 @@
     [self loadEntries];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden = YES;
@@ -133,13 +139,14 @@
     [cell initWithCase:self.cases[indexPath.row]];
     
     return cell;
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:self.cases[indexPath.row] isNewCase:NO];
-    [self.navigationController pushViewController:detailvc animated:YES];
+    Case *caseInfo = self.cases[indexPath.row];
+    CaseViewController *detailvc = [[CaseViewController alloc] initWithCase:caseInfo];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:detailvc];
+    [self presentViewController:nvc animated:YES completion:nil];
 }
 
 - (void)queryForCases:(PFQuery *)query
