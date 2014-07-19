@@ -47,7 +47,7 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_edit_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(editForm:)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissView:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_close_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissView:)];
     
 //    [self setNeedsStatusBarAppearanceUpdate];
     self.tableView.dataSource = self;
@@ -72,53 +72,70 @@
     return 5;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return UITableViewAutomaticDimension;
-}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, 64.0)];
-    //headerView.contentMode = UIViewContentModeScaleToFill;
-    
-    // Add the label
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, -14, 300.0, 30.0)];
-    headerLabel.backgroundColor = [UIColor clearColor];
-    headerLabel.opaque = NO;
-    headerLabel.textColor = [UIColor darkGrayColor];
-    headerLabel.highlightedTextColor = [UIColor blackColor];
-    
-    //this is what you asked
-    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0];
-    
-    headerLabel.shadowColor = [UIColor clearColor];
-    headerLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-    headerLabel.numberOfLines = 0;
-    [headerView addSubview: headerLabel];
-    
     switch (section) {
         case 0:
-            headerLabel.text = @"Tenant Information";
-            break;
+            return @"Tenant Information";
         case 1:
-            headerLabel.text = @"Hotel Information";
-            break;
+            return @"Hotel Information";
         case 2:
-            headerLabel.text = @"Violation Description";
-            break;
+            return @"Violation Description";
         case 3:
-            headerLabel.text = @"Attached Photos";
-            break;
+            return @"Attached Photos";
         case 4:
-            headerLabel.text = @"Notes";
-            break;
+            return @"Notes";
         default:
             NSLog(@"Not good, we ran out of options.");
             break;
     }
     
-    return headerView;
+    return @"Bad news...";
 }
+
+//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+//    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, 64.0)];
+//    //headerView.contentMode = UIViewContentModeScaleToFill;
+//    
+//    // Add the label
+//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, -14, 300.0, 30.0)];
+//    headerLabel.backgroundColor = [UIColor clearColor];
+//    headerLabel.opaque = NO;
+//    headerLabel.textColor = [UIColor darkGrayColor];
+//    headerLabel.highlightedTextColor = [UIColor blackColor];
+//    
+//    //this is what you asked
+//    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0];
+//    
+//    headerLabel.shadowColor = [UIColor clearColor];
+//    headerLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+//    headerLabel.numberOfLines = 0;
+//    [headerView addSubview: headerLabel];
+//    
+//    switch (section) {
+//        case 0:
+//            headerLabel.text = @"Tenant Information";
+//            break;
+//        case 1:
+//            headerLabel.text = @"Hotel Information";
+//            break;
+//        case 2:
+//            headerLabel.text = @"Violation Description";
+//            break;
+//        case 3:
+//            headerLabel.text = @"Attached Photos";
+//            break;
+//        case 4:
+//            headerLabel.text = @"Notes";
+//            break;
+//        default:
+//            NSLog(@"Not good, we ran out of options.");
+//            break;
+//    }
+//    
+//    return headerView;
+//}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

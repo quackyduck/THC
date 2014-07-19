@@ -21,6 +21,8 @@
 		0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2EF03E19663E9D00FED705 /* MapKit.framework */; };
 		0A2FFB3A197A2C320064E647 /* CaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB38197A2C320064E647 /* CaseViewController.m */; };
 		0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB39197A2C320064E647 /* CaseViewController.xib */; };
+		0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB3D197B0F670064E647 /* DetailContentTableViewCell.m */; };
+		0A2FFB40197B0F670064E647 /* DetailContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB3E197B0F670064E647 /* DetailContentTableViewCell.xib */; };
 		0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */; };
 		0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */; };
 		0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */; };
@@ -127,6 +129,9 @@
 		0A2FFB37197A2C320064E647 /* CaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseViewController.h; sourceTree = "<group>"; };
 		0A2FFB38197A2C320064E647 /* CaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseViewController.m; sourceTree = "<group>"; };
 		0A2FFB39197A2C320064E647 /* CaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseViewController.xib; sourceTree = "<group>"; };
+		0A2FFB3C197B0F670064E647 /* DetailContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailContentTableViewCell.h; sourceTree = "<group>"; };
+		0A2FFB3D197B0F670064E647 /* DetailContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailContentTableViewCell.m; sourceTree = "<group>"; };
+		0A2FFB3E197B0F670064E647 /* DetailContentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailContentTableViewCell.xib; sourceTree = "<group>"; };
 		0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_normal@2x.png"; sourceTree = "<group>"; };
 		0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_create_normal@2x.png"; sourceTree = "<group>"; };
@@ -420,6 +425,9 @@
 				37BD74C0197427F9004BD913 /* PhotoCell.xib */,
 				0A3C8C4D1978E76000ED1667 /* BuildingAnnotationView.h */,
 				0A3C8C4E1978E76000ED1667 /* BuildingAnnotationView.m */,
+				0A2FFB3C197B0F670064E647 /* DetailContentTableViewCell.h */,
+				0A2FFB3D197B0F670064E647 /* DetailContentTableViewCell.m */,
+				0A2FFB3E197B0F670064E647 /* DetailContentTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -591,6 +599,7 @@
 				0A3C8C461978C03A00ED1667 /* ic_nav_close_normal@2x.png in Resources */,
 				37BD74D5197594C4004BD913 /* delete.png in Resources */,
 				0A3C8C431978C03A00ED1667 /* ic_nav_back_normal@2x.png in Resources */,
+				0A2FFB40197B0F670064E647 /* DetailContentTableViewCell.xib in Resources */,
 				0A3C8C3E1978C03A00ED1667 /* btn_email_pressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,6 +660,7 @@
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
+				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
 				0A122E951969A5F7005894EB /* Building.m in Sources */,
 				0A3C8C4F1978E76000ED1667 /* BuildingAnnotationView.m in Sources */,
