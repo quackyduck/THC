@@ -7,8 +7,19 @@
 //
 
 #import "ContactInfoCell.h"
+#import "ContactInfoButton.h"
+
+@interface ContactInfoCell()
+@property (weak, nonatomic) IBOutlet ContactInfoButton *phoneButton;
+@property (weak, nonatomic) IBOutlet ContactInfoButton *emailButton;
+
+@end
 
 @implementation ContactInfoCell
+- (IBAction)onMakeCall:(id)sender {
+}
+- (IBAction)onMakeEmail:(id)sender {
+}
 
 - (void)awakeFromNib
 {

@@ -26,6 +26,8 @@
 		0A2FFB4E197C28F90064E647 /* ContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB4C197C28F90064E647 /* ContactInfoCell.m */; };
 		0A2FFB4F197C28F90064E647 /* ContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */; };
 		0A2FFB52197C29D70064E647 /* ContactInfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB51197C29D70064E647 /* ContactInfoButton.m */; };
+		0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */; };
+		0A2FFB57197C71710064E647 /* DetailViewTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */; };
 		0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */; };
 		0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */; };
 		0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */; };
@@ -143,6 +145,9 @@
 		0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactInfoCell.xib; sourceTree = "<group>"; };
 		0A2FFB50197C29D70064E647 /* ContactInfoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfoButton.h; sourceTree = "<group>"; };
 		0A2FFB51197C29D70064E647 /* ContactInfoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoButton.m; sourceTree = "<group>"; };
+		0A2FFB53197C71590064E647 /* DetailViewTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewTableHeader.h; sourceTree = "<group>"; };
+		0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewTableHeader.m; sourceTree = "<group>"; };
+		0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewTableHeader.xib; sourceTree = "<group>"; };
 		0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_normal@2x.png"; sourceTree = "<group>"; };
 		0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_create_normal@2x.png"; sourceTree = "<group>"; };
@@ -454,6 +459,9 @@
 				0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */,
 				0A2FFB50197C29D70064E647 /* ContactInfoButton.h */,
 				0A2FFB51197C29D70064E647 /* ContactInfoButton.m */,
+				0A2FFB53197C71590064E647 /* DetailViewTableHeader.h */,
+				0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */,
+				0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -615,6 +623,7 @@
 				0A3C8C441978C03A00ED1667 /* ic_nav_cases_normal@2x.png in Resources */,
 				0A3C8C4C1978C03A00ED1667 /* ic_search@2x.png in Resources */,
 				37BD74D11974A65F004BD913 /* delete1.png in Resources */,
+				0A2FFB57197C71710064E647 /* DetailViewTableHeader.xib in Resources */,
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
@@ -691,6 +700,7 @@
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				0A2FFB4E197C28F90064E647 /* ContactInfoCell.m in Sources */,
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
+				0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */,
 				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
 				0A122E951969A5F7005894EB /* Building.m in Sources */,
