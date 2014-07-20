@@ -113,7 +113,9 @@
     NSLog(@"creating violation submission controller %@", self.navigationController);
     ViolationSubmissionViewController *vsc = [[ViolationSubmissionViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vsc];
-    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+//    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+//    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f];
 
     [self presentViewController:nvc animated:YES completion:nil];
 }

@@ -19,5 +19,6 @@
 //@property (nonatomic, readwrite)  AssetPickingState state;
 
 - (void)changeSelectionState:(BOOL)selected forAsset:(ALAsset *)asset;
+-(void) clearSelection;
 
 @end

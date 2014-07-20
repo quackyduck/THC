@@ -13,7 +13,9 @@
 #import <Parse/Parse.h>
 #import "AlbumListController.h"
 
-
+#define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
+#define orangeColor [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1]
+#define whiteColor  [UIColor whiteColor]
 
 @interface ViolationSubmissionViewController ()
 
@@ -51,14 +53,34 @@
 
 - (void)initializeView {
     
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed: 0.106f green: 0.157f blue: 0.333f alpha: 1];
+    // This commented code blends the navigation bar with the tble view
+//    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+//    
+//    [navigationBar setBackgroundImage:[UIImage new]
+//                       forBarPosition:UIBarPositionAny
+//                           barMetrics:UIBarMetricsDefault];
+//    
+//    [navigationBar setShadowImage:[UIImage new]];
+    
+//    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed: 0.106f green: 0.157f blue: 0.333f alpha: 1];
+    self.navigationController.navigationBar.barTintColor = self.tableView.backgroundColor;
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                           target:self
-                                                                                           action:@selector(cancelButtonAction)];
+
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+//                                                                                           target:self
+//                                                                                           action:@selector(cancelButtonAction)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
+
+//    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = orangeColor;
+    
+//    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"ic_nav_back_normal@2x"];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                                           target:self
                                                                                           action:@selector(editForm)];
+//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshForm)
                                                  name:@"Addresses Retrieved"
@@ -114,7 +136,10 @@
         self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
 
-        self.scrollView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+//        self.scrollView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+//        self.scrollView.backgroundColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+        self.scrollView.backgroundColor = self.tableView.backgroundColor;
+
 
         self.scrollView.delegate = self;
         
@@ -161,7 +186,8 @@
         imageView.layer.cornerRadius = 4.f;
         imageView.layer.borderWidth = 1.f;
         
-        imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+//        imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+        imageView.backgroundColor = [UIColor clearColor];
         imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
         [imageView setClipsToBounds:YES];
         
@@ -642,8 +668,9 @@
 //    frame.size.width = 5;
 //    frame.size.height = 5;
     
-    UIImage *image = [UIImage imageNamed:@"delete"];
+    UIImage *image = [UIImage imageNamed:@"ic_nav_close_normal"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.backgroundColor = orangeColor;
     imageView.frame = frame;
     
     return imageView;

@@ -38,6 +38,10 @@
     return [[self.selectedAssetsSet array] copy];
 }
 
+-(void) clearSelection {
+    [self.selectedAssetsSet removeAllObjects];
+}
+
 - (void)changeSelectionState:(BOOL)selected forAsset:(ALAsset *)asset
 {
     if (selected) {
