@@ -60,6 +60,7 @@
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+    
     self.navigationController.navigationBar.tintColor = orangeColor;
     self.navigationController.navigationBar.barTintColor = self.tableView.backgroundColor;
 
