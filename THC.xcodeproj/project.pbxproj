@@ -99,10 +99,10 @@
 		87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A988591968C0D700EDE34F /* CaseCell.xib */; };
 		87A9885E1968D6EE00EDE34F /* Case.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9885D1968D6EE00EDE34F /* Case.m */; };
 		87A98861196A3BE000EDE34F /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A98860196A3BE000EDE34F /* Note.m */; };
-		87B20019197C5484000D6CBD /* btn_success_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20018197C5484000D6CBD /* btn_success_normal@2x.png */; };
-		87B2001B197C548D000D6CBD /* btn_success_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B2001A197C548D000D6CBD /* btn_success_pressed@2x.png */; };
-		87B2001D197C54A3000D6CBD /* ic_nav_check_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B2001C197C54A3000D6CBD /* ic_nav_check_normal@2x.png */; };
-		87B2001F197C54AB000D6CBD /* ic_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B2001E197C54AB000D6CBD /* ic_success@2x.png */; };
+		87B20022197C7F91000D6CBD /* btn_success_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20020197C7F91000D6CBD /* btn_success_normal@2x.png */; };
+		87B20023197C7F91000D6CBD /* btn_success_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20021197C7F91000D6CBD /* btn_success_pressed@2x.png */; };
+		87B20026197C7FA9000D6CBD /* ic_nav_check_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20024197C7FA9000D6CBD /* ic_nav_check_normal@2x.png */; };
+		87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20025197C7FA9000D6CBD /* ic_success@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,10 +248,10 @@
 		87A9885D1968D6EE00EDE34F /* Case.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Case.m; sourceTree = "<group>"; };
 		87A9885F196A3BE000EDE34F /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		87A98860196A3BE000EDE34F /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
-		87B20018197C5484000D6CBD /* btn_success_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_success_normal@2x.png"; path = "../../../../Downloads/btn_success_normal@2x.png"; sourceTree = "<group>"; };
-		87B2001A197C548D000D6CBD /* btn_success_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_success_pressed@2x.png"; path = "../../../../Downloads/btn_success_pressed@2x.png"; sourceTree = "<group>"; };
-		87B2001C197C54A3000D6CBD /* ic_nav_check_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_nav_check_normal@2x.png"; path = "../../../../Downloads/ic_nav_check_normal@2x.png"; sourceTree = "<group>"; };
-		87B2001E197C54AB000D6CBD /* ic_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_success@2x.png"; path = "../../../../Downloads/ic_success@2x.png"; sourceTree = "<group>"; };
+		87B20020197C7F91000D6CBD /* btn_success_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_success_normal@2x.png"; sourceTree = "<group>"; };
+		87B20021197C7F91000D6CBD /* btn_success_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_success_pressed@2x.png"; sourceTree = "<group>"; };
+		87B20024197C7FA9000D6CBD /* ic_nav_check_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_nav_check_normal@2x.png"; sourceTree = "<group>"; };
+		87B20025197C7FA9000D6CBD /* ic_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_success@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,10 +335,10 @@
 		0AF08BB81964EC94002761B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				87B2001E197C54AB000D6CBD /* ic_success@2x.png */,
-				87B2001C197C54A3000D6CBD /* ic_nav_check_normal@2x.png */,
-				87B2001A197C548D000D6CBD /* btn_success_pressed@2x.png */,
-				87B20018197C5484000D6CBD /* btn_success_normal@2x.png */,
+				87B20024197C7FA9000D6CBD /* ic_nav_check_normal@2x.png */,
+				87B20025197C7FA9000D6CBD /* ic_success@2x.png */,
+				87B20020197C7F91000D6CBD /* btn_success_normal@2x.png */,
+				87B20021197C7F91000D6CBD /* btn_success_pressed@2x.png */,
 				0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */,
 				0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */,
 				0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */,
@@ -608,12 +608,12 @@
 				87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */,
 				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
 				0A2FFB4F197C28F90064E647 /* ContactInfoCell.xib in Resources */,
-				87B2001D197C54A3000D6CBD /* ic_nav_check_normal@2x.png in Resources */,
+				87B20026197C7FA9000D6CBD /* ic_nav_check_normal@2x.png in Resources */,
 				0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */,
 				0A3C8C3F1978C03A00ED1667 /* btn_phone_normal@2x.png in Resources */,
-				87B20019197C5484000D6CBD /* btn_success_normal@2x.png in Resources */,
+				87B20022197C7F91000D6CBD /* btn_success_normal@2x.png in Resources */,
 				37BD74CB19742864004BD913 /* PhotoCollectionController.xib in Resources */,
 				37BD74C619742839004BD913 /* AlbumListController.xib in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
@@ -626,7 +626,7 @@
 				0A3C8C401978C03A00ED1667 /* btn_phone_pressed@2x.png in Resources */,
 				377D170D1969E75F004E4E67 /* ViolationDescriptionViewController.xib in Resources */,
 				0A3C8C411978C03A00ED1667 /* ic_nav_admin_normal@2x.png in Resources */,
-				87B2001B197C548D000D6CBD /* btn_success_pressed@2x.png in Resources */,
+				87B20023197C7F91000D6CBD /* btn_success_pressed@2x.png in Resources */,
 				0A3C8C441978C03A00ED1667 /* ic_nav_cases_normal@2x.png in Resources */,
 				0A3C8C4C1978C03A00ED1667 /* ic_search@2x.png in Resources */,
 				37BD74D11974A65F004BD913 /* delete1.png in Resources */,
@@ -634,7 +634,7 @@
 				0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
-				87B2001F197C54AB000D6CBD /* ic_success@2x.png in Resources */,
+				87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */,
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
 				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
 				0A3C8C3C1978C03A00ED1667 /* btn_create_pressed@2x.png in Resources */,
