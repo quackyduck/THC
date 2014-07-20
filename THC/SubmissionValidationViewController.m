@@ -20,6 +20,8 @@
 @property (strong, nonatomic) Case *myCase;
 @property (strong, nonatomic) UIImage *firstPhoto;
 
+- (IBAction)onDownSwipe:(UISwipeGestureRecognizer *)sender;
+
 @end
 
 @implementation SubmissionValidationViewController
@@ -49,12 +51,13 @@
     
     UIColor * orangeNavBarColor = [UIColor orangeColor];
     
+    self.view.backgroundColor = orangeNavBarColor;
     self.navigationController.navigationBar.barTintColor = orangeNavBarColor;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.title = @"Violation Submitted";
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_photoGallery_active"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_check_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(backToEditView)];
     
@@ -65,7 +68,7 @@
     [self.violationImageView.layer setBorderColor: [[UIColor whiteColor] CGColor]];
     [self.violationImageView.layer setBorderWidth: 5.0];
     
-    UIImage* checkImage = [UIImage imageNamed:@"Confirmation"];
+    UIImage* checkImage = [UIImage imageNamed:@"ic_success"];
     [self.checkMarkImageView setImage:checkImage];
     
     //Use buildingId to query for building name
@@ -101,4 +104,7 @@
     
 }
 
+- (IBAction)onDownSwipe:(UISwipeGestureRecognizer *)sender {
+    [self dismissView];
+}
 @end

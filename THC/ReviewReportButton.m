@@ -40,11 +40,11 @@
     CGFloat buttonShadowBlurRadius = 1;
     
     //// Image Declarations
-    UIImage* btn_create_normal = [UIImage imageNamed: @"btn_create_normal"];
+    UIImage* btn_create_normal = [UIImage imageNamed: @"btn_success_normal"];
     
     
     if (self.state == UIControlStateHighlighted) {
-        btn_create_normal = [UIImage imageNamed: @"btn_create_pressed"];
+        btn_create_normal = [UIImage imageNamed: @"btn_success_pressed"];
         tHCOrange = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: .5f];
     }
     
