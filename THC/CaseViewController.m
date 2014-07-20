@@ -15,7 +15,8 @@
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) Case *caseInfo;
-//@property (strong, nonatomic) DetailViewTableHeader *headerView;
+@property (strong, nonatomic) DetailViewTableHeader *offscreenHeaderView;
+@property (strong, nonatomic) DetailContentTableViewCell *offscreenDetailCell;
 
 @end
 
@@ -57,14 +58,17 @@
     self.tableView.delegate = self;
     
     UINib *detailNib = [UINib nibWithNibName:@"DetailContentTableViewCell" bundle:nil];
+    NSArray *detailNibs = [detailNib instantiateWithOwner:nil options:nil];
     [self.tableView registerNib:detailNib forCellReuseIdentifier:@"DetailContentTableViewCell"];
+    
+    self.offscreenDetailCell = detailNibs[0];
     
     UINib *contactNib = [UINib nibWithNibName:@"ContactInfoCell" bundle:nil];
     [self.tableView registerNib:contactNib forCellReuseIdentifier:@"ContactInfoCell"];
     
     UINib *headerNib = [UINib nibWithNibName:@"DetailViewTableHeader" bundle:nil];
-//    NSArray *nibs = [headerNib instantiateWithOwner:nil options:nil];
-//    self.headerView = nibs[0];
+    NSArray *nibs = [headerNib instantiateWithOwner:nil options:nil];
+    self.offscreenHeaderView = nibs[0];
     
     [self.tableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:@"TableHeader"];
     
@@ -88,72 +92,11 @@
     return 5;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//
-//    switch (section) {
-//        case 0:
-//            return @"Tenant Information";
-//        case 1:
-//            return @"Hotel Information";
-//        case 2:
-//            return @"Violation Description";
-//        case 3:
-//            return @"Attached Photos";
-//        case 4:
-//            return @"Notes";
-//        default:
-//            NSLog(@"Not good, we ran out of options.");
-//            break;
-//    }
-//    
-//    return @"Bad news...";
-//}
-
-//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-//    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, 64.0)];
-//    //headerView.contentMode = UIViewContentModeScaleToFill;
-//    
-//    // Add the label
-//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, -14, 300.0, 30.0)];
-//    headerLabel.backgroundColor = [UIColor clearColor];
-//    headerLabel.opaque = NO;
-//    headerLabel.textColor = [UIColor darkGrayColor];
-//    headerLabel.highlightedTextColor = [UIColor blackColor];
-//    
-//    //this is what you asked
-//    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0];
-//    
-//    headerLabel.shadowColor = [UIColor clearColor];
-//    headerLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-//    headerLabel.numberOfLines = 0;
-//    [headerView addSubview: headerLabel];
-//    
-//    switch (section) {
-//        case 0:
-//            headerLabel.text = @"Tenant Information";
-//            break;
-//        case 1:
-//            headerLabel.text = @"Hotel Information";
-//            break;
-//        case 2:
-//            headerLabel.text = @"Violation Description";
-//            break;
-//        case 3:
-//            headerLabel.text = @"Attached Photos";
-//            break;
-//        case 4:
-//            headerLabel.text = @"Notes";
-//            break;
-//        default:
-//            NSLog(@"Not good, we ran out of options.");
-//            break;
-//    }
-//    
-//    return headerView;
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+//    [self.offscreenHeaderView layoutSubviews];
+//    CGFloat height = [self.offscreenHeaderView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//    return height + 1;
     return 80;
 }
 
@@ -193,10 +136,48 @@
     
 }
 
+- (void)configureDetailCell:(DetailContentTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        } else if (indexPath.row == 1) {
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        }
+        
+    } else if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        } else if (indexPath.row == 1) {
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        }
+        
+    } else if (indexPath.section == 2) {
+        cell.titleLabel.text = @"Reported 3 months ago";
+        cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
+        
+    } else if (indexPath.section == 4) {
+        cell.titleLabel.text = @"Tenant Name";
+        cell.contentLabel.text = @"Nicolas Melo";
+    }
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 90;
+    [self configureDetailCell:self.offscreenDetailCell forRowAtIndexPath:indexPath];
+    [self.offscreenDetailCell layoutSubviews];
+    CGFloat height = [self.offscreenDetailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height + 1;
 }
 
 
@@ -216,14 +197,12 @@
         if (indexPath.row == 0) {
             
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else if (indexPath.row == 1) {
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else {
@@ -236,14 +215,12 @@
         
         if (indexPath.row == 0) {
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else if (indexPath.row == 1) {
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else {
@@ -254,8 +231,7 @@
         
     } else if (indexPath.section == 2) {
         DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-        detailCell.titleLabel.text = @"Reported 3 months ago";
-        detailCell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
+        [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
         return detailCell;
         
     } else if (indexPath.section == 3) {
@@ -266,8 +242,7 @@
         
     } else if (indexPath.section == 4) {
         DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-        detailCell.titleLabel.text = @"Tenant Name";
-        detailCell.contentLabel.text = @"Nicolas Melo";
+        [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
         return detailCell;
         
     }
