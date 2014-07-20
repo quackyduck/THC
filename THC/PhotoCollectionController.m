@@ -47,13 +47,18 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate   = self;
     self.collectionView.allowsMultipleSelection = YES;
-    self.collectionView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
-//    self.collectionView.backgroundColor = [UIColor colorWithRed: 0.106f green: 0.157f blue: 0.333f alpha: 1];
+//    self.collectionView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+//    self.collectionView.backgroundColor = [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f];
+//    self.collectionView.backgroundColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];;
 
     
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonAction:)];
+//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    
+//    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+//    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"PhotoCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"PhotoCell"];
     

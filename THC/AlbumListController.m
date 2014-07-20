@@ -11,6 +11,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoCollectionController.h"
 
+#define orangeColor [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1]
+
 @interface AlbumListController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -40,6 +42,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.assetPicker clearSelection];
     
 }
 
@@ -55,12 +58,23 @@
 
     self.navigationItem.title = @"Loading…";
 
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+    self.navigationController.navigationBar.tintColor = orangeColor;
+    self.navigationController.navigationBar.barTintColor = self.tableView.backgroundColor;
+
 
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                           target:self
-                                                                                           action:@selector(cancelButtonAction:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+//                                                                                           target:self
+//                                                                                           action:@selector(cancelButtonAction:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_close_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction:)];
+//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+
+    
+//    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorColor = [UIColor clearColor];
@@ -125,6 +139,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    cell.backgroundColor = self.tableView.backgroundColor;
+    
     // Get the group from the datasource.
     ALAssetsGroup *group = [self.assetGroups objectAtIndex:indexPath.row];
     [group setAssetsFilter:[ALAssetsFilter allPhotos]]; // TODO: Make this a delegate choice.
@@ -144,10 +160,13 @@
     ALAssetsGroup *group = [self.assetGroups objectAtIndex:indexPath.row];
     [group setAssetsFilter:[ALAssetsFilter allPhotos]]; // TODO: Make this a delegate choice.
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     PhotoCollectionController *pcc = [[PhotoCollectionController alloc] init];
     pcc.assetPicker = self.assetPicker;
     pcc.assetsGroup      = group;
     pcc.delegate = self.delegate;
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     [self.navigationController pushViewController:pcc animated:YES];
     
     

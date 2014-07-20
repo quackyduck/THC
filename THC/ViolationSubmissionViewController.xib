@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="dHK-4j-3wj">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="488"/>
+                    <rect key="frame" x="10" y="0.0" width="300" height="488"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
@@ -26,14 +26,14 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.90588241820000004" green="0.90980398650000005" blue="0.91764712329999998" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Eoc-jz-znD" secondAttribute="trailing" id="1mh-tb-JHK"/>
                 <constraint firstItem="Eoc-jz-znD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3Pj-rq-UQe"/>
                 <constraint firstItem="dHK-4j-3wj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="H7L-R5-Jz0"/>
                 <constraint firstAttribute="bottom" secondItem="dHK-4j-3wj" secondAttribute="bottom" constant="80" id="Hbb-4I-G0R"/>
-                <constraint firstItem="dHK-4j-3wj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OUL-z7-zGI"/>
-                <constraint firstAttribute="trailing" secondItem="dHK-4j-3wj" secondAttribute="trailing" id="bwv-PI-KPd"/>
+                <constraint firstItem="dHK-4j-3wj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="OUL-z7-zGI"/>
+                <constraint firstAttribute="trailing" secondItem="dHK-4j-3wj" secondAttribute="trailing" constant="10" id="bwv-PI-KPd"/>
                 <constraint firstItem="Eoc-jz-znD" firstAttribute="top" secondItem="dHK-4j-3wj" secondAttribute="bottom" id="dBt-aI-ZAE"/>
                 <constraint firstAttribute="bottom" secondItem="Eoc-jz-znD" secondAttribute="bottom" id="gfd-Q4-ZEb"/>
             </constraints>
