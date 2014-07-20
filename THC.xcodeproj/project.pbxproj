@@ -85,6 +85,7 @@
 		37BD74CD19742BB1004BD913 /* SelectionIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74CC19742BB1004BD913 /* SelectionIndicator.png */; };
 		37BD74D11974A65F004BD913 /* delete1.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74D01974A65F004BD913 /* delete1.png */; };
 		37BD74D5197594C4004BD913 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74D4197594C4004BD913 /* delete.png */; };
+		37BD7520197C858A004BD913 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD751F197C858A004BD913 /* KxMenu.m */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
@@ -226,6 +227,8 @@
 		37BD74CF19742C22004BD913 /* PhotoPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPicker.h; sourceTree = "<group>"; };
 		37BD74D01974A65F004BD913 /* delete1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete1.png; sourceTree = "<group>"; };
 		37BD74D4197594C4004BD913 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		37BD751E197C858A004BD913 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
+		37BD751F197C858A004BD913 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 		0AF08BB71964EC94002761B9 /* THC */ = {
 			isa = PBXGroup;
 			children = (
+				37BD751D197C854E004BD913 /* DropMenu */,
 				37BD74E2197882BC004BD913 /* FXForm */,
 				37BD74CE19742C0A004BD913 /* Protocol */,
 				37BD74B61974271E004BD913 /* Camera */,
@@ -519,6 +523,15 @@
 			name = FXForm;
 			sourceTree = "<group>";
 		};
+		37BD751D197C854E004BD913 /* DropMenu */ = {
+			isa = PBXGroup;
+			children = (
+				37BD751E197C858A004BD913 /* KxMenu.h */,
+				37BD751F197C858A004BD913 /* KxMenu.m */,
+			);
+			name = DropMenu;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -702,6 +715,7 @@
 				878845A5197B8DD00077A27A /* ReviewReportButton.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
+				37BD7520197C858A004BD913 /* KxMenu.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
@@ -857,7 +871,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "THC/THC-Prefix.pch";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
@@ -886,7 +900,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "THC/THC-Prefix.pch";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
