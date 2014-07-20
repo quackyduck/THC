@@ -8,6 +8,7 @@
 
 #import "CaseViewController.h"
 #import "Case.h"
+#import "DetailContentTableViewCell.h"
 
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -52,6 +53,12 @@
 //    [self setNeedsStatusBarAppearanceUpdate];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    
+    UINib *nib = [UINib nibWithNibName:@"DetailContentTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"DetailContentTableViewCell"];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,17 +144,92 @@
 //    return headerView;
 //}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section > 1 || indexPath.row > 1) {
+        return 44;
+    }
+    
+    return 80;
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (section < 2) {
+        return 3;
+    } else {
+        return 1;
+    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = @"Boom!";
-    
-    return cell;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            
+            DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
+            detailCell.titleLabel.text = @"Tenant Name";
+            detailCell.contentLabel.text = @"Nicolas Melo";
+            return detailCell;
+            
+        } else if (indexPath.row == 1) {
+            DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
+            detailCell.titleLabel.text = @"Tenant Name";
+            detailCell.contentLabel.text = @"Nicolas Melo";
+            return detailCell;
+            
+        } else {
+            UITableViewCell *cell = [[UITableViewCell alloc] init];
+            cell.textLabel.text = @"Boom!";
+            
+            return cell;
+            
+        }
+        
+    } else if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
+            detailCell.titleLabel.text = @"Tenant Name";
+            detailCell.contentLabel.text = @"Nicolas Melo";
+            return detailCell;
+            
+        } else if (indexPath.row == 1) {
+            DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
+            detailCell.titleLabel.text = @"Tenant Name";
+            detailCell.contentLabel.text = @"Nicolas Melo";
+            return detailCell;
+            
+        } else {
+            UITableViewCell *cell = [[UITableViewCell alloc] init];
+            cell.textLabel.text = @"Boom!";
+            
+            return cell;
+            
+        }
+        
+    } else if (indexPath.section == 2) {
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        cell.textLabel.text = @"Boom!";
+        
+        return cell;
+        
+    } else if (indexPath.section == 3) {
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        cell.textLabel.text = @"Boom!";
+        
+        return cell;
+        
+    } else if (indexPath.section == 4) {
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        cell.textLabel.text = @"Boom!";
+        
+        return cell;
+        
+    }
+
+    return nil;
 }
 
 @end

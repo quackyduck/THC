@@ -23,6 +23,9 @@
 		0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB39197A2C320064E647 /* CaseViewController.xib */; };
 		0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB3D197B0F670064E647 /* DetailContentTableViewCell.m */; };
 		0A2FFB40197B0F670064E647 /* DetailContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB3E197B0F670064E647 /* DetailContentTableViewCell.xib */; };
+		0A2FFB4E197C28F90064E647 /* ContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB4C197C28F90064E647 /* ContactInfoCell.m */; };
+		0A2FFB4F197C28F90064E647 /* ContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */; };
+		0A2FFB52197C29D70064E647 /* ContactInfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB51197C29D70064E647 /* ContactInfoButton.m */; };
 		0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */; };
 		0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */; };
 		0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */; };
@@ -135,6 +138,11 @@
 		0A2FFB3C197B0F670064E647 /* DetailContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailContentTableViewCell.h; sourceTree = "<group>"; };
 		0A2FFB3D197B0F670064E647 /* DetailContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailContentTableViewCell.m; sourceTree = "<group>"; };
 		0A2FFB3E197B0F670064E647 /* DetailContentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailContentTableViewCell.xib; sourceTree = "<group>"; };
+		0A2FFB4B197C28F90064E647 /* ContactInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfoCell.h; sourceTree = "<group>"; };
+		0A2FFB4C197C28F90064E647 /* ContactInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoCell.m; sourceTree = "<group>"; };
+		0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactInfoCell.xib; sourceTree = "<group>"; };
+		0A2FFB50197C29D70064E647 /* ContactInfoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfoButton.h; sourceTree = "<group>"; };
+		0A2FFB51197C29D70064E647 /* ContactInfoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoButton.m; sourceTree = "<group>"; };
 		0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_normal@2x.png"; sourceTree = "<group>"; };
 		0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_create_normal@2x.png"; sourceTree = "<group>"; };
@@ -441,6 +449,11 @@
 				0A2FFB3E197B0F670064E647 /* DetailContentTableViewCell.xib */,
 				878845A3197B8DD00077A27A /* ReviewReportButton.h */,
 				878845A4197B8DD00077A27A /* ReviewReportButton.m */,
+				0A2FFB4B197C28F90064E647 /* ContactInfoCell.h */,
+				0A2FFB4C197C28F90064E647 /* ContactInfoCell.m */,
+				0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */,
+				0A2FFB50197C29D70064E647 /* ContactInfoButton.h */,
+				0A2FFB51197C29D70064E647 /* ContactInfoButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -582,6 +595,7 @@
 				37BD74CD19742BB1004BD913 /* SelectionIndicator.png in Resources */,
 				87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */,
 				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
+				0A2FFB4F197C28F90064E647 /* ContactInfoCell.xib in Resources */,
 				0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */,
@@ -675,6 +689,7 @@
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
+				0A2FFB4E197C28F90064E647 /* ContactInfoCell.m in Sources */,
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
 				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
@@ -691,6 +706,7 @@
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,
+				0A2FFB52197C29D70064E647 /* ContactInfoButton.m in Sources */,
 				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
 				0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */,
 				87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */,
