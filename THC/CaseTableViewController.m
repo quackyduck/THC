@@ -14,6 +14,7 @@
 #import "AggregateMapViewController.h"
 #import <Parse/Parse.h>
 #import "CaseViewController.h"
+#import "SubmissionValidationViewController.h"
 
 @interface CaseTableViewController ()
 
@@ -145,6 +146,7 @@
 {
     Case *caseInfo = self.cases[indexPath.row];
     CaseViewController *detailvc = [[CaseViewController alloc] initWithCase:caseInfo];
+    
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:detailvc];
     [self presentViewController:nvc animated:YES completion:nil];
 }
@@ -209,7 +211,7 @@
     self.myLabel.textColor = [UIColor grayColor];
     [self addBottomBorder:self.openView];
     
-    //Get 10 newest cases, need to instead just look for open cases?
+    //Get 10 newest cases?
     PFQuery *query = [Case query];
     [query orderByDescending:@"createdAt"];
     query.limit = 10;

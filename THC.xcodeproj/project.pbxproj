@@ -85,6 +85,9 @@
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
+		878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8788459F197B56650077A27A /* SubmissionValidationViewController.m */; };
+		878845A2197B56650077A27A /* SubmissionValidationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 878845A0197B56650077A27A /* SubmissionValidationViewController.xib */; };
+		878845A5197B8DD00077A27A /* ReviewReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 878845A4197B8DD00077A27A /* ReviewReportButton.m */; };
 		87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A9884E1968C09500EDE34F /* CaseTableViewController.m */; };
 		87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A9884F1968C09500EDE34F /* CaseTableViewController.xib */; };
 		87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A988531968C0A400EDE34F /* CaseDetailViewController.m */; };
@@ -215,6 +218,11 @@
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
 		87749378197A18420094B83E /* BuildingPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingPhoto.m; sourceTree = "<group>"; };
+		8788459E197B56650077A27A /* SubmissionValidationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmissionValidationViewController.h; sourceTree = "<group>"; };
+		8788459F197B56650077A27A /* SubmissionValidationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmissionValidationViewController.m; sourceTree = "<group>"; };
+		878845A0197B56650077A27A /* SubmissionValidationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmissionValidationViewController.xib; sourceTree = "<group>"; };
+		878845A3197B8DD00077A27A /* ReviewReportButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewReportButton.h; sourceTree = "<group>"; };
+		878845A4197B8DD00077A27A /* ReviewReportButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewReportButton.m; sourceTree = "<group>"; };
 		87A9884D1968C09500EDE34F /* CaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewController.h; sourceTree = "<group>"; };
 		87A9884E1968C09500EDE34F /* CaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseTableViewController.m; sourceTree = "<group>"; };
 		87A9884F1968C09500EDE34F /* CaseTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseTableViewController.xib; sourceTree = "<group>"; };
@@ -406,6 +414,9 @@
 				0A2FFB37197A2C320064E647 /* CaseViewController.h */,
 				0A2FFB38197A2C320064E647 /* CaseViewController.m */,
 				0A2FFB39197A2C320064E647 /* CaseViewController.xib */,
+				8788459E197B56650077A27A /* SubmissionValidationViewController.h */,
+				8788459F197B56650077A27A /* SubmissionValidationViewController.m */,
+				878845A0197B56650077A27A /* SubmissionValidationViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -428,6 +439,8 @@
 				0A2FFB3C197B0F670064E647 /* DetailContentTableViewCell.h */,
 				0A2FFB3D197B0F670064E647 /* DetailContentTableViewCell.m */,
 				0A2FFB3E197B0F670064E647 /* DetailContentTableViewCell.xib */,
+				878845A3197B8DD00077A27A /* ReviewReportButton.h */,
+				878845A4197B8DD00077A27A /* ReviewReportButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -559,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AE370B4196D16DB00E80E88 /* building.png in Resources */,
+				878845A2197B56650077A27A /* SubmissionValidationViewController.xib in Resources */,
 				0A3C8C451978C03A00ED1667 /* ic_nav_cases_selected@2x.png in Resources */,
 				0A3C8C4A1978C03A00ED1667 /* ic_photoGallery_active@2x.png in Resources */,
 				0A3C8C491978C03A00ED1667 /* ic_nav_map_selected@2x.png in Resources */,
@@ -655,9 +669,11 @@
 				37BD74CA19742864004BD913 /* PhotoCollectionController.m in Sources */,
 				377D17131969E7D7004E4E67 /* AddressForm.m in Sources */,
 				0A2FFB3A197A2C320064E647 /* CaseViewController.m in Sources */,
+				878845A5197B8DD00077A27A /* ReviewReportButton.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
+				878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
 				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,

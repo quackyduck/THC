@@ -100,6 +100,9 @@
                         NSData *imageData = data;
                         UIImage *image = [UIImage imageWithData:imageData];
                         [self.caseFirstImageView setImage:image];
+                        
+                        self.caseFirstImageView.layer.cornerRadius = 35;
+                        self.caseFirstImageView.layer.masksToBounds = YES;
                     }
                 }];
                 
