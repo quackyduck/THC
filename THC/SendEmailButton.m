@@ -36,6 +36,10 @@
     UIColor* tHCOrange = [UIColor colorWithRed: 1 green: 0.455 blue: 0.184 alpha: 1];
     UIColor* shadow2Color = [UIColor colorWithRed: 0.725 green: 0.725 blue: 0.733 alpha: 1];
     
+    if (self.state == UIControlStateHighlighted) {
+        tHCOrange = [UIColor colorWithRed: 1 green: 0.455 blue: 0.184 alpha: .5f];
+    }
+    
     //// Shadow Declarations
     UIColor* buttonShadow = shadow2Color;
     CGSize buttonShadowOffset = CGSizeMake(1.1, 1.1);
@@ -89,6 +93,21 @@
         
         [@"Email\n" drawInRect: textRect withAttributes: textFontAttributes];
     }
+}
+
+-(void)setHighlighted:(BOOL)value {
+    [super setHighlighted:value];
+    [self setNeedsDisplay];
+}
+
+-(void)setSelected:(BOOL)value {
+    [super setSelected:value];
+    [self setNeedsDisplay];
+}
+
+-(void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    [self setNeedsDisplay];
 }
 
 
