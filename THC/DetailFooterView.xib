@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DetailFooterView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -25,7 +25,7 @@
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.96862751250000001" green="0.96862751250000001" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3yc-c5-jqD" secondAttribute="bottom" constant="20" id="Mj5-L4-PAp"/>
                         <constraint firstAttribute="trailing" secondItem="3yc-c5-jqD" secondAttribute="trailing" constant="15" id="bU1-a3-tPr"/>
@@ -42,6 +42,10 @@
                 <constraint firstItem="XPp-Gl-aVP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="knU-By-TAA"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="XPp-Gl-aVP" id="EhY-wz-nIm"/>
+                <outlet property="sendEmailButton" destination="3yc-c5-jqD" id="rOm-sh-SXg"/>
+            </connections>
         </view>
     </objects>
 </document>

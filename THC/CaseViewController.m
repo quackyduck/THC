@@ -12,6 +12,7 @@
 #import "ContactInfoCell.h"
 #import "DetailViewTableHeader.h"
 #import "ContactInfoButton.h"
+#import "DetailFooterView.h"
 
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -19,6 +20,7 @@
 @property (strong, nonatomic) DetailViewTableHeader *offscreenHeaderView;
 @property (strong, nonatomic) DetailContentTableViewCell *offscreenDetailCell;
 @property (strong, nonatomic) ContactInfoCell *offscreenContactDetailCell;
+@property (strong, nonatomic) DetailFooterView *footerView;
 @property (strong, nonatomic) UIImage *emailImageNormal;
 @property (strong, nonatomic) UIImage *emailImagePressed;
 @property (strong, nonatomic) UIImage *phoneImageNormal;
@@ -87,6 +89,10 @@
     self.offscreenHeaderView = nibs[0];
     [self.tableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:@"TableHeader"];
     
+    UINib *footerNib = [UINib nibWithNibName:@"DetailFooterView" bundle:nil];
+    NSArray *footerNibs = [footerNib instantiateWithOwner:nil options:nil];
+    self.footerView = footerNibs[0];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,20 +121,27 @@
     NSLog(@"Height of header view: %f", height);
     
     return height + 1;
-//    return 80;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
     // last section gets an email button
     if (section == 4) {
-        return 150;
+        [self.footerView layoutSubviews];
+        CGFloat height = [self.footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height + 1;
     }
     
     return 0.01f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    if (section == 4) {
+        return self.footerView;
+    }
+    
+    
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 

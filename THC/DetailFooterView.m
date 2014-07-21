@@ -7,6 +7,12 @@
 //
 
 #import "DetailFooterView.h"
+#import "SendEmailButton.h"
+
+@interface DetailFooterView()
+@property (weak, nonatomic) IBOutlet SendEmailButton *sendEmailButton;
+
+@end
 
 @implementation DetailFooterView
 

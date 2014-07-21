@@ -41,46 +41,55 @@
     CGSize buttonShadowOffset = CGSizeMake(1.1, 1.1);
     CGFloat buttonShadowBlurRadius = 1;
     
-    //// Rectangle Drawing
-    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(frame) + 2, CGRectGetMinY(frame) + 2, 316, 71)];
-    CGContextSaveGState(context);
-    CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [buttonShadow CGColor]);
-    [tHCOrange setFill];
-    [rectanglePath fill];
     
-    ////// Rectangle Inner Shadow
-    CGContextSaveGState(context);
-    UIRectClip(rectanglePath.bounds);
-    CGContextSetShadowWithColor(context, CGSizeZero, 0, NULL);
+    //// Subframes
+    CGRect group = CGRectMake(CGRectGetMinX(frame) + floor(CGRectGetWidth(frame) * 0.00625 + 0.5), CGRectGetMinY(frame) + floor(CGRectGetHeight(frame) * 0.02667 + 0.5), floor(CGRectGetWidth(frame) * 0.99375 + 0.5) - floor(CGRectGetWidth(frame) * 0.00625 + 0.5), floor(CGRectGetHeight(frame) * 0.97333 + 0.5) - floor(CGRectGetHeight(frame) * 0.02667 + 0.5));
     
-    CGContextSetAlpha(context, CGColorGetAlpha([buttonShadow CGColor]));
-    CGContextBeginTransparencyLayer(context, NULL);
+    
+    //// Group
     {
-        UIColor* opaqueShadow = [buttonShadow colorWithAlphaComponent: 1];
-        CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [opaqueShadow CGColor]);
-        CGContextSetBlendMode(context, kCGBlendModeSourceOut);
-        CGContextBeginTransparencyLayer(context, NULL);
-        
-        [opaqueShadow setFill];
+        //// Rectangle Drawing
+        UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(group) + floor(CGRectGetWidth(group) * 0.00000 + 0.5), CGRectGetMinY(group) + floor(CGRectGetHeight(group) * 0.00000 + 0.5), floor(CGRectGetWidth(group) * 1.00000 + 0.5) - floor(CGRectGetWidth(group) * 0.00000 + 0.5), floor(CGRectGetHeight(group) * 1.00000 + 0.5) - floor(CGRectGetHeight(group) * 0.00000 + 0.5))];
+        CGContextSaveGState(context);
+        CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [buttonShadow CGColor]);
+        [tHCOrange setFill];
         [rectanglePath fill];
         
+        ////// Rectangle Inner Shadow
+        CGContextSaveGState(context);
+        UIRectClip(rectanglePath.bounds);
+        CGContextSetShadowWithColor(context, CGSizeZero, 0, NULL);
+        
+        CGContextSetAlpha(context, CGColorGetAlpha([buttonShadow CGColor]));
+        CGContextBeginTransparencyLayer(context, NULL);
+        {
+            UIColor* opaqueShadow = [buttonShadow colorWithAlphaComponent: 1];
+            CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [opaqueShadow CGColor]);
+            CGContextSetBlendMode(context, kCGBlendModeSourceOut);
+            CGContextBeginTransparencyLayer(context, NULL);
+            
+            [opaqueShadow setFill];
+            [rectanglePath fill];
+            
+            CGContextEndTransparencyLayer(context);
+        }
         CGContextEndTransparencyLayer(context);
+        CGContextRestoreGState(context);
+        
+        CGContextRestoreGState(context);
+        
+        
+        
+        //// Text Drawing
+        CGRect textRect = CGRectMake(CGRectGetMinX(group) + floor(CGRectGetWidth(group) * 0.41236 + 0.2) + 0.3, CGRectGetMinY(group) + floor(CGRectGetHeight(group) * 0.32224 - 0.38) + 0.88, floor(CGRectGetWidth(group) * 0.58764 - 0.2) - floor(CGRectGetWidth(group) * 0.41236 + 0.2) + 0.39, floor(CGRectGetHeight(group) * 0.67776 + 0.38) - floor(CGRectGetHeight(group) * 0.32224 - 0.38) - 0.76);
+        NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        textStyle.alignment = NSTextAlignmentCenter;
+        
+        NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue" size: UIFont.buttonFontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: textStyle};
+        
+        [@"Email\n" drawInRect: textRect withAttributes: textFontAttributes];
     }
-    CGContextEndTransparencyLayer(context);
-    CGContextRestoreGState(context);
-    
-    CGContextRestoreGState(context);
-    
-    
-    
-    //// Text Drawing
-    CGRect textRect = CGRectMake(CGRectGetMinX(frame) + 132.3, CGRectGetMinY(frame) + 24.88, 55.39, 25.24);
-    NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-    textStyle.alignment = NSTextAlignmentCenter;
-    
-    NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue" size: UIFont.buttonFontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: textStyle};
-    
-    [@"Email\n" drawInRect: textRect withAttributes: textFontAttributes];
 }
+
 
 @end

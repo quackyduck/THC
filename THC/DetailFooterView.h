@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailFooterView : UIView
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @end
