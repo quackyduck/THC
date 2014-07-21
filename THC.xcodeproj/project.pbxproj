@@ -29,6 +29,9 @@
 		0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */; };
 		0A2FFB57197C71710064E647 /* DetailViewTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */; };
 		0A2FFB5F197CBD6D0064E647 /* PhoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB5E197CBD6D0064E647 /* PhoneButton.m */; };
+		0A2FFB62197CCBA70064E647 /* SendEmailButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB61197CCBA70064E647 /* SendEmailButton.m */; };
+		0A2FFB65197CCC210064E647 /* DetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB64197CCC210064E647 /* DetailFooterView.m */; };
+		0A2FFB67197CCC3B0064E647 /* DetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB66197CCC3B0064E647 /* DetailFooterView.xib */; };
 		0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */; };
 		0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */; };
 		0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */; };
@@ -187,6 +190,11 @@
 		0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewTableHeader.xib; sourceTree = "<group>"; };
 		0A2FFB5D197CBD6D0064E647 /* PhoneButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneButton.h; sourceTree = "<group>"; };
 		0A2FFB5E197CBD6D0064E647 /* PhoneButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneButton.m; sourceTree = "<group>"; };
+		0A2FFB60197CCBA70064E647 /* SendEmailButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendEmailButton.h; sourceTree = "<group>"; };
+		0A2FFB61197CCBA70064E647 /* SendEmailButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendEmailButton.m; sourceTree = "<group>"; };
+		0A2FFB63197CCC210064E647 /* DetailFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailFooterView.h; sourceTree = "<group>"; };
+		0A2FFB64197CCC210064E647 /* DetailFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailFooterView.m; sourceTree = "<group>"; };
+		0A2FFB66197CCC3B0064E647 /* DetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailFooterView.xib; sourceTree = "<group>"; };
 		0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_normal@2x.png"; sourceTree = "<group>"; };
 		0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_create_normal@2x.png"; sourceTree = "<group>"; };
@@ -596,6 +604,11 @@
 				0A2FFB53197C71590064E647 /* DetailViewTableHeader.h */,
 				0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */,
 				0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */,
+				0A2FFB60197CCBA70064E647 /* SendEmailButton.h */,
+				0A2FFB61197CCBA70064E647 /* SendEmailButton.m */,
+				0A2FFB63197CCC210064E647 /* DetailFooterView.h */,
+				0A2FFB64197CCC210064E647 /* DetailFooterView.m */,
+				0A2FFB66197CCC3B0064E647 /* DetailFooterView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -751,6 +764,7 @@
 				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
 				37BD755C197CB91D004BD913 /* ic_reports_unit@2x.png in Resources */,
 				0A2FFB4F197C28F90064E647 /* ContactInfoCell.xib in Resources */,
+				0A2FFB67197CCC3B0064E647 /* DetailFooterView.xib in Resources */,
 				87B20026197C7FA9000D6CBD /* ic_nav_check_normal@2x.png in Resources */,
 				0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
@@ -875,6 +889,7 @@
 				0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */,
 				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
+				0A2FFB62197CCBA70064E647 /* SendEmailButton.m in Sources */,
 				0A122E951969A5F7005894EB /* Building.m in Sources */,
 				0A3C8C4F1978E76000ED1667 /* BuildingAnnotationView.m in Sources */,
 				0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */,
@@ -887,6 +902,7 @@
 				87A98861196A3BE000EDE34F /* Note.m in Sources */,
 				0A28355D1972DCB4008A5FC7 /* ExploreTabBarItem.m in Sources */,
 				0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */,
+				0A2FFB65197CCC210064E647 /* DetailFooterView.m in Sources */,
 				37BD7548197CB7C1004BD913 /* HotelFieldCell.m in Sources */,
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,

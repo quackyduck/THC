@@ -120,10 +120,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-//    // last section gets an email button
-//    if (section == 4) {
-//        return 150;
-//    }
+    // last section gets an email button
+    if (section == 4) {
+        return 150;
+    }
     
     return 0.01f;
 }
