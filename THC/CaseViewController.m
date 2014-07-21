@@ -109,20 +109,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-//    [self.offscreenHeaderView layoutSubviews];
-//    CGFloat height = [self.offscreenHeaderView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//    return height + 1;
-    return 80;
+    [self.offscreenHeaderView layoutSubviews];
+    CGFloat height = [self.offscreenHeaderView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    
+    NSLog(@"Height of header view: %f", height);
+    
+    return height + 1;
+//    return 80;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    // last section gets an email button
-    if (section == 4) {
-        return 400;
-    }
+//    // last section gets an email button
+//    if (section == 4) {
+//        return 150;
+//    }
     
-    return 0;
+    return 0.01f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

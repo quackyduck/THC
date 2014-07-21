@@ -8,6 +8,13 @@
 
 #import "DetailViewTableHeader.h"
 
+@interface DetailViewTableHeader()
+//@property (weak, nonatomic) IBOutlet UIView *contentView;
+
+
+
+@end
+
 @implementation DetailViewTableHeader
 
 - (id)initWithFrame:(CGRect)frame
