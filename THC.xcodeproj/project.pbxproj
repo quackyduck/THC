@@ -122,6 +122,8 @@
 		37BD7562197CBA15004BD913 /* btn_selected_remove_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7561197CBA15004BD913 /* btn_selected_remove_normal@2x.png */; };
 		37BD7564197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7563197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png */; };
 		37BD7566197CBA62004BD913 /* ic_report_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7565197CBA62004BD913 /* ic_report_camera@2x.png */; };
+		37BD7569197DB47A004BD913 /* ic_reports_violationText@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7567197DB47A004BD913 /* ic_reports_violationText@2x.png */; };
+		37BD756A197DB47A004BD913 /* ic_reports_violationType@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7568197DB47A004BD913 /* ic_reports_violationType@2x.png */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
@@ -317,6 +319,9 @@
 		37BD7561197CBA15004BD913 /* btn_selected_remove_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_selected_remove_normal@2x.png"; sourceTree = "<group>"; };
 		37BD7563197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_selected_remove_pressed@2x.png"; sourceTree = "<group>"; };
 		37BD7565197CBA62004BD913 /* ic_report_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_report_camera@2x.png"; sourceTree = "<group>"; };
+		37BD7567197DB47A004BD913 /* ic_reports_violationText@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_violationText@2x.png"; sourceTree = "<group>"; };
+		37BD7568197DB47A004BD913 /* ic_reports_violationType@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_violationType@2x.png"; sourceTree = "<group>"; };
+		37BD756B197DB580004BD913 /* FieldContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldContent.h; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
@@ -433,6 +438,8 @@
 			isa = PBXGroup;
 			children = (
 				0A2FFB68197CE7970064E647 /* ic_signin_password@2x.png */,
+				37BD7567197DB47A004BD913 /* ic_reports_violationText@2x.png */,
+				37BD7568197DB47A004BD913 /* ic_reports_violationType@2x.png */,
 				37BD7565197CBA62004BD913 /* ic_report_camera@2x.png */,
 				37BD7563197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png */,
 				37BD7561197CBA15004BD913 /* btn_selected_remove_normal@2x.png */,
@@ -659,6 +666,7 @@
 			isa = PBXGroup;
 			children = (
 				37BD74CF19742C22004BD913 /* PhotoPicker.h */,
+				37BD756B197DB580004BD913 /* FieldContent.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -775,6 +783,7 @@
 				0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				37BD753A197C94ED004BD913 /* ic_reports_email@2x.png in Resources */,
+				37BD7569197DB47A004BD913 /* ic_reports_violationText@2x.png in Resources */,
 				37BD7558197CB833004BD913 /* ViolationDescriptionFieldCell.xib in Resources */,
 				0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */,
 				37BD7527197C93FB004BD913 /* NameFieldCell.xib in Resources */,
@@ -815,6 +824,7 @@
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
 				87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */,
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
+				37BD756A197DB47A004BD913 /* ic_reports_violationType@2x.png in Resources */,
 				37BD7536197C9461004BD913 /* EmailFieldCell.xib in Resources */,
 				0A2FFB69197CE7970064E647 /* ic_signin_password@2x.png in Resources */,
 				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
