@@ -11,6 +11,7 @@
 #import "DetailContentTableViewCell.h"
 #import "ContactInfoCell.h"
 #import "DetailViewTableHeader.h"
+#import "ContactInfoButton.h"
 
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -18,6 +19,10 @@
 @property (strong, nonatomic) DetailViewTableHeader *offscreenHeaderView;
 @property (strong, nonatomic) DetailContentTableViewCell *offscreenDetailCell;
 @property (strong, nonatomic) ContactInfoCell *offscreenContactDetailCell;
+@property (strong, nonatomic) UIImage *emailImageNormal;
+@property (strong, nonatomic) UIImage *emailImagePressed;
+@property (strong, nonatomic) UIImage *phoneImageNormal;
+@property (strong, nonatomic) UIImage *phoneImagePressed;
 
 @end
 
@@ -28,6 +33,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.emailImageNormal = [UIImage imageNamed:@"ic_nav_email_normal"];
+        self.emailImagePressed = [UIImage imageNamed:@"ic_nav_email_pressed"];
+        self.phoneImageNormal = [UIImage imageNamed:@"ic_nav_phone_normal"];
+        self.phoneImagePressed = [UIImage imageNamed:@"ic_nav_phone_pressed"];
     }
     return self;
 }

@@ -28,6 +28,7 @@
 		0A2FFB52197C29D70064E647 /* ContactInfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB51197C29D70064E647 /* ContactInfoButton.m */; };
 		0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */; };
 		0A2FFB57197C71710064E647 /* DetailViewTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */; };
+		0A2FFB5F197CBD6D0064E647 /* PhoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB5E197CBD6D0064E647 /* PhoneButton.m */; };
 		0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */; };
 		0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */; };
 		0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */; };
@@ -148,6 +149,8 @@
 		0A2FFB53197C71590064E647 /* DetailViewTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewTableHeader.h; sourceTree = "<group>"; };
 		0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewTableHeader.m; sourceTree = "<group>"; };
 		0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewTableHeader.xib; sourceTree = "<group>"; };
+		0A2FFB5D197CBD6D0064E647 /* PhoneButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneButton.h; sourceTree = "<group>"; };
+		0A2FFB5E197CBD6D0064E647 /* PhoneButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneButton.m; sourceTree = "<group>"; };
 		0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_normal@2x.png"; sourceTree = "<group>"; };
 		0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_create_normal@2x.png"; sourceTree = "<group>"; };
@@ -459,6 +462,8 @@
 				0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */,
 				0A2FFB50197C29D70064E647 /* ContactInfoButton.h */,
 				0A2FFB51197C29D70064E647 /* ContactInfoButton.m */,
+				0A2FFB5D197CBD6D0064E647 /* PhoneButton.h */,
+				0A2FFB5E197CBD6D0064E647 /* PhoneButton.m */,
 				0A2FFB53197C71590064E647 /* DetailViewTableHeader.h */,
 				0A2FFB54197C71590064E647 /* DetailViewTableHeader.m */,
 				0A2FFB56197C71710064E647 /* DetailViewTableHeader.xib */,
@@ -717,6 +722,7 @@
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,
 				0A2FFB52197C29D70064E647 /* ContactInfoButton.m in Sources */,
+				0A2FFB5F197CBD6D0064E647 /* PhoneButton.m in Sources */,
 				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
 				0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */,
 				87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */,
