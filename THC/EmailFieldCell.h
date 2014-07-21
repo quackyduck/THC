@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EmailFieldCell : UITableViewCell
+@interface EmailFieldCell : UITableViewCell <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @end

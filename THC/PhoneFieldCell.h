@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhoneFieldCell : UITableViewCell
+@interface PhoneFieldCell : UITableViewCell <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @end

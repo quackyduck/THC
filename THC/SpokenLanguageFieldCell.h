@@ -10,4 +10,7 @@
 
 @interface SpokenLanguageFieldCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *languageLabel;
+
+- (void)showMenu:(CGRect)frame onView:(UIView *)view;
 @end

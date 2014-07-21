@@ -8,6 +8,9 @@
 
 #import "ViolationForm.h"
 
+#define languageList @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", nil}
+#define FieldList    @[@"name", @"languageSpoken", @"hotel", @"address", @"email", @"phone", @"violationDescription"]
+
 @implementation ViolationForm
 
 @end

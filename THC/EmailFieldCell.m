@@ -22,4 +22,26 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)editingFinished:(UITextField *)sender {
+    [sender resignFirstResponder];
+}
+
+#pragma keyboard delegates
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    NSLog(@"text written so far %@", textView.text);
+    
+}
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing");
+    //    self.nameTextField.textColor = [UIColor blackColor];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    NSLog(@"Full name: %@", self.emailTextField.text);
+    [self.emailTextField resignFirstResponder];
+}
+
 @end
