@@ -177,10 +177,11 @@
 
         //NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
         
-        UIImage *image = [UIImage imageNamed:@"camera"];
+        UIImage *image = [UIImage imageNamed:@"ic_report_camera"];
 //        NSLog(@"camera image %@", image);
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+//        imageView.backgroundColor = [UIColor blackColor];
         imageView.frame = imageViewFrame;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.layer.cornerRadius = 4.f;
