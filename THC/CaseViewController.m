@@ -17,6 +17,7 @@
 @property (strong, nonatomic) Case *caseInfo;
 @property (strong, nonatomic) DetailViewTableHeader *offscreenHeaderView;
 @property (strong, nonatomic) DetailContentTableViewCell *offscreenDetailCell;
+@property (strong, nonatomic) ContactInfoCell *offscreenContactDetailCell;
 
 @end
 
@@ -57,19 +58,24 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    // Detail cells
     UINib *detailNib = [UINib nibWithNibName:@"DetailContentTableViewCell" bundle:nil];
     NSArray *detailNibs = [detailNib instantiateWithOwner:nil options:nil];
+    self.offscreenDetailCell = detailNibs[0];
     [self.tableView registerNib:detailNib forCellReuseIdentifier:@"DetailContentTableViewCell"];
     
-    self.offscreenDetailCell = detailNibs[0];
     
+    // Email and Phone button cells
     UINib *contactNib = [UINib nibWithNibName:@"ContactInfoCell" bundle:nil];
+    NSArray *contactNibs = [contactNib instantiateWithOwner:nil options:nil];
+    self.offscreenContactDetailCell = contactNibs[0];
     [self.tableView registerNib:contactNib forCellReuseIdentifier:@"ContactInfoCell"];
     
+    
+    // Header views
     UINib *headerNib = [UINib nibWithNibName:@"DetailViewTableHeader" bundle:nil];
     NSArray *nibs = [headerNib instantiateWithOwner:nil options:nil];
     self.offscreenHeaderView = nibs[0];
-    
     [self.tableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:@"TableHeader"];
     
 }
@@ -101,6 +107,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    // last section gets an email button
+    if (section == 4) {
+        return 400;
+    }
+    
     return 0;
 }
 
@@ -128,9 +140,6 @@
             NSLog(@"Not good, we ran out of options.");
             break;
     }
-    
-//    CGRect frame = CGRectMake(0, 0, 320, 86);
-//    headerView.frame = frame;
     
     return headerView;
     
@@ -171,12 +180,22 @@
     }
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ((indexPath.section == 0 && indexPath.row == 2) || (indexPath.section == 1 && indexPath.row == 2)) {
+        [self.offscreenContactDetailCell layoutSubviews];
+        CGFloat height = [self.offscreenContactDetailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        NSLog(@"Layout email and phone buttons at height %f", height);
+        return height + 1;
+    } else if (indexPath.section == 3) {
+        NSLog(@"Photos");
+        return 100;
+    }
     
     [self configureDetailCell:self.offscreenDetailCell forRowAtIndexPath:indexPath];
     [self.offscreenDetailCell layoutSubviews];
     CGFloat height = [self.offscreenDetailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    NSLog(@"Layout detail cells at height %f", height);
     return height + 1;
 }
 
