@@ -12,10 +12,34 @@
 #import "Building.h"
 #import <Parse/Parse.h>
 #import "AlbumListController.h"
+#import "NameFieldCell.h"
+#import "SpokenLanguageFieldCell.h"
+#import "PhoneFieldCell.h"
+#import "EmailFieldCell.h"
+#import "HotelFieldCell.h"
+#import "UnitFieldCell.h"
+#import "ViolationTypeFieldCell.h"
+#import "ViolationDescriptionFieldCell.h"
+
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
 #define orangeColor [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1]
 #define whiteColor  [UIColor whiteColor]
+
+#define LanguageList  @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", nil}
+#define AllFields     @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"unit", @"violationDescription", @"violationType"]
+#define FieldList     @[@"name", @"languageSpoken", @"phone", @"email"]
+#define PersonalInfo  @[@"name", @"languageSpoken", @"phone", @"email"]
+#define HotelInfo     @[@"hotel", @"unit"]
+#define ViolationInfo @[@"violationType", @"violationDescription"]
+//#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo}
+#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo}
+#define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details"}
+
+
+
+//#define FieldList    @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"address",   @"violationDescription"]
+
 
 @interface ViolationSubmissionViewController ()
 
@@ -27,13 +51,26 @@
 @property (strong, nonatomic) UIImagePickerController *picker;
 @property (weak, nonatomic) IBOutlet UIScrollView     *scrollView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityView;
-
+@property (strong, nonatomic) NSArray                 *fields;
+@property (strong, nonatomic) NSDictionary            *formFields;
+@property (strong, nonatomic) NSDictionary            *formSectionHeader;
+@property (strong, nonatomic) UITapGestureRecognizer  *tapGestureRecognizer;
+@property (strong, nonatomic) NSIndexPath             *currentIndexPath;
 
 
 
 @end
 
 @implementation ViolationSubmissionViewController
+
+NameFieldCell                   *_stubNameCell;
+SpokenLanguageFieldCell         *_stubLanguageCell;
+HotelFieldCell                  *_stubHotelCell;
+UnitFieldCell                   *_stubUnitCell;
+PhoneFieldCell                  *_stubPhoneCell;
+ViolationDescriptionFieldCell   *_stubViolationCell;
+ViolationTypeFieldCell          *_stubViolationTypeCell;
+EmailFieldCell                  *_stubEmailCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,9 +113,14 @@
     
 //    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"ic_nav_back_normal@2x"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                          target:self
-                                                                                          action:@selector(editForm)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+//                                                                                          target:self
+//                                                                                          action:@selector(editForm)];
+//    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit"
+                                                                    style:UIBarButtonItemStylePlain
+                                                                    target:self action:@selector(submitForm)];
+    
 //    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -86,7 +128,8 @@
                                                  name:@"Addresses Retrieved"
                                                object:nil];
     
-    
+    // This is old FXForm code
+    /*
     // Create the FX form controller and specify the form entries
     self.formController = [[FXFormController alloc] init];
     self.formController.tableView = self.tableView;
@@ -120,6 +163,21 @@
         self.formController.form = [[ViolationSubmissionForm alloc] init];
     }
 
+     */
+    
+    self.fields = AllFields;
+    self.formFields = FormFields;
+    self.formSectionHeader = FormSectionHeader;
+    
+    [self registerFieldCells];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource =self;
+    [self setupKeyboardDismissGestures];
+    [self registerForKeyboardNotifications];
+    [self.tableView reloadData];
+    
+    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -228,6 +286,390 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma Register Field Cells
+
+- (void)registerFieldCells {
+    
+    for (NSString *fieldName in self.fields) {
+        
+        if ([fieldName isEqualToString:@"name"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"NameFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"NameFieldCell"];
+            _stubNameCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"languageSpoken"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"SpokenLanguageFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"LanguageCell"];
+            _stubLanguageCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"hotel"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"HotelFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"HotelMenuCell"];
+            _stubHotelCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"email"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"EmailFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"EmailFieldCell"];
+            _stubEmailCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"phone"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"PhoneFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"PhoneCell"];
+            _stubPhoneCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"hotel"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"HotelFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"HotelFieldCell"];
+            _stubHotelCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"unit"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"UnitFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"UnitFieldCell"];
+            _stubUnitCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"violationDescription"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"ViolationDescriptionFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ViolationCell"];
+            _stubViolationCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"violationType"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"ViolationTypeFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ViolationTypeFieldCell"];
+            _stubViolationTypeCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        }
+    }
+}
+
+#pragma mark -
+#pragma Keyboard notification setup
+
+- (void)setupKeyboardDismissGestures
+{
+    
+    //    Example for a swipe gesture recognizer. it was not set-up since we use scrollViewDelegate for dissmin-on-swiping, but it could be useful to keep in mind for views that do not inherit from UIScrollView
+    //    UISwipeGestureRecognizer *swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    //    swipeUpGestureRecognizer.cancelsTouchesInView = NO;
+    //    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    //    [self.tableView addGestureRecognizer:swipeUpGestureRecognizer];
+    
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    //this prevents the gestureRecognizer to override other Taps, such as Cell Selection
+    self.tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
+    
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSLog(@"keyboard shown, scrolling up");
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    NSLog(@"contentInset %@", NSStringFromUIEdgeInsets(self.tableView.contentInset));
+    
+    CGRect kboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //    self.tableView.contentInset = contentInsets;
+    //    scrollView.scrollIndicatorInsets = contentInsets;
+    
+    
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.currentIndexPath];
+    
+    CGRect aRect = cell.frame;
+    
+    CGRect rectOfCellInTableView = [self.tableView rectForRowAtIndexPath:self.currentIndexPath];
+    CGRect rectOfCellInSuperview = [self.tableView convertRect:rectOfCellInTableView toView:[self.tableView superview]];
+    
+    //    CGRect aRect = rectOfCellInSuperview;
+    NSLog(@"cell frame at row %d %@", self.currentIndexPath.row, NSStringFromCGRect(rectOfCellInSuperview));
+    NSLog(@"kboard frame %@", NSStringFromCGRect(kboardRect));
+    
+    
+    //    aRect.size.height -= kbSize.height;
+    if (CGRectIntersectsRect(kboardRect, aRect) ) {
+        //        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
+        NSLog(@"table row would move upwards");
+        self.tableView.contentInset = contentInsets;
+        [self.tableView scrollToRowAtIndexPath:self.currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    NSLog(@"keyboard hidden");
+    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0.0, 0.0, 0.0);
+}
+
+-(void)hideKeyboard
+{
+    //this convenience method on UITableView sends a nested message to all subviews, and they resign responders if they have hold of the keyboard
+    [self.tableView endEditing:YES];
+    
+}
+
+#pragma mark - UIScrollViewDelegate
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self hideKeyboard];
+}
+
+#pragma TableView delegates
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.formFields count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //    NSLog(@"num of rows %d", self.fields.count);
+    NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)section]];
+    
+    NSLog(@"num of rows %lu", (unsigned long)sectionContent.count);
+    
+    return [sectionContent count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.formSectionHeader objectForKey:[NSString stringWithFormat:@"%ld", (long)section]];
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.section]];
+
+    NSString *fieldName = [sectionContent objectAtIndex:indexPath.row];
+    
+    if ([fieldName isEqualToString:@"name"]) {
+        NameFieldCell *nameCell = (NameFieldCell *)cell;
+        nameCell.nameTextField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"languageSpoken"]) {
+        SpokenLanguageFieldCell *lanCell = (SpokenLanguageFieldCell *)cell;
+        lanCell.languageLabel.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"hotel"]) {
+        HotelFieldCell *hotelCell = (HotelFieldCell *)cell;
+        hotelCell.textLabel.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"email"]) {
+        EmailFieldCell *emailCell = (EmailFieldCell *)cell;
+        emailCell.emailTextField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"phone"]) {
+        PhoneFieldCell *phoneCell = (PhoneFieldCell *)cell;
+        phoneCell.phoneTextField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"hotel"]) {
+        HotelFieldCell *hotelCell = (HotelFieldCell *)cell;
+        hotelCell.hotelLabel.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"unit"]) {
+        UnitFieldCell *unitCell = (UnitFieldCell *)cell;
+        unitCell.unitTextField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"violationDescription"]) {
+        ViolationDescriptionFieldCell *violationCell = (ViolationDescriptionFieldCell *)cell;
+        violationCell.violationDescriptionTextField.text = @"Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing TestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTesting";
+    } else if ([fieldName isEqualToString:@"violationType"]) {
+        ViolationTypeFieldCell *violationTypeCell = (ViolationTypeFieldCell *)cell;
+        violationTypeCell.violationTypeTextField.text = @"Testing";
+    }
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.section]];
+
+    NSString *fieldName = [sectionContent objectAtIndex:indexPath.row];
+    
+    CGFloat height = 0;
+    
+    if ([fieldName isEqualToString:@"name"]) {
+        [self configureCell:_stubNameCell atIndexPath:indexPath];
+        [_stubNameCell layoutSubviews];
+        height = [_stubNameCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+              height = 45;
+    } else if ([fieldName isEqualToString:@"languageSpoken"]) {
+        [self configureCell:_stubLanguageCell atIndexPath:indexPath];
+        [_stubLanguageCell layoutSubviews];
+        [_stubLanguageCell layoutSubviews];
+        height = [_stubLanguageCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
+    } else if ([fieldName isEqualToString:@"hotel"]) {
+        [self configureCell:_stubHotelCell atIndexPath:indexPath];
+        [_stubHotelCell layoutSubviews];
+        [_stubHotelCell layoutSubviews];
+        height = [_stubHotelCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
+    } else if ([fieldName isEqualToString:@"email"]) {
+        [self configureCell:_stubEmailCell atIndexPath:indexPath];
+        //        NSLog(@"_stubEmailCell %@", _stubEmailCell);
+        [_stubEmailCell layoutSubviews];
+        height = [_stubEmailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
+    } else if ([fieldName isEqualToString:@"phone"]) {
+        [self configureCell:_stubPhoneCell atIndexPath:indexPath];
+        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
+        [_stubPhoneCell layoutSubviews];
+        height = 45;
+        height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    } else if ([fieldName isEqualToString:@"hotel"]) {
+        [self configureCell:_stubHotelCell atIndexPath:indexPath];
+        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
+        [_stubHotelCell layoutSubviews];
+        height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    } else if ([fieldName isEqualToString:@"unit"]) {
+        [self configureCell:_stubUnitCell atIndexPath:indexPath];
+        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
+        [_stubUnitCell layoutSubviews];
+        height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
+    } else if ([fieldName isEqualToString:@"violationDescription"]) {
+        [self configureCell:_stubViolationCell atIndexPath:indexPath];
+//        NSLog(@"_stubViolationCell %@", _stubViolationCell);
+        [_stubViolationCell layoutSubviews];
+        height = [_stubViolationCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 59;
+
+    } else if ([fieldName isEqualToString:@"violationType"]) {
+        [self configureCell:_stubViolationTypeCell atIndexPath:indexPath];
+//        NSLog(@"_stubViolationTypeCell %@", _stubViolationTypeCell);
+        [_stubViolationTypeCell layoutSubviews];
+        height = [_stubViolationTypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
+    }
+    
+    NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
+    
+    
+    return height + 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.section]];
+
+    NSString *fieldName = [sectionContent objectAtIndex:indexPath.row];
+    
+    NSLog(@"creating row for cell %@", fieldName);
+    if ([fieldName isEqualToString:@"name"]) {
+        NameFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"NameFieldCell" ];
+        
+        NSLog(@"creating row for cell %@", fieldName);
+        return cell;
+    } else if ([fieldName isEqualToString:@"languageSpoken"]) {
+        SpokenLanguageFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"LanguageCell" ];
+        return cell;
+    } else if ([fieldName isEqualToString:@"hotel"]) {
+        //        HotelCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelCell" ];
+        HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelMenuCell" ];
+        return cell;
+    } else if ([fieldName isEqualToString:@"email"]) {
+        EmailFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"EmailFieldCell" ];
+        return cell;
+    } else if ([fieldName isEqualToString:@"phone"]) {
+        PhoneFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhoneCell" ];
+        return cell;
+    } else if ([fieldName isEqualToString:@"hotel"]) {
+        HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelFieldCell" ];
+        return cell;
+    } else if ([fieldName isEqualToString:@"unit"]) {
+        UnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"UnitFieldCell" ];
+        return cell;
+    } else if ([fieldName isEqualToString:@"violationDescription"]) {
+        ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationCell" ];
+        return cell;
+    } else if ([fieldName isEqualToString:@"violationType"]) {
+        ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationTypeFieldCell" ];
+        return cell;
+    }
+    
+    return nil;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [[self tableView] endEditing:YES];
+    
+    self.currentIndexPath = indexPath;
+    NSLog(@"current index path: %ld", (long)self.currentIndexPath.row);
+    
+    NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.section]];
+
+    NSString *fieldName  = [sectionContent objectAtIndex:indexPath.row];
+    if ([fieldName isEqualToString:@"languageSpoken"]) {
+        [self.tapGestureRecognizer setEnabled:NO];
+        CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
+        CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
+        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+        
+        
+        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+            NSLog(@"portrait orientation");
+        }
+        SpokenLanguageFieldCell *cell = (SpokenLanguageFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
+    } else    if ([fieldName isEqualToString:@"hotel"]) {
+        [self.tapGestureRecognizer setEnabled:NO];
+        CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
+        CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
+        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+        
+        
+        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+            NSLog(@"portrait orientation");
+        }
+        HotelFieldCell *cell = (HotelFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
+    } else    if ([fieldName isEqualToString:@"violationType"]) {
+        [self.tapGestureRecognizer setEnabled:NO];
+        CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
+        CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
+        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+        
+        
+        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+            NSLog(@"portrait orientation");
+        }
+        ViolationTypeFieldCell *cell = (ViolationTypeFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
+    } else if ([fieldName isEqualToString:@"name"]) {
+        NameFieldCell *cell = (NameFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.nameTextField.userInteractionEnabled = YES;
+        [cell.nameTextField becomeFirstResponder];
+    } else if ([fieldName isEqualToString:@"email"]) {
+        EmailFieldCell *cell = (EmailFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.emailTextField.userInteractionEnabled = YES;
+        [cell.emailTextField becomeFirstResponder];
+    } else if ([fieldName isEqualToString:@"phone"]) {
+        PhoneFieldCell *cell = (PhoneFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.phoneTextField.userInteractionEnabled = YES;
+        [cell.phoneTextField becomeFirstResponder];
+    }  else if ([fieldName isEqualToString:@"unit"]) {
+        UnitFieldCell *cell = (UnitFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.unitTextField.userInteractionEnabled = YES;
+        [cell.unitTextField becomeFirstResponder];
+    } else if ([fieldName isEqualToString:@"violationDescription"]) {
+        NSLog(@"selecting violation description cell");
+        ViolationDescriptionFieldCell *cell = (ViolationDescriptionFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.violationDescriptionTextField.userInteractionEnabled = YES;
+        [cell.violationDescriptionTextField becomeFirstResponder];
+    } else {
+        [self.tapGestureRecognizer setEnabled:YES];
+    }
+    
+    [tableView  deselectRowAtIndexPath:indexPath  animated:YES];
+
+ 
+}
+
 #pragma mark -
 #pragma Dynamic Form Changes
 
@@ -301,6 +743,10 @@
      */
     
 //    [[[UIAlertView alloc] initWithTitle:@"Violation Submitted" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+}
+
+- (void)submitForm {
+    
 }
 
 #pragma ImagePicker Delegate Protocols

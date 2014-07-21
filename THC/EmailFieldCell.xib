@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e7c-FN-fpU">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_email.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7c-FN-fpU">
                         <rect key="frame" x="5" y="5" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
@@ -24,9 +24,6 @@
                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H5g-2Y-cs6">
                         <rect key="frame" x="48" y="8" width="267" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="fQK-J4-sbq"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                         <connections>
@@ -35,11 +32,12 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="H5g-2Y-cs6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Fin-SR-Ndg"/>
-                    <constraint firstItem="H5g-2Y-cs6" firstAttribute="leading" secondItem="e7c-FN-fpU" secondAttribute="trailing" constant="8" id="GZG-iH-t5o"/>
-                    <constraint firstAttribute="trailing" secondItem="H5g-2Y-cs6" secondAttribute="trailing" constant="5" id="OE9-go-OV0"/>
+                    <constraint firstAttribute="bottom" secondItem="H5g-2Y-cs6" secondAttribute="bottom" constant="7" id="86H-HB-1WM"/>
+                    <constraint firstItem="H5g-2Y-cs6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="C4y-bK-1Wy"/>
                     <constraint firstItem="e7c-FN-fpU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="ZBo-5n-qHT"/>
+                    <constraint firstItem="H5g-2Y-cs6" firstAttribute="leading" secondItem="e7c-FN-fpU" secondAttribute="trailing" constant="8" id="dlh-an-Niq"/>
                     <constraint firstItem="e7c-FN-fpU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="hLI-Pb-hb3"/>
+                    <constraint firstAttribute="trailing" secondItem="H5g-2Y-cs6" secondAttribute="trailing" constant="5" id="rpO-dH-ML9"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -47,4 +45,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ic_reports_email.png" width="25" height="27"/>
+    </resources>
 </document>

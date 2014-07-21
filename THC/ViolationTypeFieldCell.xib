@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -7,12 +7,43 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ViolationTypeFieldCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Vm-O6-Bxs">
+                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="ROb-qy-Svn"/>
+                            <constraint firstAttribute="height" constant="35" id="bdG-DW-Wfe"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViolationType" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ois-aC-Xa1">
+                        <rect key="frame" x="48" y="12" width="263" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Ois-aC-Xa1" secondAttribute="trailing" constant="9" id="7xG-IO-TGQ"/>
+                    <constraint firstItem="4Vm-O6-Bxs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="B3w-0q-hpP"/>
+                    <constraint firstAttribute="bottom" secondItem="Ois-aC-Xa1" secondAttribute="bottom" constant="12" id="YoR-YI-i8A"/>
+                    <constraint firstItem="Ois-aC-Xa1" firstAttribute="leading" secondItem="4Vm-O6-Bxs" secondAttribute="trailing" constant="8" id="gu7-x4-Bqa"/>
+                    <constraint firstItem="4Vm-O6-Bxs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="p2u-iN-PY8"/>
+                    <constraint firstItem="Ois-aC-Xa1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="zPe-Xd-ZXo"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="violationTypeTextField" destination="Ois-aC-Xa1" id="fWF-zk-WvW"/>
+            </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ic_reports_phone.png" width="25" height="27"/>
+    </resources>
 </document>

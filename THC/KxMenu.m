@@ -182,10 +182,15 @@ typedef enum {
 - (void) setupFrameInView:(UIView *)view
                  fromRect:(CGRect)fromRect
 {
+    const CGFloat navBarHeight = 66;
+    
     const CGSize contentSize = _contentView.frame.size;
     
     const CGFloat outerWidth = view.bounds.size.width;
     const CGFloat outerHeight = view.bounds.size.height;
+    
+    NSLog(@"outerWidth %f outerHeight %f", outerWidth, outerHeight);
+    NSLog(@"drop downmenu rect %@", NSStringFromCGRect(_contentView.frame));
     
     const CGFloat rectX0 = fromRect.origin.x;
     const CGFloat rectX1 = fromRect.origin.x + fromRect.size.width;
@@ -311,28 +316,30 @@ typedef enum {
     }    
 }
 
-- (void)adjustContentView:(UIView *)view toFrame:(CGRect)rect {
+- (void)adjustContentView:(UIView *)view toFrame:(CGRect)rect forOrientation:(UIInterfaceOrientation) orientation
+{
 
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+//    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
     
     NSLog(@"old frame %@", NSStringFromCGRect(view.frame));
 
     if (UIDeviceOrientationIsPortrait(orientation)) {
         
-//        NSLog(@"portrait: itemY %f, screen height %f", itemY, screenHeight);
+        NSLog(@"scroll view height %f cell rect y %f cell rect height %f screen width %f", view.frame.size.height, rect.origin.y, rect.size.height, screenHeight);
 
-        if (view.frame.size.height + rect.origin.y + rect.size.height > screenHeight) {
-            view.frame = CGRectInset(view.frame, 0, abs(view.frame.size.height + rect.origin.y + rect.size.height- screenHeight));
+        if (view.frame.size.height + rect.origin.y + rect.size.height > screenHeight*2/3) {
+            view.frame = CGRectInset(view.frame, 0, fabs(view.frame.size.height + rect.origin.y + rect.size.height- screenHeight));
             NSLog(@"new frame %@", NSStringFromCGRect(view.frame));
         }
         
     } else if (UIDeviceOrientationIsLandscape(orientation)) {
 //        NSLog(@"landscape: itemY %f, screen Width %f", itemY, s);
         if (view.frame.size.height + rect.origin.y + rect.size.height > screenWidth) {
-            view.frame = CGRectInset(view.frame, 0, abs(view.frame.size.height + rect.origin.y + rect.size.height- screenWidth));
+            NSLog(@"scroll view height %f cell rect y %f cell rect height %f screen width %f", view.frame.size.height, rect.origin.y, rect.size.height, screenWidth);
+            view.frame = CGRectInset(view.frame, 0, fabs(view.frame.size.height + rect.origin.y + rect.size.height- screenWidth)*2/3);
             NSLog(@"new frame %@", NSStringFromCGRect(view.frame));
         }
         
@@ -343,15 +350,16 @@ typedef enum {
 - (void)showMenuInView:(UIView *)view
               fromRect:(CGRect)rect
              menuItems:(NSArray *)menuItems
+             forOrientation:(UIInterfaceOrientation) orientation
 {
     _menuItems = menuItems;
     
-    _contentView = [self mkContentView];
+    _contentView = [self mkContentViewForView:view forOrientation:orientation];
     
-    NSLog(@"content view height %f view origin %f", _contentView.frame.size.height, rect.origin.y);
+    NSLog(@"content view height %f view rect placement origin %f", _contentView.frame.size.height, rect.origin.y);
     
 
-    [self adjustContentView:_contentView toFrame:rect];
+//    [self adjustContentView:_contentView toFrame:rect forOrientation:orientation];
     
 //    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:_contentView.frame];
 //    NSLog(@"scroll view frame %@", NSStringFromCGRect(scrollView.frame));
@@ -426,7 +434,7 @@ typedef enum {
     [menuItem performAction];
 }
 
-- (UIView *) mkContentView
+- (UIView *) mkContentViewForView:(UIView *)view  forOrientation:(UIInterfaceOrientation) orientation
 {
     for (UIView *v in self.subviews) {
         [v removeFromSuperview];
@@ -484,6 +492,7 @@ typedef enum {
     maxItemWidth  = MAX(maxItemWidth, kMinMenuItemWidth);
     maxItemHeight = MAX(maxItemHeight, kMinMenuItemHeight);
 
+    NSLog(@"maxItemWidth %f maxItemHeight %f", maxItemWidth, maxItemHeight);
     const CGFloat titleX = kMarginX * 2 + maxImageWidth;
     const CGFloat titleWidth = maxItemWidth - titleX - kMarginX * 2;
     
@@ -594,17 +603,19 @@ typedef enum {
         ++itemNum;
     }    
     
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = view.frame.size.width;
+    CGFloat screenHeight = view.frame.size.height;
+//    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+
+    NSLog(@"General itemY %f, screen height %f", itemY, screenHeight);
 
     if (UIDeviceOrientationIsPortrait(orientation)) {
         
         NSLog(@"portrait: itemY %f, screen height %f", itemY, screenHeight);
         contentView.contentSize = CGSizeMake(maxImageWidth, itemY+kMarginY*2);
 
-        if (itemY >= screenHeight) {
+        if (itemY >= screenHeight*1/3) {
             itemY = screenHeight*1/3;
         }
         contentView.frame = (CGRect){0, 0, maxItemWidth, itemY + kMarginY * 2};
@@ -613,8 +624,8 @@ typedef enum {
         NSLog(@"landscape: itemY %f, screen Width %f", itemY, screenWidth);
         contentView.contentSize = CGSizeMake(maxImageWidth, itemY+kMarginY*2);
 
-        if (itemY >= screenWidth) {
-            itemY = screenWidth*2/3;
+        if (itemY >= screenWidth*1/3) {
+            itemY = screenWidth*1/3;
         }
         contentView.frame = (CGRect){0, 0, maxItemWidth, itemY + kMarginY * 2};
 
@@ -901,6 +912,7 @@ static UIFont *gTitleFont;
 - (void) showMenuInView:(UIView *)view
                fromRect:(CGRect)rect
               menuItems:(NSArray *)menuItems
+              forOrientation:(UIInterfaceOrientation) orientation
 {
     NSParameterAssert(view);
     NSParameterAssert(menuItems.count);
@@ -923,7 +935,7 @@ static UIFont *gTitleFont;
 
     
     _menuView = [[KxMenuView alloc] init];
-    [_menuView showMenuInView:view fromRect:rect menuItems:menuItems];    
+    [_menuView showMenuInView:view fromRect:rect menuItems:menuItems forOrientation:orientation];
 }
 
 - (void) dismissMenu
@@ -949,8 +961,9 @@ static UIFont *gTitleFont;
 + (void) showMenuInView:(UIView *)view
                fromRect:(CGRect)rect
               menuItems:(NSArray *)menuItems
+              forOrientation:(UIInterfaceOrientation) orientation
 {
-    [[self sharedMenu] showMenuInView:view fromRect:rect menuItems:menuItems];
+    [[self sharedMenu] showMenuInView:view fromRect:rect menuItems:menuItems forOrientation:orientation];
 }
 
 + (void) dismissMenu

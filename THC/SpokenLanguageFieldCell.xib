@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-1s-Iex">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_language.png" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-1s-Iex">
                         <rect key="frame" x="5" y="5" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
@@ -24,20 +24,18 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spoken Language" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cll-Sd-aML">
                         <rect key="frame" x="48" y="12" width="263" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="JDX-sx-HcD"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Cll-Sd-aML" secondAttribute="trailing" constant="9" id="Gwk-88-pfI"/>
                     <constraint firstItem="ffa-1s-Iex" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="P45-ac-Rr5"/>
                     <constraint firstItem="ffa-1s-Iex" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="PIN-k1-arH"/>
-                    <constraint firstItem="Cll-Sd-aML" firstAttribute="leading" secondItem="ffa-1s-Iex" secondAttribute="trailing" constant="8" id="TLR-fp-fEx"/>
-                    <constraint firstAttribute="trailing" secondItem="Cll-Sd-aML" secondAttribute="trailing" constant="9" id="X5B-l9-L0i"/>
-                    <constraint firstItem="Cll-Sd-aML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="syk-xY-y75"/>
+                    <constraint firstItem="Cll-Sd-aML" firstAttribute="leading" secondItem="ffa-1s-Iex" secondAttribute="trailing" constant="8" id="Xbz-MV-TQt"/>
+                    <constraint firstAttribute="bottom" secondItem="Cll-Sd-aML" secondAttribute="bottom" constant="12" id="wgf-gY-rFL"/>
+                    <constraint firstItem="Cll-Sd-aML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="yl4-ie-I9g"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -45,4 +43,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ic_reports_language.png" width="25" height="27"/>
+    </resources>
 </document>

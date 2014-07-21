@@ -24,9 +24,6 @@
                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4JD-vP-3iq">
                         <rect key="frame" x="48" y="7" width="267" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="HRQ-dQ-FtC"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
@@ -35,11 +32,12 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="4JD-vP-3iq" secondAttribute="trailing" constant="5" id="AeZ-dp-TO4"/>
+                    <constraint firstItem="4JD-vP-3iq" firstAttribute="leading" secondItem="lZU-e9-tOL" secondAttribute="trailing" constant="8" id="8bE-7T-UHh"/>
+                    <constraint firstItem="4JD-vP-3iq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Bt6-NX-plQ"/>
                     <constraint firstItem="lZU-e9-tOL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="IaR-hI-I60"/>
                     <constraint firstItem="lZU-e9-tOL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="NKb-yU-DdC"/>
-                    <constraint firstItem="4JD-vP-3iq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Rih-yA-dF4"/>
-                    <constraint firstItem="4JD-vP-3iq" firstAttribute="leading" secondItem="lZU-e9-tOL" secondAttribute="trailing" constant="8" id="gbl-CS-rST"/>
+                    <constraint firstAttribute="trailing" secondItem="4JD-vP-3iq" secondAttribute="trailing" constant="5" id="QYl-Ub-4Jg"/>
+                    <constraint firstAttribute="bottom" secondItem="4JD-vP-3iq" secondAttribute="bottom" constant="8" id="XBo-lW-oKA"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

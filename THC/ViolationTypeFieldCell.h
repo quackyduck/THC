@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ViolationTypeFieldCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *violationTypeTextField;
+
+- (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation;
 
 @end

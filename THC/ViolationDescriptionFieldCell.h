@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViolationDescriptionFieldCell : UITableViewCell
+@interface ViolationDescriptionFieldCell : UITableViewCell <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *violationDescriptionTextField;
 
 @end

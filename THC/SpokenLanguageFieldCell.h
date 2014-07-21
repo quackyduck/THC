@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *languageLabel;
 
-- (void)showMenu:(CGRect)frame onView:(UIView *)view;
+- (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation;
+
 @end

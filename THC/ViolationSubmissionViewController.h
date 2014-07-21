@@ -12,7 +12,7 @@
 #import "AsseptPicker.h"
 #import "PhotoPicker.h"
 
-@interface ViolationSubmissionViewController : UIViewController <FXFormControllerDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker>
+@interface ViolationSubmissionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker>
 
 @property (nonatomic, strong) AsseptPicker *assetPicker;
 

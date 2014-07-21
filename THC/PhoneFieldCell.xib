@@ -13,20 +13,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kDf-1e-Lht">
-                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="kDf-1e-Lht">
+                        <rect key="frame" x="5" y="5" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="35" id="3kC-EK-5S7"/>
-                            <constraint firstAttribute="height" constant="35" id="YR6-9I-sqt"/>
+                            <constraint firstAttribute="width" constant="30" id="3kC-EK-5S7"/>
+                            <constraint firstAttribute="height" constant="30" id="YR6-9I-sqt"/>
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c1m-eS-yjR">
                         <rect key="frame" x="48" y="8" width="267" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="MRU-BW-F9X"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                         <connections>
@@ -35,11 +32,12 @@
                     </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="c1m-eS-yjR" secondAttribute="bottom" constant="7" id="1MN-nu-JyU"/>
                     <constraint firstItem="kDf-1e-Lht" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="8Vr-dx-93c"/>
-                    <constraint firstAttribute="trailing" secondItem="c1m-eS-yjR" secondAttribute="trailing" constant="5" id="K3g-8E-KW4"/>
                     <constraint firstItem="kDf-1e-Lht" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="LMM-Uf-c61"/>
-                    <constraint firstItem="c1m-eS-yjR" firstAttribute="leading" secondItem="kDf-1e-Lht" secondAttribute="trailing" constant="8" id="m6s-9H-m5r"/>
-                    <constraint firstItem="c1m-eS-yjR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="xIr-f8-Epy"/>
+                    <constraint firstItem="c1m-eS-yjR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Tmf-1G-YYj"/>
+                    <constraint firstAttribute="trailing" secondItem="c1m-eS-yjR" secondAttribute="trailing" constant="5" id="e8C-S9-zmR"/>
+                    <constraint firstItem="c1m-eS-yjR" firstAttribute="leading" secondItem="kDf-1e-Lht" secondAttribute="trailing" constant="13" id="tHg-Ml-IRX"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -47,4 +45,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ic_reports_phone.png" width="25" height="27"/>
+    </resources>
 </document>

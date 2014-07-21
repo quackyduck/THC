@@ -54,7 +54,8 @@
 
 + (void) showMenuInView:(UIView *)view
                fromRect:(CGRect)rect
-              menuItems:(NSArray *)menuItems;
+              menuItems:(NSArray *)menuItems
+              forOrientation:(UIInterfaceOrientation) orientation;
 
 + (void) dismissMenu;
 

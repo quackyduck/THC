@@ -9,7 +9,7 @@
 #import "SpokenLanguageFieldCell.h"
 #import "KxMenu.h"
 
-#define languageList @[@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino" @"Punjabi"]
+#define languageList @[@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", @"Punjabi", @"Hindi", @"Gujrati"]
 
 @implementation SpokenLanguageFieldCell
 
@@ -25,7 +25,7 @@
     // Configure the view for the selected state
 }
 
-- (void)showMenu:(CGRect)frame onView:(UIView *)view
+- (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation
 {
     NSLog(@"showMenu");
     
@@ -35,6 +35,8 @@
     for (NSString *language in languages) {
         [menuItems addObject:[KxMenuItem menuItem:language image:nil target:self action:@selector(pushMenuItem:)]];
     }
+    NSLog(@"menu items %d", [menuItems count]);
+    
 //    NSArray *menuItems =
 //    @[
 //      
@@ -159,14 +161,15 @@
     
     KxMenuItem *first = menuItems[0];
     //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-    first.foreColor = [UIColor greenColor];
+//    first.foreColor = [UIColor greenColor];
     
-    first.alignment = NSTextAlignmentCenter;
+//    first.alignment = NSTextAlignmentCenter;
     
     [KxMenu setTintColor:[UIColor orangeColor]];
     [KxMenu showMenuInView:view
                   fromRect:frame
-                 menuItems:menuItems];
+                 menuItems:menuItems
+                 forOrientation:orientation ];
     
 }
 
@@ -175,6 +178,8 @@
     KxMenuItem *menu = (KxMenuItem *) sender;
     
     self.languageLabel.text = menu.title;
+    self.languageLabel.textColor = [UIColor blackColor];
+
     [self setNeedsDisplay];
 }
 
