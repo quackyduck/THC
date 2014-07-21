@@ -179,23 +179,23 @@
         if (indexPath.row == 0) {
 
             cell.titleLabel.text = @"Tenant Name";
-            cell.contentLabel.text = @"Nicolas Melo";
+            cell.contentLabel.text = self.caseInfo.name;
             
         } else if (indexPath.row == 1) {
-            cell.titleLabel.text = @"Tenant Name";
-            cell.contentLabel.text = @"Nicolas Melo";
+            cell.titleLabel.text = @"Language Spoken";
+            cell.contentLabel.text = self.caseInfo.languageSpoken;
             
         }
         
     } else if (indexPath.section == 1) {
         
         if (indexPath.row == 0) {
-            cell.titleLabel.text = @"Tenant Name";
-            cell.contentLabel.text = @"Nicolas Melo";
+            cell.titleLabel.text = @"Hotel";
+            cell.contentLabel.text = @"Allstar Hotel";
             
         } else if (indexPath.row == 1) {
-            cell.titleLabel.text = @"Tenant Name";
-            cell.contentLabel.text = @"Nicolas Melo";
+            cell.titleLabel.text = @"Address";
+            cell.contentLabel.text = self.caseInfo.address;
             
         }
         
@@ -204,8 +204,8 @@
         cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
         
     } else if (indexPath.section == 4) {
-        cell.titleLabel.text = @"Tenant Name";
-        cell.contentLabel.text = @"Nicolas Melo";
+        cell.titleLabel.text = @"Notes";
+        cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
     }
 }
 
