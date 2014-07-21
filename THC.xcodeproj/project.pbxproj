@@ -104,6 +104,9 @@
 		87B20023197C7F91000D6CBD /* btn_success_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20021197C7F91000D6CBD /* btn_success_pressed@2x.png */; };
 		87B20026197C7FA9000D6CBD /* ic_nav_check_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20024197C7FA9000D6CBD /* ic_nav_check_normal@2x.png */; };
 		87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B20025197C7FA9000D6CBD /* ic_success@2x.png */; };
+		87B2002B197C88FF000D6CBD /* HappySunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B20029197C88FF000D6CBD /* HappySunViewController.m */; };
+		87B2002C197C88FF000D6CBD /* HappySunViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B2002A197C88FF000D6CBD /* HappySunViewController.xib */; };
+		87B2002F197C90CE000D6CBD /* GetStartedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B2002E197C90CE000D6CBD /* GetStartedButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,6 +258,11 @@
 		87B20021197C7F91000D6CBD /* btn_success_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_success_pressed@2x.png"; sourceTree = "<group>"; };
 		87B20024197C7FA9000D6CBD /* ic_nav_check_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_nav_check_normal@2x.png"; sourceTree = "<group>"; };
 		87B20025197C7FA9000D6CBD /* ic_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_success@2x.png"; sourceTree = "<group>"; };
+		87B20028197C88FF000D6CBD /* HappySunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HappySunViewController.h; sourceTree = "<group>"; };
+		87B20029197C88FF000D6CBD /* HappySunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HappySunViewController.m; sourceTree = "<group>"; };
+		87B2002A197C88FF000D6CBD /* HappySunViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HappySunViewController.xib; sourceTree = "<group>"; };
+		87B2002D197C90CE000D6CBD /* GetStartedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetStartedButton.h; sourceTree = "<group>"; };
+		87B2002E197C90CE000D6CBD /* GetStartedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetStartedButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +449,9 @@
 				8788459E197B56650077A27A /* SubmissionValidationViewController.h */,
 				8788459F197B56650077A27A /* SubmissionValidationViewController.m */,
 				878845A0197B56650077A27A /* SubmissionValidationViewController.xib */,
+				87B20028197C88FF000D6CBD /* HappySunViewController.h */,
+				87B20029197C88FF000D6CBD /* HappySunViewController.m */,
+				87B2002A197C88FF000D6CBD /* HappySunViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -470,6 +481,8 @@
 				0A2FFB4D197C28F90064E647 /* ContactInfoCell.xib */,
 				0A2FFB50197C29D70064E647 /* ContactInfoButton.h */,
 				0A2FFB51197C29D70064E647 /* ContactInfoButton.m */,
+				87B2002D197C90CE000D6CBD /* GetStartedButton.h */,
+				87B2002E197C90CE000D6CBD /* GetStartedButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -613,6 +626,7 @@
 				878845A2197B56650077A27A /* SubmissionValidationViewController.xib in Resources */,
 				0A3C8C451978C03A00ED1667 /* ic_nav_cases_selected@2x.png in Resources */,
 				0A3C8C4A1978C03A00ED1667 /* ic_photoGallery_active@2x.png in Resources */,
+				87B2002C197C88FF000D6CBD /* HappySunViewController.xib in Resources */,
 				0A3C8C491978C03A00ED1667 /* ic_nav_map_selected@2x.png in Resources */,
 				0A122E9C1969C2D4005894EB /* SignupViewController.xib in Resources */,
 				0A3C8C421978C03A00ED1667 /* ic_nav_admin_selected@2x.png in Resources */,
@@ -713,6 +727,7 @@
 				377D17131969E7D7004E4E67 /* AddressForm.m in Sources */,
 				0A2FFB3A197A2C320064E647 /* CaseViewController.m in Sources */,
 				878845A5197B8DD00077A27A /* ReviewReportButton.m in Sources */,
+				87B2002B197C88FF000D6CBD /* HappySunViewController.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
 				37BD7520197C858A004BD913 /* KxMenu.m in Sources */,
@@ -737,6 +752,7 @@
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,
 				0A2FFB52197C29D70064E647 /* ContactInfoButton.m in Sources */,
+				87B2002F197C90CE000D6CBD /* GetStartedButton.m in Sources */,
 				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
 				0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */,
 				87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */,

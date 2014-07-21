@@ -10,6 +10,7 @@
 #import "AggregateMapViewController.h"
 #import "CaseTableViewController.h"
 #import "ViolationSubmissionViewController.h"
+#import "HappySunViewController.h"
 
 @interface ExploreCasesContainerViewController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -35,8 +36,9 @@
         
         AggregateMapViewController *mapViewController = [[AggregateMapViewController alloc] init];
         CaseTableViewController *casesViewController = [[CaseTableViewController alloc] init];
+        HappySunViewController *happySunViewController = [[HappySunViewController alloc] init];
         UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:casesViewController];
-        self.tabViewControllers = @[mapViewController, nvc];
+        self.tabViewControllers = @[mapViewController, nvc, happySunViewController];
     }
     return self;
 }
@@ -87,8 +89,15 @@
     
     AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
     UINavigationController *nvc = self.tabViewControllers[1];
+    HappySunViewController *happySunVC = self.tabViewControllers[2];
+    if ([PFUser currentUser] != nil)
+    {
+        [self show:nvc andRemove:mapsViewController];
+    } else
+    {
+        [self show:happySunVC andRemove:mapsViewController];
+    }
     
-    [self show:nvc andRemove:mapsViewController];
 }
 
 - (void)show:(UIViewController *)newChild andRemove:(UIViewController *)oldChild {
