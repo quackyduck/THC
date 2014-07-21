@@ -98,6 +98,7 @@
 		37BD753A197C94ED004BD913 /* ic_reports_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7537197C94ED004BD913 /* ic_reports_email@2x.png */; };
 		37BD753B197C94ED004BD913 /* ic_reports_language@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7538197C94ED004BD913 /* ic_reports_language@2x.png */; };
 		37BD753C197C94ED004BD913 /* ic_reports_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7539197C94ED004BD913 /* ic_reports_phone@2x.png */; };
+		37BD753F197C9A15004BD913 /* ViolationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD753E197C9A15004BD913 /* ViolationForm.m */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
@@ -257,6 +258,8 @@
 		37BD7537197C94ED004BD913 /* ic_reports_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_email@2x.png"; sourceTree = "<group>"; };
 		37BD7538197C94ED004BD913 /* ic_reports_language@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_language@2x.png"; sourceTree = "<group>"; };
 		37BD7539197C94ED004BD913 /* ic_reports_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_phone@2x.png"; sourceTree = "<group>"; };
+		37BD753D197C9A15004BD913 /* ViolationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationForm.h; sourceTree = "<group>"; };
+		37BD753E197C9A15004BD913 /* ViolationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationForm.m; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
@@ -529,6 +532,8 @@
 				0A122E941969A5F7005894EB /* Building.m */,
 				377D170E1969E7BA004E4E67 /* ViolationSubmissionForm.h */,
 				377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */,
+				37BD753D197C9A15004BD913 /* ViolationForm.h */,
+				37BD753E197C9A15004BD913 /* ViolationForm.m */,
 				377D17111969E7D7004E4E67 /* AddressForm.h */,
 				377D17121969E7D7004E4E67 /* AddressForm.m */,
 				377D1714196AF9F0004E4E67 /* OtherAddress.h */,
@@ -802,6 +807,7 @@
 				87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */,
 				37BD74B91974274A004BD913 /* AsseptPicker.m in Sources */,
 				37BD7535197C9461004BD913 /* EmailFieldCell.m in Sources */,
+				37BD753F197C9A15004BD913 /* ViolationForm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

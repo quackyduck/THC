@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    self.nameTextField.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -21,5 +21,31 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)editingFinished:(id)sender {
+    [sender resignFirstResponder];
+}
+
+#pragma keyboard delegates
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    NSLog(@"text written so far %@", textView.text);
+
+}
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing");
+//    self.nameTextField.textColor = [UIColor blackColor];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    NSLog(@"Full name: %@", self.nameTextField.text);
+    [self.nameTextField resignFirstResponder];
+}
+
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    
+//    return YES;
+//}
 
 @end
