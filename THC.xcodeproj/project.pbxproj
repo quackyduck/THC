@@ -32,6 +32,8 @@
 		0A2FFB62197CCBA70064E647 /* SendEmailButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB61197CCBA70064E647 /* SendEmailButton.m */; };
 		0A2FFB65197CCC210064E647 /* DetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FFB64197CCC210064E647 /* DetailFooterView.m */; };
 		0A2FFB67197CCC3B0064E647 /* DetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB66197CCC3B0064E647 /* DetailFooterView.xib */; };
+		0A2FFB69197CE7970064E647 /* ic_signin_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB68197CE7970064E647 /* ic_signin_password@2x.png */; };
+		0A2FFB6B197CEAC90064E647 /* ic_signin_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2FFB6A197CEAC90064E647 /* ic_signin_username@2x.png */; };
 		0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */; };
 		0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */; };
 		0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */; };
@@ -195,6 +197,8 @@
 		0A2FFB63197CCC210064E647 /* DetailFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailFooterView.h; sourceTree = "<group>"; };
 		0A2FFB64197CCC210064E647 /* DetailFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailFooterView.m; sourceTree = "<group>"; };
 		0A2FFB66197CCC3B0064E647 /* DetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailFooterView.xib; sourceTree = "<group>"; };
+		0A2FFB68197CE7970064E647 /* ic_signin_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_signin_password@2x.png"; sourceTree = "<group>"; };
+		0A2FFB6A197CEAC90064E647 /* ic_signin_username@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_signin_username@2x.png"; sourceTree = "<group>"; };
 		0A3C8C251978C03A00ED1667 /* btn_adminLogin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_normal@2x.png"; sourceTree = "<group>"; };
 		0A3C8C261978C03A00ED1667 /* btn_adminLogin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adminLogin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A3C8C271978C03A00ED1667 /* btn_create_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_create_normal@2x.png"; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 		0AF08BB81964EC94002761B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A2FFB68197CE7970064E647 /* ic_signin_password@2x.png */,
 				37BD7565197CBA62004BD913 /* ic_report_camera@2x.png */,
 				37BD7563197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png */,
 				37BD7561197CBA15004BD913 /* btn_selected_remove_normal@2x.png */,
@@ -463,6 +468,7 @@
 				0A3C8C361978C03A00ED1667 /* ic_photoGallery_active@2x.png */,
 				0A3C8C371978C03A00ED1667 /* ic_photoGallery_inactive@2x.png */,
 				0A3C8C381978C03A00ED1667 /* ic_search@2x.png */,
+				0A2FFB6A197CEAC90064E647 /* ic_signin_username@2x.png */,
 				37BD74D4197594C4004BD913 /* delete.png */,
 				37BD74D01974A65F004BD913 /* delete1.png */,
 				37BD74CC19742BB1004BD913 /* SelectionIndicator.png */,
@@ -802,6 +808,7 @@
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */,
 				37BD753C197C94ED004BD913 /* ic_reports_phone@2x.png in Resources */,
+				0A2FFB6B197CEAC90064E647 /* ic_signin_username@2x.png in Resources */,
 				37BD7564197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png in Resources */,
 				37BD7549197CB7C1004BD913 /* HotelFieldCell.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
@@ -809,6 +816,7 @@
 				87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */,
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
 				37BD7536197C9461004BD913 /* EmailFieldCell.xib in Resources */,
+				0A2FFB69197CE7970064E647 /* ic_signin_password@2x.png in Resources */,
 				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
 				0A3C8C3C1978C03A00ED1667 /* btn_create_pressed@2x.png in Resources */,
 				37BD755E197CB992004BD913 /* ic_reports_violationPhotos@2x.png in Resources */,
