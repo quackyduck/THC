@@ -9,10 +9,20 @@
 #import "CaseViewController.h"
 #import "Case.h"
 #import "DetailContentTableViewCell.h"
+#import "ContactInfoCell.h"
+#import "DetailViewTableHeader.h"
+#import "ContactInfoButton.h"
 
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) Case *caseInfo;
+@property (strong, nonatomic) DetailViewTableHeader *offscreenHeaderView;
+@property (strong, nonatomic) DetailContentTableViewCell *offscreenDetailCell;
+@property (strong, nonatomic) ContactInfoCell *offscreenContactDetailCell;
+@property (strong, nonatomic) UIImage *emailImageNormal;
+@property (strong, nonatomic) UIImage *emailImagePressed;
+@property (strong, nonatomic) UIImage *phoneImageNormal;
+@property (strong, nonatomic) UIImage *phoneImagePressed;
 
 @end
 
@@ -23,6 +33,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.emailImageNormal = [UIImage imageNamed:@"ic_nav_email_normal"];
+        self.emailImagePressed = [UIImage imageNamed:@"ic_nav_email_pressed"];
+        self.phoneImageNormal = [UIImage imageNamed:@"ic_nav_phone_normal"];
+        self.phoneImagePressed = [UIImage imageNamed:@"ic_nav_phone_pressed"];
     }
     return self;
 }
@@ -50,14 +64,28 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_close_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissView:)];
     
-//    [self setNeedsStatusBarAppearanceUpdate];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    // Detail cells
+    UINib *detailNib = [UINib nibWithNibName:@"DetailContentTableViewCell" bundle:nil];
+    NSArray *detailNibs = [detailNib instantiateWithOwner:nil options:nil];
+    self.offscreenDetailCell = detailNibs[0];
+    [self.tableView registerNib:detailNib forCellReuseIdentifier:@"DetailContentTableViewCell"];
     
-    UINib *nib = [UINib nibWithNibName:@"DetailContentTableViewCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"DetailContentTableViewCell"];
     
+    // Email and Phone button cells
+    UINib *contactNib = [UINib nibWithNibName:@"ContactInfoCell" bundle:nil];
+    NSArray *contactNibs = [contactNib instantiateWithOwner:nil options:nil];
+    self.offscreenContactDetailCell = contactNibs[0];
+    [self.tableView registerNib:contactNib forCellReuseIdentifier:@"ContactInfoCell"];
+    
+    
+    // Header views
+    UINib *headerNib = [UINib nibWithNibName:@"DetailViewTableHeader" bundle:nil];
+    NSArray *nibs = [headerNib instantiateWithOwner:nil options:nil];
+    self.offscreenHeaderView = nibs[0];
+    [self.tableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:@"TableHeader"];
     
 }
 
@@ -79,77 +107,105 @@
     return 5;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+//    [self.offscreenHeaderView layoutSubviews];
+//    CGFloat height = [self.offscreenHeaderView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//    return height + 1;
+    return 80;
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    // last section gets an email button
+    if (section == 4) {
+        return 400;
+    }
+    
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    DetailViewTableHeader *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"TableHeader"];
+    
     switch (section) {
         case 0:
-            return @"Tenant Information";
+            headerView.headerTitleLabel.text = @"Tenant Information";
+            break;
         case 1:
-            return @"Hotel Information";
+            headerView.headerTitleLabel.text = @"Hotel Information";
+            break;
         case 2:
-            return @"Violation Description";
+            headerView.headerTitleLabel.text = @"Violation Description";
+            break;
         case 3:
-            return @"Attached Photos";
+            headerView.headerTitleLabel.text = @"Attached Photos";
+            break;
         case 4:
-            return @"Notes";
+            headerView.headerTitleLabel.text = @"Notes";
+            break;
         default:
             NSLog(@"Not good, we ran out of options.");
             break;
     }
     
-    return @"Bad news...";
+    return headerView;
+    
 }
 
-//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-//    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, 64.0)];
-//    //headerView.contentMode = UIViewContentModeScaleToFill;
-//    
-//    // Add the label
-//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, -14, 300.0, 30.0)];
-//    headerLabel.backgroundColor = [UIColor clearColor];
-//    headerLabel.opaque = NO;
-//    headerLabel.textColor = [UIColor darkGrayColor];
-//    headerLabel.highlightedTextColor = [UIColor blackColor];
-//    
-//    //this is what you asked
-//    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0];
-//    
-//    headerLabel.shadowColor = [UIColor clearColor];
-//    headerLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-//    headerLabel.numberOfLines = 0;
-//    [headerView addSubview: headerLabel];
-//    
-//    switch (section) {
-//        case 0:
-//            headerLabel.text = @"Tenant Information";
-//            break;
-//        case 1:
-//            headerLabel.text = @"Hotel Information";
-//            break;
-//        case 2:
-//            headerLabel.text = @"Violation Description";
-//            break;
-//        case 3:
-//            headerLabel.text = @"Attached Photos";
-//            break;
-//        case 4:
-//            headerLabel.text = @"Notes";
-//            break;
-//        default:
-//            NSLog(@"Not good, we ran out of options.");
-//            break;
-//    }
-//    
-//    return headerView;
-//}
+- (void)configureDetailCell:(DetailContentTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        } else if (indexPath.row == 1) {
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        }
+        
+    } else if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        } else if (indexPath.row == 1) {
+            cell.titleLabel.text = @"Tenant Name";
+            cell.contentLabel.text = @"Nicolas Melo";
+            
+        }
+        
+    } else if (indexPath.section == 2) {
+        cell.titleLabel.text = @"Reported 3 months ago";
+        cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
+        
+    } else if (indexPath.section == 4) {
+        cell.titleLabel.text = @"Tenant Name";
+        cell.contentLabel.text = @"Nicolas Melo";
+    }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section > 1 || indexPath.row > 1) {
-        return 44;
+    
+    if ((indexPath.section == 0 && indexPath.row == 2) || (indexPath.section == 1 && indexPath.row == 2)) {
+        [self.offscreenContactDetailCell layoutSubviews];
+        CGFloat height = [self.offscreenContactDetailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        NSLog(@"Layout email and phone buttons at height %f", height);
+        return height + 1;
+    } else if (indexPath.section == 3) {
+        NSLog(@"Photos");
+        return 100;
     }
     
-    return 80;
+    [self configureDetailCell:self.offscreenDetailCell forRowAtIndexPath:indexPath];
+    [self.offscreenDetailCell layoutSubviews];
+    CGFloat height = [self.offscreenDetailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    NSLog(@"Layout detail cells at height %f", height);
+    return height + 1;
 }
 
 
@@ -169,21 +225,17 @@
         if (indexPath.row == 0) {
             
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else if (indexPath.row == 1) {
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else {
-            UITableViewCell *cell = [[UITableViewCell alloc] init];
-            cell.textLabel.text = @"Boom!";
-            
-            return cell;
+            ContactInfoCell *contactInfoCell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactInfoCell"];
+            return contactInfoCell;
             
         }
         
@@ -191,29 +243,24 @@
         
         if (indexPath.row == 0) {
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else if (indexPath.row == 1) {
             DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
-            detailCell.titleLabel.text = @"Tenant Name";
-            detailCell.contentLabel.text = @"Nicolas Melo";
+            [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
             return detailCell;
             
         } else {
-            UITableViewCell *cell = [[UITableViewCell alloc] init];
-            cell.textLabel.text = @"Boom!";
-            
-            return cell;
+            ContactInfoCell *contactInfoCell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactInfoCell"];
+            return contactInfoCell;
             
         }
         
     } else if (indexPath.section == 2) {
-        UITableViewCell *cell = [[UITableViewCell alloc] init];
-        cell.textLabel.text = @"Boom!";
-        
-        return cell;
+        DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
+        [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
+        return detailCell;
         
     } else if (indexPath.section == 3) {
         UITableViewCell *cell = [[UITableViewCell alloc] init];
@@ -222,10 +269,9 @@
         return cell;
         
     } else if (indexPath.section == 4) {
-        UITableViewCell *cell = [[UITableViewCell alloc] init];
-        cell.textLabel.text = @"Boom!";
-        
-        return cell;
+        DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
+        [self configureDetailCell:detailCell forRowAtIndexPath:indexPath];
+        return detailCell;
         
     }
 

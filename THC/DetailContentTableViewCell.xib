@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenant Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="71" translatesAutoresizingMaskIntoConstraints="NO" id="Kge-gP-Ub4">
-                        <rect key="frame" x="15" y="20" width="71" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="71" placeholderIntrinsicHeight="20" text="Tenant Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="Kge-gP-Ub4">
+                        <rect key="frame" x="15" y="20" width="285" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Qkl-OP-igx"/>
@@ -23,8 +23,8 @@
                         <color key="textColor" red="0.68627452850000004" green="0.68627452850000004" blue="0.68627452850000004" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evelyn Hansen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="113" translatesAutoresizingMaskIntoConstraints="NO" id="5qD-zz-VfF">
-                        <rect key="frame" x="15" y="41" width="113" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="113" placeholderIntrinsicHeight="20" text="Evelyn Hansen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="5qD-zz-VfF">
+                        <rect key="frame" x="15" y="41" width="285" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="iQp-Ic-A9l"/>
@@ -39,9 +39,9 @@
                     <constraint firstItem="Kge-gP-Ub4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="PRg-85-Fot"/>
                     <constraint firstAttribute="bottom" secondItem="5qD-zz-VfF" secondAttribute="bottom" constant="15" id="Qie-yz-w5r"/>
                     <constraint firstItem="5qD-zz-VfF" firstAttribute="top" secondItem="Kge-gP-Ub4" secondAttribute="bottom" constant="1" id="U5k-hP-Xgl"/>
-                    <constraint firstAttribute="trailing" secondItem="Kge-gP-Ub4" secondAttribute="trailing" constant="234" id="b1O-9h-swa"/>
+                    <constraint firstAttribute="trailing" secondItem="Kge-gP-Ub4" secondAttribute="trailing" constant="20" id="b1O-9h-swa"/>
                     <constraint firstItem="Kge-gP-Ub4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ggS-6y-cLI"/>
-                    <constraint firstAttribute="trailing" secondItem="5qD-zz-VfF" secondAttribute="trailing" constant="192" id="uAa-dT-5mb"/>
+                    <constraint firstAttribute="trailing" secondItem="5qD-zz-VfF" secondAttribute="trailing" constant="20" id="uAa-dT-5mb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

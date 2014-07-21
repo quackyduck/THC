@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class ContactInfoButton;
+@class PhoneButton;
 @interface ContactInfoCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet PhoneButton *phoneButton;
+@property (weak, nonatomic) IBOutlet ContactInfoButton *emailButton;
 
 @end

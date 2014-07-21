@@ -9,6 +9,10 @@
 #import "ContactInfoCell.h"
 
 @implementation ContactInfoCell
+- (IBAction)onMakeCall:(id)sender {
+}
+- (IBAction)onMakeEmail:(id)sender {
+}
 
 - (void)awakeFromNib
 {
