@@ -24,6 +24,8 @@
 @dynamic email;
 @dynamic languageSpoken;
 @dynamic description;
+@dynamic violationType;
+@dynamic multiUnitPetition;
 @dynamic userId;
 @dynamic photoIdList;
 @dynamic status;

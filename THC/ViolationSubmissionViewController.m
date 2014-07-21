@@ -20,6 +20,7 @@
 #import "UnitFieldCell.h"
 #import "ViolationTypeFieldCell.h"
 #import "ViolationDescriptionFieldCell.h"
+#import "ViolationForm.h"
 
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
@@ -56,7 +57,7 @@
 @property (strong, nonatomic) NSDictionary            *formSectionHeader;
 @property (strong, nonatomic) UITapGestureRecognizer  *tapGestureRecognizer;
 @property (strong, nonatomic) NSIndexPath             *currentIndexPath;
-
+@property (strong, nonatomic) ViolationForm           *violationForm;
 
 
 @end
@@ -168,6 +169,8 @@ EmailFieldCell                  *_stubEmailCell;
     self.fields = AllFields;
     self.formFields = FormFields;
     self.formSectionHeader = FormSectionHeader;
+    
+    self.violationForm = [[ViolationForm alloc] init];
     
     [self registerFieldCells];
     
@@ -557,33 +560,41 @@ EmailFieldCell                  *_stubEmailCell;
     NSLog(@"creating row for cell %@", fieldName);
     if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"NameFieldCell" ];
-        
+        cell.delegate = self.violationForm;
         NSLog(@"creating row for cell %@", fieldName);
         return cell;
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         SpokenLanguageFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"LanguageCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         //        HotelCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelCell" ];
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelMenuCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"email"]) {
         EmailFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"EmailFieldCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"phone"]) {
         PhoneFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhoneCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelFieldCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"unit"]) {
         UnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"UnitFieldCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationTypeFieldCell" ];
+        cell.delegate = self.violationForm;
         return cell;
     }
     
@@ -746,7 +757,24 @@ EmailFieldCell                  *_stubEmailCell;
 }
 
 - (void)submitForm {
+    [self.violationForm dumpFormContent];
     
+    NSMutableArray *imageDataList = nil;
+    
+    if ([self.imagesInScroll count]) {
+        imageDataList = [NSMutableArray array];
+        for (UIImageView *imageView in self.imagesInScroll) {
+            NSData  *imageData = UIImageJPEGRepresentation(imageView.image, 0);
+            [imageDataList addObject:imageData];
+        }
+    }
+    [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:imageDataList completion:^(Case* createdCase){
+        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
+        [self presentViewController:detailvc animated:YES completion:nil];
+    } error:^(NSError * onError) {
+        NSLog(@"Error creating Case!");
+    }];
+
 }
 
 #pragma ImagePicker Delegate Protocols

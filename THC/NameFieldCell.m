@@ -22,6 +22,15 @@
     // Configure the view for the selected state
 }
 - (IBAction)editingFinished:(id)sender {
+    
+    NSLog(@"Full name: %@", self.nameTextField.text);
+    if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [self.delegate setValue:self.nameTextField.text forField:@"name"];
+        });
+    }
+
     [sender resignFirstResponder];
 }
 
@@ -40,6 +49,14 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     NSLog(@"Full name: %@", self.nameTextField.text);
+    
+    if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [self.delegate setValue:textView.text forField:@"name"];
+        });
+    }
+
     [self.nameTextField resignFirstResponder];
 }
 

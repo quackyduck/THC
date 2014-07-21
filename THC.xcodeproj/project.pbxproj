@@ -124,6 +124,10 @@
 		37BD7566197CBA62004BD913 /* ic_report_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7565197CBA62004BD913 /* ic_report_camera@2x.png */; };
 		37BD7569197DB47A004BD913 /* ic_reports_violationText@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7567197DB47A004BD913 /* ic_reports_violationText@2x.png */; };
 		37BD756A197DB47A004BD913 /* ic_reports_violationType@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7568197DB47A004BD913 /* ic_reports_violationType@2x.png */; };
+		37BD756F197DCA29004BD913 /* MultiUnitFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD756D197DCA29004BD913 /* MultiUnitFieldCell.m */; };
+		37BD7570197DCA29004BD913 /* MultiUnitFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD756E197DCA29004BD913 /* MultiUnitFieldCell.xib */; };
+		37BD7574197DCA3C004BD913 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD7572197DCA3B004BD913 /* SubmitCell.m */; };
+		37BD7575197DCA3C004BD913 /* SubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7573197DCA3C004BD913 /* SubmitCell.xib */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
@@ -322,6 +326,12 @@
 		37BD7567197DB47A004BD913 /* ic_reports_violationText@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_violationText@2x.png"; sourceTree = "<group>"; };
 		37BD7568197DB47A004BD913 /* ic_reports_violationType@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_violationType@2x.png"; sourceTree = "<group>"; };
 		37BD756B197DB580004BD913 /* FieldContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldContent.h; sourceTree = "<group>"; };
+		37BD756C197DCA29004BD913 /* MultiUnitFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiUnitFieldCell.h; sourceTree = "<group>"; };
+		37BD756D197DCA29004BD913 /* MultiUnitFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiUnitFieldCell.m; sourceTree = "<group>"; };
+		37BD756E197DCA29004BD913 /* MultiUnitFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiUnitFieldCell.xib; sourceTree = "<group>"; };
+		37BD7571197DCA3B004BD913 /* SubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCell.h; sourceTree = "<group>"; };
+		37BD7572197DCA3B004BD913 /* SubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCell.m; sourceTree = "<group>"; };
+		37BD7573197DCA3C004BD913 /* SubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitCell.xib; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
@@ -612,6 +622,12 @@
 				37BD7554197CB833004BD913 /* ViolationDescriptionFieldCell.h */,
 				37BD7555197CB833004BD913 /* ViolationDescriptionFieldCell.m */,
 				37BD7556197CB833004BD913 /* ViolationDescriptionFieldCell.xib */,
+				37BD756C197DCA29004BD913 /* MultiUnitFieldCell.h */,
+				37BD756D197DCA29004BD913 /* MultiUnitFieldCell.m */,
+				37BD756E197DCA29004BD913 /* MultiUnitFieldCell.xib */,
+				37BD7571197DCA3B004BD913 /* SubmitCell.h */,
+				37BD7572197DCA3B004BD913 /* SubmitCell.m */,
+				37BD7573197DCA3C004BD913 /* SubmitCell.xib */,
 				0A2FFB5D197CBD6D0064E647 /* PhoneButton.h */,
 				0A2FFB5E197CBD6D0064E647 /* PhoneButton.m */,
 				0A2FFB53197C71590064E647 /* DetailViewTableHeader.h */,
@@ -797,6 +813,7 @@
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				37BD7531197C944A004BD913 /* PhoneFieldCell.xib in Resources */,
 				0A3C8C481978C03A00ED1667 /* ic_nav_map_normal@2x.png in Resources */,
+				37BD7575197DCA3C004BD913 /* SubmitCell.xib in Resources */,
 				0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */,
 				0A3C8C4B1978C03A00ED1667 /* ic_photoGallery_inactive@2x.png in Resources */,
 				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
@@ -822,6 +839,7 @@
 				37BD7549197CB7C1004BD913 /* HotelFieldCell.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
+				37BD7570197DCA29004BD913 /* MultiUnitFieldCell.xib in Resources */,
 				87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */,
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
 				37BD756A197DB47A004BD913 /* ic_reports_violationType@2x.png in Resources */,
@@ -898,12 +916,14 @@
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
 				37BD752B197C9432004BD913 /* SpokenLanguageFieldCell.m in Sources */,
+				37BD756F197DCA29004BD913 /* MultiUnitFieldCell.m in Sources */,
 				37BD7520197C858A004BD913 /* KxMenu.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				0A2FFB4E197C28F90064E647 /* ContactInfoCell.m in Sources */,
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
+				37BD7574197DCA3C004BD913 /* SubmitCell.m in Sources */,
 				0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */,
 				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,

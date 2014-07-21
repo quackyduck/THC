@@ -23,6 +23,13 @@
 }
 
 - (IBAction)editingFinished:(UITextField *)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [self.delegate setValue:self.phoneTextField.text forField:@"phone"];
+        });
+    }
     [sender resignFirstResponder];
 }
 
@@ -41,6 +48,14 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     NSLog(@"Full name: %@", self.phoneTextField.text);
+    
+    if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [self.delegate setValue:textView.text forField:@"phone"];
+        });
+    }
+    
     [self.phoneTextField resignFirstResponder];
 }
 

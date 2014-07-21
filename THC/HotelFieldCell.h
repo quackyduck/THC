@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FieldContent.h"
 
 @interface HotelFieldCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *hotelLabel;
+@property (weak, nonatomic) id<FieldContent> delegate;
+
 - (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation;
 
 @end

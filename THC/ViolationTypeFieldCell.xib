@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Vm-O6-Bxs">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_violationType.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Vm-O6-Bxs">
                         <rect key="frame" x="5" y="5" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
@@ -44,6 +44,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_reports_phone.png" width="25" height="27"/>
+        <image name="ic_reports_violationType.png" width="25" height="27"/>
     </resources>
 </document>

@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FieldContent.h"
+#import "Case.h"
 
-@interface ViolationForm : NSObject
+@interface ViolationForm : NSObject <FieldContent>
 
 @property (strong, nonatomic)   NSString   *name;
 @property (strong, nonatomic)   NSString   *email;
@@ -19,6 +21,14 @@
 @property (strong, nonatomic)   NSArray    *languages;
 @property (strong, nonatomic)   NSString   *languageSpoken;
 @property (strong, nonatomic)   NSString   *violationDescription;
-@property (strong, nonatomic)   NSString   *caseSummary;
+@property (strong, nonatomic)   NSString   *violationType;
+@property (strong, nonatomic)   NSMutableArray *hotelBuildingNames;
+@property (strong, nonatomic)   NSMutableDictionary *hotelBuildings;
+
+
+- (void)setValue:(NSString *)value forField:(NSString *)field;
+- (void)dumpFormContent;
+
+- (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;
 
 @end

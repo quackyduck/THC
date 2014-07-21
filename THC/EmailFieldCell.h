@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FieldContent.h"
 
 @interface EmailFieldCell : UITableViewCell <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) id<FieldContent> delegate;
+
 @end

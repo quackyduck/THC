@@ -10,4 +10,6 @@
 
 @protocol FieldContent <NSObject>
 
+- (void)setValue:(NSString *)value forField:(NSString *)field;
+
 @end

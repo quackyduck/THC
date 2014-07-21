@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FieldContent.h"
 
 @interface ViolationDescriptionFieldCell : UITableViewCell <UITextViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextView *violationDescriptionTextField;
+@property (weak, nonatomic) id<FieldContent> delegate;
+
 
 @end

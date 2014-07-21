@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FieldContent.h"
 
 @interface PhoneFieldCell : UITableViewCell <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) id<FieldContent> delegate;
+
 @end

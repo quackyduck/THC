@@ -36,6 +36,13 @@
     if ([self.violationDescriptionTextField.text isEqualToString:@""]) {
         self.violationDescriptionTextField.text = @"Describe the Violation";
         self.violationDescriptionTextField.textColor = [UIColor lightGrayColor];
+    } else {
+        if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                [self.delegate setValue:textView.text forField:@"violationDescription"];
+            });
+        }
     }
     NSLog(@"violation edit end %@", self.violationDescriptionTextField.text);
 }

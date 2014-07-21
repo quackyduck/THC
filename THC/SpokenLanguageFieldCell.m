@@ -180,6 +180,13 @@
     self.languageLabel.text = menu.title;
     self.languageLabel.textColor = [UIColor blackColor];
 
+    if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [self.delegate setValue:menu.title forField:@"languageSpoken"];
+        });
+    }
+
     [self setNeedsDisplay];
 }
 
