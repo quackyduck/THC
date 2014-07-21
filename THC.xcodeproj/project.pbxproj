@@ -86,6 +86,19 @@
 		37BD74D11974A65F004BD913 /* delete1.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74D01974A65F004BD913 /* delete1.png */; };
 		37BD74D5197594C4004BD913 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD74D4197594C4004BD913 /* delete.png */; };
 		37BD7520197C858A004BD913 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD751F197C858A004BD913 /* KxMenu.m */; };
+		37BD7522197C93D3004BD913 /* ic_reports_fullname@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7521197C93D3004BD913 /* ic_reports_fullname@2x.png */; };
+		37BD7526197C93FB004BD913 /* NameFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD7524197C93FB004BD913 /* NameFieldCell.m */; };
+		37BD7527197C93FB004BD913 /* NameFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7525197C93FB004BD913 /* NameFieldCell.xib */; };
+		37BD752B197C9432004BD913 /* SpokenLanguageFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD7529197C9432004BD913 /* SpokenLanguageFieldCell.m */; };
+		37BD752C197C9432004BD913 /* SpokenLanguageFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD752A197C9432004BD913 /* SpokenLanguageFieldCell.xib */; };
+		37BD7530197C944A004BD913 /* PhoneFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD752E197C944A004BD913 /* PhoneFieldCell.m */; };
+		37BD7531197C944A004BD913 /* PhoneFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD752F197C944A004BD913 /* PhoneFieldCell.xib */; };
+		37BD7535197C9461004BD913 /* EmailFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD7533197C9461004BD913 /* EmailFieldCell.m */; };
+		37BD7536197C9461004BD913 /* EmailFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7534197C9461004BD913 /* EmailFieldCell.xib */; };
+		37BD753A197C94ED004BD913 /* ic_reports_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7537197C94ED004BD913 /* ic_reports_email@2x.png */; };
+		37BD753B197C94ED004BD913 /* ic_reports_language@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7538197C94ED004BD913 /* ic_reports_language@2x.png */; };
+		37BD753C197C94ED004BD913 /* ic_reports_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7539197C94ED004BD913 /* ic_reports_phone@2x.png */; };
+		37BD753F197C9A15004BD913 /* ViolationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD753E197C9A15004BD913 /* ViolationForm.m */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
@@ -232,6 +245,24 @@
 		37BD74D4197594C4004BD913 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		37BD751E197C858A004BD913 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
 		37BD751F197C858A004BD913 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
+		37BD7521197C93D3004BD913 /* ic_reports_fullname@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_fullname@2x.png"; sourceTree = "<group>"; };
+		37BD7523197C93FB004BD913 /* NameFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameFieldCell.h; sourceTree = "<group>"; };
+		37BD7524197C93FB004BD913 /* NameFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameFieldCell.m; sourceTree = "<group>"; };
+		37BD7525197C93FB004BD913 /* NameFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameFieldCell.xib; sourceTree = "<group>"; };
+		37BD7528197C9432004BD913 /* SpokenLanguageFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpokenLanguageFieldCell.h; sourceTree = "<group>"; };
+		37BD7529197C9432004BD913 /* SpokenLanguageFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpokenLanguageFieldCell.m; sourceTree = "<group>"; };
+		37BD752A197C9432004BD913 /* SpokenLanguageFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpokenLanguageFieldCell.xib; sourceTree = "<group>"; };
+		37BD752D197C944A004BD913 /* PhoneFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneFieldCell.h; sourceTree = "<group>"; };
+		37BD752E197C944A004BD913 /* PhoneFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneFieldCell.m; sourceTree = "<group>"; };
+		37BD752F197C944A004BD913 /* PhoneFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneFieldCell.xib; sourceTree = "<group>"; };
+		37BD7532197C9461004BD913 /* EmailFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailFieldCell.h; sourceTree = "<group>"; };
+		37BD7533197C9461004BD913 /* EmailFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailFieldCell.m; sourceTree = "<group>"; };
+		37BD7534197C9461004BD913 /* EmailFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailFieldCell.xib; sourceTree = "<group>"; };
+		37BD7537197C94ED004BD913 /* ic_reports_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_email@2x.png"; sourceTree = "<group>"; };
+		37BD7538197C94ED004BD913 /* ic_reports_language@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_language@2x.png"; sourceTree = "<group>"; };
+		37BD7539197C94ED004BD913 /* ic_reports_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_reports_phone@2x.png"; sourceTree = "<group>"; };
+		37BD753D197C9A15004BD913 /* ViolationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationForm.h; sourceTree = "<group>"; };
+		37BD753E197C9A15004BD913 /* ViolationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationForm.m; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
@@ -347,6 +378,10 @@
 		0AF08BB81964EC94002761B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37BD7537197C94ED004BD913 /* ic_reports_email@2x.png */,
+				37BD7538197C94ED004BD913 /* ic_reports_language@2x.png */,
+				37BD7539197C94ED004BD913 /* ic_reports_phone@2x.png */,
+				37BD7521197C93D3004BD913 /* ic_reports_fullname@2x.png */,
 				87B20024197C7FA9000D6CBD /* ic_nav_check_normal@2x.png */,
 				87B20025197C7FA9000D6CBD /* ic_success@2x.png */,
 				87B20020197C7F91000D6CBD /* btn_success_normal@2x.png */,
@@ -483,6 +518,18 @@
 				0A2FFB51197C29D70064E647 /* ContactInfoButton.m */,
 				87B2002D197C90CE000D6CBD /* GetStartedButton.h */,
 				87B2002E197C90CE000D6CBD /* GetStartedButton.m */,
+				37BD7523197C93FB004BD913 /* NameFieldCell.h */,
+				37BD7524197C93FB004BD913 /* NameFieldCell.m */,
+				37BD7525197C93FB004BD913 /* NameFieldCell.xib */,
+				37BD7528197C9432004BD913 /* SpokenLanguageFieldCell.h */,
+				37BD7529197C9432004BD913 /* SpokenLanguageFieldCell.m */,
+				37BD752A197C9432004BD913 /* SpokenLanguageFieldCell.xib */,
+				37BD752D197C944A004BD913 /* PhoneFieldCell.h */,
+				37BD752E197C944A004BD913 /* PhoneFieldCell.m */,
+				37BD752F197C944A004BD913 /* PhoneFieldCell.xib */,
+				37BD7532197C9461004BD913 /* EmailFieldCell.h */,
+				37BD7533197C9461004BD913 /* EmailFieldCell.m */,
+				37BD7534197C9461004BD913 /* EmailFieldCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -498,6 +545,8 @@
 				0A122E941969A5F7005894EB /* Building.m */,
 				377D170E1969E7BA004E4E67 /* ViolationSubmissionForm.h */,
 				377D170F1969E7BA004E4E67 /* ViolationSubmissionForm.m */,
+				37BD753D197C9A15004BD913 /* ViolationForm.h */,
+				37BD753E197C9A15004BD913 /* ViolationForm.m */,
 				377D17111969E7D7004E4E67 /* AddressForm.h */,
 				377D17121969E7D7004E4E67 /* AddressForm.m */,
 				377D1714196AF9F0004E4E67 /* OtherAddress.h */,
@@ -638,12 +687,16 @@
 				87B20026197C7FA9000D6CBD /* ic_nav_check_normal@2x.png in Resources */,
 				0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
+				37BD753A197C94ED004BD913 /* ic_reports_email@2x.png in Resources */,
 				0A3C8C3A1978C03A00ED1667 /* btn_adminLogin_pressed@2x.png in Resources */,
+				37BD7527197C93FB004BD913 /* NameFieldCell.xib in Resources */,
 				0A3C8C3F1978C03A00ED1667 /* btn_phone_normal@2x.png in Resources */,
 				87B20022197C7F91000D6CBD /* btn_success_normal@2x.png in Resources */,
+				37BD753B197C94ED004BD913 /* ic_reports_language@2x.png in Resources */,
 				37BD74CB19742864004BD913 /* PhotoCollectionController.xib in Resources */,
 				37BD74C619742839004BD913 /* AlbumListController.xib in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
+				37BD7531197C944A004BD913 /* PhoneFieldCell.xib in Resources */,
 				0A3C8C481978C03A00ED1667 /* ic_nav_map_normal@2x.png in Resources */,
 				0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */,
 				0A3C8C4B1978C03A00ED1667 /* ic_photoGallery_inactive@2x.png in Resources */,
@@ -654,17 +707,21 @@
 				377D170D1969E75F004E4E67 /* ViolationDescriptionViewController.xib in Resources */,
 				0A3C8C411978C03A00ED1667 /* ic_nav_admin_normal@2x.png in Resources */,
 				87B20023197C7F91000D6CBD /* btn_success_pressed@2x.png in Resources */,
+				37BD752C197C9432004BD913 /* SpokenLanguageFieldCell.xib in Resources */,
 				0A3C8C441978C03A00ED1667 /* ic_nav_cases_normal@2x.png in Resources */,
 				0A3C8C4C1978C03A00ED1667 /* ic_search@2x.png in Resources */,
 				37BD74D11974A65F004BD913 /* delete1.png in Resources */,
 				377D16B01967BD38004E4E67 /* PhotoDescriptionViewController.xib in Resources */,
 				0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */,
+				37BD753C197C94ED004BD913 /* ic_reports_phone@2x.png in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
 				377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */,
 				87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */,
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
+				37BD7536197C9461004BD913 /* EmailFieldCell.xib in Resources */,
 				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
 				0A3C8C3C1978C03A00ED1667 /* btn_create_pressed@2x.png in Resources */,
+				37BD7522197C93D3004BD913 /* ic_reports_fullname@2x.png in Resources */,
 				37BD74B519739633004BD913 /* camera.png in Resources */,
 				87A988511968C09500EDE34F /* CaseTableViewController.xib in Resources */,
 				0A3C8C461978C03A00ED1667 /* ic_nav_close_normal@2x.png in Resources */,
@@ -730,6 +787,7 @@
 				87B2002B197C88FF000D6CBD /* HappySunViewController.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,
 				377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */,
+				37BD752B197C9432004BD913 /* SpokenLanguageFieldCell.m in Sources */,
 				37BD7520197C858A004BD913 /* KxMenu.m in Sources */,
 				377D16A91967342A004E4E67 /* CameraViewController.m in Sources */,
 				878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */,
@@ -757,11 +815,15 @@
 				0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */,
 				87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */,
 				87A9885A1968C0D700EDE34F /* CaseCell.m in Sources */,
+				37BD7530197C944A004BD913 /* PhoneFieldCell.m in Sources */,
 				87A988551968C0A400EDE34F /* CaseDetailViewController.m in Sources */,
 				377D17101969E7BA004E4E67 /* ViolationSubmissionForm.m in Sources */,
 				377D1716196AF9F0004E4E67 /* OtherAddress.m in Sources */,
+				37BD7526197C93FB004BD913 /* NameFieldCell.m in Sources */,
 				87A988501968C09500EDE34F /* CaseTableViewController.m in Sources */,
 				37BD74B91974274A004BD913 /* AsseptPicker.m in Sources */,
+				37BD7535197C9461004BD913 /* EmailFieldCell.m in Sources */,
+				37BD753F197C9A15004BD913 /* ViolationForm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
