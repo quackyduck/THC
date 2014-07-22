@@ -7,11 +7,15 @@
 //
 
 #import "LoginViewController.h"
+#import "LoginButton.h"
+#import "RequestAccessButton.h"
 #import <Parse/Parse.h>
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet LoginButton *loginButton;
+@property (weak, nonatomic) IBOutlet RequestAccessButton *requestAccessButton;
 
 @end
 
@@ -31,6 +35,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.view.backgroundColor = [UIColor colorWithRed: 1 green: 0.455 blue: 0.184 alpha: 1];
+    self.emailTextField.tintColor = [UIColor whiteColor];
+    self.passwordTextField.tintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,6 +62,11 @@
 }
 - (IBAction)onDismiss:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)onRequestAccess:(id)sender {
+    UIAlertView *requestAccessAlert = [[UIAlertView alloc] initWithTitle:@"Request Access" message:@"Your request is being considered" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [requestAccessAlert show];
 }
 
 @end
