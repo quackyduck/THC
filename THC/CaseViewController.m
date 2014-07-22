@@ -15,6 +15,8 @@
 #import "DetailFooterView.h"
 #import "ViolationSubmissionViewController.h"
 #import "SendEmailButton.h"
+#import "DetailPhotoCell.h"
+
 #import <MessageUI/MFMailComposeViewController.h>
 
 @interface CaseViewController ()
@@ -23,6 +25,7 @@
 @property (strong, nonatomic) DetailViewTableHeader *offscreenHeaderView;
 @property (strong, nonatomic) DetailContentTableViewCell *offscreenDetailCell;
 @property (strong, nonatomic) ContactInfoCell *offscreenContactDetailCell;
+@property (strong, nonatomic) DetailPhotoCell *offscreenPhotoCell;
 @property (strong, nonatomic) DetailFooterView *footerView;
 @property (strong, nonatomic) UIImage *emailImageNormal;
 @property (strong, nonatomic) UIImage *emailImagePressed;
@@ -96,6 +99,11 @@
     NSArray *footerNibs = [footerNib instantiateWithOwner:nil options:nil];
     self.footerView = footerNibs[0];
     [self.footerView.sendEmailButton addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UINib *detailPhotoNib = [UINib nibWithNibName:@"DetailPhotoCell" bundle:nil];
+    NSArray *detailPhotoNibs = [detailPhotoNib instantiateWithOwner:nil options:nil];
+    self.offscreenPhotoCell = detailPhotoNibs[0];
+    [self.tableView registerNib:detailPhotoNib forCellReuseIdentifier:@"PhotoCell"];
     
 }
 
@@ -251,8 +259,12 @@
         NSLog(@"Layout email and phone buttons at height %f", height);
         return height + 1;
     } else if (indexPath.section == 3) {
-        NSLog(@"Photos");
-        return 100;
+        self.offscreenPhotoCell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
+        [self.offscreenPhotoCell layoutSubviews];
+        CGFloat height = [self.offscreenPhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        
+        NSLog(@"Photos with height %f", height);
+        return height + 1;
     }
     
     [self configureDetailCell:self.offscreenDetailCell forRowAtIndexPath:indexPath];
@@ -317,10 +329,10 @@
         return detailCell;
         
     } else if (indexPath.section == 3) {
-        UITableViewCell *cell = [[UITableViewCell alloc] init];
-        cell.textLabel.text = @"Boom!";
+        DetailPhotoCell *photoCell = [self.tableView dequeueReusableCellWithIdentifier:@"PhotoCell"];
+        photoCell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
         
-        return cell;
+        return photoCell;
         
     } else if (indexPath.section == 4) {
         DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];
