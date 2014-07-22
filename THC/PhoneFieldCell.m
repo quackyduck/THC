@@ -33,6 +33,15 @@
     [sender resignFirstResponder];
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            self.phoneTextField.text = [self.delegate getValueForField:@"phone"];
+        });
+    }
+}
+
 #pragma keyboard delegates
 - (void)textViewDidChange:(UITextView *)textView {
     

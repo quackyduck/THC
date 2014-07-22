@@ -61,6 +61,7 @@
 @property (strong, nonatomic) UITapGestureRecognizer  *tapGestureRecognizer;
 @property (strong, nonatomic) NSIndexPath             *currentIndexPath;
 @property (strong, nonatomic) ViolationForm           *violationForm;
+@property (assign)            BOOL                    showFilledForm;
 
 
 @end
@@ -176,6 +177,7 @@ SubmitCell                      *_stubSubmitCell;
     self.formSectionHeader = FormSectionHeader;
     
     self.violationForm = [[ViolationForm alloc] init];
+    self.showFilledForm = NO;
     
     [self registerFieldCells];
     
@@ -292,6 +294,13 @@ SubmitCell                      *_stubSubmitCell;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma Public Functions
+
+-(void) setPrefilledForm:(ViolationForm *) form {
+    self.showFilledForm = YES;
+    self.violationForm = form;
 }
 
 #pragma Register Field Cells
@@ -592,44 +601,74 @@ SubmitCell                      *_stubSubmitCell;
     if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"NameFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         NSLog(@"creating row for cell %@", fieldName);
         return cell;
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         SpokenLanguageFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"LanguageCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         //        HotelCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelCell" ];
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelMenuCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"email"]) {
         EmailFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"EmailFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"phone"]) {
         PhoneFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhoneCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"unit"]) {
         UnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"UnitFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationTypeFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
         MultiUnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"MultiUnitFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];

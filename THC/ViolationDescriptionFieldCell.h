@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *violationDescriptionTextField;
 @property (weak, nonatomic) id<FieldContent> delegate;
 
+- (void)getFieldValueFromform;
 
 @end

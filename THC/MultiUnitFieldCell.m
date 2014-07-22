@@ -26,6 +26,15 @@
     // Configure the view for the selected state
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            self.multiUnitField.text = [self.delegate getValueForField:@"multiUnitPetiiton"];
+        });
+    }
+}
+
 - (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation
 {
     NSLog(@"showMenu");
@@ -33,6 +42,8 @@
     NSArray *multiUnitOptions = MultiUnitPetition;
     NSMutableArray *menuItems = [NSMutableArray array];
     
+    [menuItems addObject:[KxMenuItem menuItem:@"Is Multi-Unit Petition" image:nil target:nil action:nil]];
+
     for (NSString *option in multiUnitOptions) {
         [menuItems addObject:[KxMenuItem menuItem:option image:nil target:self action:@selector(pushMenuItem:)]];
     }
@@ -41,9 +52,9 @@
     
     KxMenuItem *first = menuItems[0];
     //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-//    first.foreColor = [UIColor greenColor];
-//    
-//    first.alignment = NSTextAlignmentCenter;
+    first.foreColor = [UIColor greenColor];
+//
+    first.alignment = NSTextAlignmentCenter;
     
     [KxMenu setTintColor:[UIColor orangeColor]];
     [KxMenu showMenuInView:view

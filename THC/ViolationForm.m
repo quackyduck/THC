@@ -62,6 +62,31 @@
     }
 }
 
+- (NSString *)getValueForField:(NSString *)field {
+    
+    if ([field isEqualToString:@"name"]) {
+        return self.name;
+    } else if ([field isEqualToString:@"email"]) {
+        return self.email;
+    } else if ([field isEqualToString:@"unit"]) {
+        return self.unit;
+    } else if ([field isEqualToString:@"phone"]) {
+        return self.phone;
+    } else if ([field isEqualToString:@"selectedHotel"]) {
+        return self.selectedHotel;
+    } else if ([field isEqualToString:@"languageSpoken"]) {
+        return self.languageSpoken;
+    } else if ([field isEqualToString:@"violationDescription"]) {
+        return self.violationDescription ;
+    } else if ([field isEqualToString:@"violationType"]) {
+        return self.violationType;
+    } else if ([field isEqualToString:@"multiUnitPetiiton"]) {
+        return self.multiUnitPetiiton;
+    }
+
+    return nil;
+}
+
 - (void)dumpFormContent {
     NSLog(@"Name: %@", self.name);
     NSLog(@"Spoken Language: %@", self.languageSpoken);

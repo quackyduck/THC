@@ -17,4 +17,6 @@
 
 - (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation;
 
+- (void)getFieldValueFromform;
+
 @end

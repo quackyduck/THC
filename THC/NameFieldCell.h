@@ -15,4 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
+- (void)getFieldValueFromform;
+
 @end

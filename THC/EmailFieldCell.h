@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) id<FieldContent> delegate;
 
+- (void)getFieldValueFromform;
+
 @end

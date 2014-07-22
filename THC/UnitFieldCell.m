@@ -32,6 +32,15 @@
     [sender resignFirstResponder];
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            self.unitTextField.text = [self.delegate getValueForField:@"unit"];
+        });
+    }
+}
+
 #pragma keyboard delegates
 - (void)textViewDidChange:(UITextView *)textView {
     

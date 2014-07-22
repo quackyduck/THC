@@ -22,6 +22,15 @@
     // Configure the view for the selected state
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            self.violationDescriptionTextField.text = [self.delegate getValueForField:@"violationDescription"];
+        });
+    }
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
     if ([self.violationDescriptionTextField.text isEqualToString:@"Describe the Violation"]) {

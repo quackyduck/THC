@@ -28,6 +28,8 @@
 
 
 - (void)setValue:(NSString *)value forField:(NSString *)field;
+- (NSString *)getValueForField:(NSString *)field;
+
 - (void)dumpFormContent;
 
 - (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;

@@ -25,6 +25,15 @@
     // Configure the view for the selected state
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            self.violationTypeTextField.text = [self.delegate getValueForField:@"violationType"];
+        });
+    }
+}
+
 - (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation
 {
     NSLog(@"showMenu");
@@ -32,6 +41,8 @@
     NSArray *violations = ViolationTypeList;
     NSMutableArray *menuItems = [NSMutableArray array];
     
+    [menuItems addObject:[KxMenuItem menuItem:@"Select Violation Type" image:nil target:nil action:nil]];
+
     for (NSString *violation in violations) {
         [menuItems addObject:[KxMenuItem menuItem:violation image:nil target:self action:@selector(pushMenuItem:)]];
     }
