@@ -243,7 +243,7 @@ SubmitCell                      *_stubSubmitCell;
 
         //NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
         
-        UIImage *image = [UIImage imageNamed:@"ic_report_camera"];
+        UIImage *image = [UIImage imageNamed:@"ic_camera_add"];
 //        NSLog(@"camera image %@", image);
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
