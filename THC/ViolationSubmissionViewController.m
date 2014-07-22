@@ -692,9 +692,9 @@ SubmitCell                      *_stubSubmitCell;
 //        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         SpokenLanguageFieldCell *cell = (SpokenLanguageFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else    if ([fieldName isEqualToString:@"hotel"]) {
@@ -718,9 +718,9 @@ SubmitCell                      *_stubSubmitCell;
 //        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         ViolationTypeFieldCell *cell = (ViolationTypeFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else    if ([fieldName isEqualToString:@"multiUnitPetition"]) {
@@ -846,7 +846,7 @@ SubmitCell                      *_stubSubmitCell;
 }
 
 - (void)submitForm {
-    [self.violationForm dumpFormContent];
+//    [self.violationForm dumpFormContent];
     
     NSMutableArray *imageDataList = nil;
     
@@ -892,7 +892,7 @@ SubmitCell                      *_stubSubmitCell;
 #pragma custom picker delegate
 - (void) finishedPhotoPicker:(UIViewController *)picker withUserSelectedAssets:(NSArray *)assets {
     
-    NSLog(@"userSelectedAssets %@", assets);
+//    NSLog(@"userSelectedAssets %@", assets);
     
     //[self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     //[self.scrollView.subviews removeFromSuperview];
@@ -951,7 +951,7 @@ SubmitCell                      *_stubSubmitCell;
 //            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
 
             CGRect imageViewFrame = CGRectInset(self.scrollView.bounds, padding, padding);
-            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
+//            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
 
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
@@ -1130,7 +1130,7 @@ SubmitCell                      *_stubSubmitCell;
 #pragma mark - button actions
 
 - (void)launchPhotoPicker:(UITapGestureRecognizer *) tap {
-    NSLog(@"launch photo picker");
+//    NSLog(@"launch photo picker");
     AlbumListController *alc = [[AlbumListController alloc] init];
     alc.delegate = self;
     

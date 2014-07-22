@@ -178,7 +178,7 @@
     
     Case* newCase = [Case object];
     
-    NSLog(@"case id %@", newCase.objectId);
+//    NSLog(@"case id %@", newCase.objectId);
     
     Building *building = self.hotelBuildings[self.selectedHotel];
     
@@ -193,8 +193,8 @@
     newCase.email = self.email;
     newCase.languageSpoken = self.languageSpoken;
     newCase.violationDetails = self.violationDescription;
-    NSLog(@"submitting case with description %@", self.violationDescription);
-    NSLog(@"submitting case with description %@", newCase.description);
+//    NSLog(@"submitting case with description %@", self.violationDescription);
+//    NSLog(@"submitting case with description %@", newCase.description);
     newCase.multiUnitPetition = [self.multiUnitPetiiton boolValue];
     newCase.userId = userId;
     newCase.status = caseOpen;
@@ -202,7 +202,7 @@
     if (!imageDataList && [imageDataList count] == 0) {
             [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
-                    NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
+//                    NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
                     completion(newCase);
                 } else
                 {
@@ -215,7 +215,7 @@
             
             if (succeeded) {
                 
-                NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
+//                NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
 
                 NSMutableArray *photoObjectList = [NSMutableArray array];
                 
@@ -245,7 +245,7 @@
                             
                         }
                         newCase.photoIdList = photoIdList;
-                        NSLog(@"submitting case with %lu photos", (unsigned long)[photoIdList count]);
+//                        NSLog(@"submitting case with %lu photos", (unsigned long)[photoIdList count]);
                         //                    newCase.caseId = photoInfo.objectId;
                         [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
                             if (updateSucceeded) {
