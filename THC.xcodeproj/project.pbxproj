@@ -19,6 +19,9 @@
 		0A23769C197EEC8A000E4AA1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A23769B197EEC8A000E4AA1 /* MessageUI.framework */; };
 		0A2376A0197EF0F3000E4AA1 /* DetailPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23769E197EF0F3000E4AA1 /* DetailPhotoCell.m */; };
 		0A2376A1197EF0F3000E4AA1 /* DetailPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A23769F197EF0F3000E4AA1 /* DetailPhotoCell.xib */; };
+		0A2376A8197F2D09000E4AA1 /* btn_map_pin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376A5197F2D09000E4AA1 /* btn_map_pin_normal@2x.png */; };
+		0A2376A9197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376A6197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png */; };
+		0A2376AA197F2D09000E4AA1 /* btn_map_pin_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376A7197F2D09000E4AA1 /* btn_map_pin_selected@2x.png */; };
 		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
 		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355919721499008A5FC7 /* CreateReportButton.m */; };
@@ -193,6 +196,9 @@
 		0A23769D197EF0F3000E4AA1 /* DetailPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPhotoCell.h; sourceTree = "<group>"; };
 		0A23769E197EF0F3000E4AA1 /* DetailPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPhotoCell.m; sourceTree = "<group>"; };
 		0A23769F197EF0F3000E4AA1 /* DetailPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPhotoCell.xib; sourceTree = "<group>"; };
+		0A2376A5197F2D09000E4AA1 /* btn_map_pin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_map_pin_normal@2x.png"; sourceTree = "<group>"; };
+		0A2376A6197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_map_pin_pressed@2x.png"; sourceTree = "<group>"; };
+		0A2376A7197F2D09000E4AA1 /* btn_map_pin_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_map_pin_selected@2x.png"; sourceTree = "<group>"; };
 		0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCasesContainerViewController.h; sourceTree = "<group>"; };
 		0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCasesContainerViewController.m; sourceTree = "<group>"; };
 		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
@@ -510,6 +516,9 @@
 				0A3C8C2D1978C03A00ED1667 /* ic_nav_admin_normal@2x.png */,
 				0A3C8C2E1978C03A00ED1667 /* ic_nav_admin_selected@2x.png */,
 				0A3C8C2F1978C03A00ED1667 /* ic_nav_back_normal@2x.png */,
+				0A2376A5197F2D09000E4AA1 /* btn_map_pin_normal@2x.png */,
+				0A2376A6197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png */,
+				0A2376A7197F2D09000E4AA1 /* btn_map_pin_selected@2x.png */,
 				0A3C8C301978C03A00ED1667 /* ic_nav_cases_normal@2x.png */,
 				0A3C8C311978C03A00ED1667 /* ic_nav_cases_selected@2x.png */,
 				0A3C8C321978C03A00ED1667 /* ic_nav_close_normal@2x.png */,
@@ -838,8 +847,10 @@
 				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
 				37BD755C197CB91D004BD913 /* ic_reports_unit@2x.png in Resources */,
 				0A2FFB4F197C28F90064E647 /* ContactInfoCell.xib in Resources */,
+				0A2376AA197F2D09000E4AA1 /* btn_map_pin_selected@2x.png in Resources */,
 				0A2FFB67197CCC3B0064E647 /* DetailFooterView.xib in Resources */,
 				87B20026197C7FA9000D6CBD /* ic_nav_check_normal@2x.png in Resources */,
+				0A2376A8197F2D09000E4AA1 /* btn_map_pin_normal@2x.png in Resources */,
 				0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */,
 				37BD75F3197E3A3F004BD913 /* ic_camera_add@2x.png in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
@@ -908,6 +919,7 @@
 				0A2FFB40197B0F670064E647 /* DetailContentTableViewCell.xib in Resources */,
 				37BD755A197CB8F0004BD913 /* ic_reports_hotel@2x.png in Resources */,
 				0A3C8C3E1978C03A00ED1667 /* btn_email_pressed@2x.png in Resources */,
+				0A2376A9197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
