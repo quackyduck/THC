@@ -24,10 +24,11 @@
 
 - (void)getFieldValueFromform {
     if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            self.violationDescriptionTextField.text = [self.delegate getValueForField:@"violationDescription"];
-        });
+        
+            NSString *value = [self.delegate getValueForField:@"violationDescription"];
+            if (value != nil && ![value isEqualToString:@""]) {
+                self.violationDescriptionTextField.text = value;
+            }
     }
 }
 

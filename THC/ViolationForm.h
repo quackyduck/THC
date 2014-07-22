@@ -33,6 +33,8 @@
 
 - (void)setCase:(Case*) caseInfo;
 
+- (BOOL)addloggedInUserDetails;
+
 - (void)dumpFormContent;
 
 - (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;

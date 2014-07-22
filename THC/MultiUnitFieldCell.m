@@ -28,16 +28,18 @@
 
 - (void)getFieldValueFromform {
     if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            self.multiUnitField.text = [self.delegate getValueForField:@"multiUnitPetiiton"];
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+            NSString *value = [self.delegate getValueForField:@"multiUnitPetiiton"];
+            if (value != nil && ![value isEqualToString:@""]) {
+                self.multiUnitField.text = value;
+            }
+//        });
     }
 }
 
 - (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation
 {
-    NSLog(@"showMenu");
     
     NSArray *multiUnitOptions = MultiUnitPetition;
     NSMutableArray *menuItems = [NSMutableArray array];
@@ -47,7 +49,6 @@
     for (NSString *option in multiUnitOptions) {
         [menuItems addObject:[KxMenuItem menuItem:option image:nil target:self action:@selector(pushMenuItem:)]];
     }
-    NSLog(@"menu items %d", [menuItems count]);
     
     
     KxMenuItem *first = menuItems[0];

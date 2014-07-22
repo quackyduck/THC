@@ -37,8 +37,9 @@
                     self.hotelBuildings[building.buildingName] = building;
                     self.streetAddress[building.streetAddress] = building.buildingName;
                 }
+//                NSLog(@"street address %@", self.streetAddress);
                 [self.hotelBuildingNames addObject:@"Other"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
                 
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -46,6 +47,27 @@
         }];
     }
     return self;
+}
+
+- (BOOL)addloggedInUserDetails {
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        if ([currentUser.username isEqualToString:@"hunaid@hotmail.com"]) {
+            self.name = @"Hunaid Hussain";
+        } else if ([currentUser.username isEqualToString:@"melo.nicolas@gmail.com"]) {
+            self.name = @"Nicolas Melo";
+        } else if ([currentUser.username isEqualToString:@"rosejonescolour@yahoo.com"]) {
+            self.name = @"Rose Jones";
+        } else if ([currentUser.username isEqualToString:@"test@gmail.com"]) {
+            self.name = @"Test Bot";
+        } else {
+            self.name = currentUser.username;
+        }
+        
+        self.email = currentUser.email;
+        return YES;
+    }
+    return NO;
 }
 
 - (void)setCase:(Case*) caseInfo {
@@ -60,14 +82,31 @@
     self.violationType         = caseInfo.violationType;
     self.multiUnitPetiiton     = caseInfo.multiUnitPetition ? @"YES" : @"NO";
     
-    NSLog(@"case description %@", caseInfo.description);
-    if (self.streetAddress && [self.streetAddress objectForKey:caseInfo.address]) {
-        self.selectedHotel = self.streetAddress[caseInfo.address];
-    } else {
-        NSLog(@"Selecting default hotel");
-        self.selectedHotel = @"Allstar Hotel";
+//    NSLog(@"case description %@", caseInfo.description);
+//    NSLog(@"self.streetAddress %@", self.streetAddress);
+//    NSLog(@"case address %@", caseInfo.address);
+    
+    if (caseInfo.address) {
+        PFQuery *query = [PFQuery queryWithClassName:@"Building"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
+            if (!error) {
+                for (Building *building in buildings) {
+                    [self.hotelBuildingNames addObject:building.buildingName];
+                    self.hotelBuildings[building.buildingName] = building;
+                    self.streetAddress[building.streetAddress] = building.buildingName;
+                }
+//                NSLog(@"street address %@", self.streetAddress);
+                self.selectedHotel = self.streetAddress[caseInfo.address];
+                [self.hotelBuildingNames addObject:@"Other"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
+                
+            } else {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
     }
-    [self dumpFormContent];
+
+//    [self dumpFormContent];
 }
 
 - (void)setValue:(NSString *)value forField:(NSString *)field {

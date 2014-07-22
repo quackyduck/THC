@@ -27,16 +27,18 @@
 
 - (void)getFieldValueFromform {
     if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            self.hotelLabel.text = [self.delegate getValueForField:@"selectedHotel"];
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+            NSString *value = [self.delegate getValueForField:@"selectedHotel"];
+            if (value != nil && ![value isEqualToString:@""]) {
+                self.hotelLabel.text = value;
+            }
+//        });
     }
 }
 
 - (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation
 {
-    NSLog(@"showMenu");
     
     NSArray *hotels = HotelList;
     NSMutableArray *menuItems = [NSMutableArray array];
@@ -46,7 +48,6 @@
     for (NSString *hotel in hotels) {
         [menuItems addObject:[KxMenuItem menuItem:hotel image:nil target:self action:@selector(pushMenuItem:)]];
     }
-    NSLog(@"menu items %d", [menuItems count]);
     
 
     KxMenuItem *first = menuItems[0];
