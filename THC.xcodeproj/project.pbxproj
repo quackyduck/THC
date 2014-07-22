@@ -17,6 +17,8 @@
 		0A237695197ED935000E4AA1 /* LoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A237694197ED935000E4AA1 /* LoginButton.m */; };
 		0A237698197EDC67000E4AA1 /* RequestAccessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A237697197EDC67000E4AA1 /* RequestAccessButton.m */; };
 		0A23769C197EEC8A000E4AA1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A23769B197EEC8A000E4AA1 /* MessageUI.framework */; };
+		0A2376A0197EF0F3000E4AA1 /* DetailPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A23769E197EF0F3000E4AA1 /* DetailPhotoCell.m */; };
+		0A2376A1197EF0F3000E4AA1 /* DetailPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A23769F197EF0F3000E4AA1 /* DetailPhotoCell.xib */; };
 		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
 		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355919721499008A5FC7 /* CreateReportButton.m */; };
@@ -188,6 +190,9 @@
 		0A237696197EDC67000E4AA1 /* RequestAccessButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestAccessButton.h; sourceTree = "<group>"; };
 		0A237697197EDC67000E4AA1 /* RequestAccessButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestAccessButton.m; sourceTree = "<group>"; };
 		0A23769B197EEC8A000E4AA1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		0A23769D197EF0F3000E4AA1 /* DetailPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPhotoCell.h; sourceTree = "<group>"; };
+		0A23769E197EF0F3000E4AA1 /* DetailPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPhotoCell.m; sourceTree = "<group>"; };
+		0A23769F197EF0F3000E4AA1 /* DetailPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPhotoCell.xib; sourceTree = "<group>"; };
 		0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCasesContainerViewController.h; sourceTree = "<group>"; };
 		0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCasesContainerViewController.m; sourceTree = "<group>"; };
 		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
@@ -673,6 +678,9 @@
 				0A237694197ED935000E4AA1 /* LoginButton.m */,
 				0A237696197EDC67000E4AA1 /* RequestAccessButton.h */,
 				0A237697197EDC67000E4AA1 /* RequestAccessButton.m */,
+				0A23769D197EF0F3000E4AA1 /* DetailPhotoCell.h */,
+				0A23769E197EF0F3000E4AA1 /* DetailPhotoCell.m */,
+				0A23769F197EF0F3000E4AA1 /* DetailPhotoCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -876,6 +884,7 @@
 				0A2FFB3B197A2C320064E647 /* CaseViewController.xib in Resources */,
 				37BD753C197C94ED004BD913 /* ic_reports_phone@2x.png in Resources */,
 				0A2FFB6B197CEAC90064E647 /* ic_signin_username@2x.png in Resources */,
+				0A2376A1197EF0F3000E4AA1 /* DetailPhotoCell.xib in Resources */,
 				37BD7564197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png in Resources */,
 				37BD7549197CB7C1004BD913 /* HotelFieldCell.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
@@ -964,6 +973,7 @@
 				878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */,
 				0AF08BC21964EC94002761B9 /* AppDelegate.m in Sources */,
 				0A237695197ED935000E4AA1 /* LoginButton.m in Sources */,
+				0A2376A0197EF0F3000E4AA1 /* DetailPhotoCell.m in Sources */,
 				0A2FFB4E197C28F90064E647 /* ContactInfoCell.m in Sources */,
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
 				37BD7574197DCA3C004BD913 /* SubmitCell.m in Sources */,
