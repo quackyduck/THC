@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @class Case;
-@interface CaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
 - (id)initWithCase:(Case *)caseInfo;
 

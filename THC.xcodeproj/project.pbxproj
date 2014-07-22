@@ -16,6 +16,7 @@
 		0A237692197ED7C4000E4AA1 /* appicon@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A237691197ED7C4000E4AA1 /* appicon@2X.png */; };
 		0A237695197ED935000E4AA1 /* LoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A237694197ED935000E4AA1 /* LoginButton.m */; };
 		0A237698197EDC67000E4AA1 /* RequestAccessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A237697197EDC67000E4AA1 /* RequestAccessButton.m */; };
+		0A23769C197EEC8A000E4AA1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A23769B197EEC8A000E4AA1 /* MessageUI.framework */; };
 		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
 		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355919721499008A5FC7 /* CreateReportButton.m */; };
@@ -186,6 +187,7 @@
 		0A237694197ED935000E4AA1 /* LoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginButton.m; sourceTree = "<group>"; };
 		0A237696197EDC67000E4AA1 /* RequestAccessButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestAccessButton.h; sourceTree = "<group>"; };
 		0A237697197EDC67000E4AA1 /* RequestAccessButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestAccessButton.m; sourceTree = "<group>"; };
+		0A23769B197EEC8A000E4AA1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCasesContainerViewController.h; sourceTree = "<group>"; };
 		0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCasesContainerViewController.m; sourceTree = "<group>"; };
 		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A23769C197EEC8A000E4AA1 /* MessageUI.framework in Frameworks */,
 				0A122E971969ACF8005894EB /* CoreLocation.framework in Frameworks */,
 				0A2EF03F19663E9D00FED705 /* MapKit.framework in Frameworks */,
 				0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */,
@@ -435,6 +438,7 @@
 		0AF08BB01964EC94002761B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A23769B197EEC8A000E4AA1 /* MessageUI.framework */,
 				0A122E961969ACF8005894EB /* CoreLocation.framework */,
 				0A2EF03E19663E9D00FED705 /* MapKit.framework */,
 				0AF08BB11964EC94002761B9 /* Foundation.framework */,

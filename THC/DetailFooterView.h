@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class SendEmailButton;
+
 @interface DetailFooterView : UIView
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet SendEmailButton *sendEmailButton;
 
 @end

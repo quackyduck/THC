@@ -147,6 +147,8 @@
     Case *caseInfo = self.cases[indexPath.row];
     CaseViewController *detailvc = [[CaseViewController alloc] initWithCase:caseInfo];
     
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:detailvc];
     [self presentViewController:nvc animated:YES completion:nil];
 }

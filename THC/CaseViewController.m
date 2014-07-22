@@ -14,6 +14,8 @@
 #import "ContactInfoButton.h"
 #import "DetailFooterView.h"
 #import "ViolationSubmissionViewController.h"
+#import "SendEmailButton.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -93,6 +95,7 @@
     UINib *footerNib = [UINib nibWithNibName:@"DetailFooterView" bundle:nil];
     NSArray *footerNibs = [footerNib instantiateWithOwner:nil options:nil];
     self.footerView = footerNibs[0];
+    [self.footerView.sendEmailButton addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -100,6 +103,25 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)sendEmail:(id)sender {
+    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+    controller.mailComposeDelegate = self;
+    [controller setSubject:[NSString stringWithFormat:@"Case #%@", self.caseInfo.objectId]];
+    [controller setMessageBody:[NSString stringWithFormat:@"Description:\n%@", self.caseInfo.name] isHTML:NO];
+    [controller setToRecipients:@[@"issues@thc.org"]];
+    if (controller) {
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"It's away!");
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)editForm:(id)sender {
