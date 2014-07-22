@@ -12,6 +12,8 @@
 		0A122E971969ACF8005894EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A122E961969ACF8005894EB /* CoreLocation.framework */; };
 		0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A122E991969C2D4005894EB /* SignupViewController.m */; };
 		0A122E9C1969C2D4005894EB /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A122E9A1969C2D4005894EB /* SignupViewController.xib */; };
+		0A237690197ED6FA000E4AA1 /* default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23768F197ED6FA000E4AA1 /* default-568h@2x.png */; };
+		0A237692197ED7C4000E4AA1 /* appicon@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A237691197ED7C4000E4AA1 /* appicon@2X.png */; };
 		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
 		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355919721499008A5FC7 /* CreateReportButton.m */; };
@@ -176,6 +178,8 @@
 		0A122E981969C2D4005894EB /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		0A122E991969C2D4005894EB /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		0A122E9A1969C2D4005894EB /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
+		0A23768F197ED6FA000E4AA1 /* default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-568h@2x.png"; sourceTree = "<group>"; };
+		0A237691197ED7C4000E4AA1 /* appicon@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2X.png"; sourceTree = "<group>"; };
 		0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCasesContainerViewController.h; sourceTree = "<group>"; };
 		0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCasesContainerViewController.m; sourceTree = "<group>"; };
 		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
@@ -496,6 +500,7 @@
 				0A3C8C321978C03A00ED1667 /* ic_nav_close_normal@2x.png */,
 				0A3C8C331978C03A00ED1667 /* ic_nav_edit_normal@2x.png */,
 				0A3C8C341978C03A00ED1667 /* ic_nav_map_normal@2x.png */,
+				0A237691197ED7C4000E4AA1 /* appicon@2X.png */,
 				0A3C8C351978C03A00ED1667 /* ic_nav_map_selected@2x.png */,
 				0A3C8C361978C03A00ED1667 /* ic_photoGallery_active@2x.png */,
 				0A3C8C371978C03A00ED1667 /* ic_photoGallery_inactive@2x.png */,
@@ -503,6 +508,7 @@
 				0A2FFB6A197CEAC90064E647 /* ic_signin_username@2x.png */,
 				37BD74D4197594C4004BD913 /* delete.png */,
 				37BD74D01974A65F004BD913 /* delete1.png */,
+				0A23768F197ED6FA000E4AA1 /* default-568h@2x.png */,
 				37BD74CC19742BB1004BD913 /* SelectionIndicator.png */,
 				37BD74B419739633004BD913 /* camera.png */,
 				0AE370B3196D16DB00E80E88 /* building.png */,
@@ -826,7 +832,9 @@
 				37BD753B197C94ED004BD913 /* ic_reports_language@2x.png in Resources */,
 				37BD74CB19742864004BD913 /* PhotoCollectionController.xib in Resources */,
 				37BD74C619742839004BD913 /* AlbumListController.xib in Resources */,
+				0A237690197ED6FA000E4AA1 /* default-568h@2x.png in Resources */,
 				37BD75F7197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png in Resources */,
+				0A237692197ED7C4000E4AA1 /* appicon@2X.png in Resources */,
 				37BD7562197CBA15004BD913 /* btn_selected_remove_normal@2x.png in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				37BD7531197C944A004BD913 /* PhoneFieldCell.xib in Resources */,
