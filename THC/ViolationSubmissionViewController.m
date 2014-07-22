@@ -1199,9 +1199,9 @@ SubmitCell                      *_stubSubmitCell;
 //    frame.size.width = 5;
 //    frame.size.height = 5;
     
-    UIImage *image = [UIImage imageNamed:@"ic_nav_close_normal"];
+    UIImage *image = [UIImage imageNamed:@"btn_selected_remove_pressed"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.backgroundColor = orangeColor;
+    imageView.backgroundColor = [UIColor clearColor];
     imageView.frame = frame;
     
     return imageView;
