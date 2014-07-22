@@ -558,7 +558,7 @@ SubmitCell                      *_stubSubmitCell;
         [self configureCell:_stubViolationCell atIndexPath:indexPath];
         [_stubViolationCell layoutSubviews];
         height = [_stubViolationCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        NSLog(@"height for violation description cell: %f", height);
+//        NSLog(@"height for violation description cell: %f", height);
         if (height < 59) {
             height = 59;
         }

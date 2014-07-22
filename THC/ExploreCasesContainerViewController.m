@@ -119,7 +119,6 @@
 
 - (IBAction)onCreateReport:(id)sender {
     NSLog(@"Create new report.");
-    NSLog(@"creating violation submission controller %@", self.navigationController);
     ViolationSubmissionViewController *vsc = [[ViolationSubmissionViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vsc];
 //    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
