@@ -30,8 +30,18 @@
 - (void)drawCanvas4WithFrame: (CGRect)frame;
 {
     //// Color Declarations
-    UIColor* tHCButtonGray = [UIColor colorWithRed: 0.965 green: 0.965 blue: 0.965 alpha: 1];
+//    UIColor* tHCButtonGray = [UIColor colorWithRed: 0.965 green: 0.965 blue: 0.965 alpha: .85];
     UIColor* tHCOrange = [UIColor colorWithRed: 1 green: 0.455 blue: 0.184 alpha: 1];
+    UIColor *tHCWhite = [UIColor whiteColor];
+    UIColor *tHCButtonGray = [[UIColor whiteColor] colorWithAlphaComponent:0.5f];
+    
+    UIColor *buttonColor = tHCButtonGray;
+    
+    if (self.enabled) {
+        NSLog(@"Button should be white!");
+        buttonColor = tHCWhite;
+    }
+    
     
     if (self.state == UIControlStateHighlighted) {
         tHCOrange = [tHCOrange colorWithAlphaComponent:0.5];
@@ -47,7 +57,7 @@
         UIBezierPath* buttonOutlinePath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(group) + floor(CGRectGetWidth(group) * 0.00000 + 0.5), CGRectGetMinY(group) + floor(CGRectGetHeight(group) * 0.00000 + 0.5), floor(CGRectGetWidth(group) * 1.00000 + 0.5) - floor(CGRectGetWidth(group) * 0.00000 + 0.5), floor(CGRectGetHeight(group) * 1.00000 + 0.5) - floor(CGRectGetHeight(group) * 0.00000 + 0.5))];
         [tHCOrange setFill];
         [buttonOutlinePath fill];
-        [tHCButtonGray setStroke];
+        [buttonColor setStroke];
         buttonOutlinePath.lineWidth = 0.5;
         [buttonOutlinePath stroke];
         
@@ -59,7 +69,7 @@
             NSMutableParagraphStyle* loginStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
             loginStyle.alignment = NSTextAlignmentCenter;
             
-            NSDictionary* loginFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue-Light" size: UIFont.buttonFontSize], NSForegroundColorAttributeName: tHCButtonGray, NSParagraphStyleAttributeName: loginStyle};
+            NSDictionary* loginFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue-Light" size: UIFont.buttonFontSize], NSForegroundColorAttributeName: buttonColor, NSParagraphStyleAttributeName: loginStyle};
             
             [textContent drawInRect: CGRectOffset(loginRect, 0, (CGRectGetHeight(loginRect) - [textContent boundingRectWithSize: loginRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: loginFontAttributes context: nil].size.height) / 2) withAttributes: loginFontAttributes];
         }
