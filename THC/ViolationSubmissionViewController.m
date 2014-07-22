@@ -21,6 +21,8 @@
 #import "ViolationTypeFieldCell.h"
 #import "ViolationDescriptionFieldCell.h"
 #import "ViolationForm.h"
+#import "MultiUnitFieldCell.h"
+#import "SubmitCell.h"
 
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
@@ -28,14 +30,15 @@
 #define whiteColor  [UIColor whiteColor]
 
 #define LanguageList  @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", nil}
-#define AllFields     @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"unit", @"violationDescription", @"violationType"]
+#define AllFields     @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"unit", @"violationDescription", @"violationType", @"multiUnitPetition", @"submit"]
 #define FieldList     @[@"name", @"languageSpoken", @"phone", @"email"]
 #define PersonalInfo  @[@"name", @"languageSpoken", @"phone", @"email"]
 #define HotelInfo     @[@"hotel", @"unit"]
-#define ViolationInfo @[@"violationType", @"violationDescription"]
+#define ViolationInfo @[@"violationType", @"violationDescription", @"multiUnitPetition"]
+#define SubmitInfo    @[@"submit"]
 //#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo}
-#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo}
-#define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details"}
+#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo,  @"3": SubmitInfo}
+#define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details", @"3": @""}
 
 
 
@@ -72,6 +75,8 @@ PhoneFieldCell                  *_stubPhoneCell;
 ViolationDescriptionFieldCell   *_stubViolationCell;
 ViolationTypeFieldCell          *_stubViolationTypeCell;
 EmailFieldCell                  *_stubEmailCell;
+MultiUnitFieldCell              *_stubMultiUnitFieldCell;
+SubmitCell                      *_stubSubmitCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -331,6 +336,14 @@ EmailFieldCell                  *_stubEmailCell;
             UINib *cellNib = [UINib nibWithNibName:@"ViolationTypeFieldCell" bundle:nil];
             [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ViolationTypeFieldCell"];
             _stubViolationTypeCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"MultiUnitFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"MultiUnitFieldCell"];
+            _stubMultiUnitFieldCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"submit"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"SubmitCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"SubmitCell"];
+            _stubSubmitCell = [cellNib instantiateWithOwner:nil options:nil][0];
         }
     }
 }
@@ -478,6 +491,12 @@ EmailFieldCell                  *_stubEmailCell;
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationTypeFieldCell *violationTypeCell = (ViolationTypeFieldCell *)cell;
         violationTypeCell.violationTypeTextField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        MultiUnitFieldCell *multiUniteCell = (MultiUnitFieldCell *)cell;
+        multiUniteCell.multiUnitField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"submit"]) {
+        SubmitCell *multiUniteCell = (SubmitCell *)cell;
+//        multiUniteCell.multiUnitField.text = @"Testing";
     }
 }
 
@@ -542,6 +561,18 @@ EmailFieldCell                  *_stubEmailCell;
         [_stubViolationTypeCell layoutSubviews];
         height = [_stubViolationTypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
+    } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        [self configureCell:_stubMultiUnitFieldCell atIndexPath:indexPath];
+        //        NSLog(@"_stubViolationTypeCell %@", _stubViolationTypeCell);
+        [_stubMultiUnitFieldCell layoutSubviews];
+        height = [_stubMultiUnitFieldCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
+    } else if ([fieldName isEqualToString:@"submit"]) {
+        [self configureCell:_stubSubmitCell atIndexPath:indexPath];
+        //        NSLog(@"_stubViolationTypeCell %@", _stubViolationTypeCell);
+        [_stubSubmitCell layoutSubviews];
+        height = [_stubSubmitCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 59;
     }
     
     NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
@@ -594,6 +625,14 @@ EmailFieldCell                  *_stubEmailCell;
         return cell;
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationTypeFieldCell" ];
+        cell.delegate = self.violationForm;
+        return cell;
+    } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        MultiUnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"MultiUnitFieldCell" ];
+        cell.delegate = self.violationForm;
+        return cell;
+    } else if ([fieldName isEqualToString:@"submit"]) {
+        SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
         cell.delegate = self.violationForm;
         return cell;
     }
@@ -651,6 +690,19 @@ EmailFieldCell                  *_stubEmailCell;
         }
         ViolationTypeFieldCell *cell = (ViolationTypeFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
+    } else    if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        [self.tapGestureRecognizer setEnabled:NO];
+        CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
+        CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
+        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+        
+        
+        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+            NSLog(@"portrait orientation");
+        }
+        MultiUnitFieldCell *cell = (MultiUnitFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *cell = (NameFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.nameTextField.userInteractionEnabled = YES;
@@ -672,6 +724,10 @@ EmailFieldCell                  *_stubEmailCell;
         ViolationDescriptionFieldCell *cell = (ViolationDescriptionFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.violationDescriptionTextField.userInteractionEnabled = YES;
         [cell.violationDescriptionTextField becomeFirstResponder];
+    }  else if ([fieldName isEqualToString:@"submit"]) {
+        SubmitCell *cell = (SubmitCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.submitButton.userInteractionEnabled = YES;
+        [cell.submitButton becomeFirstResponder];
     } else {
         [self.tapGestureRecognizer setEnabled:YES];
     }

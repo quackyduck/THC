@@ -22,6 +22,7 @@
 @property (strong, nonatomic)   NSString   *languageSpoken;
 @property (strong, nonatomic)   NSString   *violationDescription;
 @property (strong, nonatomic)   NSString   *violationType;
+@property (strong, nonatomic)   NSString   *multiUnitPetiiton;
 @property (strong, nonatomic)   NSMutableArray *hotelBuildingNames;
 @property (strong, nonatomic)   NSMutableDictionary *hotelBuildings;
 

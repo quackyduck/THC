@@ -57,6 +57,8 @@
         self.violationDescription = value;
     } else if ([field isEqualToString:@"violationType"]) {
         self.violationType = value;
+    } else if ([field isEqualToString:@"multiUnitPetiiton"]) {
+        self.multiUnitPetiiton = value;
     }
 }
 
@@ -97,64 +99,77 @@
     newCase.email = self.email;
     newCase.languageSpoken = self.languageSpoken;
     newCase.description = self.violationDescription;
+    newCase.multiUnitPetition = [self.multiUnitPetiiton boolValue];
     newCase.userId = userId;
     newCase.status = caseOpen;
     
+    if (!imageDataList && [imageDataList count] == 0) {
+            [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    completion(newCase);
+                } else
+                {
+                    onError(error);
+                }
+            }];
+    } else {
     
-    [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        if (succeeded) {
+        [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
-            NSMutableArray *photoObjectList = [NSMutableArray array];
-            
-            NSUInteger imageIndex = 1;
-            for (NSData *imageData in  imageDataList) {
-                PhotoInfo* photoInfo = [PhotoInfo object];
-                photoInfo.caseId = newCase.objectId;
-                photoInfo.caption = nil;
-                PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"Image_%lu", (unsigned long)imageIndex] data:imageData];
-                photoInfo.image = imageFile;
-                photoInfo.caseId = newCase.objectId;
+            if (succeeded) {
                 
-                [photoObjectList addObject:photoInfo];
                 
-                ++imageIndex;
+                NSMutableArray *photoObjectList = [NSMutableArray array];
                 
-            }
-            
-            
-            newCase.status = caseOpen;
-            [PFObject saveAllInBackground:photoObjectList block:^(BOOL photoSuccess, NSError *photoError) {
-                if (photoSuccess) {
-                    NSMutableArray *photoIdList = [NSMutableArray array];
-                    for (PhotoInfo *photoInfo in photoObjectList) {
-                        [photoIdList addObject:photoInfo.objectId];
-                        newCase.caseId = photoInfo.objectId;
-                        
-                    }
-                    newCase.photoIdList = photoIdList;
-                    NSLog(@"submitting case with %lu photos", (unsigned long)[photoIdList count]);
-                    //                    newCase.caseId = photoInfo.objectId;
-                    [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
-                        if (updateSucceeded) {
-                            completion(newCase);
-                        } else
-                        {
-                            onError(caseUpdateError);
-                        }
-                    }];
-                } else if (photoError) {
-                    [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Case" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                NSUInteger imageIndex = 1;
+                for (NSData *imageData in  imageDataList) {
+                    PhotoInfo* photoInfo = [PhotoInfo object];
+                    photoInfo.caseId = newCase.objectId;
+                    photoInfo.caption = nil;
+                    PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"Image_%lu", (unsigned long)imageIndex] data:imageData];
+                    photoInfo.image = imageFile;
+                    photoInfo.caseId = newCase.objectId;
+                    
+                    [photoObjectList addObject:photoInfo];
+                    
+                    ++imageIndex;
                     
                 }
                 
-            }];
-            
-            
-        } else if (error) {
-            [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Photo" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
-        }
-    }];
+                
+                newCase.status = caseOpen;
+                [PFObject saveAllInBackground:photoObjectList block:^(BOOL photoSuccess, NSError *photoError) {
+                    if (photoSuccess) {
+                        NSMutableArray *photoIdList = [NSMutableArray array];
+                        for (PhotoInfo *photoInfo in photoObjectList) {
+                            [photoIdList addObject:photoInfo.objectId];
+                            newCase.caseId = photoInfo.objectId;
+                            
+                        }
+                        newCase.photoIdList = photoIdList;
+                        NSLog(@"submitting case with %lu photos", (unsigned long)[photoIdList count]);
+                        //                    newCase.caseId = photoInfo.objectId;
+                        [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
+                            if (updateSucceeded) {
+                                completion(newCase);
+                            } else
+                            {
+                                onError(caseUpdateError);
+                            }
+                        }];
+                    } else if (photoError) {
+                        [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Case" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                        
+                    }
+                    
+                }];
+                
+                
+            } else if (error) {
+                [[[UIAlertView alloc] initWithTitle:@"Could not Submit the Photo" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+            }
+        }];
+    }
     return newCase;
     
 }
