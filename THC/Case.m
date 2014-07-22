@@ -23,8 +23,9 @@
 @dynamic phoneNumber;
 @dynamic email;
 @dynamic languageSpoken;
-@dynamic description;
+//@dynamic description;
 @dynamic violationType;
+@dynamic violationDetails;
 @dynamic multiUnitPetition;
 @dynamic userId;
 @dynamic photoIdList;

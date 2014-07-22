@@ -49,7 +49,7 @@
         if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
-                [self.delegate setValue:textView.text forField:@"violationDescription"];
+                [self.delegate setValue:self.violationDescriptionTextField.text forField:@"violationDescription"];
             });
         }
     }

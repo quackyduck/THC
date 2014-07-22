@@ -54,14 +54,17 @@
     self.email                 = caseInfo.email;
     self.phone                 = caseInfo.phoneNumber;
     self.selectedHotel         = self.streetAddress[caseInfo.address];
+    self.unit                  = caseInfo.unit;
     self.languageSpoken        = caseInfo.languageSpoken;
-    self.violationDescription  = caseInfo.description;
+    self.violationDescription  = caseInfo.violationDetails;
     self.violationType         = caseInfo.violationType;
     self.multiUnitPetiiton     = caseInfo.multiUnitPetition ? @"YES" : @"NO";
     
+    NSLog(@"case description %@", caseInfo.description);
     if (self.streetAddress && [self.streetAddress objectForKey:caseInfo.address]) {
         self.selectedHotel = self.streetAddress[caseInfo.address];
     } else {
+        NSLog(@"Selecting default hotel");
         self.selectedHotel = @"Allstar Hotel";
     }
     [self dumpFormContent];
@@ -150,7 +153,9 @@
     newCase.phoneNumber = self.phone;
     newCase.email = self.email;
     newCase.languageSpoken = self.languageSpoken;
-    newCase.description = self.violationDescription;
+    newCase.violationDetails = self.violationDescription;
+    NSLog(@"submitting case with description %@", self.violationDescription);
+    NSLog(@"submitting case with description %@", newCase.description);
     newCase.multiUnitPetition = [self.multiUnitPetiiton boolValue];
     newCase.userId = userId;
     newCase.status = caseOpen;
@@ -158,6 +163,7 @@
     if (!imageDataList && [imageDataList count] == 0) {
             [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
+                    NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
                     completion(newCase);
                 } else
                 {
@@ -170,7 +176,8 @@
             
             if (succeeded) {
                 
-                
+                NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
+
                 NSMutableArray *photoObjectList = [NSMutableArray array];
                 
                 NSUInteger imageIndex = 1;
