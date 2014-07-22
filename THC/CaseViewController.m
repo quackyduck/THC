@@ -13,6 +13,7 @@
 #import "DetailViewTableHeader.h"
 #import "ContactInfoButton.h"
 #import "DetailFooterView.h"
+#import "ViolationSubmissionViewController.h"
 
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -102,6 +103,17 @@
 }
 
 - (void)editForm:(id)sender {
+    
+    ViolationSubmissionViewController *vsc = [[ViolationSubmissionViewController alloc] init];
+    ViolationForm *violationForm = [[ViolationForm alloc] init];
+    [violationForm setCase:self.caseInfo];
+    
+    [vsc setPrefilledForm:violationForm];
+    
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vsc];
+    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+    
+    [self presentViewController:nvc animated:YES completion:nil];
     
 }
 

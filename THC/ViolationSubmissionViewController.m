@@ -176,8 +176,10 @@ SubmitCell                      *_stubSubmitCell;
     self.formFields = FormFields;
     self.formSectionHeader = FormSectionHeader;
     
-    self.violationForm = [[ViolationForm alloc] init];
-    self.showFilledForm = NO;
+    if (!self.violationForm) {
+        self.violationForm = [[ViolationForm alloc] init];
+        self.showFilledForm = NO;
+    }
     
     [self registerFieldCells];
     
@@ -299,6 +301,7 @@ SubmitCell                      *_stubSubmitCell;
 #pragma Public Functions
 
 -(void) setPrefilledForm:(ViolationForm *) form {
+    NSLog(@"using prefilled form");
     self.showFilledForm = YES;
     self.violationForm = form;
 }
@@ -602,6 +605,7 @@ SubmitCell                      *_stubSubmitCell;
         NameFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"NameFieldCell" ];
         cell.delegate = self.violationForm;
         if (self.showFilledForm) {
+            NSLog(@"asking name to get it from form");
             [cell getFieldValueFromform];
         }
         NSLog(@"creating row for cell %@", fieldName);

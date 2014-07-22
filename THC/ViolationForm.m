@@ -13,6 +13,12 @@
 #define languageList @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", nil}
 #define FieldList    @[@"name", @"languageSpoken", @"hotel", @"address", @"email", @"phone", @"violationDescription"]
 
+@interface ViolationForm ()
+
+@property (strong, nonatomic) NSMutableDictionary *streetAddress;
+
+@end
+
 @implementation ViolationForm
 
 - (id)init
@@ -21,6 +27,7 @@
     {
         self.hotelBuildingNames = [NSMutableArray array];
         self.hotelBuildings     = [NSMutableDictionary dictionary];
+        self.streetAddress      = [NSMutableDictionary dictionary];
         
         PFQuery *query = [PFQuery queryWithClassName:@"Building"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
@@ -28,6 +35,7 @@
                 for (Building *building in buildings) {
                     [self.hotelBuildingNames addObject:building.buildingName];
                     self.hotelBuildings[building.buildingName] = building;
+                    self.streetAddress[building.streetAddress] = building.buildingName;
                 }
                 [self.hotelBuildingNames addObject:@"Other"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
@@ -38,6 +46,25 @@
         }];
     }
     return self;
+}
+
+- (void)setCase:(Case*) caseInfo {
+    self.caseInfo              = caseInfo;
+    self.name                  = caseInfo.name;
+    self.email                 = caseInfo.email;
+    self.phone                 = caseInfo.phoneNumber;
+    self.selectedHotel         = self.streetAddress[caseInfo.address];
+    self.languageSpoken        = caseInfo.languageSpoken;
+    self.violationDescription  = caseInfo.description;
+    self.violationType         = caseInfo.violationType;
+    self.multiUnitPetiiton     = caseInfo.multiUnitPetition ? @"YES" : @"NO";
+    
+    if (self.streetAddress && [self.streetAddress objectForKey:caseInfo.address]) {
+        self.selectedHotel = self.streetAddress[caseInfo.address];
+    } else {
+        self.selectedHotel = @"Allstar Hotel";
+    }
+    [self dumpFormContent];
 }
 
 - (void)setValue:(NSString *)value forField:(NSString *)field {
