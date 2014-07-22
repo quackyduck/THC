@@ -16,6 +16,7 @@
 #import "ViolationSubmissionViewController.h"
 #import "SendEmailButton.h"
 #import "DetailPhotoCell.h"
+#import "PhotoInfo.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) UIImage *emailImagePressed;
 @property (strong, nonatomic) UIImage *phoneImageNormal;
 @property (strong, nonatomic) UIImage *phoneImagePressed;
+@property (strong, nonatomic) UIImage *cachedPhoto;
 
 @end
 
@@ -117,8 +119,13 @@
     MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
     controller.mailComposeDelegate = self;
     [controller setSubject:[NSString stringWithFormat:@"Case #%@", self.caseInfo.objectId]];
-    [controller setMessageBody:[NSString stringWithFormat:@"Description:\n%@", self.caseInfo.name] isHTML:NO];
+    [controller setMessageBody:[NSString stringWithFormat:@"Description:\n%@", self.caseInfo.violationDetails] isHTML:NO];
     [controller setToRecipients:@[@"issues@thc.org"]];
+    
+    if (self.cachedPhoto) {
+    
+        [controller addAttachmentData:UIImageJPEGRepresentation(self.cachedPhoto, 1) mimeType:@"image/jpeg" fileName:@"Photo.jpeg"];
+    }
     if (controller) {
         [self presentViewController:controller animated:YES completion:nil];
     }
@@ -243,12 +250,46 @@
         
     } else if (indexPath.section == 2) {
         cell.titleLabel.text = @"Reported 3 months ago";
-        cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
+        cell.contentLabel.text = self.caseInfo.violationDetails;
         
     } else if (indexPath.section == 4) {
         cell.titleLabel.text = @"Notes";
-        cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
+        cell.contentLabel.text = self.caseInfo.violationDetails;
     }
+}
+
+- (void)configurePhotoCell:(DetailPhotoCell *)cell {
+    
+    NSArray *photos = self.caseInfo.photoIdList;
+    if (photos) {
+        
+        PFQuery *query = [PhotoInfo query];
+        [query whereKey:@"objectId" equalTo:photos[0]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count > 0) {
+                    PhotoInfo* photoObject = objects[0];
+                    PFFile *photo = photoObject.image;
+                    [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                        if (!photoError) {
+                            NSData *imageData = data;
+                            UIImage *image = [UIImage imageWithData:imageData];
+                            self.cachedPhoto = image;
+                            cell.photoImageView.image = image;
+                        } else {
+                            NSLog(@"Failed to get photo.");
+                        }
+                    }];
+                }
+            }
+        }];
+        
+    } else {
+        cell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
+    }
+    
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -259,6 +300,8 @@
         NSLog(@"Layout email and phone buttons at height %f", height);
         return height + 1;
     } else if (indexPath.section == 3) {
+        
+        [self configurePhotoCell:self.offscreenPhotoCell];
         self.offscreenPhotoCell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
         [self.offscreenPhotoCell layoutSubviews];
         CGFloat height = [self.offscreenPhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
@@ -330,8 +373,7 @@
         
     } else if (indexPath.section == 3) {
         DetailPhotoCell *photoCell = [self.tableView dequeueReusableCellWithIdentifier:@"PhotoCell"];
-        photoCell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
-        
+        [self configurePhotoCell:photoCell];
         return photoCell;
         
     } else if (indexPath.section == 4) {
