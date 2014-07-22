@@ -128,6 +128,10 @@
 		37BD7570197DCA29004BD913 /* MultiUnitFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD756E197DCA29004BD913 /* MultiUnitFieldCell.xib */; };
 		37BD7574197DCA3C004BD913 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BD7572197DCA3B004BD913 /* SubmitCell.m */; };
 		37BD7575197DCA3C004BD913 /* SubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BD7573197DCA3C004BD913 /* SubmitCell.xib */; };
+		37BD75F3197E3A3F004BD913 /* ic_camera_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75F2197E3A3F004BD913 /* ic_camera_add@2x.png */; };
+		37BD75F5197E3A47004BD913 /* ic_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75F4197E3A47004BD913 /* ic_camera@2x.png */; };
+		37BD75F7197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75F6197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png */; };
+		37BD75F9197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75F8197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
@@ -332,6 +336,10 @@
 		37BD7571197DCA3B004BD913 /* SubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCell.h; sourceTree = "<group>"; };
 		37BD7572197DCA3B004BD913 /* SubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCell.m; sourceTree = "<group>"; };
 		37BD7573197DCA3C004BD913 /* SubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitCell.xib; sourceTree = "<group>"; };
+		37BD75F2197E3A3F004BD913 /* ic_camera_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_camera_add@2x.png"; sourceTree = "<group>"; };
+		37BD75F4197E3A47004BD913 /* ic_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_camera@2x.png"; sourceTree = "<group>"; };
+		37BD75F6197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_report_hintPicker_normal@2x.png"; sourceTree = "<group>"; };
+		37BD75F8197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_report_hintPicker_selected@2x.png"; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
@@ -447,6 +455,10 @@
 		0AF08BB81964EC94002761B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37BD75F8197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png */,
+				37BD75F6197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png */,
+				37BD75F4197E3A47004BD913 /* ic_camera@2x.png */,
+				37BD75F2197E3A3F004BD913 /* ic_camera_add@2x.png */,
 				0A2FFB68197CE7970064E647 /* ic_signin_password@2x.png */,
 				37BD7567197DB47A004BD913 /* ic_reports_violationText@2x.png */,
 				37BD7568197DB47A004BD913 /* ic_reports_violationType@2x.png */,
@@ -790,6 +802,7 @@
 				0A3C8C421978C03A00ED1667 /* ic_nav_admin_selected@2x.png in Resources */,
 				0AF08BBC1964EC94002761B9 /* InfoPlist.strings in Resources */,
 				37BD74CD19742BB1004BD913 /* SelectionIndicator.png in Resources */,
+				37BD75F5197E3A47004BD913 /* ic_camera@2x.png in Resources */,
 				87A9885B1968C0D700EDE34F /* CaseCell.xib in Resources */,
 				87A988561968C0A400EDE34F /* CaseDetailViewController.xib in Resources */,
 				37BD755C197CB91D004BD913 /* ic_reports_unit@2x.png in Resources */,
@@ -797,6 +810,7 @@
 				0A2FFB67197CCC3B0064E647 /* DetailFooterView.xib in Resources */,
 				87B20026197C7FA9000D6CBD /* ic_nav_check_normal@2x.png in Resources */,
 				0A3C8C391978C03A00ED1667 /* btn_adminLogin_normal@2x.png in Resources */,
+				37BD75F3197E3A3F004BD913 /* ic_camera_add@2x.png in Resources */,
 				0AF08BC41964EC94002761B9 /* Images.xcassets in Resources */,
 				37BD753A197C94ED004BD913 /* ic_reports_email@2x.png in Resources */,
 				37BD7569197DB47A004BD913 /* ic_reports_violationText@2x.png in Resources */,
@@ -809,6 +823,7 @@
 				37BD753B197C94ED004BD913 /* ic_reports_language@2x.png in Resources */,
 				37BD74CB19742864004BD913 /* PhotoCollectionController.xib in Resources */,
 				37BD74C619742839004BD913 /* AlbumListController.xib in Resources */,
+				37BD75F7197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png in Resources */,
 				37BD7562197CBA15004BD913 /* btn_selected_remove_normal@2x.png in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				37BD7531197C944A004BD913 /* PhoneFieldCell.xib in Resources */,
@@ -847,6 +862,7 @@
 				0A2FFB69197CE7970064E647 /* ic_signin_password@2x.png in Resources */,
 				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
 				0A3C8C3C1978C03A00ED1667 /* btn_create_pressed@2x.png in Resources */,
+				37BD75F9197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png in Resources */,
 				37BD755E197CB992004BD913 /* ic_reports_violationPhotos@2x.png in Resources */,
 				37BD7522197C93D3004BD913 /* ic_reports_fullname@2x.png in Resources */,
 				37BD74B519739633004BD913 /* camera.png in Resources */,
