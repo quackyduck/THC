@@ -9,6 +9,7 @@
 #import "SubmissionValidationViewController.h"
 #import "PhotoInfo.h"
 #import "Building.h"
+#import "ExploreCasesContainerViewController.h"
 
 @interface SubmissionValidationViewController ()
 
@@ -97,6 +98,9 @@
 - (void)dismissView
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    ExploreCasesContainerViewController *xvc = [[ExploreCasesContainerViewController alloc] init];
+    [self presentViewController:xvc animated:NO completion:nil];
+    
 }
 
 - (void)backToEditView

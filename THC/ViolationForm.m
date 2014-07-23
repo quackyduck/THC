@@ -106,6 +106,7 @@
     if (!imageDataList && [imageDataList count] == 0) {
             [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
+                    newCase.caseId = newCase.objectId;
                     completion(newCase);
                 } else
                 {

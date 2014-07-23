@@ -23,6 +23,7 @@
 #import "ViolationForm.h"
 #import "MultiUnitFieldCell.h"
 #import "SubmitCell.h"
+#import "SubmissionValidationViewController.h"
 
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
@@ -816,6 +817,7 @@ SubmitCell                      *_stubSubmitCell;
     [self.violationForm dumpFormContent];
     
     NSMutableArray *imageDataList = nil;
+    UIImage* firstImage;
     
     if ([self.imagesInScroll count]) {
         imageDataList = [NSMutableArray array];
@@ -823,10 +825,16 @@ SubmitCell                      *_stubSubmitCell;
             NSData  *imageData = UIImageJPEGRepresentation(imageView.image, 0);
             [imageDataList addObject:imageData];
         }
+        firstImage = ((UIImageView*)(self.imagesInScroll[0])).image;
+    } else
+    {
+        firstImage = nil;
     }
     [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:imageDataList completion:^(Case* createdCase){
-        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
-        [self presentViewController:detailvc animated:YES completion:nil];
+        SubmissionValidationViewController *submissionvc =
+        [[SubmissionValidationViewController alloc] initWithCase:createdCase withTopPhoto:firstImage];
+        UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:submissionvc];
+        [self presentViewController:nvc animated:YES completion:nil];
     } error:^(NSError * onError) {
         NSLog(@"Error creating Case!");
     }];
