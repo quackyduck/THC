@@ -35,6 +35,11 @@
 
 - (BOOL)addloggedInUserDetails;
 
+- (NSString *)computeHotelDistancesFromLocation:(CLLocation*)userLocation;
+- (void)populateHotelsWithSuccess:(void (^)(BOOL success))completion error:(void (^)(NSError*))onError;
+
+- (void)assignNearestHotel;
+
 - (void)dumpFormContent;
 
 - (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;

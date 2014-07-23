@@ -22,6 +22,8 @@
 		0A2376A8197F2D09000E4AA1 /* btn_map_pin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376A5197F2D09000E4AA1 /* btn_map_pin_normal@2x.png */; };
 		0A2376A9197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376A6197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png */; };
 		0A2376AA197F2D09000E4AA1 /* btn_map_pin_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376A7197F2D09000E4AA1 /* btn_map_pin_selected@2x.png */; };
+		0A2376AD197F8292000E4AA1 /* ic_navbar_close_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376AB197F8292000E4AA1 /* ic_navbar_close_normal@2x.png */; };
+		0A2376AE197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376AC197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png */; };
 		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
 		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355919721499008A5FC7 /* CreateReportButton.m */; };
@@ -199,6 +201,8 @@
 		0A2376A5197F2D09000E4AA1 /* btn_map_pin_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_map_pin_normal@2x.png"; sourceTree = "<group>"; };
 		0A2376A6197F2D09000E4AA1 /* btn_map_pin_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_map_pin_pressed@2x.png"; sourceTree = "<group>"; };
 		0A2376A7197F2D09000E4AA1 /* btn_map_pin_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_map_pin_selected@2x.png"; sourceTree = "<group>"; };
+		0A2376AB197F8292000E4AA1 /* ic_navbar_close_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_navbar_close_normal@2x.png"; sourceTree = "<group>"; };
+		0A2376AC197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_navbar_close_pressed@2x.png"; sourceTree = "<group>"; };
 		0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCasesContainerViewController.h; sourceTree = "<group>"; };
 		0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCasesContainerViewController.m; sourceTree = "<group>"; };
 		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
@@ -526,6 +530,8 @@
 				0A3C8C341978C03A00ED1667 /* ic_nav_map_normal@2x.png */,
 				0A237691197ED7C4000E4AA1 /* appicon@2X.png */,
 				0A3C8C351978C03A00ED1667 /* ic_nav_map_selected@2x.png */,
+				0A2376AB197F8292000E4AA1 /* ic_navbar_close_normal@2x.png */,
+				0A2376AC197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png */,
 				0A3C8C361978C03A00ED1667 /* ic_photoGallery_active@2x.png */,
 				0A3C8C371978C03A00ED1667 /* ic_photoGallery_inactive@2x.png */,
 				0A3C8C381978C03A00ED1667 /* ic_search@2x.png */,
@@ -836,6 +842,7 @@
 				878845A2197B56650077A27A /* SubmissionValidationViewController.xib in Resources */,
 				0A3C8C451978C03A00ED1667 /* ic_nav_cases_selected@2x.png in Resources */,
 				0A3C8C4A1978C03A00ED1667 /* ic_photoGallery_active@2x.png in Resources */,
+				0A2376AE197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png in Resources */,
 				87B2002C197C88FF000D6CBD /* HappySunViewController.xib in Resources */,
 				0A3C8C491978C03A00ED1667 /* ic_nav_map_selected@2x.png in Resources */,
 				0A122E9C1969C2D4005894EB /* SignupViewController.xib in Resources */,
@@ -905,6 +912,7 @@
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
 				37BD756A197DB47A004BD913 /* ic_reports_violationType@2x.png in Resources */,
 				37BD7536197C9461004BD913 /* EmailFieldCell.xib in Resources */,
+				0A2376AD197F8292000E4AA1 /* ic_navbar_close_normal@2x.png in Resources */,
 				0A2FFB69197CE7970064E647 /* ic_signin_password@2x.png in Resources */,
 				0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */,
 				0A3C8C3C1978C03A00ED1667 /* btn_create_pressed@2x.png in Resources */,

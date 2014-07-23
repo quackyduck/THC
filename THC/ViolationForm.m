@@ -16,6 +16,8 @@
 @interface ViolationForm ()
 
 @property (strong, nonatomic) NSMutableDictionary *streetAddress;
+@property (nonatomic) CLLocationDistance closesetHotelDistance;
+@property (strong, nonatomic) NSString *closestHotel;
 
 @end
 
@@ -25,26 +27,28 @@
 {
     if ((self = [super init]))
     {
+        self.closesetHotelDistance = MAXFLOAT;
+        
         self.hotelBuildingNames = [NSMutableArray array];
         self.hotelBuildings     = [NSMutableDictionary dictionary];
         self.streetAddress      = [NSMutableDictionary dictionary];
         
-        PFQuery *query = [PFQuery queryWithClassName:@"Building"];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
-            if (!error) {
-                for (Building *building in buildings) {
-                    [self.hotelBuildingNames addObject:building.buildingName];
-                    self.hotelBuildings[building.buildingName] = building;
-                    self.streetAddress[building.streetAddress] = building.buildingName;
-                }
-//                NSLog(@"street address %@", self.streetAddress);
-                [self.hotelBuildingNames addObject:@"Other"];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
-                
-            } else {
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
+        self.selectedHotel = @"Boyd Hotel";
+        
+//        PFQuery *query = [PFQuery queryWithClassName:@"Building"];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
+//            if (!error) {
+//                for (Building *building in buildings) {
+//                    [self.hotelBuildingNames addObject:building.buildingName];
+//                    self.hotelBuildings[building.buildingName] = building;
+//                    self.streetAddress[building.streetAddress] = building.buildingName;
+//                }
+////                [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
+//                
+//            } else {
+//                NSLog(@"Error: %@ %@", error, [error userInfo]);
+//            }
+//        }];
     }
     return self;
 }
@@ -68,6 +72,99 @@
         return YES;
     }
     return NO;
+}
+
+- (void)populateHotelsWithSuccess:(void (^)(BOOL success))completion error:(void (^)(NSError*))onError {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Building"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
+        if (!error) {
+            NSLog(@"Got buildings!");
+            for (Building *building in buildings) {
+                [self.hotelBuildingNames addObject:building.buildingName];
+                self.hotelBuildings[building.buildingName] = building;
+                self.streetAddress[building.streetAddress] = building.buildingName;
+            }
+            completion(YES);
+
+            //                NSLog(@"street address %@", self.streetAddress);
+            //                [self.hotelBuildingNames addObject:@"Other"];
+            //                [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
+            
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            onError(error);
+        }
+    }];
+}
+
+//- (void)computeHotelDistancesFromLocation:(CLLocation*)userLocation {
+//    
+//    NSArray *hotels = self.hotelBuildingNames;
+//    for (NSString *hotel in hotels) {
+//        Building *building = [self.hotelBuildings objectForKey:hotel];
+//        NSString *streetAddress = [NSString stringWithFormat:@"%@, San Francisco, California", building.streetAddress];
+//        
+//        CLGeocoder *sanFranciscoGeo = [[CLGeocoder alloc] init];
+//        [sanFranciscoGeo geocodeAddressString:streetAddress
+//                            completionHandler:^(NSArray *placemarks, NSError *error){
+//                                
+//                                // Make sure the geocoder did not produce an error
+//                                // before coninuing
+//                                if(!error){
+//                                    
+//                                    // Iterate through all of the placemarks returned
+//                                    // and output them to the console
+//                                    for(CLPlacemark *placemark in placemarks){
+//                                        NSLog(@"----------------\n");
+//                                        NSLog(@"hotel %@:   %@", hotel, [placemark description]);
+//                                        CLLocationDistance distance = [userLocation distanceFromLocation:placemark.location];
+//                                        if (distance < self.closesetHotelDistance) {
+//                                            self.closesetHotelDistance = distance;
+//                                            NSLog(@"Closest distance: %f", self.closesetHotelDistance);
+//                                        }
+//                                        NSLog(@"\n");
+//                                        NSLog(@"distance from  your location %f", distance);
+//                                        NSLog(@"---------------\n");
+//                                    }
+//                                }
+//                                else{
+//                                    // Our geocoder had an error, output a message
+//                                    // to the console
+//                                    NSLog(@"There was a forward geocoding error\n%@",
+//                                          [error localizedDescription]);
+//                                }
+//                            }
+//         ];
+//        
+//    }
+//}
+
+- (NSString *)computeHotelDistancesFromLocation:(CLLocation*)userLocation {
+    
+    NSArray *hotels = self.hotelBuildingNames;
+    for (NSString *hotel in hotels) {
+        Building *building = [self.hotelBuildings objectForKey:hotel];
+        
+        CLLocation *hotelLocation = [[CLLocation alloc] initWithLatitude:building.latitude longitude:building.longitude];
+        CLLocationDistance distance = [userLocation distanceFromLocation:hotelLocation];
+        if (distance < self.closesetHotelDistance) {
+            self.closesetHotelDistance = distance;
+            self.closestHotel = hotel;
+        }
+     }
+    NSLog(@"%@ is the closest hotel, it is %f meters", self.closestHotel, self.closesetHotelDistance);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Nearest Hotel Retrieved" object:self];
+
+    return self.closestHotel;
+}
+
+- (void)assignNearestHotel {
+    if (self.closestHotel) {
+        self.selectedHotel = self.closestHotel;
+    } else {
+        self.selectedHotel = @"Boyd Hotel";
+    }
 }
 
 - (void)setCase:(Case*) caseInfo {

@@ -63,6 +63,9 @@
 @property (strong, nonatomic) NSIndexPath             *currentIndexPath;
 @property (strong, nonatomic) ViolationForm           *violationForm;
 @property (assign)            BOOL                    showFilledForm;
+@property (strong, nonatomic) CLLocationManager       *locationManager;
+@property (nonatomic) CLLocationDegrees currentLatitude;
+@property (nonatomic) CLLocationDegrees currentLongitude;
 
 
 @end
@@ -96,6 +99,13 @@ SubmitCell                      *_stubSubmitCell;
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+
+    if (self.locationManager) {
+        [self.locationManager stopUpdatingLocation];
+    }
+}
+
 - (void)initializeView {
     
     // This commented code blends the navigation bar with the tble view
@@ -114,7 +124,7 @@ SubmitCell                      *_stubSubmitCell;
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 //                                                                                           target:self
 //                                                                                           action:@selector(cancelButtonAction)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_navbar_close_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
 
 //    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = orangeColor;
@@ -129,6 +139,11 @@ SubmitCell                      *_stubSubmitCell;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshForm)
                                                  name:@"Addresses Retrieved"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshFormWithNearestHotel)
+                                                 name:@"Nearest Hotel Retrieved"
                                                object:nil];
     
     // This is old FXForm code
@@ -174,8 +189,16 @@ SubmitCell                      *_stubSubmitCell;
     
     if (!self.violationForm) {
         self.violationForm = [[ViolationForm alloc] init];
+        [self.violationForm populateHotelsWithSuccess:^(BOOL success) {
+            [self startLocationManager];
+        } error:^(NSError *error) {
+            NSLog(@"Could not get the Hotel");
+        }];
+        
         self.showFilledForm = [self.violationForm addloggedInUserDetails];
 //        self.showFilledForm = NO;
+//        [self startLocationManager];
+        
     }
     
     [self registerFieldCells];
@@ -778,6 +801,13 @@ SubmitCell                      *_stubSubmitCell;
 //    self.formController.form = self.formController.form;
     [self.tableView reloadData];
 }
+
+- (void)refreshFormWithNearestHotel {
+    [self.violationForm assignNearestHotel];
+    self.showFilledForm = YES;
+
+    [self.tableView reloadData];
+}
 - (void)addOtherLanguage:(UITableViewCell<FXFormFieldCell> *)cell {
     ViolationSubmissionForm *form =  (ViolationSubmissionForm *) cell.field.form;
     if ([form.languagesSpoken isEqualToString:@"Other"]) {
@@ -866,8 +896,8 @@ SubmitCell                      *_stubSubmitCell;
     [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:imageDataList completion:^(Case* createdCase){
         SubmissionValidationViewController *submissionvc =
         [[SubmissionValidationViewController alloc] initWithCase:createdCase withTopPhoto:firstImage];
-        UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:submissionvc];
-        [self presentViewController:nvc animated:YES completion:nil];
+//        UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:submissionvc];
+        [self presentViewController:submissionvc animated:YES completion:nil];
     } error:^(NSError * onError) {
         NSLog(@"Error creating Case!");
     }];
@@ -1231,6 +1261,37 @@ SubmitCell                      *_stubSubmitCell;
         
     }];
 
+}
+
+#pragma Location
+
+- (void)startLocationManager {
+    if(!self.locationManager)
+        self.locationManager = [[CLLocationManager alloc] init];
+    
+    // Set Location Manager delegate
+    [self.locationManager setDelegate:self];
+    
+    // Set location accuracy levels
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    
+    // Update again when a user moves distance in meters
+    [self.locationManager setDistanceFilter:15];
+        
+    // Start updating location
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    //NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
+    //NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    self.currentLatitude = newLocation.coordinate.latitude;
+    self.currentLongitude = newLocation.coordinate.longitude;
+    
+    if (self.violationForm) {
+        [self.violationForm computeHotelDistancesFromLocation:newLocation ];
+        NSLog(@"Done with computeHotelDistancesFromLocation");
+    }
 }
 
 #pragma Image Removal
