@@ -53,7 +53,7 @@
         //// buttonOutline Drawing
         UIBezierPath* buttonOutlinePath = [UIBezierPath bezierPathWithRect: CGRectMake(rect.origin.x, rect.origin.y, 318, 48)];
         CGContextSaveGState(context);
-        CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [buttonShadow CGColor]);
+//        CGContextSetShadowWithColor(context, buttonShadowOffset, buttonShadowBlurRadius, [buttonShadow CGColor]);
         [tHCButtonGray setFill];
         [buttonOutlinePath fill];
         CGContextRestoreGState(context);

@@ -48,6 +48,18 @@
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
     [self selectedNearbyButton];
+    
+    [self.containerView.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [self.containerView.layer setShadowOpacity:.35f];
+    [self.containerView.layer setShadowRadius:1];
+    [self.containerView.layer setShadowOffset:CGSizeMake(1, 1)];
+    
+    [self.createReportButton.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [self.createReportButton.layer setShadowOpacity:.35f];
+    [self.createReportButton.layer setShadowRadius:1];
+    [self.createReportButton.layer setShadowOffset:CGSizeMake(1, 1)];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

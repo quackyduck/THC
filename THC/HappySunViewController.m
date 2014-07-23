@@ -98,8 +98,8 @@
     UIImageView *gradientImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, gradient.size.width, gradient.size.height)];
     gradientImageView.image = gradient;
     
-    UIView *mainContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 307, 330)];
-    mainContainer.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:230.0/255.0 blue:195.0/255.0 alpha:1];
+    UIView *mainContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 306, 416)];
+    mainContainer.backgroundColor = [UIColor colorWithRed:247.0f/255.0f green:230.0f/255.0f blue:195.0f/255.0f alpha:1];
     
     [cloudBackContainer addSubview:self.cloudImageView1];
     [cloudBackContainer addSubview:self.cloudImageView2];
