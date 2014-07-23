@@ -114,7 +114,7 @@ SubmitCell                      *_stubSubmitCell;
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 //                                                                                           target:self
 //                                                                                           action:@selector(cancelButtonAction)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_navbar_close_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
 
 //    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = orangeColor;
