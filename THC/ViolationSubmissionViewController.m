@@ -866,8 +866,8 @@ SubmitCell                      *_stubSubmitCell;
     [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:imageDataList completion:^(Case* createdCase){
         SubmissionValidationViewController *submissionvc =
         [[SubmissionValidationViewController alloc] initWithCase:createdCase withTopPhoto:firstImage];
-        UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:submissionvc];
-        [self presentViewController:nvc animated:YES completion:nil];
+//        UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:submissionvc];
+        [self presentViewController:submissionvc animated:YES completion:nil];
     } error:^(NSError * onError) {
         NSLog(@"Error creating Case!");
     }];

@@ -49,7 +49,7 @@
 {
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
-    [self selectedNearbyButton];
+    
     
     [self.containerView.layer setShadowColor:[[UIColor blackColor] CGColor]];
     [self.containerView.layer setShadowOpacity:.35f];
@@ -76,6 +76,8 @@
         } else {
             NSLog(@"No user logged in.");
         }
+    } else {
+        [self selectedNearbyButton];
     }
 }
 

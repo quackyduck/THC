@@ -50,17 +50,17 @@
 {
     [super viewDidLoad];
     
-    UIColor * orangeNavBarColor = [UIColor orangeColor];
+    UIColor * orangeNavBarColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
     
     self.view.backgroundColor = orangeNavBarColor;
-    self.navigationController.navigationBar.barTintColor = orangeNavBarColor;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationItem.title = @"Violation Submitted";
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_check_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(backToEditView)];
+//    self.navigationController.navigationBar.barTintColor = orangeNavBarColor;
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    self.navigationItem.title = @"Violation Submitted";
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+//    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_check_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(backToEditView)];
     
     [self.violationImageView setImage:self.firstPhoto];
             
@@ -95,7 +95,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dismissView
+- (IBAction)dismissView:(id)sender
 {
     [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 //    [self dismissViewControllerAnimated:YES completion:nil];
@@ -109,6 +109,6 @@
 }
 
 - (IBAction)onDownSwipe:(UISwipeGestureRecognizer *)sender {
-    [self dismissView];
+    [self dismissView:self];
 }
 @end
