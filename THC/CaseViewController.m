@@ -281,7 +281,12 @@
                                                            orientation:photoObject.orientation];
                             self.cachedPhoto = image;
                             cell.photoImageView.image = image;
-                            cell.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
+                            
+                            CGRectMake(cell.photoImageView.frame.origin.x, cell.photoImageView.frame.origin.y,
+                                       320, 240);
+                            
+                            
+                            cell.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
                         } else {
                             NSLog(@"Failed to get photo.");
                         }
@@ -307,13 +312,14 @@
         return height + 1;
     } else if (indexPath.section == 3) {
         
-        [self configurePhotoCell:self.offscreenPhotoCell];
-        self.offscreenPhotoCell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
-        [self.offscreenPhotoCell layoutSubviews];
-        CGFloat height = [self.offscreenPhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        
-        NSLog(@"Photos with height %f", height);
-        return height + 1;
+//        [self configurePhotoCell:self.offscreenPhotoCell];
+//        self.offscreenPhotoCell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
+//        [self.offscreenPhotoCell layoutSubviews];
+//        CGFloat height = [self.offscreenPhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//        
+//        NSLog(@"Photos with height %f", height);
+//        return height + 1;
+        return 241;
     }
     
     [self configureDetailCell:self.offscreenDetailCell forRowAtIndexPath:indexPath];
