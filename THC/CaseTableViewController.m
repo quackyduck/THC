@@ -189,7 +189,7 @@
     self.caseTableView.scrollEnabled = YES;
 	
     PFQuery *query = [Case query];
-    [query whereKey:@"caseId" equalTo:searchBar.text];
+    [query whereKey:@"objectId" equalTo:searchBar.text];
     [self queryForCases:query];
 }
 
