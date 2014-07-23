@@ -24,6 +24,7 @@
 #import "MultiUnitFieldCell.h"
 #import "SubmitCell.h"
 #import "SubmissionValidationViewController.h"
+#import "MBProgressHUD.h"
 
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
@@ -52,6 +53,7 @@
 @property (strong, nonatomic) NSString                *violationDescription;
 @property (strong, nonatomic) Case                    *myCase;
 @property (strong, nonatomic) NSMutableArray          *imagesInScroll;
+@property (strong, nonatomic) NSMutableArray          *imagesToSubmit;
 @property (strong, nonatomic) NSMutableArray          *deleteImagesInScroll;
 @property (strong, nonatomic) UIImagePickerController *picker;
 @property (weak, nonatomic) IBOutlet UIScrollView     *scrollView;
@@ -244,6 +246,7 @@ SubmitCell                      *_stubSubmitCell;
 
         
         self.imagesInScroll = [NSMutableArray array];
+        self.imagesToSubmit = [NSMutableArray array];
         self.deleteImagesInScroll = [NSMutableArray array];
 
         
@@ -441,7 +444,7 @@ SubmitCell                      *_stubSubmitCell;
         //        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
         NSLog(@"table row would move upwards");
         self.tableView.contentInset = contentInsets;
-        [self.tableView scrollToRowAtIndexPath:self.currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [self.tableView scrollToRowAtIndexPath:self.currentIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
 }
 
@@ -879,21 +882,35 @@ SubmitCell                      *_stubSubmitCell;
 - (void)submitForm {
 //    [self.violationForm dumpFormContent];
     
-    NSMutableArray *imageDataList = nil;
+//    NSMutableArray *imageDataList = nil;
     UIImage* firstImage;
     
-    if ([self.imagesInScroll count]) {
-        imageDataList = [NSMutableArray array];
-        for (UIImageView *imageView in self.imagesInScroll) {
-            NSData  *imageData = UIImageJPEGRepresentation(imageView.image, 0);
-            [imageDataList addObject:imageData];
-        }
+    if ([self.imagesToSubmit count]) {
+//        imageDataList = [NSMutableArray array];
+//        for (NSData *imageData in self.imagesToSubmit) {
+//            [imageDataList addObject:imageData];
+//        }
         firstImage = ((UIImageView*)(self.imagesInScroll[0])).image;
     } else
     {
         firstImage = nil;
     }
-    [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:imageDataList completion:^(Case* createdCase){
+    
+//    if ([self.imagesInScroll count]) {
+//        imageDataList = [NSMutableArray array];
+//        for (UIImageView *imageView in self.imagesInScroll) {
+//            NSData  *imageData = UIImageJPEGRepresentation(imageView.image, 0);
+//            [imageDataList addObject:imageData];
+//        }
+//        firstImage = ((UIImageView*)(self.imagesInScroll[0])).image;
+//    } else
+//    {
+//        firstImage = nil;
+//    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:self.imagesToSubmit completion:^(Case* createdCase){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         SubmissionValidationViewController *submissionvc =
         [[SubmissionValidationViewController alloc] initWithCase:createdCase withTopPhoto:firstImage];
 //        UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:submissionvc];
@@ -979,25 +996,36 @@ SubmitCell                      *_stubSubmitCell;
 //        self.pageControl.hidden = NO;
 //        self.pageControl.numberOfPages = assets.count;
         
-        int index = 1;
-        
         
         [self.imagesInScroll removeAllObjects];
+        [self.imagesToSubmit removeAllObjects];
+        
+//        [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
+
+        
+        int index = 1;
+        
         for (ALAsset *asset in assets) {
             
-
-//            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
-
+            
+            //            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
+            
             CGRect imageViewFrame = CGRectInset(self.scrollView.bounds, padding, padding);
-//            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
-
+            //            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
+            
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index + padding;
-//            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
             
-            //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *fullResImage = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+                
+                NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
+                [self.imagesToSubmit addObject:imageData];
+            });
+            
             
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             imageView.frame = imageViewFrame;
@@ -1009,18 +1037,18 @@ SubmitCell                      *_stubSubmitCell;
             imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
-
-
+            
+            
             CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
             deleteFrame.origin.x += width - 4*padding;
             deleteFrame.origin.y -= 2*padding;
             deleteFrame.size.height = 4*padding;
             deleteFrame.size.width  = 4*padding;
             UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
-//            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
+            //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
             tap.numberOfTapsRequired = 1;
-
+            
             [deleteImageView addGestureRecognizer:tap];
             deleteImageView.userInteractionEnabled = YES;
             deleteImageView.tag = [self.imagesInScroll count];
@@ -1029,13 +1057,15 @@ SubmitCell                      *_stubSubmitCell;
             
             
             [self.scrollView addSubview:imageView];
-
+            
             [self.scrollView addSubview:deleteImageView];
             [self.imagesInScroll addObject:imageView];
             [self.deleteImagesInScroll addObject:deleteImageView];
             
         }
         
+//        [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
+
         [self.activityView stopAnimating];
         
         [self.scrollView flashScrollIndicators];
@@ -1092,6 +1122,7 @@ SubmitCell                      *_stubSubmitCell;
         int index = 1;
         
         [self.imagesInScroll removeAllObjects];
+        [self.imagesToSubmit removeAllObjects];
         
         for (UIImage *image in selectedImages) {
             
@@ -1103,6 +1134,10 @@ SubmitCell                      *_stubSubmitCell;
             
             //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
             
+            NSData  *imageData = UIImageJPEGRepresentation(image, 7);
+            [self.imagesToSubmit addObject:imageData];
+
+
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             imageView.frame = imageViewFrame;
             //imageView.contentMode = UIViewContentModeCenter;
@@ -1198,6 +1233,7 @@ SubmitCell                      *_stubSubmitCell;
         CGRect nextFrame;
         [imageView removeFromSuperview];
         [self.imagesInScroll removeObjectAtIndex:tap.view.tag];
+        [self.imagesToSubmit removeObjectAtIndex:tap.view.tag];
         
         CGRect deleteImageFrame = tap.view.frame;
         CGRect nextDeleteImageFrame;
