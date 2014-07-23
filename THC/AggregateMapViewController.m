@@ -15,10 +15,12 @@
 #import <Parse/Parse.h>
 #import "Building.h"
 #import "BuildingAnnotationView.h"
+#import "BuildingCalloutView.h"
+#import "BuildingMapPin.h"
+#import "BuildingPhoto.h"
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 @property (strong, nonatomic) NSMutableDictionary *buildingInfo;
 
 @end
@@ -119,11 +121,56 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     static NSString* AnnotationIdentifier = @"Annotation";
-    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
+    BuildingMapPin *annotationView = (BuildingMapPin *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
+    
+    annotationView.canShowCallout = YES;
+    
     if (!annotationView) {
         
-        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        annotationView = [[BuildingMapPin alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        annotationView.canShowCallout = YES;
+        
         Building *building = (Building *)annotation;
+        
+//        UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
+//        NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
+//        
+//        BuildingCalloutView *buildingCallout = nibs[0];
+//        
+//        annotationView.calloutView = buildingCallout;
+        
+        
+        //Get first image to show
+        PFQuery *photoQuery = [BuildingPhoto query];
+        [photoQuery whereKey:@"buildingId" equalTo:building.objectId];
+        [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count > 0)
+                {
+                    BuildingPhoto* photoObject = objects[0];
+                    PFFile *photo = photoObject.image;
+                    [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                        if (!photoError) {
+                            NSData *imageData = data;
+                            UIImage *image = [UIImage imageWithData:imageData];
+                            
+                            CGRect resizeRect = CGRectMake(0, 0, 32, 32);
+                            UIGraphicsBeginImageContext(resizeRect.size);
+                            [image drawInRect:resizeRect];
+                            UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+                            UIGraphicsEndImageContext();
+                            annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:resizedImage];
+
+                        }
+                    }];
+                    
+                }
+            }
+        }];
+        
+        
+        
+        
         
         PFQuery *query = [PFQuery queryWithClassName:@"Case"];
         [query whereKey:@"buildingId" equalTo:building.objectId];
@@ -157,9 +204,19 @@
         annotationView.annotation = annotation;
     }
     
-    annotationView.canShowCallout = YES;
-    
     return annotationView;
 }
+
+//- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+//    NSLog(@"Selected ...");
+//    
+//    UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
+//    NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
+//    
+//    BuildingCalloutView *buildingCallout = nibs[0];
+//    
+//    [view addSubview:buildingCallout];
+//    
+//}
 
 @end

@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AggregateMapViewController">
             <connections>
                 <outlet property="mapView" destination="PFC-2y-Xzj" id="yFm-Fd-hkT"/>
-                <outlet property="tapGestureRecognizer" destination="7vj-ZN-Ipo" id="XkP-PE-iyK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,9 +19,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <gestureRecognizers/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="7vj-ZN-Ipo" appends="YES" id="GpL-xa-tFe"/>
-                    </connections>
                 </mapView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -35,10 +31,5 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
-        <tapGestureRecognizer id="7vj-ZN-Ipo">
-            <connections>
-                <action selector="onTap:" destination="-1" id="H3O-p2-ECc"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>
