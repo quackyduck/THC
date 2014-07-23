@@ -24,6 +24,8 @@
 		0A2376AA197F2D09000E4AA1 /* btn_map_pin_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376A7197F2D09000E4AA1 /* btn_map_pin_selected@2x.png */; };
 		0A2376AD197F8292000E4AA1 /* ic_navbar_close_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376AB197F8292000E4AA1 /* ic_navbar_close_normal@2x.png */; };
 		0A2376AE197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376AC197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png */; };
+		0A2376B1197F917F000E4AA1 /* BuildingCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2376B0197F917F000E4AA1 /* BuildingCalloutView.m */; };
+		0A2376B3197F9196000E4AA1 /* BuildingCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2376B2197F9196000E4AA1 /* BuildingCalloutView.xib */; };
 		0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */; };
 		0A2835571971D863008A5FC7 /* ExploreCasesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */; };
 		0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28355919721499008A5FC7 /* CreateReportButton.m */; };
@@ -203,6 +205,9 @@
 		0A2376A7197F2D09000E4AA1 /* btn_map_pin_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_map_pin_selected@2x.png"; sourceTree = "<group>"; };
 		0A2376AB197F8292000E4AA1 /* ic_navbar_close_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_navbar_close_normal@2x.png"; sourceTree = "<group>"; };
 		0A2376AC197F8292000E4AA1 /* ic_navbar_close_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_navbar_close_pressed@2x.png"; sourceTree = "<group>"; };
+		0A2376AF197F917F000E4AA1 /* BuildingCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingCalloutView.h; sourceTree = "<group>"; };
+		0A2376B0197F917F000E4AA1 /* BuildingCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingCalloutView.m; sourceTree = "<group>"; };
+		0A2376B2197F9196000E4AA1 /* BuildingCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingCalloutView.xib; sourceTree = "<group>"; };
 		0A2835531971D863008A5FC7 /* ExploreCasesContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCasesContainerViewController.h; sourceTree = "<group>"; };
 		0A2835541971D863008A5FC7 /* ExploreCasesContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCasesContainerViewController.m; sourceTree = "<group>"; };
 		0A2835551971D863008A5FC7 /* ExploreCasesContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCasesContainerViewController.xib; sourceTree = "<group>"; };
@@ -696,6 +701,9 @@
 				0A23769D197EF0F3000E4AA1 /* DetailPhotoCell.h */,
 				0A23769E197EF0F3000E4AA1 /* DetailPhotoCell.m */,
 				0A23769F197EF0F3000E4AA1 /* DetailPhotoCell.xib */,
+				0A2376AF197F917F000E4AA1 /* BuildingCalloutView.h */,
+				0A2376B0197F917F000E4AA1 /* BuildingCalloutView.m */,
+				0A2376B2197F9196000E4AA1 /* BuildingCalloutView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -903,6 +911,7 @@
 				37BD753C197C94ED004BD913 /* ic_reports_phone@2x.png in Resources */,
 				0A2FFB6B197CEAC90064E647 /* ic_signin_username@2x.png in Resources */,
 				0A2376A1197EF0F3000E4AA1 /* DetailPhotoCell.xib in Resources */,
+				0A2376B3197F9196000E4AA1 /* BuildingCalloutView.xib in Resources */,
 				37BD7564197CBA1F004BD913 /* btn_selected_remove_pressed@2x.png in Resources */,
 				37BD7549197CB7C1004BD913 /* HotelFieldCell.xib in Resources */,
 				377D16B51967BE1D004E4E67 /* ViolationSubmissionViewController.xib in Resources */,
@@ -1006,6 +1015,7 @@
 				0A28355A19721499008A5FC7 /* CreateReportButton.m in Sources */,
 				37BD74BC1974276B004BD913 /* AssetWrapper.m in Sources */,
 				0AF08BBE1964EC94002761B9 /* main.m in Sources */,
+				0A2376B1197F917F000E4AA1 /* BuildingCalloutView.m in Sources */,
 				37BD74C519742839004BD913 /* AlbumListController.m in Sources */,
 				37BD74BF197427D5004BD913 /* PhotoCell.m in Sources */,
 				377D170C1969E75F004E4E67 /* ViolationDescriptionViewController.m in Sources */,
