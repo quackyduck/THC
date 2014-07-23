@@ -120,6 +120,7 @@
     
     AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
     UINavigationController *nvc = self.tabViewControllers[1];
+    nvc.navigationBar.hidden = YES;
     HappySunViewController *happySunVC = self.tabViewControllers[2];
     if ([PFUser currentUser] != nil)
     {

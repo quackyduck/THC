@@ -97,10 +97,10 @@
 
 - (void)dismissView
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    ExploreCasesContainerViewController *xvc = [[ExploreCasesContainerViewController alloc] init];
-    [self presentViewController:xvc animated:NO completion:nil];
-    
+    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    ExploreCasesContainerViewController *xvc = [[ExploreCasesContainerViewController alloc] init];
+//    [self presentViewController:xvc animated:NO completion:nil];
 }
 
 - (void)backToEditView
