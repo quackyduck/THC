@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Describe the Violation" translatesAutoresizingMaskIntoConstraints="NO" id="hBg-h4-NWV">
-                        <rect key="frame" x="44" y="8" width="267" height="31"/>
+                        <rect key="frame" x="44" y="8" width="267" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,7 +33,7 @@
                 <constraints>
                     <constraint firstItem="Evx-cc-BfE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="3GV-mp-ez7"/>
                     <constraint firstItem="hBg-h4-NWV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="IeW-SY-gGS"/>
-                    <constraint firstAttribute="bottom" secondItem="hBg-h4-NWV" secondAttribute="bottom" constant="20" id="JEH-eN-89k"/>
+                    <constraint firstAttribute="bottom" secondItem="hBg-h4-NWV" secondAttribute="bottom" constant="8" id="JEH-eN-89k"/>
                     <constraint firstItem="hBg-h4-NWV" firstAttribute="leading" secondItem="Evx-cc-BfE" secondAttribute="trailing" constant="4" id="LKG-PK-d1M"/>
                     <constraint firstAttribute="trailing" secondItem="hBg-h4-NWV" secondAttribute="trailing" constant="9" id="gC1-fi-xpb"/>
                     <constraint firstItem="Evx-cc-BfE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="k5C-kq-U72"/>

@@ -13,6 +13,12 @@
 #import "DetailViewTableHeader.h"
 #import "ContactInfoButton.h"
 #import "DetailFooterView.h"
+#import "ViolationSubmissionViewController.h"
+#import "SendEmailButton.h"
+#import "DetailPhotoCell.h"
+#import "PhotoInfo.h"
+
+#import <MessageUI/MFMailComposeViewController.h>
 
 @interface CaseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -20,11 +26,13 @@
 @property (strong, nonatomic) DetailViewTableHeader *offscreenHeaderView;
 @property (strong, nonatomic) DetailContentTableViewCell *offscreenDetailCell;
 @property (strong, nonatomic) ContactInfoCell *offscreenContactDetailCell;
+@property (strong, nonatomic) DetailPhotoCell *offscreenPhotoCell;
 @property (strong, nonatomic) DetailFooterView *footerView;
 @property (strong, nonatomic) UIImage *emailImageNormal;
 @property (strong, nonatomic) UIImage *emailImagePressed;
 @property (strong, nonatomic) UIImage *phoneImageNormal;
 @property (strong, nonatomic) UIImage *phoneImagePressed;
+@property (strong, nonatomic) UIImage *cachedPhoto;
 
 @end
 
@@ -92,6 +100,12 @@
     UINib *footerNib = [UINib nibWithNibName:@"DetailFooterView" bundle:nil];
     NSArray *footerNibs = [footerNib instantiateWithOwner:nil options:nil];
     self.footerView = footerNibs[0];
+    [self.footerView.sendEmailButton addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UINib *detailPhotoNib = [UINib nibWithNibName:@"DetailPhotoCell" bundle:nil];
+    NSArray *detailPhotoNibs = [detailPhotoNib instantiateWithOwner:nil options:nil];
+    self.offscreenPhotoCell = detailPhotoNibs[0];
+    [self.tableView registerNib:detailPhotoNib forCellReuseIdentifier:@"PhotoCell"];
     
 }
 
@@ -101,7 +115,42 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)sendEmail:(id)sender {
+    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+    controller.mailComposeDelegate = self;
+    [controller setSubject:[NSString stringWithFormat:@"Case #%@", self.caseInfo.objectId]];
+    [controller setMessageBody:[NSString stringWithFormat:@"Description:\n%@", self.caseInfo.violationDetails] isHTML:NO];
+    [controller setToRecipients:@[@"issues@thc.org"]];
+    
+    if (self.cachedPhoto) {
+    
+        [controller addAttachmentData:UIImageJPEGRepresentation(self.cachedPhoto, 1) mimeType:@"image/jpeg" fileName:@"Photo.jpeg"];
+    }
+    if (controller) {
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"It's away!");
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)editForm:(id)sender {
+    
+    ViolationSubmissionViewController *vsc = [[ViolationSubmissionViewController alloc] init];
+    ViolationForm *violationForm = [[ViolationForm alloc] init];
+    [violationForm setCase:self.caseInfo];
+    
+    [vsc setPrefilledForm:violationForm];
+    
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vsc];
+    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+    
+    [self presentViewController:nvc animated:YES completion:nil];
     
 }
 
@@ -201,12 +250,46 @@
         
     } else if (indexPath.section == 2) {
         cell.titleLabel.text = @"Reported 3 months ago";
-        cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
+        cell.contentLabel.text = self.caseInfo.violationDetails;
         
     } else if (indexPath.section == 4) {
         cell.titleLabel.text = @"Notes";
-        cell.contentLabel.text = @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.";
+        cell.contentLabel.text = self.caseInfo.violationDetails;
     }
+}
+
+- (void)configurePhotoCell:(DetailPhotoCell *)cell {
+    
+    NSArray *photos = self.caseInfo.photoIdList;
+    if (photos) {
+        
+        PFQuery *query = [PhotoInfo query];
+        [query whereKey:@"objectId" equalTo:photos[0]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count > 0) {
+                    PhotoInfo* photoObject = objects[0];
+                    PFFile *photo = photoObject.image;
+                    [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                        if (!photoError) {
+                            NSData *imageData = data;
+                            UIImage *image = [UIImage imageWithData:imageData];
+                            self.cachedPhoto = image;
+                            cell.photoImageView.image = image;
+                        } else {
+                            NSLog(@"Failed to get photo.");
+                        }
+                    }];
+                }
+            }
+        }];
+        
+    } else {
+        cell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
+    }
+    
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -217,8 +300,14 @@
         NSLog(@"Layout email and phone buttons at height %f", height);
         return height + 1;
     } else if (indexPath.section == 3) {
-        NSLog(@"Photos");
-        return 100;
+        
+        [self configurePhotoCell:self.offscreenPhotoCell];
+        self.offscreenPhotoCell.photoImageView.image = [UIImage imageNamed:@"default-568h"];
+        [self.offscreenPhotoCell layoutSubviews];
+        CGFloat height = [self.offscreenPhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        
+        NSLog(@"Photos with height %f", height);
+        return height + 1;
     }
     
     [self configureDetailCell:self.offscreenDetailCell forRowAtIndexPath:indexPath];
@@ -283,10 +372,9 @@
         return detailCell;
         
     } else if (indexPath.section == 3) {
-        UITableViewCell *cell = [[UITableViewCell alloc] init];
-        cell.textLabel.text = @"Boom!";
-        
-        return cell;
+        DetailPhotoCell *photoCell = [self.tableView dequeueReusableCellWithIdentifier:@"PhotoCell"];
+        [self configurePhotoCell:photoCell];
+        return photoCell;
         
     } else if (indexPath.section == 4) {
         DetailContentTableViewCell *detailCell = [self.tableView dequeueReusableCellWithIdentifier:@"DetailContentTableViewCell"];

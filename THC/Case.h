@@ -25,7 +25,8 @@ typedef enum {
 @property (retain) NSString *phoneNumber;
 @property (retain) NSString *email;
 @property (retain) NSString *languageSpoken;
-@property (retain) NSString *description;
+//@property (retain) NSString *description;
+@property (retain) NSString *violationDetails;
 @property (retain) NSString *violationType;
 @property (retain) NSString *userId;
 @property (assign) BOOL     multiUnitPetition;

@@ -145,7 +145,7 @@
     newCase.phoneNumber = self.phoneNumber;
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
-    newCase.description = self.description;
+//    newCase.description = self.description;
     newCase.userId = userId;
     newCase.status = caseOpen;
     
@@ -220,7 +220,7 @@
     newCase.phoneNumber = self.phoneNumber;
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
-    newCase.description = self.description;
+//    newCase.description = self.description;
     newCase.userId = userId;
     newCase.status = caseOpen;
     
@@ -284,7 +284,7 @@
     newCase.phoneNumber = self.phoneNumber;
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
-    newCase.description = self.description;
+//    newCase.description = self.description;
     newCase.userId = userId;
     newCase.status = caseOpen;
     

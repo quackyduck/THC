@@ -13,6 +13,12 @@
 #define languageList @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", nil}
 #define FieldList    @[@"name", @"languageSpoken", @"hotel", @"address", @"email", @"phone", @"violationDescription"]
 
+@interface ViolationForm ()
+
+@property (strong, nonatomic) NSMutableDictionary *streetAddress;
+
+@end
+
 @implementation ViolationForm
 
 - (id)init
@@ -21,6 +27,7 @@
     {
         self.hotelBuildingNames = [NSMutableArray array];
         self.hotelBuildings     = [NSMutableDictionary dictionary];
+        self.streetAddress      = [NSMutableDictionary dictionary];
         
         PFQuery *query = [PFQuery queryWithClassName:@"Building"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
@@ -28,7 +35,68 @@
                 for (Building *building in buildings) {
                     [self.hotelBuildingNames addObject:building.buildingName];
                     self.hotelBuildings[building.buildingName] = building;
+                    self.streetAddress[building.streetAddress] = building.buildingName;
                 }
+//                NSLog(@"street address %@", self.streetAddress);
+                [self.hotelBuildingNames addObject:@"Other"];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
+                
+            } else {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }
+    return self;
+}
+
+- (BOOL)addloggedInUserDetails {
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        if ([currentUser.username isEqualToString:@"hunaid@hotmail.com"]) {
+            self.name = @"Hunaid Hussain";
+        } else if ([currentUser.username isEqualToString:@"melo.nicolas@gmail.com"]) {
+            self.name = @"Nicolas Melo";
+        } else if ([currentUser.username isEqualToString:@"rosejonescolour@yahoo.com"]) {
+            self.name = @"Rose Jones";
+        } else if ([currentUser.username isEqualToString:@"test@gmail.com"]) {
+            self.name = @"Test Bot";
+        } else {
+            self.name = currentUser.username;
+        }
+        
+        self.email = currentUser.email;
+        return YES;
+    }
+    return NO;
+}
+
+- (void)setCase:(Case*) caseInfo {
+    self.caseInfo              = caseInfo;
+    self.name                  = caseInfo.name;
+    self.email                 = caseInfo.email;
+    self.phone                 = caseInfo.phoneNumber;
+    self.selectedHotel         = self.streetAddress[caseInfo.address];
+    self.unit                  = caseInfo.unit;
+    self.languageSpoken        = caseInfo.languageSpoken;
+    self.violationDescription  = caseInfo.violationDetails;
+    self.violationType         = caseInfo.violationType;
+    self.multiUnitPetiiton     = caseInfo.multiUnitPetition ? @"YES" : @"NO";
+    
+//    NSLog(@"case description %@", caseInfo.description);
+//    NSLog(@"self.streetAddress %@", self.streetAddress);
+//    NSLog(@"case address %@", caseInfo.address);
+    
+    if (caseInfo.address) {
+        PFQuery *query = [PFQuery queryWithClassName:@"Building"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *buildings, NSError *error) {
+            if (!error) {
+                for (Building *building in buildings) {
+                    [self.hotelBuildingNames addObject:building.buildingName];
+                    self.hotelBuildings[building.buildingName] = building;
+                    self.streetAddress[building.streetAddress] = building.buildingName;
+                }
+//                NSLog(@"street address %@", self.streetAddress);
+                self.selectedHotel = self.streetAddress[caseInfo.address];
                 [self.hotelBuildingNames addObject:@"Other"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Addresses Retrieved" object:self];
                 
@@ -37,7 +105,8 @@
             }
         }];
     }
-    return self;
+
+//    [self dumpFormContent];
 }
 
 - (void)setValue:(NSString *)value forField:(NSString *)field {
@@ -62,6 +131,31 @@
     }
 }
 
+- (NSString *)getValueForField:(NSString *)field {
+    
+    if ([field isEqualToString:@"name"]) {
+        return self.name;
+    } else if ([field isEqualToString:@"email"]) {
+        return self.email;
+    } else if ([field isEqualToString:@"unit"]) {
+        return self.unit;
+    } else if ([field isEqualToString:@"phone"]) {
+        return self.phone;
+    } else if ([field isEqualToString:@"selectedHotel"]) {
+        return self.selectedHotel;
+    } else if ([field isEqualToString:@"languageSpoken"]) {
+        return self.languageSpoken;
+    } else if ([field isEqualToString:@"violationDescription"]) {
+        return self.violationDescription ;
+    } else if ([field isEqualToString:@"violationType"]) {
+        return self.violationType;
+    } else if ([field isEqualToString:@"multiUnitPetiiton"]) {
+        return self.multiUnitPetiiton;
+    }
+
+    return nil;
+}
+
 - (void)dumpFormContent {
     NSLog(@"Name: %@", self.name);
     NSLog(@"Spoken Language: %@", self.languageSpoken);
@@ -84,7 +178,7 @@
     
     Case* newCase = [Case object];
     
-    NSLog(@"case id %@", newCase.objectId);
+//    NSLog(@"case id %@", newCase.objectId);
     
     Building *building = self.hotelBuildings[self.selectedHotel];
     
@@ -98,7 +192,9 @@
     newCase.phoneNumber = self.phone;
     newCase.email = self.email;
     newCase.languageSpoken = self.languageSpoken;
-    newCase.description = self.violationDescription;
+    newCase.violationDetails = self.violationDescription;
+//    NSLog(@"submitting case with description %@", self.violationDescription);
+//    NSLog(@"submitting case with description %@", newCase.description);
     newCase.multiUnitPetition = [self.multiUnitPetiiton boolValue];
     newCase.userId = userId;
     newCase.status = caseOpen;
@@ -107,6 +203,7 @@
             [newCase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
                     newCase.caseId = newCase.objectId;
+//                    NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
                     completion(newCase);
                 } else
                 {
@@ -119,7 +216,8 @@
             
             if (succeeded) {
                 
-                
+//                NSLog(@"submitted case with violationDetails %@", newCase.violationDetails);
+
                 NSMutableArray *photoObjectList = [NSMutableArray array];
                 
                 NSUInteger imageIndex = 1;
@@ -148,7 +246,7 @@
                             
                         }
                         newCase.photoIdList = photoIdList;
-                        NSLog(@"submitting case with %lu photos", (unsigned long)[photoIdList count]);
+//                        NSLog(@"submitting case with %lu photos", (unsigned long)[photoIdList count]);
                         //                    newCase.caseId = photoInfo.objectId;
                         [newCase saveInBackgroundWithBlock:^(BOOL updateSucceeded, NSError *caseUpdateError) {
                             if (updateSucceeded) {

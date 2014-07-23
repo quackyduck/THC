@@ -25,9 +25,16 @@
 @property (strong, nonatomic)   NSString   *multiUnitPetiiton;
 @property (strong, nonatomic)   NSMutableArray *hotelBuildingNames;
 @property (strong, nonatomic)   NSMutableDictionary *hotelBuildings;
+@property (strong, nonatomic)   Case                *caseInfo;
 
 
 - (void)setValue:(NSString *)value forField:(NSString *)field;
+- (NSString *)getValueForField:(NSString *)field;
+
+- (void)setCase:(Case*) caseInfo;
+
+- (BOOL)addloggedInUserDetails;
+
 - (void)dumpFormContent;
 
 - (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;

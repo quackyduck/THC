@@ -23,7 +23,6 @@
 }
 - (IBAction)editingFinished:(id)sender {
     
-    NSLog(@"Full name: %@", self.nameTextField.text);
     if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
@@ -34,10 +33,22 @@
     [sender resignFirstResponder];
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+            NSString *value = [self.delegate getValueForField:@"name"];
+            if (value != nil && ![value isEqualToString:@""]) {
+                self.nameTextField.text = value;
+            }
+//        });
+    }
+}
+
 #pragma keyboard delegates
 - (void)textViewDidChange:(UITextView *)textView {
     
-    NSLog(@"text written so far %@", textView.text);
+//    NSLog(@"text written so far %@", textView.text);
 
 }
 
@@ -48,7 +59,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    NSLog(@"Full name: %@", self.nameTextField.text);
+//    NSLog(@"Full name: %@", self.nameTextField.text);
     
     if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

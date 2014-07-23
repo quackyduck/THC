@@ -62,6 +62,7 @@
 @property (strong, nonatomic) UITapGestureRecognizer  *tapGestureRecognizer;
 @property (strong, nonatomic) NSIndexPath             *currentIndexPath;
 @property (strong, nonatomic) ViolationForm           *violationForm;
+@property (assign)            BOOL                    showFilledForm;
 
 
 @end
@@ -118,12 +119,7 @@ SubmitCell                      *_stubSubmitCell;
 //    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = orangeColor;
     
-//    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"ic_nav_back_normal@2x"];
-    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-//                                                                                          target:self
-//                                                                                          action:@selector(editForm)];
-//    
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit"
                                                                     style:UIBarButtonItemStylePlain
                                                                     target:self action:@selector(submitForm)];
@@ -176,7 +172,11 @@ SubmitCell                      *_stubSubmitCell;
     self.formFields = FormFields;
     self.formSectionHeader = FormSectionHeader;
     
-    self.violationForm = [[ViolationForm alloc] init];
+    if (!self.violationForm) {
+        self.violationForm = [[ViolationForm alloc] init];
+        self.showFilledForm = [self.violationForm addloggedInUserDetails];
+//        self.showFilledForm = NO;
+    }
     
     [self registerFieldCells];
     
@@ -220,7 +220,6 @@ SubmitCell                      *_stubSubmitCell;
         self.activityView.center = activityCenter;
 
         
-        //self.pageControl.numberOfPages = 0;
         self.imagesInScroll = [NSMutableArray array];
         self.deleteImagesInScroll = [NSMutableArray array];
 
@@ -240,21 +239,17 @@ SubmitCell                      *_stubSubmitCell;
         imageViewFrame.origin.y = padding;
         imageViewFrame.size.width = 70;
         imageViewFrame.size.height = 70;
-        NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.frame));
+//        NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.frame));
 
-        //NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
         
-        UIImage *image = [UIImage imageNamed:@"ic_report_camera"];
-//        NSLog(@"camera image %@", image);
+        UIImage *image = [UIImage imageNamed:@"ic_camera_add"];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//        imageView.backgroundColor = [UIColor blackColor];
         imageView.frame = imageViewFrame;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.layer.cornerRadius = 4.f;
         imageView.layer.borderWidth = 1.f;
         
-//        imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
         imageView.backgroundColor = [UIColor clearColor];
         imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
         [imageView setClipsToBounds:YES];
@@ -293,6 +288,14 @@ SubmitCell                      *_stubSubmitCell;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma Public Functions
+
+-(void) setPrefilledForm:(ViolationForm *) form {
+//    NSLog(@"using prefilled form");
+    self.showFilledForm = YES;
+    self.violationForm = form;
 }
 
 #pragma Register Field Cells
@@ -447,10 +450,7 @@ SubmitCell                      *_stubSubmitCell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    NSLog(@"num of rows %d", self.fields.count);
     NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)section]];
-    
-    NSLog(@"num of rows %lu", (unsigned long)sectionContent.count);
     
     return [sectionContent count];
 }
@@ -467,7 +467,12 @@ SubmitCell                      *_stubSubmitCell;
     
     if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *nameCell = (NameFieldCell *)cell;
-        nameCell.nameTextField.text = @"Testing";
+        nameCell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [nameCell getFieldValueFromform];
+        } else {
+            nameCell.nameTextField.text = @"Testing";
+        }
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         SpokenLanguageFieldCell *lanCell = (SpokenLanguageFieldCell *)cell;
         lanCell.languageLabel.text = @"Testing";
@@ -488,7 +493,12 @@ SubmitCell                      *_stubSubmitCell;
         unitCell.unitTextField.text = @"Testing";
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         ViolationDescriptionFieldCell *violationCell = (ViolationDescriptionFieldCell *)cell;
-        violationCell.violationDescriptionTextField.text = @"Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing TestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTesting";
+        violationCell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [violationCell getFieldValueFromform];
+        } else {
+            violationCell.violationDescriptionTextField.text = @"Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing TestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTesting";
+        }
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationTypeFieldCell *violationTypeCell = (ViolationTypeFieldCell *)cell;
         violationTypeCell.violationTypeTextField.text = @"Testing";
@@ -513,7 +523,7 @@ SubmitCell                      *_stubSubmitCell;
         [self configureCell:_stubNameCell atIndexPath:indexPath];
         [_stubNameCell layoutSubviews];
         height = [_stubNameCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-              height = 45;
+        height = 45;
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         [self configureCell:_stubLanguageCell atIndexPath:indexPath];
         [_stubLanguageCell layoutSubviews];
@@ -528,55 +538,50 @@ SubmitCell                      *_stubSubmitCell;
         height = 45;
     } else if ([fieldName isEqualToString:@"email"]) {
         [self configureCell:_stubEmailCell atIndexPath:indexPath];
-        //        NSLog(@"_stubEmailCell %@", _stubEmailCell);
         [_stubEmailCell layoutSubviews];
         height = [_stubEmailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
     } else if ([fieldName isEqualToString:@"phone"]) {
         [self configureCell:_stubPhoneCell atIndexPath:indexPath];
-        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
         [_stubPhoneCell layoutSubviews];
         height = 45;
         height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         [self configureCell:_stubHotelCell atIndexPath:indexPath];
-        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
         [_stubHotelCell layoutSubviews];
         height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     } else if ([fieldName isEqualToString:@"unit"]) {
         [self configureCell:_stubUnitCell atIndexPath:indexPath];
-        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
         [_stubUnitCell layoutSubviews];
         height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         [self configureCell:_stubViolationCell atIndexPath:indexPath];
-//        NSLog(@"_stubViolationCell %@", _stubViolationCell);
         [_stubViolationCell layoutSubviews];
         height = [_stubViolationCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        height = 59;
+//        NSLog(@"height for violation description cell: %f", height);
+        if (height < 59) {
+            height = 59;
+        }
 
     } else if ([fieldName isEqualToString:@"violationType"]) {
         [self configureCell:_stubViolationTypeCell atIndexPath:indexPath];
-//        NSLog(@"_stubViolationTypeCell %@", _stubViolationTypeCell);
         [_stubViolationTypeCell layoutSubviews];
         height = [_stubViolationTypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
     } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
         [self configureCell:_stubMultiUnitFieldCell atIndexPath:indexPath];
-        //        NSLog(@"_stubViolationTypeCell %@", _stubViolationTypeCell);
         [_stubMultiUnitFieldCell layoutSubviews];
         height = [_stubMultiUnitFieldCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
     } else if ([fieldName isEqualToString:@"submit"]) {
         [self configureCell:_stubSubmitCell atIndexPath:indexPath];
-        //        NSLog(@"_stubViolationTypeCell %@", _stubViolationTypeCell);
         [_stubSubmitCell layoutSubviews];
         height = [_stubSubmitCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 59;
     }
     
-    NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
+//    NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
     
     
     return height + 1;
@@ -589,48 +594,76 @@ SubmitCell                      *_stubSubmitCell;
 
     NSString *fieldName = [sectionContent objectAtIndex:indexPath.row];
     
-    NSLog(@"creating row for cell %@", fieldName);
     if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"NameFieldCell" ];
         cell.delegate = self.violationForm;
-        NSLog(@"creating row for cell %@", fieldName);
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         SpokenLanguageFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"LanguageCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         //        HotelCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelCell" ];
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelMenuCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"email"]) {
         EmailFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"EmailFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"phone"]) {
         PhoneFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhoneCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"unit"]) {
         UnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"UnitFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationTypeFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
         MultiUnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"MultiUnitFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
@@ -647,7 +680,7 @@ SubmitCell                      *_stubSubmitCell;
     [[self tableView] endEditing:YES];
     
     self.currentIndexPath = indexPath;
-    NSLog(@"current index path: %ld", (long)self.currentIndexPath.row);
+//    NSLog(@"current index path: %ld", (long)self.currentIndexPath.row);
     
     NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.section]];
 
@@ -656,52 +689,52 @@ SubmitCell                      *_stubSubmitCell;
         [self.tapGestureRecognizer setEnabled:NO];
         CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
         CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
-        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
-        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         SpokenLanguageFieldCell *cell = (SpokenLanguageFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else    if ([fieldName isEqualToString:@"hotel"]) {
         [self.tapGestureRecognizer setEnabled:NO];
         CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
         CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
-        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
-        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         HotelFieldCell *cell = (HotelFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else    if ([fieldName isEqualToString:@"violationType"]) {
         [self.tapGestureRecognizer setEnabled:NO];
         CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
         CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
-        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
-        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         ViolationTypeFieldCell *cell = (ViolationTypeFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else    if ([fieldName isEqualToString:@"multiUnitPetition"]) {
         [self.tapGestureRecognizer setEnabled:NO];
         CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
         CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
-        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
-        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
-        
-        
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        
+//        
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         MultiUnitFieldCell *cell = (MultiUnitFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else if ([fieldName isEqualToString:@"name"]) {
@@ -721,7 +754,7 @@ SubmitCell                      *_stubSubmitCell;
         cell.unitTextField.userInteractionEnabled = YES;
         [cell.unitTextField becomeFirstResponder];
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
-        NSLog(@"selecting violation description cell");
+//        NSLog(@"selecting violation description cell");
         ViolationDescriptionFieldCell *cell = (ViolationDescriptionFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.violationDescriptionTextField.userInteractionEnabled = YES;
         [cell.violationDescriptionTextField becomeFirstResponder];
@@ -742,7 +775,7 @@ SubmitCell                      *_stubSubmitCell;
 #pragma Dynamic Form Changes
 
 - (void)refreshForm {
-    self.formController.form = self.formController.form;
+//    self.formController.form = self.formController.form;
     [self.tableView reloadData];
 }
 - (void)addOtherLanguage:(UITableViewCell<FXFormFieldCell> *)cell {
@@ -814,7 +847,7 @@ SubmitCell                      *_stubSubmitCell;
 }
 
 - (void)submitForm {
-    [self.violationForm dumpFormContent];
+//    [self.violationForm dumpFormContent];
     
     NSMutableArray *imageDataList = nil;
     UIImage* firstImage;
@@ -867,7 +900,7 @@ SubmitCell                      *_stubSubmitCell;
 #pragma custom picker delegate
 - (void) finishedPhotoPicker:(UIViewController *)picker withUserSelectedAssets:(NSArray *)assets {
     
-    NSLog(@"userSelectedAssets %@", assets);
+//    NSLog(@"userSelectedAssets %@", assets);
     
     //[self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     //[self.scrollView.subviews removeFromSuperview];
@@ -926,7 +959,7 @@ SubmitCell                      *_stubSubmitCell;
 //            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
 
             CGRect imageViewFrame = CGRectInset(self.scrollView.bounds, padding, padding);
-            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
+//            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
 
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
@@ -1105,7 +1138,7 @@ SubmitCell                      *_stubSubmitCell;
 #pragma mark - button actions
 
 - (void)launchPhotoPicker:(UITapGestureRecognizer *) tap {
-    NSLog(@"launch photo picker");
+//    NSLog(@"launch photo picker");
     AlbumListController *alc = [[AlbumListController alloc] init];
     alc.delegate = self;
     
@@ -1207,9 +1240,9 @@ SubmitCell                      *_stubSubmitCell;
 //    frame.size.width = 5;
 //    frame.size.height = 5;
     
-    UIImage *image = [UIImage imageNamed:@"ic_nav_close_normal"];
+    UIImage *image = [UIImage imageNamed:@"btn_selected_remove_pressed"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.backgroundColor = orangeColor;
+    imageView.backgroundColor = [UIColor clearColor];
     imageView.frame = frame;
     
     return imageView;

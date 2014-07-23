@@ -22,6 +22,16 @@
     // Configure the view for the selected state
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+        
+            NSString *value = [self.delegate getValueForField:@"violationDescription"];
+            if (value != nil && ![value isEqualToString:@""]) {
+                self.violationDescriptionTextField.text = value;
+            }
+    }
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
     if ([self.violationDescriptionTextField.text isEqualToString:@"Describe the Violation"]) {
@@ -40,7 +50,7 @@
         if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
-                [self.delegate setValue:textView.text forField:@"violationDescription"];
+                [self.delegate setValue:self.violationDescriptionTextField.text forField:@"violationDescription"];
             });
         }
     }
