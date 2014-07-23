@@ -54,6 +54,7 @@
 @property (strong, nonatomic) Case                    *myCase;
 @property (strong, nonatomic) NSMutableArray          *imagesInScroll;
 @property (strong, nonatomic) NSMutableArray          *imagesToSubmit;
+@property (strong, nonatomic) NSMutableArray          *imagesToSubmitOrientation;
 @property (strong, nonatomic) NSMutableArray          *deleteImagesInScroll;
 @property (strong, nonatomic) UIImagePickerController *picker;
 @property (weak, nonatomic) IBOutlet UIScrollView     *scrollView;
@@ -247,6 +248,7 @@ SubmitCell                      *_stubSubmitCell;
         
         self.imagesInScroll = [NSMutableArray array];
         self.imagesToSubmit = [NSMutableArray array];
+        self.imagesToSubmitOrientation = [NSMutableArray array];
         self.deleteImagesInScroll = [NSMutableArray array];
 
         
@@ -909,7 +911,7 @@ SubmitCell                      *_stubSubmitCell;
 //    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:self.imagesToSubmit completion:^(Case* createdCase){
+    [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:self.imagesToSubmit withOrientation:self.imagesToSubmitOrientation  completion:^(Case* createdCase){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         SubmissionValidationViewController *submissionvc =
         [[SubmissionValidationViewController alloc] initWithCase:createdCase withTopPhoto:firstImage];
@@ -999,6 +1001,8 @@ SubmitCell                      *_stubSubmitCell;
         
         [self.imagesInScroll removeAllObjects];
         [self.imagesToSubmit removeAllObjects];
+        [self.imagesToSubmitOrientation removeAllObjects];
+
         
 //        [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
 
@@ -1024,6 +1028,7 @@ SubmitCell                      *_stubSubmitCell;
                 
                 NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
                 [self.imagesToSubmit addObject:imageData];
+                [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
             });
             
             
@@ -1234,6 +1239,7 @@ SubmitCell                      *_stubSubmitCell;
         [imageView removeFromSuperview];
         [self.imagesInScroll removeObjectAtIndex:tap.view.tag];
         [self.imagesToSubmit removeObjectAtIndex:tap.view.tag];
+        [self.imagesToSubmitOrientation removeObjectAtIndex:tap.view.tag];
         
         CGRect deleteImageFrame = tap.view.frame;
         CGRect nextDeleteImageFrame;

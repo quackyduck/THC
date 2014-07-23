@@ -273,9 +273,15 @@
                     [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
                         if (!photoError) {
                             NSData *imageData = data;
+//                            UIImage *image = [UIImage imageWithData:imageData];
                             UIImage *image = [UIImage imageWithData:imageData];
+
+                            image = [UIImage imageWithCGImage:image.CGImage
+                                                                 scale:1
+                                                           orientation:photoObject.orientation];
                             self.cachedPhoto = image;
                             cell.photoImageView.image = image;
+                            cell.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
                         } else {
                             NSLog(@"Failed to get photo.");
                         }

@@ -18,5 +18,6 @@
 @dynamic caseId;
 @dynamic caption;
 @dynamic image;
+@dynamic orientation;
 
 @end
