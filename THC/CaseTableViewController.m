@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIView *myView;
 @property (weak, nonatomic) IBOutlet UIImageView *searchImage;
 
-@property (nonatomic, strong) NSArray* cases;
+@property (nonatomic, strong) NSMutableArray* cases;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) CaseCell* stubCell;
@@ -103,7 +103,7 @@
 {
     self.navigationController.navigationBar.hidden = YES;
     [self loadEntries];
-    [self getAll];
+    [self getNew];
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,7 +118,7 @@
     //ALL THE CASES!!
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            self.cases = objects;
+            self.cases = [NSMutableArray arrayWithArray:objects];;
             [self.caseTableView reloadData];
         }
     }];
@@ -156,9 +156,10 @@
 
 - (void)queryForCases:(PFQuery *)query
 {
+    [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            self.cases = objects;
+            self.cases = [NSMutableArray arrayWithArray:objects];;
             [self.caseTableView reloadData];
         }
     }];
@@ -209,16 +210,7 @@
 }
 
 - (IBAction)onOpenTap:(id)sender {
-    self.openLabel.textColor = [UIColor orangeColor];
-    self.allLabel.textColor = [UIColor grayColor];
-    self.myLabel.textColor = [UIColor grayColor];
-    [self addBottomBorder:self.openView];
-    
-    //Get 10 newest cases?
-    PFQuery *query = [Case query];
-    [query orderByDescending:@"createdAt"];
-    query.limit = 10;
-    [self queryForCases:query];
+    [self getNew];
 }
 
 - (IBAction)onMyTap:(id)sender {
@@ -231,11 +223,19 @@
     PFQuery *query = [Case query];
     PFUser *user = [PFUser currentUser];
     [query whereKey:@"userId" equalTo:user.objectId];
+    [query whereKey:@"status" equalTo:@0];
     [self queryForCases:query];
 }
 
 - (IBAction)onAllTap:(id)sender {
-    [self getAll];
+    self.allLabel.textColor = [UIColor orangeColor];
+    self.openLabel.textColor = [UIColor grayColor];
+    self.myLabel.textColor = [UIColor grayColor];
+    [self addBottomBorder:self.allView];
+    
+    PFQuery *query = [Case query];
+    //ALL THE CASES!!
+    [self queryForCases:query];
 }
 
 - (void)addBottomBorder:(UIView*)superView {
@@ -280,16 +280,48 @@
     
 }
 
-- (void)getAll
+- (void)getNew
 {
-    self.allLabel.textColor = [UIColor orangeColor];
-    self.openLabel.textColor = [UIColor grayColor];
+    self.openLabel.textColor = [UIColor orangeColor];
+    self.allLabel.textColor = [UIColor grayColor];
     self.myLabel.textColor = [UIColor grayColor];
-    [self addBottomBorder:self.allView];
+    [self addBottomBorder:self.openView];
     
     PFQuery *query = [Case query];
-    //ALL THE CASES!!
+    [query whereKey:@"status" equalTo:@0];
+    [query orderByDescending:@"createdAt"];
     [self queryForCases:query];
+}
+
+//Closing code
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [self.caseTableView setEditing:editing animated:animated];
+}
+
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        //Close the case
+        Case *caseInfo = self.cases[indexPath.row];
+        caseInfo.status = caseClosed;
+        [caseInfo saveInBackground];
+        
+        [self.cases removeObjectAtIndex:indexPath.row];
+        
+        /* Then remove the associated cell from the Table View */
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+    }
+    
+}
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"Close";
 }
 
 

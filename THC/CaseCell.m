@@ -65,9 +65,24 @@
         else
             self.timeStampLabel.text = [NSString stringWithFormat:@"%.0f weeks ago", intervalInWeeks];
     }
+    if (myCase.status == caseClosed)
+    {
+        self.timeStampLabel.text = @"";
+        self.statusLabel.text = @"Closed";
+        self.timestampBackgroudView.backgroundColor = [UIColor blueColor];
+    } else
+    {
+        self.statusLabel.text = @"Created";
+        self.timestampBackgroudView.backgroundColor = [UIColor orangeColor];
+    }
+    
     [self.timeStampLabel sizeToFit];
     CGRect newFrame = self.timestampBackgroudView.frame;
-    newFrame.size.width = self.timeStampLabel.frame.size.width + 70;
+    if (myCase.status == caseClosed) {
+        newFrame.size.width = self.timeStampLabel.frame.size.width + 55;
+    } else {
+        newFrame.size.width = self.timeStampLabel.frame.size.width + 70;
+    }
     [self.timestampBackgroudView setFrame:newFrame];
     self.timestampBackgroudView.layer.cornerRadius = 3;
     self.timestampBackgroudView.layer.masksToBounds = YES;
