@@ -92,7 +92,7 @@
     HappySunViewController *happySunVC = self.tabViewControllers[2];
     if ([PFUser currentUser] != nil)
     {
-        [self show:happySunVC andRemove:mapsViewController];
+        [self show:nvc andRemove:mapsViewController];
     } else
     {
         [self show:happySunVC andRemove:mapsViewController];

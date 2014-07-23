@@ -103,6 +103,7 @@
 {
     self.navigationController.navigationBar.hidden = YES;
     [self loadEntries];
+    [self getAll];
 }
 
 - (void)didReceiveMemoryWarning
@@ -234,15 +235,7 @@
 }
 
 - (IBAction)onAllTap:(id)sender {
-    self.allLabel.textColor = [UIColor orangeColor];
-    self.openLabel.textColor = [UIColor grayColor];
-    self.myLabel.textColor = [UIColor grayColor];
-    [self addBottomBorder:self.allView];
-    
-    PFQuery *query = [Case query];
-    //ALL THE CASES!!
-    [self queryForCases:query];
-    
+    [self getAll];
 }
 
 - (void)addBottomBorder:(UIView*)superView {
@@ -286,4 +279,18 @@
     } completion:nil];
     
 }
+
+- (void)getAll
+{
+    self.allLabel.textColor = [UIColor orangeColor];
+    self.openLabel.textColor = [UIColor grayColor];
+    self.myLabel.textColor = [UIColor grayColor];
+    [self addBottomBorder:self.allView];
+    
+    PFQuery *query = [Case query];
+    //ALL THE CASES!!
+    [self queryForCases:query];
+}
+
+
 @end
