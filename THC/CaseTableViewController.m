@@ -89,8 +89,6 @@
     self.searchBar.delegate = self;
     
     self.navigationController.navigationBar.hidden = YES;
-    
-    [self loadEntries];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,7 +100,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden = YES;
-    [self loadEntries];
     [self getNew];
 }
 
@@ -115,6 +112,7 @@
 - (void)loadEntries
 {
     PFQuery *query = [Case query];
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     //ALL THE CASES!!
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -139,7 +137,6 @@
 {
     CaseCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CaseCell"];
     [cell initWithCase:self.cases[indexPath.row]];
-    
     return cell;
 }
 

@@ -90,6 +90,7 @@
     
     //Use buildingId to query for building name
     PFQuery *query = [Building query];
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query whereKey:@"objectId" equalTo:myCase.buildingId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -103,6 +104,7 @@
     
     //Get first image to show
     PFQuery *photoQuery = [BuildingPhoto query];
+    photoQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [photoQuery whereKey:@"buildingId" equalTo:myCase.buildingId];
     [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
