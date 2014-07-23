@@ -208,8 +208,8 @@
 }
 
 - (IBAction)onGetStartedTap:(UITapGestureRecognizer *)sender {
-    SignupViewController *signUpViewController = [[SignupViewController alloc] init];
-    [self presentViewController:signUpViewController animated:YES completion:nil];
+    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    [self presentViewController:loginViewController animated:YES completion:nil];
 }
 
 @end
