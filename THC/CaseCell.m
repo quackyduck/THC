@@ -28,7 +28,7 @@
 
 - (void)initWithCase:(Case*)myCase;
 {
-    self.caseIdLabel.text = [NSString stringWithFormat:@"Case #%@", myCase.caseId];
+    self.caseIdLabel.text = [NSString stringWithFormat:@"Case #%@", myCase.objectId];
     
     //Setup timestamp view
     self.timestampBackgroudView.backgroundColor = [UIColor orangeColor];
