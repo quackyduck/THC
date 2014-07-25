@@ -21,6 +21,10 @@
 #import "ViolationTypeFieldCell.h"
 #import "ViolationDescriptionFieldCell.h"
 #import "ViolationForm.h"
+#import "MultiUnitFieldCell.h"
+#import "SubmitCell.h"
+#import "SubmissionValidationViewController.h"
+#import "MBProgressHUD.h"
 
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
@@ -28,14 +32,15 @@
 #define whiteColor  [UIColor whiteColor]
 
 #define LanguageList  @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", nil}
-#define AllFields     @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"unit", @"violationDescription", @"violationType"]
+#define AllFields     @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"unit", @"violationDescription", @"violationType", @"multiUnitPetition", @"submit"]
 #define FieldList     @[@"name", @"languageSpoken", @"phone", @"email"]
 #define PersonalInfo  @[@"name", @"languageSpoken", @"phone", @"email"]
 #define HotelInfo     @[@"hotel", @"unit"]
-#define ViolationInfo @[@"violationType", @"violationDescription"]
+#define ViolationInfo @[@"violationType", @"violationDescription", @"multiUnitPetition"]
+#define SubmitInfo    @[@"submit"]
 //#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo}
-#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo}
-#define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details"}
+#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo,  @"3": SubmitInfo}
+#define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details", @"3": @""}
 
 
 
@@ -48,6 +53,8 @@
 @property (strong, nonatomic) NSString                *violationDescription;
 @property (strong, nonatomic) Case                    *myCase;
 @property (strong, nonatomic) NSMutableArray          *imagesInScroll;
+@property (strong, nonatomic) NSMutableArray          *imagesToSubmit;
+@property (strong, nonatomic) NSMutableArray          *imagesToSubmitOrientation;
 @property (strong, nonatomic) NSMutableArray          *deleteImagesInScroll;
 @property (strong, nonatomic) UIImagePickerController *picker;
 @property (weak, nonatomic) IBOutlet UIScrollView     *scrollView;
@@ -58,6 +65,10 @@
 @property (strong, nonatomic) UITapGestureRecognizer  *tapGestureRecognizer;
 @property (strong, nonatomic) NSIndexPath             *currentIndexPath;
 @property (strong, nonatomic) ViolationForm           *violationForm;
+@property (assign)            BOOL                    showFilledForm;
+@property (strong, nonatomic) CLLocationManager       *locationManager;
+@property (nonatomic) CLLocationDegrees currentLatitude;
+@property (nonatomic) CLLocationDegrees currentLongitude;
 
 
 @end
@@ -72,6 +83,8 @@ PhoneFieldCell                  *_stubPhoneCell;
 ViolationDescriptionFieldCell   *_stubViolationCell;
 ViolationTypeFieldCell          *_stubViolationTypeCell;
 EmailFieldCell                  *_stubEmailCell;
+MultiUnitFieldCell              *_stubMultiUnitFieldCell;
+SubmitCell                      *_stubSubmitCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,6 +100,13 @@ EmailFieldCell                  *_stubEmailCell;
     [super viewDidLoad];
     [self initializeView];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    if (self.locationManager) {
+        [self.locationManager stopUpdatingLocation];
+    }
 }
 
 - (void)initializeView {
@@ -107,17 +127,12 @@ EmailFieldCell                  *_stubEmailCell;
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 //                                                                                           target:self
 //                                                                                           action:@selector(cancelButtonAction)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_navbar_close_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
 
 //    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = orangeColor;
     
-//    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"ic_nav_back_normal@2x"];
-    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-//                                                                                          target:self
-//                                                                                          action:@selector(editForm)];
-//    
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit"
                                                                     style:UIBarButtonItemStylePlain
                                                                     target:self action:@selector(submitForm)];
@@ -127,6 +142,11 @@ EmailFieldCell                  *_stubEmailCell;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshForm)
                                                  name:@"Addresses Retrieved"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshFormWithNearestHotel)
+                                                 name:@"Nearest Hotel Retrieved"
                                                object:nil];
     
     // This is old FXForm code
@@ -170,7 +190,19 @@ EmailFieldCell                  *_stubEmailCell;
     self.formFields = FormFields;
     self.formSectionHeader = FormSectionHeader;
     
-    self.violationForm = [[ViolationForm alloc] init];
+    if (!self.violationForm) {
+        self.violationForm = [[ViolationForm alloc] init];
+        [self.violationForm populateHotelsWithSuccess:^(BOOL success) {
+            [self startLocationManager];
+        } error:^(NSError *error) {
+            NSLog(@"Could not get the Hotel");
+        }];
+        
+        self.showFilledForm = [self.violationForm addloggedInUserDetails];
+//        self.showFilledForm = NO;
+//        [self startLocationManager];
+        
+    }
     
     [self registerFieldCells];
     
@@ -214,8 +246,9 @@ EmailFieldCell                  *_stubEmailCell;
         self.activityView.center = activityCenter;
 
         
-        //self.pageControl.numberOfPages = 0;
         self.imagesInScroll = [NSMutableArray array];
+        self.imagesToSubmit = [NSMutableArray array];
+        self.imagesToSubmitOrientation = [NSMutableArray array];
         self.deleteImagesInScroll = [NSMutableArray array];
 
         
@@ -234,21 +267,17 @@ EmailFieldCell                  *_stubEmailCell;
         imageViewFrame.origin.y = padding;
         imageViewFrame.size.width = 70;
         imageViewFrame.size.height = 70;
-        NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.frame));
+//        NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.frame));
 
-        //NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
         
-        UIImage *image = [UIImage imageNamed:@"ic_report_camera"];
-//        NSLog(@"camera image %@", image);
+        UIImage *image = [UIImage imageNamed:@"ic_camera_add"];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//        imageView.backgroundColor = [UIColor blackColor];
         imageView.frame = imageViewFrame;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.layer.cornerRadius = 4.f;
         imageView.layer.borderWidth = 1.f;
         
-//        imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
         imageView.backgroundColor = [UIColor clearColor];
         imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
         [imageView setClipsToBounds:YES];
@@ -287,6 +316,14 @@ EmailFieldCell                  *_stubEmailCell;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma Public Functions
+
+-(void) setPrefilledForm:(ViolationForm *) form {
+//    NSLog(@"using prefilled form");
+    self.showFilledForm = YES;
+    self.violationForm = form;
 }
 
 #pragma Register Field Cells
@@ -331,6 +368,14 @@ EmailFieldCell                  *_stubEmailCell;
             UINib *cellNib = [UINib nibWithNibName:@"ViolationTypeFieldCell" bundle:nil];
             [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ViolationTypeFieldCell"];
             _stubViolationTypeCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"MultiUnitFieldCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"MultiUnitFieldCell"];
+            _stubMultiUnitFieldCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"submit"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"SubmitCell" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"SubmitCell"];
+            _stubSubmitCell = [cellNib instantiateWithOwner:nil options:nil][0];
         }
     }
 }
@@ -401,7 +446,7 @@ EmailFieldCell                  *_stubEmailCell;
         //        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
         NSLog(@"table row would move upwards");
         self.tableView.contentInset = contentInsets;
-        [self.tableView scrollToRowAtIndexPath:self.currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [self.tableView scrollToRowAtIndexPath:self.currentIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
 }
 
@@ -433,10 +478,7 @@ EmailFieldCell                  *_stubEmailCell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    NSLog(@"num of rows %d", self.fields.count);
     NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)section]];
-    
-    NSLog(@"num of rows %lu", (unsigned long)sectionContent.count);
     
     return [sectionContent count];
 }
@@ -453,7 +495,12 @@ EmailFieldCell                  *_stubEmailCell;
     
     if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *nameCell = (NameFieldCell *)cell;
-        nameCell.nameTextField.text = @"Testing";
+        nameCell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [nameCell getFieldValueFromform];
+        } else {
+            nameCell.nameTextField.text = @"Testing";
+        }
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         SpokenLanguageFieldCell *lanCell = (SpokenLanguageFieldCell *)cell;
         lanCell.languageLabel.text = @"Testing";
@@ -474,10 +521,21 @@ EmailFieldCell                  *_stubEmailCell;
         unitCell.unitTextField.text = @"Testing";
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         ViolationDescriptionFieldCell *violationCell = (ViolationDescriptionFieldCell *)cell;
-        violationCell.violationDescriptionTextField.text = @"Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing TestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTesting";
+        violationCell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [violationCell getFieldValueFromform];
+        } else {
+            violationCell.violationDescriptionTextField.text = @"Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing TestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTestingTesting";
+        }
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationTypeFieldCell *violationTypeCell = (ViolationTypeFieldCell *)cell;
         violationTypeCell.violationTypeTextField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        MultiUnitFieldCell *multiUniteCell = (MultiUnitFieldCell *)cell;
+        multiUniteCell.multiUnitField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"submit"]) {
+        SubmitCell *multiUniteCell = (SubmitCell *)cell;
+//        multiUniteCell.multiUnitField.text = @"Testing";
     }
 }
 
@@ -493,7 +551,7 @@ EmailFieldCell                  *_stubEmailCell;
         [self configureCell:_stubNameCell atIndexPath:indexPath];
         [_stubNameCell layoutSubviews];
         height = [_stubNameCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-              height = 45;
+        height = 45;
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         [self configureCell:_stubLanguageCell atIndexPath:indexPath];
         [_stubLanguageCell layoutSubviews];
@@ -508,43 +566,50 @@ EmailFieldCell                  *_stubEmailCell;
         height = 45;
     } else if ([fieldName isEqualToString:@"email"]) {
         [self configureCell:_stubEmailCell atIndexPath:indexPath];
-        //        NSLog(@"_stubEmailCell %@", _stubEmailCell);
         [_stubEmailCell layoutSubviews];
         height = [_stubEmailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
     } else if ([fieldName isEqualToString:@"phone"]) {
         [self configureCell:_stubPhoneCell atIndexPath:indexPath];
-        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
         [_stubPhoneCell layoutSubviews];
         height = 45;
         height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         [self configureCell:_stubHotelCell atIndexPath:indexPath];
-        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
         [_stubHotelCell layoutSubviews];
         height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     } else if ([fieldName isEqualToString:@"unit"]) {
         [self configureCell:_stubUnitCell atIndexPath:indexPath];
-        //        NSLog(@"_stubPhoneCell %@", _stubPhoneCell);
         [_stubUnitCell layoutSubviews];
         height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         [self configureCell:_stubViolationCell atIndexPath:indexPath];
-//        NSLog(@"_stubViolationCell %@", _stubViolationCell);
         [_stubViolationCell layoutSubviews];
         height = [_stubViolationCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        height = 59;
+//        NSLog(@"height for violation description cell: %f", height);
+        if (height < 59) {
+            height = 59;
+        }
 
     } else if ([fieldName isEqualToString:@"violationType"]) {
         [self configureCell:_stubViolationTypeCell atIndexPath:indexPath];
-//        NSLog(@"_stubViolationTypeCell %@", _stubViolationTypeCell);
         [_stubViolationTypeCell layoutSubviews];
         height = [_stubViolationTypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
+    } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        [self configureCell:_stubMultiUnitFieldCell atIndexPath:indexPath];
+        [_stubMultiUnitFieldCell layoutSubviews];
+        height = [_stubMultiUnitFieldCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
+    } else if ([fieldName isEqualToString:@"submit"]) {
+        [self configureCell:_stubSubmitCell atIndexPath:indexPath];
+        [_stubSubmitCell layoutSubviews];
+        height = [_stubSubmitCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 59;
     }
     
-    NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
+//    NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
     
     
     return height + 1;
@@ -557,43 +622,79 @@ EmailFieldCell                  *_stubEmailCell;
 
     NSString *fieldName = [sectionContent objectAtIndex:indexPath.row];
     
-    NSLog(@"creating row for cell %@", fieldName);
     if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"NameFieldCell" ];
         cell.delegate = self.violationForm;
-        NSLog(@"creating row for cell %@", fieldName);
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"languageSpoken"]) {
         SpokenLanguageFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"LanguageCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         //        HotelCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelCell" ];
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelMenuCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"email"]) {
         EmailFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"EmailFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"phone"]) {
         PhoneFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhoneCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         HotelFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"HotelFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"unit"]) {
         UnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"UnitFieldCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationCell" ];
         cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
         return cell;
     } else if ([fieldName isEqualToString:@"violationType"]) {
         ViolationDescriptionFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"ViolationTypeFieldCell" ];
+        cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
+        return cell;
+    } else if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        MultiUnitFieldCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"MultiUnitFieldCell" ];
+        cell.delegate = self.violationForm;
+        if (self.showFilledForm) {
+            [cell getFieldValueFromform];
+        }
+        return cell;
+    } else if ([fieldName isEqualToString:@"submit"]) {
+        SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
         cell.delegate = self.violationForm;
         return cell;
     }
@@ -607,7 +708,7 @@ EmailFieldCell                  *_stubEmailCell;
     [[self tableView] endEditing:YES];
     
     self.currentIndexPath = indexPath;
-    NSLog(@"current index path: %ld", (long)self.currentIndexPath.row);
+//    NSLog(@"current index path: %ld", (long)self.currentIndexPath.row);
     
     NSArray *sectionContent = [self.formFields objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.section]];
 
@@ -616,40 +717,53 @@ EmailFieldCell                  *_stubEmailCell;
         [self.tapGestureRecognizer setEnabled:NO];
         CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
         CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
-        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
-        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         SpokenLanguageFieldCell *cell = (SpokenLanguageFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else    if ([fieldName isEqualToString:@"hotel"]) {
         [self.tapGestureRecognizer setEnabled:NO];
         CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
         CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
-        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
-        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         HotelFieldCell *cell = (HotelFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else    if ([fieldName isEqualToString:@"violationType"]) {
         [self.tapGestureRecognizer setEnabled:NO];
         CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
         CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
-        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
-        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
         
         
-        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            NSLog(@"portrait orientation");
-        }
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
         ViolationTypeFieldCell *cell = (ViolationTypeFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
+    } else    if ([fieldName isEqualToString:@"multiUnitPetition"]) {
+        [self.tapGestureRecognizer setEnabled:NO];
+        CGRect rectOfCellInTableView = [tableView rectForRowAtIndexPath:indexPath];
+        CGRect rectOfCellInSuperview = [tableView convertRect:rectOfCellInTableView toView:[tableView superview]];
+//        NSLog(@"rect of Spoken language cell in superview %@", NSStringFromCGRect(rectOfCellInSuperview));
+//        NSLog(@"rect of Spoken language cell in tableview %@", NSStringFromCGRect(rectOfCellInTableView));
+//        
+//        
+//        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+//            NSLog(@"portrait orientation");
+//        }
+        MultiUnitFieldCell *cell = (MultiUnitFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell showMenu:rectOfCellInSuperview onView:self.tableView forOrientation:self.interfaceOrientation];
     } else if ([fieldName isEqualToString:@"name"]) {
         NameFieldCell *cell = (NameFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -668,10 +782,14 @@ EmailFieldCell                  *_stubEmailCell;
         cell.unitTextField.userInteractionEnabled = YES;
         [cell.unitTextField becomeFirstResponder];
     } else if ([fieldName isEqualToString:@"violationDescription"]) {
-        NSLog(@"selecting violation description cell");
+//        NSLog(@"selecting violation description cell");
         ViolationDescriptionFieldCell *cell = (ViolationDescriptionFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.violationDescriptionTextField.userInteractionEnabled = YES;
         [cell.violationDescriptionTextField becomeFirstResponder];
+    }  else if ([fieldName isEqualToString:@"submit"]) {
+        SubmitCell *cell = (SubmitCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.submitButton.userInteractionEnabled = YES;
+        [cell.submitButton becomeFirstResponder];
     } else {
         [self.tapGestureRecognizer setEnabled:YES];
     }
@@ -685,7 +803,14 @@ EmailFieldCell                  *_stubEmailCell;
 #pragma Dynamic Form Changes
 
 - (void)refreshForm {
-    self.formController.form = self.formController.form;
+//    self.formController.form = self.formController.form;
+    [self.tableView reloadData];
+}
+
+- (void)refreshFormWithNearestHotel {
+    [self.violationForm assignNearestHotel];
+    self.showFilledForm = YES;
+
     [self.tableView reloadData];
 }
 - (void)addOtherLanguage:(UITableViewCell<FXFormFieldCell> *)cell {
@@ -757,20 +882,41 @@ EmailFieldCell                  *_stubEmailCell;
 }
 
 - (void)submitForm {
-    [self.violationForm dumpFormContent];
+//    [self.violationForm dumpFormContent];
     
-    NSMutableArray *imageDataList = nil;
+//    NSMutableArray *imageDataList = nil;
+    UIImage* firstImage;
     
-    if ([self.imagesInScroll count]) {
-        imageDataList = [NSMutableArray array];
-        for (UIImageView *imageView in self.imagesInScroll) {
-            NSData  *imageData = UIImageJPEGRepresentation(imageView.image, 0);
-            [imageDataList addObject:imageData];
-        }
+    if ([self.imagesToSubmit count]) {
+//        imageDataList = [NSMutableArray array];
+//        for (NSData *imageData in self.imagesToSubmit) {
+//            [imageDataList addObject:imageData];
+//        }
+        firstImage = ((UIImageView*)(self.imagesInScroll[0])).image;
+    } else
+    {
+        firstImage = nil;
     }
-    [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:imageDataList completion:^(Case* createdCase){
-        CaseDetailViewController *detailvc = [[CaseDetailViewController alloc] initWithCase:createdCase isNewCase:YES];
-        [self presentViewController:detailvc animated:YES completion:nil];
+    
+//    if ([self.imagesInScroll count]) {
+//        imageDataList = [NSMutableArray array];
+//        for (UIImageView *imageView in self.imagesInScroll) {
+//            NSData  *imageData = UIImageJPEGRepresentation(imageView.image, 0);
+//            [imageDataList addObject:imageData];
+//        }
+//        firstImage = ((UIImageView*)(self.imagesInScroll[0])).image;
+//    } else
+//    {
+//        firstImage = nil;
+//    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    [self.violationForm createCaseWithDescription:self.violationDescription withImageDataList:self.imagesToSubmit withOrientation:self.imagesToSubmitOrientation  completion:^(Case* createdCase){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        SubmissionValidationViewController *submissionvc =
+        [[SubmissionValidationViewController alloc] initWithCase:createdCase withTopPhoto:firstImage];
+//        UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:submissionvc];
+        [self presentViewController:submissionvc animated:YES completion:nil];
     } error:^(NSError * onError) {
         NSLog(@"Error creating Case!");
     }];
@@ -803,7 +949,7 @@ EmailFieldCell                  *_stubEmailCell;
 #pragma custom picker delegate
 - (void) finishedPhotoPicker:(UIViewController *)picker withUserSelectedAssets:(NSArray *)assets {
     
-    NSLog(@"userSelectedAssets %@", assets);
+//    NSLog(@"userSelectedAssets %@", assets);
     
     //[self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     //[self.scrollView.subviews removeFromSuperview];
@@ -852,25 +998,39 @@ EmailFieldCell                  *_stubEmailCell;
 //        self.pageControl.hidden = NO;
 //        self.pageControl.numberOfPages = assets.count;
         
-        int index = 1;
-        
         
         [self.imagesInScroll removeAllObjects];
+        [self.imagesToSubmit removeAllObjects];
+        [self.imagesToSubmitOrientation removeAllObjects];
+
+        
+//        [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
+
+        
+        int index = 1;
+        
         for (ALAsset *asset in assets) {
             
-
-//            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
-
+            
+            //            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
+            
             CGRect imageViewFrame = CGRectInset(self.scrollView.bounds, padding, padding);
-            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
-
+            //            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
+            
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index + padding;
-//            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
             
-            //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *fullResImage = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+                
+                NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
+                [self.imagesToSubmit addObject:imageData];
+                [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
+            });
+            
             
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             imageView.frame = imageViewFrame;
@@ -882,18 +1042,18 @@ EmailFieldCell                  *_stubEmailCell;
             imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
-
-
+            
+            
             CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
             deleteFrame.origin.x += width - 4*padding;
             deleteFrame.origin.y -= 2*padding;
             deleteFrame.size.height = 4*padding;
             deleteFrame.size.width  = 4*padding;
             UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
-//            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
+            //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
             tap.numberOfTapsRequired = 1;
-
+            
             [deleteImageView addGestureRecognizer:tap];
             deleteImageView.userInteractionEnabled = YES;
             deleteImageView.tag = [self.imagesInScroll count];
@@ -902,13 +1062,15 @@ EmailFieldCell                  *_stubEmailCell;
             
             
             [self.scrollView addSubview:imageView];
-
+            
             [self.scrollView addSubview:deleteImageView];
             [self.imagesInScroll addObject:imageView];
             [self.deleteImagesInScroll addObject:deleteImageView];
             
         }
         
+//        [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
+
         [self.activityView stopAnimating];
         
         [self.scrollView flashScrollIndicators];
@@ -965,6 +1127,7 @@ EmailFieldCell                  *_stubEmailCell;
         int index = 1;
         
         [self.imagesInScroll removeAllObjects];
+        [self.imagesToSubmit removeAllObjects];
         
         for (UIImage *image in selectedImages) {
             
@@ -976,6 +1139,10 @@ EmailFieldCell                  *_stubEmailCell;
             
             //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
             
+            NSData  *imageData = UIImageJPEGRepresentation(image, 7);
+            [self.imagesToSubmit addObject:imageData];
+
+
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             imageView.frame = imageViewFrame;
             //imageView.contentMode = UIViewContentModeCenter;
@@ -1041,7 +1208,7 @@ EmailFieldCell                  *_stubEmailCell;
 #pragma mark - button actions
 
 - (void)launchPhotoPicker:(UITapGestureRecognizer *) tap {
-    NSLog(@"launch photo picker");
+//    NSLog(@"launch photo picker");
     AlbumListController *alc = [[AlbumListController alloc] init];
     alc.delegate = self;
     
@@ -1071,6 +1238,8 @@ EmailFieldCell                  *_stubEmailCell;
         CGRect nextFrame;
         [imageView removeFromSuperview];
         [self.imagesInScroll removeObjectAtIndex:tap.view.tag];
+        [self.imagesToSubmit removeObjectAtIndex:tap.view.tag];
+        [self.imagesToSubmitOrientation removeObjectAtIndex:tap.view.tag];
         
         CGRect deleteImageFrame = tap.view.frame;
         CGRect nextDeleteImageFrame;
@@ -1136,6 +1305,37 @@ EmailFieldCell                  *_stubEmailCell;
 
 }
 
+#pragma Location
+
+- (void)startLocationManager {
+    if(!self.locationManager)
+        self.locationManager = [[CLLocationManager alloc] init];
+    
+    // Set Location Manager delegate
+    [self.locationManager setDelegate:self];
+    
+    // Set location accuracy levels
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    
+    // Update again when a user moves distance in meters
+    [self.locationManager setDistanceFilter:15];
+        
+    // Start updating location
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    //NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
+    //NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    self.currentLatitude = newLocation.coordinate.latitude;
+    self.currentLongitude = newLocation.coordinate.longitude;
+    
+    if (self.violationForm) {
+        [self.violationForm computeHotelDistancesFromLocation:newLocation ];
+        NSLog(@"Done with computeHotelDistancesFromLocation");
+    }
+}
+
 #pragma Image Removal
 
 - (UIImageView *)createEditForImageOnFrame:(CGRect) frame {
@@ -1143,9 +1343,9 @@ EmailFieldCell                  *_stubEmailCell;
 //    frame.size.width = 5;
 //    frame.size.height = 5;
     
-    UIImage *image = [UIImage imageNamed:@"ic_nav_close_normal"];
+    UIImage *image = [UIImage imageNamed:@"btn_selected_remove_pressed"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.backgroundColor = orangeColor;
+    imageView.backgroundColor = [UIColor clearColor];
     imageView.frame = frame;
     
     return imageView;

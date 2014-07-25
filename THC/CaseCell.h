@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *buildingNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *timestampBackgroudView;
 @property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (void)initWithCase:(Case*)myCase;
 

@@ -12,4 +12,7 @@
 
 - (void)setValue:(NSString *)value forField:(NSString *)field;
 
+@optional
+- (NSString *)getValueForField:(NSString *)field;
+
 @end

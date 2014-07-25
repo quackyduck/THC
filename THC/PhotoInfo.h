@@ -15,5 +15,6 @@
 @property (retain) NSString *caseId;
 @property (retain) NSString *caption;
 @property (retain) PFFile *image;
+@property (assign) UIImageOrientation orientation;
 
 @end

@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SelectionIndicator.png" translatesAutoresizingMaskIntoConstraints="NO" id="cL9-Ro-gcS">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_selection_check.png" translatesAutoresizingMaskIntoConstraints="NO" id="cL9-Ro-gcS">
                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -32,6 +32,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="SelectionIndicator.png" width="75" height="75"/>
+        <image name="ic_selection_check.png" width="37" height="37"/>
     </resources>
 </document>

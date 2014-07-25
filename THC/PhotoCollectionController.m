@@ -102,7 +102,7 @@
             if (!result || index == NSNotFound) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"1. Calling collection view reload");
+//                    NSLog(@"1. Calling collection view reload");
                     [self.collectionView reloadData];
                     self.navigationItem.title = [NSString stringWithFormat:@"%@", [self.assetsGroup valueForProperty:ALAssetsGroupPropertyName]];
                 });
@@ -122,7 +122,7 @@
         }];
     });
     
-    NSLog(@"2. Calling collection view reload");
+//    NSLog(@"2. Calling collection view reload");
     
     //[self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.5];
     [self.collectionView reloadData];
@@ -132,7 +132,7 @@
 
 - (void)doneButtonAction:(id)sender
 {
-    NSLog(@"Picked %lu images", (unsigned long)[self.assetPicker.selectedAssets count]);
+//    NSLog(@"Picked %lu images", (unsigned long)[self.assetPicker.selectedAssets count]);
     [self.delegate finishedPhotoPicker:self withUserSelectedAssets:self.assetPicker.selectedAssets];
 }
 
@@ -143,7 +143,7 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView*)cv numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"total fetched assets %lu", (unsigned long)[self.fetchedAssets count]);
+//    NSLog(@"total fetched assets %lu", (unsigned long)[self.fetchedAssets count]);
     return [self.fetchedAssets count];
 }
 
@@ -152,7 +152,7 @@
     PhotoCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     if (indexPath.row == 0) {
-        UIImage *cameraImage = [UIImage imageNamed:@"camera"];
+        UIImage *cameraImage = [UIImage imageNamed:@"ic_camera"];
         //NSLog(@"camera image %@", cameraImage);
         cell.imageView.image = cameraImage;
         cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -206,7 +206,7 @@
                                                                  delegate:nil
                                                         cancelButtonTitle:@"OK"
                                                         otherButtonTitles: nil];
-            NSLog(@"Alert view: %@", myAlertView);
+//            NSLog(@"Alert view: %@", myAlertView);
             
             [myAlertView show];
         } else {
@@ -261,7 +261,7 @@
         
         
         
-        NSLog(@"Selecting image for row %ld", (long)indexPath.row);
+//        NSLog(@"Selecting image for row %ld", (long)indexPath.row);
         return [assetWrapper isSelected];
     }
 }

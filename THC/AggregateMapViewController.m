@@ -15,10 +15,12 @@
 #import <Parse/Parse.h>
 #import "Building.h"
 #import "BuildingAnnotationView.h"
+#import "BuildingCalloutView.h"
+#import "BuildingMapPin.h"
+#import "BuildingPhoto.h"
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 @property (strong, nonatomic) NSMutableDictionary *buildingInfo;
 
 @end
@@ -47,11 +49,11 @@
 -(void)zoomInToTenderloin
 {
     MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
-    region.center.latitude = 37.785134;
+    region.center.latitude = 37.78;
     region.center.longitude = -122.412752;
     
-    region.span.longitudeDelta = 0.03f;
-    region.span.latitudeDelta = 0.03f;
+    region.span.longitudeDelta = 0.05f;
+    region.span.latitudeDelta = 0.001f;
     [self.mapView setRegion:region animated:YES];
 }
 
@@ -60,12 +62,6 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     [self zoomInToTenderloin];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [super viewWillAppear:animated];
     
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
@@ -86,7 +82,12 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -120,13 +121,56 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     static NSString* AnnotationIdentifier = @"Annotation";
-    BuildingAnnotationView *annotationView = (BuildingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
+    BuildingMapPin *annotationView = (BuildingMapPin *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
+    
+    annotationView.canShowCallout = YES;
+    
     if (!annotationView) {
-        annotationView = [[BuildingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
-        annotationView.frame = CGRectMake(0, 0, 35, 35);
-        annotationView.backgroundColor = [UIColor clearColor];
+        
+        annotationView = [[BuildingMapPin alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        annotationView.canShowCallout = YES;
         
         Building *building = (Building *)annotation;
+        
+//        UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
+//        NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
+//        
+//        BuildingCalloutView *buildingCallout = nibs[0];
+//        
+//        annotationView.calloutView = buildingCallout;
+        
+        
+        //Get first image to show
+        PFQuery *photoQuery = [BuildingPhoto query];
+        [photoQuery whereKey:@"buildingId" equalTo:building.objectId];
+        [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count > 0)
+                {
+                    BuildingPhoto* photoObject = objects[0];
+                    PFFile *photo = photoObject.image;
+                    [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                        if (!photoError) {
+                            NSData *imageData = data;
+                            UIImage *image = [UIImage imageWithData:imageData];
+                            
+                            CGRect resizeRect = CGRectMake(0, 0, 32, 32);
+                            UIGraphicsBeginImageContext(resizeRect.size);
+                            [image drawInRect:resizeRect];
+                            UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+                            UIGraphicsEndImageContext();
+                            annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:resizedImage];
+
+                        }
+                    }];
+                    
+                }
+            }
+        }];
+        
+        
+        
+        
         
         PFQuery *query = [PFQuery queryWithClassName:@"Case"];
         [query whereKey:@"buildingId" equalTo:building.objectId];
@@ -134,29 +178,45 @@
             if (!error) {
                 // The find succeeded.
                 NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
-//                [self.buildingInfo setValue:@(objects.count) forKey:building.objectId];
-                annotationView.numberOfCases = objects.count;
+                NSString *text = [NSString stringWithFormat:@"%d", objects.count];
+                UIImage *pin = [UIImage imageNamed:@"btn_map_pin_normal"];
+                CGPoint point = CGPointMake(annotationView.bounds.origin.x + pin.size.width / 2.5f, annotationView.bounds.origin.y + pin.size.height / 3);
+                
+                UIFont *font = [UIFont systemFontOfSize:14];
+                UIGraphicsBeginImageContextWithOptions(pin.size, NO, 0);
+                [pin drawInRect:CGRectMake(0, 0, pin.size.width, pin.size.height)];
+                CGRect rect = CGRectMake(point.x, point.y, pin.size.width, pin.size.height);
+                [text drawInRect:rect withAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
+                UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                annotationView.image = newImage;
                 [annotationView setNeedsDisplay];
+
                 
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
-        
-        
-        
-        annotationView.numberOfCases = [[self.buildingInfo valueForKey:building.objectId] intValue];
-        [annotationView setNeedsDisplay];
-        
     }
     else {
         annotationView.annotation = annotation;
     }
     
-    annotationView.canShowCallout = YES;
-    
     return annotationView;
 }
+
+//- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+//    NSLog(@"Selected ...");
+//    
+//    UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
+//    NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
+//    
+//    BuildingCalloutView *buildingCallout = nibs[0];
+//    
+//    [view addSubview:buildingCallout];
+//    
+//}
 
 @end

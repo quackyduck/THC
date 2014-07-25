@@ -22,13 +22,29 @@
 @property (strong, nonatomic)   NSString   *languageSpoken;
 @property (strong, nonatomic)   NSString   *violationDescription;
 @property (strong, nonatomic)   NSString   *violationType;
+@property (strong, nonatomic)   NSString   *multiUnitPetiiton;
 @property (strong, nonatomic)   NSMutableArray *hotelBuildingNames;
 @property (strong, nonatomic)   NSMutableDictionary *hotelBuildings;
+@property (strong, nonatomic)   Case                *caseInfo;
 
 
 - (void)setValue:(NSString *)value forField:(NSString *)field;
+- (NSString *)getValueForField:(NSString *)field;
+
+- (void)setCase:(Case*) caseInfo;
+
+- (BOOL)addloggedInUserDetails;
+
+- (NSString *)computeHotelDistancesFromLocation:(CLLocation*)userLocation;
+- (void)populateHotelsWithSuccess:(void (^)(BOOL success))completion error:(void (^)(NSError*))onError;
+
+- (void)assignNearestHotel;
+
 - (void)dumpFormContent;
 
 - (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;
+// This call takes image orientation
+- (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList withOrientation:(NSArray *)orientations completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError;
+
 
 @end

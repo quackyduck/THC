@@ -45,18 +45,28 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-Io-aIW" customClass="ReviewReportButton">
-                    <rect key="frame" x="20" y="503" width="280" height="45"/>
+                    <rect key="frame" x="20" y="503" width="280" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="XHe-y3-TVL"/>
+                        <constraint firstAttribute="height" constant="49" id="XHe-y3-TVL"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAj-Mf-6Ee">
+                    <rect key="frame" x="28" y="20" width="22" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="ic_nav_close_normal.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="dismissView:" destination="-1" eventType="touchUpInside" id="oh9-Jo-dSN"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="NP1-Io-aIW" secondAttribute="bottom" constant="20" id="4Ji-LU-hjG"/>
+                <constraint firstAttribute="bottom" secondItem="NP1-Io-aIW" secondAttribute="bottom" constant="16" id="4Ji-LU-hjG"/>
                 <constraint firstItem="UDQ-98-0AP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="5Fv-Vu-dEk"/>
                 <constraint firstItem="w6w-ij-ObV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="28" id="6nL-za-bac"/>
                 <constraint firstAttribute="trailing" secondItem="UDQ-98-0AP" secondAttribute="trailing" constant="34" id="Cgi-m3-5kL"/>
@@ -80,4 +90,7 @@
             </connections>
         </swipeGestureRecognizer>
     </objects>
+    <resources>
+        <image name="ic_nav_close_normal.png" width="22" height="26"/>
+    </resources>
 </document>

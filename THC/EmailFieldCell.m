@@ -33,6 +33,18 @@
     [sender resignFirstResponder];
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+            NSString *value = [self.delegate getValueForField:@"email"];
+            if (value != nil && ![value isEqualToString:@""]) {
+                self.emailTextField.text = value;
+            }
+//        });
+    }
+}
+
 #pragma keyboard delegates
 - (void)textViewDidChange:(UITextView *)textView {
     

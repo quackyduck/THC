@@ -11,8 +11,9 @@
 #import "Case.h"
 #import "AsseptPicker.h"
 #import "PhotoPicker.h"
+#import "ViolationForm.h"
 
-@interface ViolationSubmissionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker>
+@interface ViolationSubmissionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) AsseptPicker *assetPicker;
 
@@ -22,5 +23,6 @@
 -(void) setImageData:(NSData *) imageData;
 -(void) setViolationDescription:(NSString *) description;
 -(void) setCase:(Case *) myCase;
+-(void) setPrefilledForm:(ViolationForm *) form;
 
 @end

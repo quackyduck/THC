@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *dividerView;
 @property (weak, nonatomic) IBOutlet UIButton *casesButton;
 @property (weak, nonatomic) IBOutlet UIButton *nearbyButton;
+@property (assign, nonatomic) BOOL onExploreTab;
 
 
 - (IBAction)onCreateReport:(id)sender;
@@ -39,6 +40,7 @@
         HappySunViewController *happySunViewController = [[HappySunViewController alloc] init];
         UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:casesViewController];
         self.tabViewControllers = @[mapViewController, nvc, happySunViewController];
+        self.onExploreTab = YES;
     }
     return self;
 }
@@ -47,7 +49,36 @@
 {
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
-    [self selectedNearbyButton];
+    
+    
+    [self.containerView.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [self.containerView.layer setShadowOpacity:.35f];
+    [self.containerView.layer setShadowRadius:1];
+    [self.containerView.layer setShadowOffset:CGSizeMake(1, 1)];
+    
+    [self.createReportButton.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [self.createReportButton.layer setShadowOpacity:.35f];
+    [self.createReportButton.layer setShadowRadius:1];
+    [self.createReportButton.layer setShadowOffset:CGSizeMake(1, 1)];
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"View will appear for the explore cases!!");
+    
+    if (!self.onExploreTab) {
+        PFUser *currentUser = [PFUser currentUser];
+        if (currentUser) {
+            [self selectedCasesButton];
+            
+        } else {
+            NSLog(@"No user logged in.");
+        }
+    } else {
+        [self selectedNearbyButton];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,6 +92,7 @@
 }
 
 - (void)selectedNearbyButton {
+    self.onExploreTab = YES;
     UIColor *selectedColor = [UIColor colorWithRed:35/255.0f green:41/255.0f blue:52/255.0f alpha:1.0f];
     UIColor *unselectedColor = [UIColor colorWithRed:149/255.0f green:150/255.0f blue:151/255.0f alpha:1.0f];
     
@@ -78,6 +110,7 @@
 }
 
 - (void)selectedCasesButton {
+    self.onExploreTab = NO;
     UIColor *selectedColor = [UIColor colorWithRed:35/255.0f green:41/255.0f blue:52/255.0f alpha:1.0f];
     UIColor *unselectedColor = [UIColor colorWithRed:149/255.0f green:150/255.0f blue:151/255.0f alpha:1.0f];
     
@@ -89,6 +122,7 @@
     
     AggregateMapViewController *mapsViewController = self.tabViewControllers[0];
     UINavigationController *nvc = self.tabViewControllers[1];
+    nvc.navigationBar.hidden = YES;
     HappySunViewController *happySunVC = self.tabViewControllers[2];
     if ([PFUser currentUser] != nil)
     {
@@ -119,7 +153,6 @@
 
 - (IBAction)onCreateReport:(id)sender {
     NSLog(@"Create new report.");
-    NSLog(@"creating violation submission controller %@", self.navigationController);
     ViolationSubmissionViewController *vsc = [[ViolationSubmissionViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vsc];
 //    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
