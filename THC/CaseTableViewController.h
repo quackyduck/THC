@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CaseCell.h"
 
-@interface CaseTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@protocol CaseTableDelegate <NSObject>
+@required
+- (void)showAssignmentView:(Case*)swipedCase;
+@end
+
+@interface CaseTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CaseCellDelegate>
+
+@property (assign) id<CaseTableDelegate> delegate;
 
 @end

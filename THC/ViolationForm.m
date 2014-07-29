@@ -373,12 +373,6 @@
 - (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList withOrientation:(NSArray *)orientations completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError {
     
     
-    NSString *userId = nil;
-    if ([PFUser currentUser]) {
-        userId = [[PFUser currentUser] objectId];
-    }
-    
-    
     Case* newCase = [Case object];
     
     //    NSLog(@"case id %@", newCase.objectId);
@@ -399,7 +393,7 @@
     //    NSLog(@"submitting case with description %@", self.violationDescription);
     //    NSLog(@"submitting case with description %@", newCase.description);
     newCase.multiUnitPetition = [self.multiUnitPetiiton boolValue];
-    newCase.userId = userId;
+    newCase.userId = @"unassigned";
     newCase.status = caseOpen;
     
     if (!imageDataList && [imageDataList count] == 0) {

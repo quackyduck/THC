@@ -95,12 +95,6 @@
 }
 
 - (Case*)createCaseWithDescription:(NSString *) description andImageData:(NSData *) imageData completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError {
-
-    
-    NSString *userId = nil;
-    if ([PFUser currentUser]) {
-        userId = [[PFUser currentUser] objectId];
-    }
     
 //    PFQuery *query = [PFQuery queryWithClassName:@"Building"];
 //    [query whereKey:@"buildingName" equalTo:self.addressForm.hotelName];
@@ -146,7 +140,7 @@
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
 //    newCase.description = self.description;
-    newCase.userId = userId;
+    newCase.userId = @"unassigned";
     newCase.status = caseOpen;
     
     
@@ -259,13 +253,6 @@
 
 - (Case*)createCaseWithDescription:(NSString *) description withImageDataList:(NSArray *) imageDataList completion:(void (^)(Case* newCase))completion error:(void (^)(NSError*))onError {
     
-    
-    NSString *userId = nil;
-    if ([PFUser currentUser]) {
-        userId = [[PFUser currentUser] objectId];
-    }
-    
-    
     Case* newCase = [Case object];
     
     NSLog(@"case id %@", newCase.objectId);
@@ -284,8 +271,8 @@
     newCase.phoneNumber = self.phoneNumber;
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
-//    newCase.description = self.description;
-    newCase.userId = userId;
+    //    newCase.description = self.description;
+    newCase.userId = @"unassigned";
     newCase.status = caseOpen;
     
     

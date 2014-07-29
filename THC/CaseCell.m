@@ -12,11 +12,15 @@
 #import "Building.h"
 #import <math.h>
 
+#define optionViewWidth 140
+
 @implementation CaseCell
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    [super awakeFromNib];
+    self.scrollView.delegate = self;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -26,9 +30,11 @@
     // Configure the view for the selected state
 }
 
-- (void)initWithCase:(Case*)myCase;
+- (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment;
 {
+    self.cellCase = myCase;
     self.caseIdLabel.text = [NSString stringWithFormat:@"Case #%@", myCase.objectId];
+    [self.scrollView setContentOffset:CGPointZero];
     
     //Setup timestamp view
     self.timestampBackgroudView.backgroundColor = [UIColor orangeColor];
@@ -70,6 +76,12 @@
         self.timeStampLabel.text = @"";
         self.statusLabel.text = @"Closed";
         self.timestampBackgroudView.backgroundColor = [UIColor blueColor];
+    } else if (assignment)
+    {
+        self.statusLabel.text = @"Assigned To";
+        //Hack, dual purpose label
+        self.timeStampLabel.text = [NSString stringWithFormat:@"%@", myCase.userId];
+        self.timestampBackgroudView.backgroundColor = [UIColor redColor];
     } else
     {
         self.statusLabel.text = @"Created";
@@ -80,8 +92,12 @@
     CGRect newFrame = self.timestampBackgroudView.frame;
     if (myCase.status == caseClosed) {
         newFrame.size.width = self.timeStampLabel.frame.size.width + 55;
-    } else {
-        newFrame.size.width = self.timeStampLabel.frame.size.width + 70;
+    } else if (assignment)
+    {
+        newFrame.size.width = self.timeStampLabel.frame.size.width + 90;
+    } else
+    {
+        newFrame.size.width = self.timeStampLabel.frame.size.width + 90;
     }
     [self.timestampBackgroudView setFrame:newFrame];
     self.timestampBackgroudView.layer.cornerRadius = 3;
@@ -126,6 +142,43 @@
             }
         }
     }];
+}
+
+
+#pragma mark - Private Methods
+
+
+#pragma mark - UIScrollViewDelegate Methods
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    
+    if (scrollView.contentOffset.x > optionViewWidth / 2) {
+        targetContentOffset->x = optionViewWidth;
+    } else {
+        *targetContentOffset = CGPointZero;
+        
+        // Need to call this subsequently to remove flickering -- TODO: check why
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [scrollView setContentOffset:CGPointZero animated:YES];
+        });
+    }
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.x < 0)
+    {
+        scrollView.contentOffset = CGPointZero;
+    } else if (scrollView.contentOffset.x > 100)
+    {
+        if (!self.didShowAssignmentTable)
+        {
+            self.didShowAssignmentTable = YES;
+            [self.delegate showAssignmentView:self.cellCase];
+        }
+    } else if (scrollView.contentOffset.x == 0)
+    {
+    }
 }
 
 @end
