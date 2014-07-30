@@ -7,7 +7,6 @@
 //
 
 #import "CaseTableViewController.h"
-#import "CaseCell.h"
 #import "Case.h"
 #import "CameraLauncher.h"
 #import "PhotoInfo.h"
@@ -32,6 +31,8 @@
 
 @property (strong, nonatomic) CaseCell* stubCell;
 @property (strong, nonatomic) CALayer* bottomBorder;
+
+@property BOOL showAssignments;
 
 @end
 
@@ -89,6 +90,7 @@
     self.searchBar.delegate = self;
     
     self.navigationController.navigationBar.hidden = YES;
+    self.showAssignments = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -136,7 +138,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CaseCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CaseCell"];
-    [cell initWithCase:self.cases[indexPath.row]];
+    [cell initWithCase:self.cases[indexPath.row] showAssignment:self.showAssignments];
+    cell.delegate = self;
     return cell;
 }
 
@@ -211,6 +214,7 @@
 }
 
 - (IBAction)onMyTap:(id)sender {
+    self.showAssignments = NO;
     self.myLabel.textColor = [UIColor orangeColor];
     self.allLabel.textColor = [UIColor grayColor];
     self.openLabel.textColor = [UIColor grayColor];
@@ -219,12 +223,14 @@
     //Get my cases
     PFQuery *query = [Case query];
     PFUser *user = [PFUser currentUser];
+    
     [query whereKey:@"userId" equalTo:user.objectId];
-    [query whereKey:@"status" equalTo:@0];
     [self queryForCases:query];
 }
 
 - (IBAction)onAllTap:(id)sender {
+    
+    self.showAssignments = YES;
     self.allLabel.textColor = [UIColor orangeColor];
     self.openLabel.textColor = [UIColor grayColor];
     self.myLabel.textColor = [UIColor grayColor];
@@ -279,47 +285,54 @@
 
 - (void)getNew
 {
+    self.showAssignments = NO;
     self.openLabel.textColor = [UIColor orangeColor];
     self.allLabel.textColor = [UIColor grayColor];
     self.myLabel.textColor = [UIColor grayColor];
     [self addBottomBorder:self.openView];
     
     PFQuery *query = [Case query];
-    [query whereKey:@"status" equalTo:@0];
+    [query whereKey:@"userId" equalTo:@"unassigned"];
     [query orderByDescending:@"createdAt"];
     [self queryForCases:query];
 }
 
-//Closing code
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (void)showAssignmentView:(Case *)swipedCase
 {
-    return UITableViewCellEditingStyleDelete;
+    [self.delegate showAssignmentView:swipedCase];
 }
 
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    [super setEditing:editing animated:animated];
-    [self.caseTableView setEditing:editing animated:animated];
-}
-
-- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete){
-        //Close the case
-        Case *caseInfo = self.cases[indexPath.row];
-        caseInfo.status = caseClosed;
-        [caseInfo saveInBackground];
-        
-        [self.cases removeObjectAtIndex:indexPath.row];
-        
-        /* Then remove the associated cell from the Table View */
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    }
-    
-}
--(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return @"Close";
-}
+////Closing code
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return UITableViewCellEditingStyleDelete;
+//}
+//
+//- (void) setEditing:(BOOL)editing animated:(BOOL)animated
+//{
+//    [super setEditing:editing animated:animated];
+//    [self.caseTableView setEditing:editing animated:animated];
+//}
+//
+//- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingStyle == UITableViewCellEditingStyleDelete){
+//        //Close the case
+//        Case *caseInfo = self.cases[indexPath.row];
+//        caseInfo.status = caseClosed;
+//        [caseInfo saveInBackground];
+//        
+//        [self.cases removeObjectAtIndex:indexPath.row];
+//        
+//        /* Then remove the associated cell from the Table View */
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+//    }
+//    
+//}
+//-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return @"Close";
+//}
 
 
 @end

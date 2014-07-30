@@ -8,9 +8,9 @@
 
 #import "ExploreCasesContainerViewController.h"
 #import "AggregateMapViewController.h"
-#import "CaseTableViewController.h"
 #import "ViolationSubmissionViewController.h"
 #import "HappySunViewController.h"
+#import "AssignmentViewController.h"
 
 @interface ExploreCasesContainerViewController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -37,6 +37,7 @@
         
         AggregateMapViewController *mapViewController = [[AggregateMapViewController alloc] init];
         CaseTableViewController *casesViewController = [[CaseTableViewController alloc] init];
+        casesViewController.delegate = self;
         HappySunViewController *happySunViewController = [[HappySunViewController alloc] init];
         UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:casesViewController];
         self.tabViewControllers = @[mapViewController, nvc, happySunViewController];
@@ -164,11 +165,65 @@
 
 - (IBAction)onNearbyTab:(id)sender {
     [self selectedNearbyButton];
-    
 }
 
 - (IBAction)onCasesTab:(id)sender {
     [self selectedCasesButton];
-    
 }
+
+- (void)showAssignmentView:(Case *)swipedCase
+{
+    AssignmentViewController *assignmentvc = [[AssignmentViewController alloc] initWithCase:swipedCase];
+    assignmentvc.modalTransitionStyle = UIModalPresentationCustom;
+    assignmentvc.transitioningDelegate = self;
+    assignmentvc.delegate = self;
+    [self presentViewController:assignmentvc animated:YES completion:nil];
+}
+
+- (void)reloadTable {
+    //reload case table
+//    [self.tableView reloadData];
+}
+
+#pragma mark - Transition Delegate Methods
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return self;
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return self;
+}
+
+- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
+{
+    return 2.0;
+}
+
+- (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
+{
+    UIView* containerView = [transitionContext containerView];
+    UIViewController* fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController* toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    toVC.view.frame = containerView.frame;
+    [containerView addSubview:toVC.view];
+    
+    toVC.view.alpha = 0;
+    [UIView animateWithDuration:2 animations:^{
+        toVC.view.alpha = 1;
+    } completion:^(BOOL finished) {
+        [transitionContext completeTransition:YES];
+    }];
+}
+
 @end
+
+
+
+
+
+
+

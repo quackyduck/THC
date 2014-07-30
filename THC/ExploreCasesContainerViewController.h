@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CaseTableViewController.h"
+#import "AssignmentViewController.h"
 
-@interface ExploreCasesContainerViewController : UIViewController
+@interface ExploreCasesContainerViewController : UIViewController <CaseTableDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, AssignmentViewDelegate>
 
 @end
