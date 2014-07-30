@@ -53,7 +53,7 @@
     
     KxMenuItem *first = menuItems[0];
     //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-    first.foreColor = [UIColor greenColor];
+    first.foreColor = [UIColor grayColor];
 //
     first.alignment = NSTextAlignmentCenter;
     
