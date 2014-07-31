@@ -37,7 +37,7 @@
 #define FieldList     @[@"name", @"languageSpoken", @"phone", @"email"]
 #define PersonalInfo  @[@"name", @"languageSpoken", @"phone", @"email"]
 #define HotelInfo     @[@"hotel", @"unit"]
-#define ViolationInfo @[@"violationType", @"violationDescription", @"multiUnitPetition"]
+#define ViolationInfo @[@"violationType", @"violationDescription", @"multiUnitPetition", @"photoPicker"]
 #define SubmitInfo    @[@"submit"]
 //#define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo}
 #define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo,  @"3": SubmitInfo}
@@ -383,7 +383,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             [self.tableView registerNib:cellNib forCellReuseIdentifier:@"SubmitCell"];
             _stubSubmitCell = [cellNib instantiateWithOwner:nil options:nil][0];
         } else if ([fieldName isEqualToString:@"photoPicker"]) {
-            UINib *cellNib = [UINib nibWithNibName:@"PhotoPicker" bundle:nil];
+            UINib *cellNib = [UINib nibWithNibName:@"PhotoPickerCell" bundle:nil];
             [self.tableView registerNib:cellNib forCellReuseIdentifier:@"PhotoPicker"];
             _stubPhotoPickerCell = [cellNib instantiateWithOwner:nil options:nil][0];
         }
