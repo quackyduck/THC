@@ -91,6 +91,7 @@
     
     self.navigationController.navigationBar.hidden = YES;
     self.showAssignments = NO;
+    [self getNew];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,7 +103,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden = YES;
-    [self getNew];
+    [self.caseTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,6 +141,7 @@
     CaseCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CaseCell"];
     [cell initWithCase:self.cases[indexPath.row] showAssignment:self.showAssignments];
     cell.delegate = self;
+    cell.didShowAssignmentTable = NO;
     return cell;
 }
 

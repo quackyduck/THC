@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *nearbyButton;
 @property (assign, nonatomic) BOOL onExploreTab;
 
+@property BOOL isShowingAssignments;
+
 
 - (IBAction)onCreateReport:(id)sender;
 - (IBAction)onNearbyTab:(id)sender;
@@ -189,11 +191,13 @@
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
+    self.isShowingAssignments = YES;
     return self;
 }
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
+    self.isShowingAssignments = NO;
     return self;
 }
 
@@ -208,15 +212,29 @@
     UIViewController* fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController* toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
-    toVC.view.frame = containerView.frame;
-    [containerView addSubview:toVC.view];
     
-    toVC.view.alpha = 0;
-    [UIView animateWithDuration:2 animations:^{
-        toVC.view.alpha = 1;
-    } completion:^(BOOL finished) {
-        [transitionContext completeTransition:YES];
-    }];
+    if (self.isShowingAssignments)
+    {
+        toVC.view.frame = containerView.frame;
+        [containerView addSubview:fromVC.view];
+        [containerView addSubview:toVC.view];
+        toVC.view.alpha = 0;
+        toVC.view.frame = CGRectMake(320, 0, 320, 570);
+        [UIView animateWithDuration:0.2 animations:^{
+            toVC.view.frame = CGRectMake(0, 0, 320, 570);
+            toVC.view.alpha = 1;
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:YES];
+        }];
+    } else
+    {
+        [UIView animateWithDuration:0.2 animations:^{
+            fromVC.view.frame = CGRectMake(320, 0, 320, 570);
+            fromVC.view.alpha = 0;
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:YES];
+        }];
+    }
 }
 
 @end
