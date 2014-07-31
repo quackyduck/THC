@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -13,18 +13,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_fullname.png" translatesAutoresizingMaskIntoConstraints="NO" id="lZU-e9-tOL">
-                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_fullname.png" translatesAutoresizingMaskIntoConstraints="NO" id="lZU-e9-tOL">
+                        <rect key="frame" x="5" y="9" width="35" height="33"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="Gcy-0f-QY9"/>
-                            <constraint firstAttribute="width" constant="35" id="WpQ-Xh-ve4"/>
+                            <constraint firstAttribute="width" constant="35" id="Cpd-op-kbs"/>
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4JD-vP-3iq">
-                        <rect key="frame" x="48" y="7" width="267" height="30"/>
+                        <rect key="frame" x="48" y="9" width="267" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
                             <action selector="editingFinished:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="a3B-Ca-rar"/>
@@ -32,12 +31,13 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="4JD-vP-3iq" firstAttribute="leading" secondItem="lZU-e9-tOL" secondAttribute="trailing" constant="8" id="8bE-7T-UHh"/>
-                    <constraint firstItem="4JD-vP-3iq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Bt6-NX-plQ"/>
-                    <constraint firstItem="lZU-e9-tOL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="IaR-hI-I60"/>
-                    <constraint firstItem="lZU-e9-tOL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="NKb-yU-DdC"/>
-                    <constraint firstAttribute="trailing" secondItem="4JD-vP-3iq" secondAttribute="trailing" constant="5" id="QYl-Ub-4Jg"/>
-                    <constraint firstAttribute="bottom" secondItem="4JD-vP-3iq" secondAttribute="bottom" constant="8" id="XBo-lW-oKA"/>
+                    <constraint firstAttribute="trailing" secondItem="4JD-vP-3iq" secondAttribute="trailing" constant="5" id="5hq-Xc-q0l"/>
+                    <constraint firstItem="4JD-vP-3iq" firstAttribute="leading" secondItem="lZU-e9-tOL" secondAttribute="trailing" constant="8" symbolic="YES" id="Hkw-Hu-4YO"/>
+                    <constraint firstItem="4JD-vP-3iq" firstAttribute="top" secondItem="lZU-e9-tOL" secondAttribute="top" id="aAx-dV-6cu"/>
+                    <constraint firstItem="4JD-vP-3iq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="fL8-HS-l3v"/>
+                    <constraint firstAttribute="bottom" secondItem="4JD-vP-3iq" secondAttribute="bottom" constant="6" id="k3h-Xe-5fO"/>
+                    <constraint firstItem="lZU-e9-tOL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="mfP-Kc-G8D"/>
+                    <constraint firstAttribute="bottom" secondItem="lZU-e9-tOL" secondAttribute="bottom" constant="3" id="nPs-YQ-5aC"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

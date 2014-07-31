@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -13,29 +13,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_language.png" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-1s-Iex">
-                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_language.png" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-1s-Iex">
+                        <rect key="frame" x="5" y="7" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="51m-AH-2Us"/>
-                            <constraint firstAttribute="width" constant="35" id="vZ8-yg-huv"/>
+                            <constraint firstAttribute="width" constant="35" id="88R-GY-cV7"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spoken Language" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cll-Sd-aML">
                         <rect key="frame" x="48" y="12" width="263" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Cll-Sd-aML" secondAttribute="trailing" constant="9" id="Gwk-88-pfI"/>
-                    <constraint firstItem="ffa-1s-Iex" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="P45-ac-Rr5"/>
-                    <constraint firstItem="ffa-1s-Iex" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="PIN-k1-arH"/>
-                    <constraint firstItem="Cll-Sd-aML" firstAttribute="leading" secondItem="ffa-1s-Iex" secondAttribute="trailing" constant="8" id="Xbz-MV-TQt"/>
-                    <constraint firstAttribute="bottom" secondItem="Cll-Sd-aML" secondAttribute="bottom" constant="12" id="wgf-gY-rFL"/>
-                    <constraint firstItem="Cll-Sd-aML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="yl4-ie-I9g"/>
+                    <constraint firstItem="Cll-Sd-aML" firstAttribute="leading" secondItem="ffa-1s-Iex" secondAttribute="trailing" constant="8" symbolic="YES" id="EJd-hK-pdx"/>
+                    <constraint firstItem="ffa-1s-Iex" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="T90-tp-7xk"/>
+                    <constraint firstItem="Cll-Sd-aML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="fhK-Bv-QZL"/>
+                    <constraint firstAttribute="bottom" secondItem="ffa-1s-Iex" secondAttribute="bottom" constant="3" id="h5z-LU-0Fe"/>
+                    <constraint firstAttribute="trailing" secondItem="Cll-Sd-aML" secondAttribute="trailing" constant="9" id="i5V-8a-hXU"/>
+                    <constraint firstItem="ffa-1s-Iex" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="pVu-LG-2v9"/>
+                    <constraint firstItem="Cll-Sd-aML" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rWr-R0-Xay"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

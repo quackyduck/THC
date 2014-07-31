@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -13,18 +13,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="kDf-1e-Lht">
-                        <rect key="frame" x="5" y="5" width="30" height="30"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="kDf-1e-Lht">
+                        <rect key="frame" x="8" y="8" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="3kC-EK-5S7"/>
-                            <constraint firstAttribute="height" constant="30" id="YR6-9I-sqt"/>
+                            <constraint firstAttribute="width" constant="30" id="WBl-7F-G5Z"/>
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c1m-eS-yjR">
                         <rect key="frame" x="48" y="8" width="267" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                         <connections>
                             <action selector="editingFinished:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="ait-V9-6bi"/>
@@ -33,11 +32,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="c1m-eS-yjR" secondAttribute="bottom" constant="7" id="1MN-nu-JyU"/>
-                    <constraint firstItem="kDf-1e-Lht" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="8Vr-dx-93c"/>
-                    <constraint firstItem="kDf-1e-Lht" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="LMM-Uf-c61"/>
+                    <constraint firstItem="c1m-eS-yjR" firstAttribute="leading" secondItem="kDf-1e-Lht" secondAttribute="trailing" constant="10" id="PX2-qW-wSt"/>
                     <constraint firstItem="c1m-eS-yjR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Tmf-1G-YYj"/>
                     <constraint firstAttribute="trailing" secondItem="c1m-eS-yjR" secondAttribute="trailing" constant="5" id="e8C-S9-zmR"/>
-                    <constraint firstItem="c1m-eS-yjR" firstAttribute="leading" secondItem="kDf-1e-Lht" secondAttribute="trailing" constant="13" id="tHg-Ml-IRX"/>
+                    <constraint firstItem="kDf-1e-Lht" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="fip-WP-p3i"/>
+                    <constraint firstItem="kDf-1e-Lht" firstAttribute="top" secondItem="c1m-eS-yjR" secondAttribute="top" id="gNq-RN-Z0F"/>
+                    <constraint firstItem="kDf-1e-Lht" firstAttribute="bottom" secondItem="c1m-eS-yjR" secondAttribute="bottom" id="gl6-pR-OlN"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

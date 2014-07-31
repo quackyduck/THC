@@ -169,7 +169,7 @@
     if (scrollView.contentOffset.x < 0)
     {
         scrollView.contentOffset = CGPointZero;
-    } else if (scrollView.contentOffset.x > 100)
+    } else if (scrollView.contentOffset.x > 170)
     {
         if (!self.didShowAssignmentTable)
         {
