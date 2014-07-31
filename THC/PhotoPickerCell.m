@@ -22,4 +22,16 @@
     // Configure the view for the selected state
 }
 
+- (void)getFieldValueFromform {
+    if ([self.delegate respondsToSelector:@selector(getValueForField:)]) {
+        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString *value = [self.delegate getValueForField:@"photoPicker"];
+        if (value != nil && ![value isEqualToString:@""]) {
+            self.photoPickerField.text = value;
+        }
+        //        });
+    }
+}
+
 @end

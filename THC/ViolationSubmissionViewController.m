@@ -25,7 +25,7 @@
 #import "SubmitCell.h"
 #import "SubmissionValidationViewController.h"
 #import "MBProgressHUD.h"
-#import "PhotoPicker.h"
+#import "PhotoPickerCell.h"
 
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
@@ -86,6 +86,7 @@ ViolationTypeFieldCell          *_stubViolationTypeCell;
 EmailFieldCell                  *_stubEmailCell;
 MultiUnitFieldCell              *_stubMultiUnitFieldCell;
 SubmitCell                      *_stubSubmitCell;
+PhotoPickerCell                 *_stubPhotoPickerCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -381,7 +382,12 @@ SubmitCell                      *_stubSubmitCell;
             UINib *cellNib = [UINib nibWithNibName:@"SubmitCell" bundle:nil];
             [self.tableView registerNib:cellNib forCellReuseIdentifier:@"SubmitCell"];
             _stubSubmitCell = [cellNib instantiateWithOwner:nil options:nil][0];
+        } else if ([fieldName isEqualToString:@"photoPicker"]) {
+            UINib *cellNib = [UINib nibWithNibName:@"PhotoPicker" bundle:nil];
+            [self.tableView registerNib:cellNib forCellReuseIdentifier:@"PhotoPicker"];
+            _stubPhotoPickerCell = [cellNib instantiateWithOwner:nil options:nil][0];
         }
+
     }
 }
 
@@ -524,7 +530,7 @@ SubmitCell                      *_stubSubmitCell;
     } else if ([fieldName isEqualToString:@"unit"]) {
         UnitFieldCell *unitCell = (UnitFieldCell *)cell;
         unitCell.unitTextField.text = @"Testing";
-    } else if ([fieldName isEqualToString:@"violationDescription"]) {
+    }  else if ([fieldName isEqualToString:@"violationDescription"]) {
         ViolationDescriptionFieldCell *violationCell = (ViolationDescriptionFieldCell *)cell;
         violationCell.delegate = self.violationForm;
         if (self.showFilledForm) {
@@ -541,6 +547,9 @@ SubmitCell                      *_stubSubmitCell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *multiUniteCell = (SubmitCell *)cell;
 //        multiUniteCell.multiUnitField.text = @"Testing";
+    } else if ([fieldName isEqualToString:@"photoPicker"]) {
+        PhotoPickerCell *photoPickerCell = (PhotoPickerCell *)cell;
+        photoPickerCell.photoPickerField.text = @"Testing";
     }
 }
 
@@ -607,7 +616,12 @@ SubmitCell                      *_stubSubmitCell;
         [_stubMultiUnitFieldCell layoutSubviews];
         height = [_stubMultiUnitFieldCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         height = 45;
-    } else if ([fieldName isEqualToString:@"submit"]) {
+    } else if ([fieldName isEqualToString:@"photoPicker"]) {
+        [self configureCell:_stubPhotoPickerCell atIndexPath:indexPath];
+        [_stubPhotoPickerCell layoutSubviews];
+        height = [_stubPhotoPickerCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 90;
+    }else if ([fieldName isEqualToString:@"submit"]) {
         [self configureCell:_stubSubmitCell atIndexPath:indexPath];
         [_stubSubmitCell layoutSubviews];
         height = [_stubSubmitCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
@@ -700,6 +714,10 @@ SubmitCell                      *_stubSubmitCell;
         return cell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
+        cell.delegate = self.violationForm;
+        return cell;
+    } else if ([fieldName isEqualToString:@"photoPicker"]) {
+        PhotoPickerCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhotoPicker" ];
         cell.delegate = self.violationForm;
         return cell;
     }
@@ -795,7 +813,11 @@ SubmitCell                      *_stubSubmitCell;
         SubmitCell *cell = (SubmitCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.submitButton.userInteractionEnabled = YES;
         [cell.submitButton becomeFirstResponder];
-    } else {
+    } else if ([fieldName isEqualToString:@"photoPicker"]) {
+        PhotoPickerCell *cell = (PhotoPickerCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.photoPickerField.userInteractionEnabled = YES;
+        [cell.photoPickerField becomeFirstResponder];
+    }else {
         [self.tapGestureRecognizer setEnabled:YES];
     }
     

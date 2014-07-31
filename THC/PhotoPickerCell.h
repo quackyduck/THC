@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FieldContent.h"
 
-@interface PhotoPickerCell : UITableViewCell
+@interface PhotoPickerCell : UITableViewCell <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *photoPickerField;
 @property (weak, nonatomic) id<FieldContent> delegate;
-
-- (void)showMenu:(CGRect)frame onView:(UIView *)view forOrientation:(UIInterfaceOrientation) orientation;
 
 - (void)getFieldValueFromform;
 
