@@ -8,6 +8,12 @@
 
 #import "BuildingCalloutView.h"
 
+@interface BuildingCalloutView ()
+
+
+
+@end
+
 @implementation BuildingCalloutView
 
 - (id)initWithFrame:(CGRect)frame

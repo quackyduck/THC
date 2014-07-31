@@ -10,4 +10,9 @@
 
 @interface BuildingCalloutView : UIView
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *hotelNameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *hotelDescriptionLabel;
+
 @end

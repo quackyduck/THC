@@ -22,6 +22,7 @@
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSMutableDictionary *buildingInfo;
+@property (strong, nonatomic) BuildingCalloutView *currentCallout;
 
 @end
 
@@ -123,12 +124,10 @@
     static NSString* AnnotationIdentifier = @"Annotation";
     BuildingMapPin *annotationView = (BuildingMapPin *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
     
-    annotationView.canShowCallout = YES;
-    
     if (!annotationView) {
         
         annotationView = [[BuildingMapPin alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
-        annotationView.canShowCallout = YES;
+        annotationView.canShowCallout = NO;
         
         Building *building = (Building *)annotation;
         
@@ -205,17 +204,65 @@
     [mapView setRegion:[mapView convertRect:view.frame toRegionFromView:mapView] animated:YES];
     
     
-//    NSLog(@"Selected mapView frame %f, %f", point.x, point.y);
+    UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
+    NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
     
-//    UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
-//    NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
-//    
-//    BuildingCalloutView *buildingCallout = nibs[0];
-//    
-//    [view addSubview:buildingCallout];
+    BuildingCalloutView *buildingCallout = nibs[0];
+    
+    buildingCallout.frame = CGRectMake(7, 7, 292, 120);
+    // buildingCallout.frame = CGRectMake(7, mapView.frame.size.height - 127, 292, 120);
+    [buildingCallout.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [buildingCallout.layer setShadowOpacity:.35f];
+    [buildingCallout.layer setShadowRadius:1];
+    [buildingCallout.layer setShadowOffset:CGSizeMake(1, 1)];
+    [buildingCallout.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [buildingCallout.layer setBorderWidth:0.5f];
     
     
     
+    Building *building = (Building *)view.annotation;
+    
+    buildingCallout.hotelNameLabel.text = building.buildingName;
+    buildingCallout.hotelDescriptionLabel.text = building.streetAddress;
+    
+    PFQuery *photoQuery = [BuildingPhoto query];
+    [photoQuery whereKey:@"buildingId" equalTo:building.objectId];
+    [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if (objects.count > 0)
+            {
+                BuildingPhoto* photoObject = objects[0];
+                PFFile *photo = photoObject.image;
+                [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                    if (!photoError) {
+                        NSData *imageData = data;
+                        UIImage *image = [UIImage imageWithData:imageData];
+                        
+                        buildingCallout.imageView.image = image;
+                        buildingCallout.imageView.layer.cornerRadius = 40;
+                        buildingCallout.imageView.layer.masksToBounds = YES;
+                        buildingCallout.imageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+                        buildingCallout.imageView.layer.borderWidth = .5f;
+                        
+                        
+                        
+                    }
+                }];
+                
+            }
+        }
+    }];
+
+    self.currentCallout = buildingCallout;
+    [mapView addSubview:buildingCallout];
+
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    [self.currentCallout removeFromSuperview];
+
+    [mapView addAnnotation:view.annotation];
+    [self zoomInToTenderloin];
     
 }
 
