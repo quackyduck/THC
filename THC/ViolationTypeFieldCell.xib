@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -13,19 +13,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_violationType.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Vm-O6-Bxs">
-                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_violationType.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Vm-O6-Bxs">
+                        <rect key="frame" x="5" y="7" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="ROb-qy-Svn"/>
                             <constraint firstAttribute="height" constant="35" id="bdG-DW-Wfe"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViolationType" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ois-aC-Xa1">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViolationType" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="263" translatesAutoresizingMaskIntoConstraints="NO" id="Ois-aC-Xa1">
                         <rect key="frame" x="48" y="12" width="263" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -34,7 +34,7 @@
                     <constraint firstItem="4Vm-O6-Bxs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="B3w-0q-hpP"/>
                     <constraint firstAttribute="bottom" secondItem="Ois-aC-Xa1" secondAttribute="bottom" constant="12" id="YoR-YI-i8A"/>
                     <constraint firstItem="Ois-aC-Xa1" firstAttribute="leading" secondItem="4Vm-O6-Bxs" secondAttribute="trailing" constant="8" id="gu7-x4-Bqa"/>
-                    <constraint firstItem="4Vm-O6-Bxs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="p2u-iN-PY8"/>
+                    <constraint firstItem="4Vm-O6-Bxs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="p2u-iN-PY8"/>
                     <constraint firstItem="Ois-aC-Xa1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="zPe-Xd-ZXo"/>
                 </constraints>
             </tableViewCellContentView>

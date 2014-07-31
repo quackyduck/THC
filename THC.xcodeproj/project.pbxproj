@@ -149,6 +149,8 @@
 		37BD75F9197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75F8197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png */; };
 		37BD75FB197E3E93004BD913 /* ic_selection_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75FA197E3E93004BD913 /* ic_selection_check@2x.png */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
+		77D1988D1988C04500E200C5 /* PhotoPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D1988B1988C04500E200C5 /* PhotoPickerCell.m */; };
+		77D1988E1988C04500E200C5 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D1988C1988C04500E200C5 /* PhotoPickerCell.xib */; };
 		87373A20196F9DC000B93FBB /* CameraLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87373A1F196F9DC000B93FBB /* CameraLauncher.m */; };
 		87749379197A18420094B83E /* BuildingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87749378197A18420094B83E /* BuildingPhoto.m */; };
 		878845A1197B56650077A27A /* SubmissionValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8788459F197B56650077A27A /* SubmissionValidationViewController.m */; };
@@ -382,6 +384,9 @@
 		37BD75F6197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_report_hintPicker_normal@2x.png"; sourceTree = "<group>"; };
 		37BD75F8197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_report_hintPicker_selected@2x.png"; sourceTree = "<group>"; };
 		37BD75FA197E3E93004BD913 /* ic_selection_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_selection_check@2x.png"; sourceTree = "<group>"; };
+		77D1988A1988C04500E200C5 /* PhotoPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerCell.h; sourceTree = "<group>"; };
+		77D1988B1988C04500E200C5 /* PhotoPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerCell.m; sourceTree = "<group>"; };
+		77D1988C1988C04500E200C5 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPickerCell.xib; sourceTree = "<group>"; };
 		87373A1E196F9DC000B93FBB /* CameraLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLauncher.h; sourceTree = "<group>"; };
 		87373A1F196F9DC000B93FBB /* CameraLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLauncher.m; sourceTree = "<group>"; };
 		87749377197A18420094B83E /* BuildingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingPhoto.h; sourceTree = "<group>"; };
@@ -700,6 +705,9 @@
 				37BD756C197DCA29004BD913 /* MultiUnitFieldCell.h */,
 				37BD756D197DCA29004BD913 /* MultiUnitFieldCell.m */,
 				37BD756E197DCA29004BD913 /* MultiUnitFieldCell.xib */,
+				77D1988A1988C04500E200C5 /* PhotoPickerCell.h */,
+				77D1988B1988C04500E200C5 /* PhotoPickerCell.m */,
+				77D1988C1988C04500E200C5 /* PhotoPickerCell.xib */,
 				37BD7571197DCA3B004BD913 /* SubmitCell.h */,
 				37BD7572197DCA3B004BD913 /* SubmitCell.m */,
 				37BD7573197DCA3C004BD913 /* SubmitCell.xib */,
@@ -948,6 +956,7 @@
 				87B20027197C7FA9000D6CBD /* ic_success@2x.png in Resources */,
 				0A3C8C471978C03A00ED1667 /* ic_nav_edit_normal@2x.png in Resources */,
 				37BD756A197DB47A004BD913 /* ic_reports_violationType@2x.png in Resources */,
+				77D1988E1988C04500E200C5 /* PhotoPickerCell.xib in Resources */,
 				37BD7536197C9461004BD913 /* EmailFieldCell.xib in Resources */,
 				0A2376AD197F8292000E4AA1 /* ic_navbar_close_normal@2x.png in Resources */,
 				0A2FFB69197CE7970064E647 /* ic_signin_password@2x.png in Resources */,
@@ -1033,6 +1042,7 @@
 				0A237695197ED935000E4AA1 /* LoginButton.m in Sources */,
 				0A2376A0197EF0F3000E4AA1 /* DetailPhotoCell.m in Sources */,
 				0A2FFB4E197C28F90064E647 /* ContactInfoCell.m in Sources */,
+				77D1988D1988C04500E200C5 /* PhotoPickerCell.m in Sources */,
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
 				37BD7574197DCA3C004BD913 /* SubmitCell.m in Sources */,
 				0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */,

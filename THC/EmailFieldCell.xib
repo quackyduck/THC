@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -13,18 +13,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_email.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7c-FN-fpU">
-                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_reports_email.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7c-FN-fpU">
+                        <rect key="frame" x="5" y="9" width="35" height="37"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="Fsi-ZS-DHf"/>
-                            <constraint firstAttribute="height" constant="35" id="kSo-LM-bCz"/>
+                            <constraint firstAttribute="height" constant="37" id="kSo-LM-bCz"/>
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H5g-2Y-cs6">
                         <rect key="frame" x="48" y="8" width="267" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                         <connections>
                             <action selector="editingFinished:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="0MJ-tf-R7X"/>
@@ -36,7 +36,7 @@
                     <constraint firstItem="H5g-2Y-cs6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="C4y-bK-1Wy"/>
                     <constraint firstItem="e7c-FN-fpU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="ZBo-5n-qHT"/>
                     <constraint firstItem="H5g-2Y-cs6" firstAttribute="leading" secondItem="e7c-FN-fpU" secondAttribute="trailing" constant="8" id="dlh-an-Niq"/>
-                    <constraint firstItem="e7c-FN-fpU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="hLI-Pb-hb3"/>
+                    <constraint firstItem="e7c-FN-fpU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="hLI-Pb-hb3"/>
                     <constraint firstAttribute="trailing" secondItem="H5g-2Y-cs6" secondAttribute="trailing" constant="5" id="rpO-dH-ML9"/>
                 </constraints>
             </tableViewCellContentView>

@@ -25,14 +25,15 @@
 #import "SubmitCell.h"
 #import "SubmissionValidationViewController.h"
 #import "MBProgressHUD.h"
+#import "PhotoPicker.h"
 
 
 #define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
-#define orangeColor [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1]
+#define orangeColor [UIColor colorWithRed: 255.0f/255.0f green: 116.0f/255.0f blue: 47.0f/255.0f alpha: 1]
 #define whiteColor  [UIColor whiteColor]
 
-#define LanguageList  @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", nil}
-#define AllFields     @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"unit", @"violationDescription", @"violationType", @"multiUnitPetition", @"submit"]
+#define LanguageList  @{@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnamese", @"Phillipino", nil}
+#define AllFields     @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"unit", @"violationDescription", @"violationType", @"multiUnitPetition", @"photoPicker", @"submit"]
 #define FieldList     @[@"name", @"languageSpoken", @"phone", @"email"]
 #define PersonalInfo  @[@"name", @"languageSpoken", @"phone", @"email"]
 #define HotelInfo     @[@"hotel", @"unit"]
@@ -121,8 +122,11 @@ SubmitCell                      *_stubSubmitCell;
 //    [navigationBar setShadowImage:[UIImage new]];
     
 //    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed: 0.106f green: 0.157f blue: 0.333f alpha: 1];
-    self.navigationController.navigationBar.barTintColor = self.tableView.backgroundColor;
-
+//    self.navigationController.navigationBar.barTintColor = self.tableView.backgroundColor;
+    self.navigationController.navigationBar.topItem.title = @"Create Report";
+    self.navigationController.navigationBar.backgroundColor = orangeColor;
+    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
 
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 //                                                                                           target:self
@@ -130,7 +134,7 @@ SubmitCell                      *_stubSubmitCell;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_navbar_close_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction)];
 
 //    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = orangeColor;
+    self.navigationController.navigationBar.tintColor = whiteColor;
     
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit"
@@ -232,6 +236,7 @@ SubmitCell                      *_stubSubmitCell;
 //        self.scrollView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
 //        self.scrollView.backgroundColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
         self.scrollView.backgroundColor = self.tableView.backgroundColor;
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 48, 0, 10)];
 
 
         self.scrollView.delegate = self;
@@ -572,8 +577,8 @@ SubmitCell                      *_stubSubmitCell;
     } else if ([fieldName isEqualToString:@"phone"]) {
         [self configureCell:_stubPhoneCell atIndexPath:indexPath];
         [_stubPhoneCell layoutSubviews];
-        height = 45;
         height = [_stubPhoneCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = 45;
     } else if ([fieldName isEqualToString:@"hotel"]) {
         [self configureCell:_stubHotelCell atIndexPath:indexPath];
         [_stubHotelCell layoutSubviews];
@@ -588,8 +593,8 @@ SubmitCell                      *_stubSubmitCell;
         [_stubViolationCell layoutSubviews];
         height = [_stubViolationCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 //        NSLog(@"height for violation description cell: %f", height);
-        if (height < 59) {
-            height = 59;
+        if (height < 90) {
+            height = 90;
         }
 
     } else if ([fieldName isEqualToString:@"violationType"]) {
@@ -606,7 +611,7 @@ SubmitCell                      *_stubSubmitCell;
         [self configureCell:_stubSubmitCell atIndexPath:indexPath];
         [_stubSubmitCell layoutSubviews];
         height = [_stubSubmitCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        height = 59;
+        height = 90;
     }
     
 //    NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
