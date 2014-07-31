@@ -132,14 +132,6 @@
         
         Building *building = (Building *)annotation;
         
-//        UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
-//        NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
-//        
-//        BuildingCalloutView *buildingCallout = nibs[0];
-//        
-//        annotationView.calloutView = buildingCallout;
-        
-        
         //Get first image to show
         PFQuery *photoQuery = [BuildingPhoto query];
         [photoQuery whereKey:@"buildingId" equalTo:building.objectId];
@@ -168,12 +160,9 @@
             }
         }];
         
-        
-        
-        
-        
         PFQuery *query = [PFQuery queryWithClassName:@"Case"];
         [query whereKey:@"buildingId" equalTo:building.objectId];
+        [query whereKey:@"status" equalTo:@0];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 // The find succeeded.
@@ -207,16 +196,27 @@
     return annotationView;
 }
 
-//- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-//    NSLog(@"Selected ...");
-//    
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+    BuildingMapPin *annotationView = (BuildingMapPin *) view;
+    annotationView.image = [UIImage imageNamed:@"btn_map_pin_selected"];
+    
+    
+    [mapView setRegion:[mapView convertRect:view.frame toRegionFromView:mapView] animated:YES];
+    
+    
+//    NSLog(@"Selected mapView frame %f, %f", point.x, point.y);
+    
 //    UINib *nib = [UINib nibWithNibName:@"BuildingCalloutView" bundle:nil];
 //    NSArray *nibs = [nib instantiateWithOwner:nil options:nil];
 //    
 //    BuildingCalloutView *buildingCallout = nibs[0];
 //    
 //    [view addSubview:buildingCallout];
-//    
-//}
+    
+    
+    
+    
+}
 
 @end
