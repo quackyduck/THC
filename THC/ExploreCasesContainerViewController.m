@@ -64,6 +64,11 @@
     [self.createReportButton.layer setShadowRadius:1];
     [self.createReportButton.layer setShadowOffset:CGSizeMake(1, 1)];
     
+    [[NSNotificationCenter defaultCenter] addObserver:nil selector:@selector(showHotelView:) name:@"CalloutTapped" object:nil];
+    
+}
+
+- (void)showHotelView:(id)obj {
     
 }
 

@@ -33,5 +33,10 @@
     // Drawing code
 }
 */
+- (IBAction)onTapCallout:(UITapGestureRecognizer *)sender {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalloutTapped" object:self];
+    
+}
 
 @end

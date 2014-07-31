@@ -70,6 +70,8 @@
 		0A3C8C4B1978C03A00ED1667 /* ic_photoGallery_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C371978C03A00ED1667 /* ic_photoGallery_inactive@2x.png */; };
 		0A3C8C4C1978C03A00ED1667 /* ic_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C8C381978C03A00ED1667 /* ic_search@2x.png */; };
 		0A3C8C4F1978E76000ED1667 /* BuildingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C8C4E1978E76000ED1667 /* BuildingAnnotationView.m */; };
+		0A4C99841989EC0900898D1A /* HotelProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C99821989EC0900898D1A /* HotelProfileViewController.m */; };
+		0A4C99851989EC0900898D1A /* HotelProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4C99831989EC0900898D1A /* HotelProfileViewController.xib */; };
 		0AE370B4196D16DB00E80E88 /* building.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE370B3196D16DB00E80E88 /* building.png */; };
 		0AF08BB21964EC94002761B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB11964EC94002761B9 /* Foundation.framework */; };
 		0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB31964EC94002761B9 /* CoreGraphics.framework */; };
@@ -274,6 +276,9 @@
 		0A3C8C381978C03A00ED1667 /* ic_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_search@2x.png"; sourceTree = "<group>"; };
 		0A3C8C4D1978E76000ED1667 /* BuildingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingAnnotationView.h; sourceTree = "<group>"; };
 		0A3C8C4E1978E76000ED1667 /* BuildingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingAnnotationView.m; sourceTree = "<group>"; };
+		0A4C99811989EC0900898D1A /* HotelProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelProfileViewController.h; sourceTree = "<group>"; };
+		0A4C99821989EC0900898D1A /* HotelProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelProfileViewController.m; sourceTree = "<group>"; };
+		0A4C99831989EC0900898D1A /* HotelProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotelProfileViewController.xib; sourceTree = "<group>"; };
 		0ACDC5B94E4440D4A15CFB87 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE370B3196D16DB00E80E88 /* building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = building.png; sourceTree = "<group>"; };
 		0AF08BAE1964EC94002761B9 /* THC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -647,6 +652,9 @@
 				87DCE681198459C9005EC7E6 /* AssignmentViewController.h */,
 				87DCE682198459C9005EC7E6 /* AssignmentViewController.m */,
 				87DCE683198459C9005EC7E6 /* AssignmentViewController.xib */,
+				0A4C99811989EC0900898D1A /* HotelProfileViewController.h */,
+				0A4C99821989EC0900898D1A /* HotelProfileViewController.m */,
+				0A4C99831989EC0900898D1A /* HotelProfileViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -928,6 +936,7 @@
 				0A3C8C4B1978C03A00ED1667 /* ic_photoGallery_inactive@2x.png in Resources */,
 				0A2EF03D19663E2A00FED705 /* AggregateMapViewController.xib in Resources */,
 				37BD74C1197427F9004BD913 /* PhotoCell.xib in Resources */,
+				0A4C99851989EC0900898D1A /* HotelProfileViewController.xib in Resources */,
 				0A3C8C3D1978C03A00ED1667 /* btn_email_normal@2x.png in Resources */,
 				0A3C8C401978C03A00ED1667 /* btn_phone_pressed@2x.png in Resources */,
 				377D170D1969E75F004E4E67 /* ViolationDescriptionViewController.xib in Resources */,
@@ -1028,6 +1037,7 @@
 				37BD74CA19742864004BD913 /* PhotoCollectionController.m in Sources */,
 				377D17131969E7D7004E4E67 /* AddressForm.m in Sources */,
 				0A2FFB3A197A2C320064E647 /* CaseViewController.m in Sources */,
+				0A4C99841989EC0900898D1A /* HotelProfileViewController.m in Sources */,
 				878845A5197B8DD00077A27A /* ReviewReportButton.m in Sources */,
 				87B2002B197C88FF000D6CBD /* HappySunViewController.m in Sources */,
 				0A122E8F1969A5BF005894EB /* PhotoInfo.m in Sources */,

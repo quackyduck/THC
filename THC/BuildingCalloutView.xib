@@ -30,12 +30,19 @@
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.96862751250000001" green="0.96862751250000001" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
+            <gestureRecognizers/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="hotelDescriptionLabel" destination="iP5-PT-BpV" id="f4B-bM-gKM"/>
                 <outlet property="hotelNameLabel" destination="T0q-au-fxe" id="fGU-2V-W3d"/>
                 <outlet property="imageView" destination="EDX-w3-Ufd" id="vtU-Tc-VhG"/>
+                <outletCollection property="gestureRecognizers" destination="iQB-br-x0Q" appends="YES" id="JoA-Cv-USZ"/>
             </connections>
         </view>
+        <tapGestureRecognizer id="iQB-br-x0Q">
+            <connections>
+                <action selector="onTapCallout:" destination="iN0-l3-epB" id="1IZ-NF-jIE"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>
