@@ -87,6 +87,8 @@
 		0AF08BD71964EC94002761B9 /* THCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF08BD61964EC94002761B9 /* THCTests.m */; };
 		0AF08BE61964F16F002761B9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF08BE41964F16F002761B9 /* LoginViewController.m */; };
 		0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF08BE51964F16F002761B9 /* LoginViewController.xib */; };
+		373B3DFB198A9B4F00D6447F /* PhotoViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B3DF9198A9B4F00D6447F /* PhotoViewerController.m */; };
+		373B3DFC198A9B4F00D6447F /* PhotoViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B3DFA198A9B4F00D6447F /* PhotoViewerController.xib */; };
 		377D16A91967342A004E4E67 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D16A71967342A004E4E67 /* CameraViewController.m */; };
 		377D16AA1967342A004E4E67 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377D16A81967342A004E4E67 /* CameraViewController.xib */; };
 		377D16AF1967BD38004E4E67 /* PhotoDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D16AD1967BD38004E4E67 /* PhotoDescriptionViewController.m */; };
@@ -300,6 +302,9 @@
 		0AF08BE31964F16F002761B9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0AF08BE41964F16F002761B9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		0AF08BE51964F16F002761B9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		373B3DF8198A9B4F00D6447F /* PhotoViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerController.h; sourceTree = "<group>"; };
+		373B3DF9198A9B4F00D6447F /* PhotoViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerController.m; sourceTree = "<group>"; };
+		373B3DFA198A9B4F00D6447F /* PhotoViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoViewerController.xib; sourceTree = "<group>"; };
 		377D16A61967342A004E4E67 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		377D16A71967342A004E4E67 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		377D16A81967342A004E4E67 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
@@ -620,6 +625,9 @@
 				377D16B11967BE1D004E4E67 /* ViolationSubmissionViewController.h */,
 				377D16B21967BE1D004E4E67 /* ViolationSubmissionViewController.m */,
 				377D16B31967BE1D004E4E67 /* ViolationSubmissionViewController.xib */,
+				373B3DF8198A9B4F00D6447F /* PhotoViewerController.h */,
+				373B3DF9198A9B4F00D6447F /* PhotoViewerController.m */,
+				373B3DFA198A9B4F00D6447F /* PhotoViewerController.xib */,
 				87A9884D1968C09500EDE34F /* CaseTableViewController.h */,
 				87A9884E1968C09500EDE34F /* CaseTableViewController.m */,
 				87A9884F1968C09500EDE34F /* CaseTableViewController.xib */,
@@ -930,6 +938,7 @@
 				37BD7562197CBA15004BD913 /* btn_selected_remove_normal@2x.png in Resources */,
 				0AF08BE71964F16F002761B9 /* LoginViewController.xib in Resources */,
 				37BD7531197C944A004BD913 /* PhoneFieldCell.xib in Resources */,
+				373B3DFC198A9B4F00D6447F /* PhotoViewerController.xib in Resources */,
 				0A3C8C481978C03A00ED1667 /* ic_nav_map_normal@2x.png in Resources */,
 				37BD7575197DCA3C004BD913 /* SubmitCell.xib in Resources */,
 				0A3C8C3B1978C03A00ED1667 /* btn_create_normal@2x.png in Resources */,
@@ -1082,6 +1091,7 @@
 				87B2002F197C90CE000D6CBD /* GetStartedButton.m in Sources */,
 				87DCE68919845D8F005EC7E6 /* AssignmentsCell.m in Sources */,
 				0A237698197EDC67000E4AA1 /* RequestAccessButton.m in Sources */,
+				373B3DFB198A9B4F00D6447F /* PhotoViewerController.m in Sources */,
 				0A2FFB5F197CBD6D0064E647 /* PhoneButton.m in Sources */,
 				0A2EF03C19663E2A00FED705 /* AggregateMapViewController.m in Sources */,
 				0A2835561971D863008A5FC7 /* ExploreCasesContainerViewController.m in Sources */,
