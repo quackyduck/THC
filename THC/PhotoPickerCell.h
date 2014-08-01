@@ -11,7 +11,7 @@
 
 @interface PhotoPickerCell : UITableViewCell <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *photoPickerField;
+@property (weak, nonatomic) IBOutlet UIButton *addPicture;
 @property (weak, nonatomic) id<FieldContent> delegate;
 
 - (void)getFieldValueFromform;

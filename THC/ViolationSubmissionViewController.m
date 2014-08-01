@@ -28,7 +28,7 @@
 #import "PhotoPickerCell.h"
 
 
-#define greyColor   [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f]
+#define greyColor   [UIColor colorWithRed: 247.0f/255.0f green: 247.0f/255.0f blue: 247.0f/255.0f alpha: 1]
 #define orangeColor [UIColor colorWithRed: 255.0f/255.0f green: 116.0f/255.0f blue: 47.0f/255.0f alpha: 1]
 #define whiteColor  [UIColor whiteColor]
 
@@ -127,8 +127,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     self.navigationController.navigationBar.topItem.title = @"Create Report";
     self.navigationController.navigationBar.backgroundColor = orangeColor;
     self.navigationController.navigationBar.translucent = NO;
-//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
-
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: whiteColor, NSFontAttributeName: [UIFont systemFontOfSize:18]};
+    
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 //                                                                                           target:self
 //                                                                                           action:@selector(cancelButtonAction)];
@@ -143,6 +143,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
                                                                     target:self action:@selector(submitForm)];
     
 //    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    [self.tableView setBackgroundColor:greyColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshForm)
@@ -217,7 +218,6 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     [self registerForKeyboardNotifications];
     [self.tableView reloadData];
     
-    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -281,22 +281,37 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         imageView.frame = imageViewFrame;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.layer.cornerRadius = 4.f;
-        imageView.layer.borderWidth = 1.f;
+//        imageView.layer.cornerRadius = 4.f;
+//        imageView.layer.borderWidth = 1.f;
         
         imageView.backgroundColor = [UIColor clearColor];
         imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
         [imageView setClipsToBounds:YES];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
-        tap.numberOfTapsRequired = 1;
-        imageView.userInteractionEnabled = YES;
-        [imageView addGestureRecognizer:tap];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
+//        tap.numberOfTapsRequired = 1;
+//        imageView.userInteractionEnabled = YES;
+//        [imageView addGestureRecognizer:tap];
         
         imageView.tag = 10000;
         
-        [self.scrollView addSubview:imageView];        
+        [self.scrollView addSubview:imageView];
+        
     }
+    
+    
+    
+//    NSLog(@"yay!");
+    PhotoPickerCell *photoPickerCell = [[PhotoPickerCell alloc] init];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
+//    tap.numberOfTapsRequired = 1;
+//    photoPickerCell.addPicture.userInteractionEnabled = YES;
+//    photoPickerCell.userInteractionEnabled = YES;
+//    [photoPickerCell.addPicture addGestureRecognizer:tap];
+    
+    [photoPickerCell.addPicture addTarget:self
+                                   action:@selector(launchPhotoPicker:)
+     forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillLayoutSubviews
@@ -406,7 +421,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     //this prevents the gestureRecognizer to override other Taps, such as Cell Selection
     self.tapGestureRecognizer.cancelsTouchesInView = NO;
-    [self.tableView addGestureRecognizer:self.tapGestureRecognizer];
+    [self.view addGestureRecognizer:self.tapGestureRecognizer];
     
 }
 
@@ -545,11 +560,13 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         MultiUnitFieldCell *multiUniteCell = (MultiUnitFieldCell *)cell;
         multiUniteCell.multiUnitField.text = @"Testing";
     } else if ([fieldName isEqualToString:@"submit"]) {
-        SubmitCell *multiUniteCell = (SubmitCell *)cell;
+        SubmitCell *submitCell = (SubmitCell *)cell;
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
+        backView.backgroundColor = [UIColor clearColor];
+        submitCell.backgroundView = backView;
 //        multiUniteCell.multiUnitField.text = @"Testing";
-    } else if ([fieldName isEqualToString:@"photoPicker"]) {
-        PhotoPickerCell *photoPickerCell = (PhotoPickerCell *)cell;
-        photoPickerCell.photoPickerField.text = @"Testing";
+    } else {
+        
     }
 }
 
@@ -620,12 +637,12 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         [self configureCell:_stubPhotoPickerCell atIndexPath:indexPath];
         [_stubPhotoPickerCell layoutSubviews];
         height = [_stubPhotoPickerCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        height = 90;
+        height = 100;
     }else if ([fieldName isEqualToString:@"submit"]) {
         [self configureCell:_stubSubmitCell atIndexPath:indexPath];
         [_stubSubmitCell layoutSubviews];
         height = [_stubSubmitCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        height = 90;
+        height = 58;
     }
     
 //    NSLog(@"hieght for cell at section %ld row %ld ------> %f  %@", (long)indexPath.section, (long)indexPath.row, height+1, fieldName);
@@ -714,6 +731,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         return cell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
+        
         cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
@@ -814,9 +832,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         cell.submitButton.userInteractionEnabled = YES;
         [cell.submitButton becomeFirstResponder];
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
-        PhotoPickerCell *cell = (PhotoPickerCell *)[tableView cellForRowAtIndexPath:indexPath];
-        cell.photoPickerField.userInteractionEnabled = YES;
-        [cell.photoPickerField becomeFirstResponder];
+        NSLog(@"%@", fieldName);
+        [self.tapGestureRecognizer setEnabled:NO];
+//        PhotoPickerCell *cell = (PhotoPickerCell *)[tableView cellForRowAtIndexPath:indexPath];
+//        cell.userInteractionEnabled = YES;
+//        cell.addPicture.userInteractionEnabled = YES;
     }else {
         [self.tapGestureRecognizer setEnabled:YES];
     }
@@ -1234,8 +1254,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 
 #pragma mark - button actions
 
-- (void)launchPhotoPicker:(UITapGestureRecognizer *) tap {
-//    NSLog(@"launch photo picker");
+- (void)launchPhotoPicker:(id)sender {
+    NSLog(@"launch photo picker");
     AlbumListController *alc = [[AlbumListController alloc] init];
     alc.delegate = self;
     
