@@ -19,6 +19,11 @@ The THC app aims to build awareness to poor housing conditions, enable tenants a
 
 During the time between our first demo and the official Aug. 4 Demo Day we are working to polish up each of the features in the walkthrough. Stay tuned!
 
+### Explore tab - user is logged out
 ![Video Walkthrough](logged_out.gif)
+
+### Login and new report creation
 ![Video Walkthrough](logged_in_create_report.gif)
+
+### Case management
 ![Video Walkthrough](logged_in_case_management.gif)
