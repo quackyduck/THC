@@ -5,7 +5,7 @@ Codepath THC
 
 ## Non-profit - Tenderloin Housing Clinic
 
-The Tenderloin Housing Clinic helps organize Single Room Occupancy and apartment tenants to fight for quality housing in San Francisco's Tenderloin and South of Market areas. They conduct outreach, record building code violations in privately owned SRO hotels and apartments, and organize tenants to improve conditions. Tenants with habitability concerns may also drop in for housing counseling with our trained peer counselors.
+The [Tenderloin Housing Clinic](http://www.thclinic.org) helps organize Single Room Occupancy and apartment tenants to fight for quality housing in San Francisco's Tenderloin and South of Market areas. They conduct outreach, record building code violations in privately owned SRO hotels and apartments, and organize tenants to improve conditions. Tenants with habitability concerns may also drop in for housing counseling with our trained peer counselors.
 
 ## Tenderloin Housing Clinic App
 
