@@ -9,9 +9,9 @@ The Tenderloin Housing Clinic helps organize Single Room Occupancy and apartment
 
 ## Tenderloin Housing Clinic App
 
-The THC app aims to build awareness to poor housing conditions, enable tenants and THC staff to efficiently report violations, and provide case management as THC staff consolidates reports into a legal case. Below are a set of walkthroughs of the app at the time of the first demo. 
+The THC app aims to build awareness to poor housing conditions, enable tenants and THC staff to efficiently report violations, and provide case management to THC staff as they consolidate reports into a legal case. Below are a set of walkthroughs of the app at the time of the first demo. 
 
-* The first demonstrates the Explore tab where you have the SRO Hotels that the THC manages. You can quickly locate a hotel and see how many open violations are currently filed against it. 
+* Walkthrough no. 1 demonstrates the Explore tab where you have the SRO Hotels that the THC manages. You can quickly locate a hotel and see how many open violations are currently filed against it. 
 * The second walkthrough displays our login screen for staff and then follows the creation of a new report. Fields are prepopulated based on location (SRO Hotel) and user (email, etc. where available). 
 * The final walkthrough details the workflow where a staff member will review a reported case and possibly email the details back to herself. Upon taking the case 'offline' the staff member may close out the case in the management tool.
 
