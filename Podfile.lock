@@ -18,7 +18,7 @@ PODS:
   - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Bolts (1.1.0)
+  - Bolts (1.1.1)
   - Facebook-iOS-SDK (3.16.2):
     - Bolts
   - FXForms (1.1.6)
@@ -38,7 +38,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
-  Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
+  Bolts: 0ca796081c3e7c139bd86d6903c27f1b83036a5d
   Facebook-iOS-SDK: 34eef640c2cc4c8618ba0f574ad2b290e07f1b4e
   FXForms: 9387c60ee6f3e1c75e0f8998012acc1ce0ad8d0a
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153

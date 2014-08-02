@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *addPicture;
 @property (weak, nonatomic) id<FieldContent> delegate;
+@property (weak, nonatomic) IBOutlet UIScrollView *photoScrollView;
 
 - (void)getFieldValueFromform;
 

@@ -28,10 +28,15 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" directionalLockEnabled="YES" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YE-qU-m3d">
+                        <rect key="frame" x="143" y="7" width="177" height="86"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </scrollView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addPicture" destination="Aqn-p8-Gib" id="pb8-dC-QUf"/>
+                <outlet property="photoScrollView" destination="3YE-qU-m3d" id="esU-NK-Eif"/>
             </connections>
         </tableViewCell>
     </objects>
