@@ -69,6 +69,7 @@
 @property (strong, nonatomic) ViolationForm           *violationForm;
 @property (assign)            BOOL                    showFilledForm;
 @property (strong, nonatomic) CLLocationManager       *locationManager;
+@property (strong, nonatomic) PhotoPickerCell         *photoPickerCell;
 @property (nonatomic) CLLocationDegrees currentLatitude;
 @property (nonatomic) CLLocationDegrees currentLongitude;
 
@@ -210,6 +211,10 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         self.imagesToShow   = [NSMutableArray array];
         self.imagesToSubmitOrientation = [NSMutableArray array];
         self.deleteImagesInScroll = [NSMutableArray array];
+        
+        UINib *cellNib = [UINib nibWithNibName:@"PhotoPickerCell" bundle:nil];
+        [self.tableView registerNib:cellNib forCellReuseIdentifier:@"PhotoPicker"];
+        self.photoPickerCell = [cellNib instantiateWithOwner:nil options:nil][0];
 
     }
 }
@@ -631,7 +636,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
-        PhotoPickerCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhotoPicker" ];
+//        PhotoPickerCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhotoPicker" ];
+        PhotoPickerCell *cell = self.photoPickerCell;
         cell.delegate = self.violationForm;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
@@ -861,25 +867,28 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     
     //[self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     //[self.scrollView.subviews removeFromSuperview];
-    for (UIView *view in _stubPhotoPickerCell.photoScrollView.subviews) {
+    for (UIView *view in self.photoPickerCell.photoScrollView.subviews) {
         if (view.tag != 10000) {
             [view removeFromSuperview];
         }
     }
     
-    CGPoint scrollViewCenter = CGPointMake(_stubPhotoPickerCell.photoScrollView.frame.size.width/2, _stubPhotoPickerCell.photoScrollView.frame.size.height/2);
-    CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:_stubPhotoPickerCell.photoScrollView];
-
+    CGPoint scrollViewCenter = CGPointMake(self.photoPickerCell.photoScrollView.frame.size.width/2, self.photoPickerCell.photoScrollView.frame.size.height/2);
+    CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.photoPickerCell.photoScrollView];
     
+    NSLog(@"scroll view centre %@ :  %@", NSStringFromCGPoint(scrollViewCenter), NSStringFromCGPoint(activityCenter));
+//
+//    
     self.activityView.center = activityCenter;
-    self.activityView.hidden = NO;
-    self.activityView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityView];
+//    self.activityView.hidden = NO;
+//    self.activityView.hidesWhenStopped = YES;
 
-    [_stubPhotoPickerCell.photoScrollView addSubview:self.activityView];
-    [_stubPhotoPickerCell.photoScrollView bringSubviewToFront:self.activityView];
+//    [self.photoPickerCell.photoScrollView addSubview:self.activityView];
+//    [self.photoPickerCell.photoScrollView bringSubviewToFront:self.activityView];
 
 
-    _stubPhotoPickerCell.photoScrollView.contentSize = CGSizeZero;
+    self.photoPickerCell.photoScrollView.contentSize = CGSizeZero;
     [self.activityView startAnimating];
 
     
@@ -897,10 +906,10 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         CGFloat width   = 70.0;
 
         CGSize contentSize = CGSizeZero;
-        contentSize.width = (width + padding) * (assets.count + 1);
+        contentSize.width = (width + padding) * (assets.count) + padding;
 
-        contentSize.height = _stubPhotoPickerCell.photoScrollView.frame.size.height;
-        _stubPhotoPickerCell.photoScrollView.contentSize = contentSize;
+        contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
+        self.photoPickerCell.photoScrollView.contentSize = contentSize;
         
         
         [self.imagesInScroll removeAllObjects];
@@ -909,7 +918,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         [self.imagesToSubmitOrientation removeAllObjects];
 
         
-        __block int index = 1;
+        __block int index = 0;
         
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
@@ -917,12 +926,13 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             //            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
             
-            CGRect imageViewFrame = CGRectInset(_stubPhotoPickerCell.photoScrollView.bounds, padding, padding);
+            CGRect imageViewFrame = CGRectInset(self.photoPickerCell.photoScrollView.bounds, padding, padding);
             //            NSLog(@"image view frame %@", NSStringFromCGRect(imageViewFrame));
             
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index + padding;
+
             
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
             
@@ -970,16 +980,17 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
                 index++;
                 
                 
-                [_stubPhotoPickerCell.photoScrollView addSubview:imageView];
+                [self.photoPickerCell.photoScrollView addSubview:imageView];
                 
-                [_stubPhotoPickerCell.photoScrollView addSubview:deleteImageView];
+                [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
                 [self.imagesInScroll addObject:imageView];
                 [self.deleteImagesInScroll addObject:deleteImageView];
         }
 
         [self.activityView stopAnimating];
+        [self.activityView removeFromSuperview];
         
-        [_stubPhotoPickerCell.photoScrollView flashScrollIndicators];
+        [self.photoPickerCell.photoScrollView flashScrollIndicators];
     }];
 
     
@@ -991,13 +1002,19 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     _stubPhotoPickerCell.photoScrollView.contentSize = CGSizeZero;
     // Show some activity.
     
-    for (UIView *view in _stubPhotoPickerCell.photoScrollView.subviews) {
+    for (UIView *view in self.photoPickerCell.photoScrollView.subviews) {
         if (view.tag != 10000) {
             [view removeFromSuperview];
         }
     }
     
-    [_stubPhotoPickerCell.photoScrollView addSubview:self.activityView];
+    CGPoint scrollViewCenter = CGPointMake(self.photoPickerCell.photoScrollView.frame.size.width/2, self.photoPickerCell.photoScrollView.frame.size.height/2);
+    CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.photoPickerCell.photoScrollView];
+    
+    self.activityView.center = activityCenter;
+    
+    [self.view addSubview:self.activityView];
+//    [self.photoPickerCell.photoScrollView addSubview:self.activityView];
 
     [self.activityView startAnimating];
     
@@ -1017,21 +1034,21 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         CGSize contentSize = CGSizeZero;
         contentSize.width = (width + padding) * (selectedImages.count + 1);
         
-        contentSize.height = _stubPhotoPickerCell.photoScrollView.frame.size.height;
-        _stubPhotoPickerCell.photoScrollView.contentSize = contentSize;
+        contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
+        self.photoPickerCell.photoScrollView.contentSize = contentSize;
         NSLog(@"sfsdlf %f", _stubPhotoPickerCell.photoScrollView.frame.size.width);
 //        // PageControl setup.
 //        self.pageControl.hidden = NO;
 //        self.pageControl.numberOfPages = selectedImages.count;
         
-        int index = 1;
+        int index = 0;
         
         [self.imagesInScroll removeAllObjects];
         [self.imagesToSubmit removeAllObjects];
         
         for (UIImage *image in selectedImages) {
             
-            CGRect imageViewFrame = CGRectInset(_stubPhotoPickerCell.photoScrollView.bounds, padding, padding);
+            CGRect imageViewFrame = CGRectInset(self.photoPickerCell.photoScrollView.bounds, padding, padding);
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index + padding;
@@ -1041,6 +1058,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             NSData  *imageData = UIImageJPEGRepresentation(image, 7);
             [self.imagesToSubmit addObject:imageData];
+            [self.imagesToShow addObject:image];
+
 
 
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -1070,8 +1089,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             index++;
             
-            [_stubPhotoPickerCell.photoScrollView addSubview:imageView];
-            [_stubPhotoPickerCell.photoScrollView addSubview:deleteImageView];
+            [self.photoPickerCell.photoScrollView addSubview:imageView];
+            [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
             [self.imagesInScroll addObject:imageView];
             [self.deleteImagesInScroll addObject:deleteImageView];
 
@@ -1080,7 +1099,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         [self.activityView stopAnimating];
         
-        [_stubPhotoPickerCell.photoScrollView flashScrollIndicators];
+        [self.photoPickerCell.photoScrollView flashScrollIndicators];
     }];
     
 }
@@ -1139,6 +1158,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         [imageView removeFromSuperview];
         [self.imagesInScroll removeObjectAtIndex:tap.view.tag];
         [self.imagesToSubmit removeObjectAtIndex:tap.view.tag];
+        [self.imagesToShow removeObjectAtIndex:tap.view.tag];
         [self.imagesToSubmitOrientation removeObjectAtIndex:tap.view.tag];
         
         CGRect deleteImageFrame = tap.view.frame;
