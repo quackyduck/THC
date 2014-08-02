@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoViewerController : UIViewController
+@interface PhotoViewerController : UIViewController <UIScrollViewDelegate>
+
+- (void)setImagesForViewing:(NSArray *) imageList withOrientations:(NSArray *) orientations;
 
 @end

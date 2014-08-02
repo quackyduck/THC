@@ -26,6 +26,7 @@
 #import "SubmissionValidationViewController.h"
 #import "MBProgressHUD.h"
 #import "PhotoPickerCell.h"
+#import "PhotoViewerController.h"
 
 
 #define greyColor   [UIColor colorWithRed: 247.0f/255.0f green: 247.0f/255.0f blue: 247.0f/255.0f alpha: 1]
@@ -55,6 +56,7 @@
 @property (strong, nonatomic) Case                    *myCase;
 @property (strong, nonatomic) NSMutableArray          *imagesInScroll;
 @property (strong, nonatomic) NSMutableArray          *imagesToSubmit;
+@property (strong, nonatomic) NSMutableArray          *imagesToShow;
 @property (strong, nonatomic) NSMutableArray          *imagesToSubmitOrientation;
 @property (strong, nonatomic) NSMutableArray          *deleteImagesInScroll;
 @property (strong, nonatomic) UIImagePickerController *picker;
@@ -243,17 +245,21 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         self.scrollView.delegate = self;
         
         
-        self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        [self.scrollView addSubview:self.activityView];
+        self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
-        CGPoint scrollViewCenter = CGPointMake(self.scrollView.frame.size.width/2, self.scrollView.frame.size.height/2);
-        CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.scrollView];
-        
-        self.activityView.center = activityCenter;
+//        CGPoint scrollViewCenter = CGPointMake(self.scrollView.frame.size.width/2, self.scrollView.frame.size.height/2);
+//        CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.scrollView];
+//        
+//        self.activityView.center = activityCenter;
+//        self.activityView.hidden = YES;
+//        self.activityView.hidesWhenStopped = YES;
+//        [self.scrollView addSubview:self.activityView];
+
 
         
         self.imagesInScroll = [NSMutableArray array];
         self.imagesToSubmit = [NSMutableArray array];
+        self.imagesToShow   = [NSMutableArray array];
         self.imagesToSubmitOrientation = [NSMutableArray array];
         self.deleteImagesInScroll = [NSMutableArray array];
 
@@ -318,10 +324,10 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 {
     [super viewWillLayoutSubviews];
     
-    CGPoint scrollViewCenter = CGPointMake(self.scrollView.frame.size.width/2, self.scrollView.frame.size.height/2);
-    CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.scrollView];
-    
-    self.activityView.center = activityCenter;
+//    CGPoint scrollViewCenter = CGPointMake(self.scrollView.frame.size.width/2, self.scrollView.frame.size.height/2);
+//    CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.scrollView];
+//    
+//    self.activityView.center = activityCenter;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1005,9 +1011,17 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             [view removeFromSuperview];
         }
     }
-    [self.scrollView addSubview:self.activityView];
+    
+    CGPoint scrollViewCenter = CGPointMake(self.scrollView.frame.size.width/2, self.scrollView.frame.size.height/2);
+    CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.scrollView];
 
+    
+    self.activityView.center = activityCenter;
+    self.activityView.hidden = NO;
+    self.activityView.hidesWhenStopped = YES;
 
+    [self.view addSubview:self.activityView];
+    [self.view bringSubviewToFront:self.activityView];
 
 
     self.scrollView.contentSize = CGSizeZero;
@@ -1018,6 +1032,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     //NSLog(@"activity view %@", self.activityView);
     // Show some activity.
     [self.activityView startAnimating];
+//    [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
+
     
     // Dismiss the picker controller.
     [self dismissViewControllerAnimated:YES completion:^{
@@ -1048,16 +1064,15 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         [self.imagesInScroll removeAllObjects];
         [self.imagesToSubmit removeAllObjects];
+        [self.imagesToShow removeAllObjects];
         [self.imagesToSubmitOrientation removeAllObjects];
 
         
-//        [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
+        __block int index = 1;
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        
-        int index = 1;
-        
         for (ALAsset *asset in assets) {
-            
             
             //            NSLog(@"scroll view frame %@", NSStringFromCGRect(self.scrollView.bounds));
             
@@ -1070,15 +1085,59 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *fullResImage = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                UIImage *fullResImage  = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:asset.defaultRepresentation.orientation];
+                UIImage *fullResImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:UIImageOrientationUp];
+                [self.imagesToShow addObject:fullResImage];
                 
                 NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
                 [self.imagesToSubmit addObject:imageData];
                 [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
-            });
+//                NSLog(@"image dimesntions %@", NSStringFromCGSize(asset.defaultRepresentation.dimensions));
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+                imageView.frame = imageViewFrame;
+                //imageView.contentMode = UIViewContentModeCenter;
+                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                imageView.layer.cornerRadius = 4.f;
+                imageView.layer.borderWidth = 1.f;
+                
+                imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+                imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
+                [imageView setClipsToBounds:YES];
+                
+                UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+                imageTap.numberOfTapsRequired = 1;
+                [imageView addGestureRecognizer:imageTap];
+                imageView.userInteractionEnabled = YES;
+                
+                
+                
+                CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
+                deleteFrame.origin.x += width - 4*padding;
+                deleteFrame.origin.y -= 2*padding;
+                deleteFrame.size.height = 4*padding;
+                deleteFrame.size.width  = 4*padding;
+                UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
+                //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
+                tap.numberOfTapsRequired = 1;
+                
+                [deleteImageView addGestureRecognizer:tap];
+                deleteImageView.userInteractionEnabled = YES;
+                deleteImageView.tag = [self.imagesInScroll count];
+                
+                index++;
+                
+                
+                [self.scrollView addSubview:imageView];
+                
+                [self.scrollView addSubview:deleteImageView];
+                [self.imagesInScroll addObject:imageView];
+                [self.deleteImagesInScroll addObject:deleteImageView];
+//            });
             
             
+            /*
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             imageView.frame = imageViewFrame;
             //imageView.contentMode = UIViewContentModeCenter;
@@ -1089,6 +1148,12 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
+            
+            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+            imageTap.numberOfTapsRequired = 1;
+            [imageView addGestureRecognizer:imageTap];
+            imageView.userInteractionEnabled = YES;
+
             
             
             CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
@@ -1113,8 +1178,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             [self.scrollView addSubview:deleteImageView];
             [self.imagesInScroll addObject:imageView];
             [self.deleteImagesInScroll addObject:deleteImageView];
+             */
             
         }
+//        });
+
         
 //        [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
 
@@ -1122,6 +1190,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         [self.scrollView flashScrollIndicators];
     }];
+
     
 }
 
@@ -1350,6 +1419,14 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
     }];
 
+}
+
+- (void)showPhotoViewer {
+    
+    PhotoViewerController *pvc = [[PhotoViewerController alloc] init];
+    [pvc setImagesForViewing:self.imagesToShow withOrientations:self.imagesToSubmitOrientation];
+    [self.navigationController presentViewController:pvc animated:YES completion:nil];
+//    [self.navigationController pushViewController:pvc animated:YES];
 }
 
 #pragma Location
