@@ -308,16 +308,16 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     
     
 //    NSLog(@"yay!");
-    PhotoPickerCell *photoPickerCell = [[PhotoPickerCell alloc] init];
+//    PhotoPickerCell *photoPickerCell = [[PhotoPickerCell alloc] init];
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
 //    tap.numberOfTapsRequired = 1;
 //    photoPickerCell.addPicture.userInteractionEnabled = YES;
 //    photoPickerCell.userInteractionEnabled = YES;
 //    [photoPickerCell.addPicture addGestureRecognizer:tap];
     
-    [photoPickerCell.addPicture addTarget:self
-                                   action:@selector(launchPhotoPicker:)
-     forControlEvents:UIControlEventTouchUpInside];
+//    [photoPickerCell.addPicture addTarget:self
+//                                   action:@selector(launchPhotoPicker:)
+//     forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillLayoutSubviews
@@ -743,6 +743,13 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
         PhotoPickerCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"PhotoPicker" ];
         cell.delegate = self.violationForm;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
+        tap.numberOfTapsRequired = 1;
+        
+        cell.addPicture.userInteractionEnabled = YES;
+        cell.userInteractionEnabled = YES;
+        [cell.addPicture addGestureRecognizer:tap];
         return cell;
     }
     
@@ -841,16 +848,16 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         NSLog(@"%@", fieldName);
         [self.tapGestureRecognizer setEnabled:NO];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
-        tap.numberOfTapsRequired = 1;
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
+//        tap.numberOfTapsRequired = 1;
         
 
-        PhotoPickerCell *cell = (PhotoPickerCell *)[tableView cellForRowAtIndexPath:indexPath];
+//        PhotoPickerCell *cell = (PhotoPickerCell *)[tableView cellForRowAtIndexPath:indexPath];
 //        cell.userInteractionEnabled = YES;
 //        cell.addPicture.userInteractionEnabled = YES;
-        cell.addPicture.userInteractionEnabled = YES;
-        cell.userInteractionEnabled = YES;
-        [cell.addPicture addGestureRecognizer:tap];
+//        cell.addPicture.userInteractionEnabled = YES;
+//        cell.userInteractionEnabled = YES;
+//        [cell.addPicture addGestureRecognizer:tap];
     }else {
         [self.tapGestureRecognizer setEnabled:YES];
     }
