@@ -840,9 +840,17 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
         NSLog(@"%@", fieldName);
         [self.tapGestureRecognizer setEnabled:NO];
-//        PhotoPickerCell *cell = (PhotoPickerCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPhotoPicker:)];
+        tap.numberOfTapsRequired = 1;
+        
+
+        PhotoPickerCell *cell = (PhotoPickerCell *)[tableView cellForRowAtIndexPath:indexPath];
 //        cell.userInteractionEnabled = YES;
 //        cell.addPicture.userInteractionEnabled = YES;
+        cell.addPicture.userInteractionEnabled = YES;
+        cell.userInteractionEnabled = YES;
+        [cell.addPicture addGestureRecognizer:tap];
     }else {
         [self.tapGestureRecognizer setEnabled:YES];
     }
