@@ -15,6 +15,12 @@
 #import "CaseViewController.h"
 #import "SubmissionValidationViewController.h"
 
+typedef enum {
+    all,
+    new,
+    myCases
+} caseTab;
+
 @interface CaseTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *caseTableView;
@@ -25,6 +31,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *myLabel;
 @property (weak, nonatomic) IBOutlet UIView *myView;
 @property (weak, nonatomic) IBOutlet UIImageView *searchImage;
+@property (weak, nonatomic) IBOutlet UIView *assignInstructionView;
+@property (weak, nonatomic) IBOutlet UIImageView *assignArrowImageView;
+@property (weak, nonatomic) IBOutlet UIView *closeInstructionView;
+@property (weak, nonatomic) IBOutlet UIImageView *closeArrowImageView;
 
 @property (nonatomic, strong) NSMutableArray* cases;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -33,6 +43,8 @@
 @property (strong, nonatomic) CALayer* bottomBorder;
 
 @property BOOL showAssignments;
+@property BOOL showInstructions;
+@property caseTab currentTab;
 
 @end
 
@@ -42,7 +54,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        self.showInstructions = YES;
     }
     return self;
 }
@@ -55,6 +67,12 @@
     self.searchBar.hidden = YES;
     
     self.searchImage.image = [UIImage imageNamed:@"Search"];
+    self.assignArrowImageView.image = [UIImage imageNamed:@"ic_nav_back_normal"];
+    self.assignInstructionView.alpha = 0;
+    self.assignInstructionView.layer.cornerRadius = 20;
+    self.closeArrowImageView.image = [UIImage imageNamed:@"ic_nav_back_normal"];
+    self.closeInstructionView.alpha = 0;
+    self.closeInstructionView.layer.cornerRadius = 20;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAllTap:)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
@@ -92,6 +110,17 @@
     self.navigationController.navigationBar.hidden = YES;
     self.showAssignments = NO;
     [self getNew];
+    
+    if (self.showInstructions && self.currentTab == new) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.assignInstructionView.alpha = 1;
+        } completion:^(BOOL finished) {
+            sleep(2);
+            [UIView animateWithDuration:0.5 animations:^{
+                self.assignInstructionView.alpha = 0;
+            } completion:nil];
+        }];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -139,18 +168,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CaseCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CaseCell"];
-    [cell initWithCase:self.cases[indexPath.row] showAssignment:self.showAssignments];
+    if (self.currentTab == new || self.currentTab == myCases) {
+        [cell initWithCase:self.cases[indexPath.row] showAssignment:self.showAssignments enableScroll:YES containingTable:self.caseTableView];
+    } else {
+        [cell initWithCase:self.cases[indexPath.row] showAssignment:self.showAssignments enableScroll:NO containingTable:self.caseTableView];
+    }
     cell.delegate = self;
     cell.didShowAssignmentTable = NO;
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCase:)];
+    [recognizer setNumberOfTapsRequired:1];
+    cell.scrollView.userInteractionEnabled = YES;
+    [cell.scrollView addGestureRecognizer:recognizer];
+    
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)selectCase:(UITapGestureRecognizer *) sender
 {
+    CGPoint touchLocation = [sender locationOfTouch:0 inView:self.caseTableView];
+    NSIndexPath *indexPath = [self.caseTableView indexPathForRowAtPoint:touchLocation];
     Case *caseInfo = self.cases[indexPath.row];
     CaseViewController *detailvc = [[CaseViewController alloc] initWithCase:caseInfo];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self.caseTableView deselectRowAtIndexPath:indexPath animated:NO];
     
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:detailvc];
     [self presentViewController:nvc animated:YES completion:nil];
@@ -216,6 +257,7 @@
 }
 
 - (IBAction)onMyTap:(id)sender {
+    self.currentTab = myCases;
     self.showAssignments = NO;
     self.myLabel.textColor = [UIColor orangeColor];
     self.allLabel.textColor = [UIColor grayColor];
@@ -228,9 +270,22 @@
     
     [query whereKey:@"userId" equalTo:user.objectId];
     [self queryForCases:query];
+    
+    if (self.showInstructions && self.currentTab == myCases) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.closeInstructionView.alpha = 1;
+        } completion:^(BOOL finished) {
+            sleep(2);
+            [UIView animateWithDuration:0.5 animations:^{
+                self.closeInstructionView.alpha = 0;
+            } completion:nil];
+        }];
+    }
+    self.showInstructions = NO;
 }
 
 - (IBAction)onAllTap:(id)sender {
+    self.currentTab = all;
     
     self.showAssignments = YES;
     self.allLabel.textColor = [UIColor orangeColor];
@@ -297,18 +352,36 @@
     [query whereKey:@"userId" equalTo:@"unassigned"];
     [query orderByDescending:@"createdAt"];
     [self queryForCases:query];
+    self.currentTab = new;
 }
 
 
-- (void)showAssignmentView:(Case *)swipedCase
+- (void)didScroll:(Case *)swipedCase index:(NSIndexPath*)indexPath
 {
-    [self.delegate showAssignmentView:swipedCase];
+    if (self.currentTab == new)
+        [self.delegate showAssignmentView:swipedCase];
+    else if (self.currentTab == myCases)
+    {
+        //Close the case
+        Case *caseInfo = self.cases[indexPath.row];
+        caseInfo.status = caseClosed;
+        [caseInfo saveInBackground];
+        
+        [self.cases removeObjectAtIndex:indexPath.row];
+        
+        /* Then remove the associated cell from the Table View */
+        [self.caseTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+    }
+        
 }
 
 ////Closing code
 //- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    return UITableViewCellEditingStyleDelete;
+//    if (self.currentTab == myCases)
+//        return UITableViewCellEditingStyleDelete;
+//    else
+//        return UITableViewCellEditingStyleNone;
 //}
 //
 //- (void) setEditing:(BOOL)editing animated:(BOOL)animated

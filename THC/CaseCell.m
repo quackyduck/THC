@@ -30,11 +30,14 @@
     // Configure the view for the selected state
 }
 
-- (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment;
+- (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment enableScroll:(BOOL)enable containingTable:(UITableView*)table;
 {
     self.cellCase = myCase;
     self.caseIdLabel.text = [NSString stringWithFormat:@"Case #%@", myCase.objectId];
     [self.scrollView setContentOffset:CGPointZero];
+    
+    self.enableScroll = enable;
+    self.table = table;
     
     //Setup timestamp view
     self.timestampBackgroudView.backgroundColor = [UIColor orangeColor];
@@ -97,6 +100,8 @@
         newFrame.size.width = self.timeStampLabel.frame.size.width + 90;
     } else
     {
+        self.timeStampLabel.frame = CGRectMake(self.timeStampLabel.frame.origin.x - 200, self.timeStampLabel.frame.origin.y,
+                                               self.timeStampLabel.frame.size.width, self.timeStampLabel.frame.size.height);
         newFrame.size.width = self.timeStampLabel.frame.size.width + 90;
     }
     [self.timestampBackgroudView setFrame:newFrame];
@@ -166,7 +171,7 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.x < 0)
+    if (scrollView.contentOffset.x < 0 || !self.enableScroll)
     {
         scrollView.contentOffset = CGPointZero;
     } else if (scrollView.contentOffset.x > 170)
@@ -174,9 +179,9 @@
         if (!self.didShowAssignmentTable)
         {
             self.didShowAssignmentTable = YES;
-            [self.delegate showAssignmentView:self.cellCase];
+            [self.delegate didScroll:self.cellCase index:[self.table indexPathForCell:self]];
         }
-    } else if (scrollView.contentOffset.x == 0)
+    } else
     {
     }
 }

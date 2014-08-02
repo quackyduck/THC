@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -8,7 +8,11 @@
             <connections>
                 <outlet property="allLabel" destination="u9a-dW-MsE" id="Bfp-lM-mYe"/>
                 <outlet property="allView" destination="tY2-ng-OE1" id="Yby-bG-4XO"/>
+                <outlet property="assignArrowImageView" destination="5xB-Zz-o00" id="gDw-wx-9xa"/>
+                <outlet property="assignInstructionView" destination="BZO-47-9Zz" id="5cV-yT-wj7"/>
                 <outlet property="caseTableView" destination="6U0-lI-G25" id="Bgb-fO-fWS"/>
+                <outlet property="closeArrowImageView" destination="AJB-zz-00U" id="mSE-tZ-J6m"/>
+                <outlet property="closeInstructionView" destination="kIE-yO-rpl" id="jCV-LB-YoK"/>
                 <outlet property="myLabel" destination="IyC-Tt-aRb" id="RVU-63-jQH"/>
                 <outlet property="myView" destination="M7J-uh-zdp" id="TZX-hJ-1Hs"/>
                 <outlet property="openLabel" destination="xKu-Yh-6nG" id="hJX-fC-K6A"/>
@@ -90,6 +94,42 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
+                <view contentMode="scaleToFill" id="BZO-47-9Zz">
+                    <rect key="frame" x="28" y="171" width="265" height="49"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left to Assign" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eqw-1L-aMj">
+                            <rect key="frame" x="36" y="13" width="245" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5xB-Zz-o00">
+                            <rect key="frame" x="27" y="10" width="35" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="kIE-yO-rpl">
+                    <rect key="frame" x="28" y="171" width="265" height="49"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left to Close" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mll-mI-n6R">
+                            <rect key="frame" x="36" y="13" width="245" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="AJB-zz-00U">
+                            <rect key="frame" x="27" y="10" width="35" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
