@@ -31,7 +31,7 @@
     return self;
 }
 
-- (id)initWithCase:(Case*)assignToCase
+- (id)initWithCase:(Case*)assignToCase backgroundImage:(UIImage*)image
 {
     self = [self initWithNibName:@"AssignmentViewController" bundle:nil];
     if (self) {
@@ -54,7 +54,7 @@
     self.assignmentTableView.layer.cornerRadius = 10;
     
     PFQuery *query = [PFUser query];
-    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+//    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.assignments = [[NSMutableArray alloc] init];
@@ -62,24 +62,6 @@
             for (NSObject* user in users)
             {
                 PFUser* pfUser = (PFUser*)user;
-                
-                //Get total count of cases assigned to this user
-//                PFQuery *caseQuery = [Case query];
-//                caseQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
-//                [caseQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//                    if (!error) {
-//                        NSMutableArray* users = [NSMutableArray arrayWithArray:objects];
-//                        for (NSObject* user in users)
-//                        {
-//                            PFUser* pfUser = (PFUser*)user;
-//                            
-//                            Assignment *assignment = [[Assignment alloc] initWithUser:(PFUser*)user andCurrentCount:3];
-//                            
-//                            self.assignments addObject:<#(id)#>
-//                        }
-//                        [self.assignmentTableView reloadData];
-//                    }
-//                }];
                 
                 Assignment *assignment = [[Assignment alloc] initWithUser:pfUser andCurrentCount:[[NSNumber alloc] initWithInt:3]];
                 [self.assignments addObject:assignment];

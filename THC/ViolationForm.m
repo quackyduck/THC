@@ -393,7 +393,7 @@
     //    NSLog(@"submitting case with description %@", self.violationDescription);
     //    NSLog(@"submitting case with description %@", newCase.description);
     newCase.multiUnitPetition = [self.multiUnitPetiiton boolValue];
-    newCase.userId = @"unassigned";
+    newCase.userId = @"No One";
     newCase.status = caseOpen;
     
     if (!imageDataList && [imageDataList count] == 0) {

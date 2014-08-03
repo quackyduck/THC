@@ -62,7 +62,7 @@
 @property (strong, nonatomic) Case                    *myCase;
 @property (strong, nonatomic) NSMutableArray          *imagesInScroll;
 @property (strong, nonatomic) NSMutableArray          *imagesToSubmit;
-@property (strong, nonatomic) NSMutableArray          *imagesToShow;
+//@property (strong, nonatomic) NSMutableArray          *imagesToShow;
 @property (strong, nonatomic) NSMutableArray          *violationPhotos;
 @property (strong, nonatomic) NSMutableArray          *imagesToSubmitOrientation;
 @property (strong, nonatomic) NSMutableArray          *deleteImagesInScroll;
@@ -215,7 +215,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         self.imagesInScroll   = [NSMutableArray array];
         self.imagesToSubmit   = [NSMutableArray array];
-        self.imagesToShow     = [NSMutableArray array];
+//        self.imagesToShow     = [NSMutableArray array];
         self.violationPhotos  = [NSMutableArray array];
 
         self.imagesToSubmitOrientation = [NSMutableArray array];
@@ -642,6 +642,13 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
         
+        [cell.submitButton addTarget:self
+                     action:@selector(submitForm)
+           forControlEvents:UIControlEventTouchUpInside];
+        cell.submitButton.userInteractionEnabled = YES;
+        [cell.submitButton becomeFirstResponder];
+
+        
         cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
@@ -749,6 +756,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         SubmitCell *cell = (SubmitCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.submitButton.userInteractionEnabled = YES;
         [cell.submitButton becomeFirstResponder];
+        [self.tapGestureRecognizer setEnabled:NO];
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
         [self.tapGestureRecognizer setEnabled:NO];
     }else {
@@ -923,7 +931,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         [self.imagesInScroll removeAllObjects];
         [self.imagesToSubmit removeAllObjects];
-        [self.imagesToShow removeAllObjects];
+//        [self.imagesToShow removeAllObjects];
         [self.imagesToSubmitOrientation removeAllObjects];
         [self.violationPhotos removeAllObjects];
 
@@ -941,124 +949,63 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
-//<<<<<<< HEAD
             imageViewFrame.origin.x = (width + padding) * index;
             
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
             
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//                UIImage *fullResImage  = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:asset.defaultRepresentation.orientation];
-                UIImage *fullResImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:UIImageOrientationUp];
-                [self.imagesToShow addObject:fullResImage];
+            //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            //                UIImage *fullResImage  = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:asset.defaultRepresentation.orientation];
+            UIImage *fullResImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:UIImageOrientationUp];
+//            [self.imagesToShow addObject:fullResImage];
             
             ViolationPhoto *photo = [ViolationPhoto photoWithProperties:@{@"image": fullResImage
                                                                           }];
             [self.violationPhotos addObject:photo];
             
-                NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
-                [self.imagesToSubmit addObject:imageData];
-                [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
-//                NSLog(@"image dimesntions %@", NSStringFromCGSize(asset.defaultRepresentation.dimensions));
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-                imageView.frame = imageViewFrame;
-                //imageView.contentMode = UIViewContentModeCenter;
-                imageView.contentMode = UIViewContentModeScaleAspectFit;
-//                imageView.layer.cornerRadius = 4.f;
-//                imageView.layer.borderWidth = 1.f;
+            NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
+            [self.imagesToSubmit addObject:imageData];
+            [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
+            //                NSLog(@"image dimesntions %@", NSStringFromCGSize(asset.defaultRepresentation.dimensions));
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+            imageView.frame = imageViewFrame;
+            //imageView.contentMode = UIViewContentModeCenter;
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
+            //                imageView.layer.cornerRadius = 4.f;
+            //                imageView.layer.borderWidth = 1.f;
             
-                imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
-                imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
-                [imageView setClipsToBounds:YES];
-                
-                UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
-                imageTap.numberOfTapsRequired = 1;
-                [imageView addGestureRecognizer:imageTap];
-                imageView.userInteractionEnabled = YES;
-                
-                
-                
-                CGRect deleteFrame = CGRectInset(imageView.frame, 28, 28);
-                deleteFrame.origin.x += width / 2;
-                deleteFrame.origin.y -= width / 2;
-                deleteFrame.size.height = 28;
-                deleteFrame.size.width  = 28;
-                UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
-                //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
-                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
-                tap.numberOfTapsRequired = 1;
-                
-                [deleteImageView addGestureRecognizer:tap];
-                deleteImageView.userInteractionEnabled = YES;
-                deleteImageView.tag = [self.imagesInScroll count];
-                
-                index++;
-                
-                
-                [self.photoPickerCell.photoScrollView addSubview:imageView];
-                
-                [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
-                [self.imagesInScroll addObject:imageView];
-                [self.deleteImagesInScroll addObject:deleteImageView];
-//=======
-//            imageViewFrame.origin.x = (width + padding) * index + padding;
-//            
-//            
-//            UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
-//            
-//            //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            //                UIImage *fullResImage  = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:asset.defaultRepresentation.orientation];
-//            UIImage *fullResImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:UIImageOrientationUp];
-//            [self.imagesToShow addObject:fullResImage];
-//            
-//            ViolationPhoto *photo = [ViolationPhoto photoWithProperties:@{@"image": fullResImage
-//                                                                          }];
-//            [self.violationPhotos addObject:photo];
-//            
-//            NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
-//            [self.imagesToSubmit addObject:imageData];
-//            [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
-//            //                NSLog(@"image dimesntions %@", NSStringFromCGSize(asset.defaultRepresentation.dimensions));
-//            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//            imageView.frame = imageViewFrame;
-//            //imageView.contentMode = UIViewContentModeCenter;
-//            imageView.contentMode = UIViewContentModeScaleAspectFit;
-//            imageView.layer.cornerRadius = 4.f;
-//            imageView.layer.borderWidth = 1.f;
-//            
-//            imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
-//            imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
-//            [imageView setClipsToBounds:YES];
-//            
-//            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
-//            imageTap.numberOfTapsRequired = 1;
-//            [imageView addGestureRecognizer:imageTap];
-//            imageView.userInteractionEnabled = YES;
-//            
-//            
-//            
-//            CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
-//            deleteFrame.origin.x += width - 4*padding;
-//            deleteFrame.origin.y -= 2*padding;
-//            deleteFrame.size.height = 4*padding;
-//            deleteFrame.size.width  = 4*padding;
-//            UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
-//            //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
-//            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
-//            tap.numberOfTapsRequired = 1;
-//            
-//            [deleteImageView addGestureRecognizer:tap];
-//            deleteImageView.userInteractionEnabled = YES;
-//            deleteImageView.tag = [self.imagesInScroll count];
-//            
-//            index++;
-//            
-//            
-//            [self.photoPickerCell.photoScrollView addSubview:imageView];
-//            
-//            [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
-//            [self.imagesInScroll addObject:imageView];
-//            [self.deleteImagesInScroll addObject:deleteImageView];
-//>>>>>>> PhotoViewer
+            imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+            imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
+            [imageView setClipsToBounds:YES];
+            
+            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+            imageTap.numberOfTapsRequired = 1;
+            [imageView addGestureRecognizer:imageTap];
+            imageView.userInteractionEnabled = YES;
+            
+            
+            
+            CGRect deleteFrame = CGRectInset(imageView.frame, 28, 28);
+            deleteFrame.origin.x += width / 2;
+            deleteFrame.origin.y -= width / 2;
+            deleteFrame.size.height = 28;
+            deleteFrame.size.width  = 28;
+            UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
+            //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
+            tap.numberOfTapsRequired = 1;
+            
+            [deleteImageView addGestureRecognizer:tap];
+            deleteImageView.userInteractionEnabled = YES;
+            deleteImageView.tag = [self.imagesInScroll count];
+            
+            index++;
+            
+            
+            [self.photoPickerCell.photoScrollView addSubview:imageView];
+            
+            [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
+            [self.imagesInScroll addObject:imageView];
+            [self.deleteImagesInScroll addObject:deleteImageView];
         }
         
         [self.activityView stopAnimating];
@@ -1106,7 +1053,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         CGFloat width   = 86.0;
         
         CGSize contentSize = CGSizeZero;
-        contentSize.width = (width + padding) * (selectedImages.count + 1);
+        contentSize.width = (width + padding) * (selectedImages.count);
         
         contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
         self.photoPickerCell.photoScrollView.contentSize = contentSize;
@@ -1119,6 +1066,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         [self.imagesInScroll removeAllObjects];
         [self.imagesToSubmit removeAllObjects];
+        [self.violationPhotos removeAllObjects];
+
         
         for (UIImage *image in selectedImages) {
             
@@ -1126,15 +1075,18 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index;
-//            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
             
-            //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
             
             NSData  *imageData = UIImageJPEGRepresentation(image, 7);
             [self.imagesToSubmit addObject:imageData];
-            [self.imagesToShow addObject:image];
+//            [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", UIImageOrientationUp]];
+
+//            [self.imagesToShow addObject:image];
 
 
+            ViolationPhoto *photo = [ViolationPhoto photoWithProperties:@{@"image": image
+                                                                          }];
+            [self.violationPhotos addObject:photo];
 
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             imageView.frame = imageViewFrame;
@@ -1147,13 +1099,17 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
             
+            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+            imageTap.numberOfTapsRequired = 1;
+            [imageView addGestureRecognizer:imageTap];
+            imageView.userInteractionEnabled = YES;
+            
             CGRect deleteFrame = CGRectInset(imageView.frame, 28, 28);
             deleteFrame.origin.x += width / 2;
             deleteFrame.origin.y -= width / 2;
             deleteFrame.size.height = 28;
             deleteFrame.size.width  = 28;
             UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
-//            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
             tap.numberOfTapsRequired = 1;
             
@@ -1232,8 +1188,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         [imageView removeFromSuperview];
         [self.imagesInScroll removeObjectAtIndex:tap.view.tag];
         [self.imagesToSubmit removeObjectAtIndex:tap.view.tag];
-        [self.imagesToShow removeObjectAtIndex:tap.view.tag];
-        [self.imagesToSubmitOrientation removeObjectAtIndex:tap.view.tag];
+//        [self.imagesToShow removeObjectAtIndex:tap.view.tag];
+
+        if (self.imagesToSubmitOrientation.count) {
+            [self.imagesToSubmitOrientation removeObjectAtIndex:tap.view.tag];
+        }
         
         CGRect deleteImageFrame = tap.view.frame;
         CGRect nextDeleteImageFrame;
@@ -1265,7 +1224,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             UIImageView *deleteImageView = [self.deleteImagesInScroll objectAtIndex:i];
 //            NSLog(@"deleteImagesInScroll count %lu", (unsigned long)[self.deleteImagesInScroll count]);
-            [_stubPhotoPickerCell.photoScrollView bringSubviewToFront:deleteImageView];
+            [self.photoPickerCell.photoScrollView bringSubviewToFront:deleteImageView];
             
             nextDeleteImageFrame = deleteImageView.frame;
             deleteImageView.frame = deleteImageFrame;
@@ -1277,10 +1236,10 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             CGFloat width   = 86.0;
             
             CGSize contentSize = CGSizeZero;
-            contentSize.width = (width + padding) * ([self.imagesInScroll count] + 1);
+            contentSize.width = (width + padding) * ([self.imagesInScroll count]);
             
-            contentSize.height = _stubPhotoPickerCell.photoScrollView.frame.size.height;
-            _stubPhotoPickerCell.photoScrollView.contentSize = contentSize;
+            contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
+            self.photoPickerCell.photoScrollView.contentSize = contentSize;
             
             //        if (!removedLastDeleteImage) {
             //            UIImageView *lastDeleteImageView = [self.deleteImagesInScroll lastObject];
@@ -1305,31 +1264,38 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     }
     [self.imagesInScroll removeObjectAtIndex:index];
     [self.imagesToSubmit removeObjectAtIndex:index];
-    [self.imagesToShow removeObjectAtIndex:index];
-    [self.imagesToSubmitOrientation removeObjectAtIndex:index];
+//    [self.imagesToShow removeObjectAtIndex:index];
     
-    CGFloat padding = 5.0;
-    CGFloat width   = 70.0;
+    if (self.imagesToSubmitOrientation.count) {
+        [self.imagesToSubmitOrientation removeObjectAtIndex:index];
+    }
+    
+    CGFloat padding = 20.0;
+    CGFloat width   = 86.0;
     
     CGSize contentSize = CGSizeZero;
-    contentSize.width = (width + padding) * (self.imagesInScroll.count) + padding;
+//    contentSize.width = (width + padding) * (self.imagesInScroll.count) + padding;
+    contentSize.width = (width + padding) * (self.imagesInScroll.count);
+
     
     contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
     self.photoPickerCell.photoScrollView.contentSize = contentSize;
     
-    for (NSUInteger index=0; index<[self.imagesInScroll count]; index++) {
+    for (NSUInteger imageIndex=0; imageIndex<[self.imagesInScroll count]; imageIndex++) {
         
         CGRect imageViewFrame = CGRectInset(self.photoPickerCell.photoScrollView.bounds, padding, padding);
 
         imageViewFrame.size.width = width;
         imageViewFrame.size.height = width;
-        imageViewFrame.origin.x = (width + padding) * index + padding;
+//        imageViewFrame.origin.x = (width + padding) * index + padding;
+        imageViewFrame.origin.x = (width + padding) * imageIndex;
+
         
-        UIImageView *imageView = [self.imagesInScroll objectAtIndex:index];
+        UIImageView *imageView = [self.imagesInScroll objectAtIndex:imageIndex];
         imageView.frame = imageViewFrame;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.layer.cornerRadius = 4.f;
-        imageView.layer.borderWidth = 1.f;
+//        imageView.layer.cornerRadius = 4.f;
+//        imageView.layer.borderWidth = 1.f;
         
         imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
         imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
@@ -1342,19 +1308,25 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         
         
-        CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
-        deleteFrame.origin.x += width - 4*padding;
-        deleteFrame.origin.y -= 2*padding;
-        deleteFrame.size.height = 4*padding;
-        deleteFrame.size.width  = 4*padding;
+//        CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
+//        deleteFrame.origin.x += width - 4*padding;
+//        deleteFrame.origin.y -= 2*padding;
+//        deleteFrame.size.height = 4*padding;
+//        deleteFrame.size.width  = 4*padding;
         
-        UIImageView *deleteImageView = [self.deleteImagesInScroll objectAtIndex:index];
+        CGRect deleteFrame = CGRectInset(imageView.frame, 28, 28);
+        deleteFrame.origin.x += width / 2;
+        deleteFrame.origin.y -= width / 2;
+        deleteFrame.size.height = 28;
+        deleteFrame.size.width  = 28;
+        
+        UIImageView *deleteImageView = [self.deleteImagesInScroll objectAtIndex:imageIndex];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
         tap.numberOfTapsRequired = 1;
         
         [deleteImageView addGestureRecognizer:tap];
         deleteImageView.userInteractionEnabled = YES;
-        deleteImageView.tag = index;
+        deleteImageView.tag = imageIndex;
         
         
         [self.photoPickerCell.photoScrollView addSubview:imageView];

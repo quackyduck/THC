@@ -92,7 +92,20 @@
     {
         self.statusLabel.text = @"Assigned To";
         //Hack, dual purpose label
-        self.timeStampLabel.text = [NSString stringWithFormat:@"%@", myCase.userId];
+        
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"objectId" equalTo:myCase.userId];
+        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error && objects.count > 0) {
+                PFUser* user = [NSMutableArray arrayWithArray:objects][0];
+                self.timeStampLabel.text = [NSString stringWithFormat:@"%@ %@.", [user objectForKey:@"firstName"],
+                        [[user objectForKey:@"lastName"] substringToIndex:1]];
+            } else
+            {
+                self.timeStampLabel.text = @"No One";
+            }
+        }];
         self.timestampBackgroudView.backgroundColor = [UIColor redColor];
     } else
     {
@@ -109,9 +122,10 @@
         newFrame.size.width = self.timeStampLabel.frame.size.width + 90;
     } else
     {
-        self.timeStampLabel.frame = CGRectMake(self.timeStampLabel.frame.origin.x - 200, self.timeStampLabel.frame.origin.y,
-                                               self.timeStampLabel.frame.size.width, self.timeStampLabel.frame.size.height);
-        newFrame.size.width = self.timeStampLabel.frame.size.width + 90;
+        CGRect newLabelFrame = self.timeStampLabel.frame;
+        newLabelFrame.origin.x = self.timeStampLabel.frame.origin.x - 20;
+        [self.timeStampLabel setFrame:newLabelFrame];
+        newFrame.size.width = self.timeStampLabel.frame.size.width + 100;
     }
     [self.timestampBackgroudView setFrame:newFrame];
     self.timestampBackgroudView.layer.cornerRadius = 3;

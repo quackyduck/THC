@@ -269,6 +269,7 @@ typedef enum {
     PFUser *user = [PFUser currentUser];
     
     [query whereKey:@"userId" equalTo:user.objectId];
+    [query whereKey:@"status" equalTo:[NSNumber numberWithInt:0]];
     [self queryForCases:query];
     
     if (self.showInstructions && self.currentTab == myCases) {
@@ -349,7 +350,7 @@ typedef enum {
     [self addBottomBorder:self.openView];
     
     PFQuery *query = [Case query];
-    [query whereKey:@"userId" equalTo:@"unassigned"];
+    [query whereKey:@"userId" equalTo:@"No One"];
     [query orderByDescending:@"createdAt"];
     [self queryForCases:query];
     self.currentTab = new;
