@@ -32,12 +32,6 @@
     UIColor* tHCButtonGray = [UIColor colorWithRed: 0.965f green: 0.965f blue: 0.965f alpha: 1];
     UIColor* tHCOrange = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
     UIColor* buttonStrokeColor = [UIColor colorWithRed: 0.882f green: 0.886f blue: 0.89f alpha: 1];
-    UIColor* shadow2Color = [UIColor colorWithRed: 0.725f green: 0.725f blue: 0.733f alpha: 1];
-    
-    //// Shadow Declarations
-    UIColor* buttonShadow = shadow2Color;
-    CGSize buttonShadowOffset = CGSizeMake(1.1f, 1.1f);
-    CGFloat buttonShadowBlurRadius = 1;
     
     //// Image Declarations
     UIImage* btn_create_normal = [UIImage imageNamed: @"btn_create_normal"];

@@ -11,6 +11,7 @@
 #import "BuildingPhoto.h"
 #import "Case.h"
 #import "CaseCell.h"
+#import "ViolationSubmissionViewController.h"
 
 @interface HotelProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *buildingLabel;
 @property (strong, nonatomic) UIImage *buildingImage;
 @property (strong, nonatomic) NSArray *cases;
+@property (weak, nonatomic) IBOutlet UILabel *violationCountLabel;
 @property (strong, nonatomic) CaseCell *stubCell;
 @end
 
@@ -53,6 +55,7 @@
         NSLog(@"Get the building photo");
         if (!error) {
             self.cases = objects;
+            self.violationCountLabel.text = [NSString stringWithFormat:@"Reported Violations (%lu)", self.cases.count];
             [self.tableView reloadData];
         }
     }];
@@ -87,6 +90,12 @@
 }
 - (IBAction)onClose:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)onCreateReport:(id)sender {
+    ViolationSubmissionViewController *vsc = [[ViolationSubmissionViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vsc];
+    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
+    [self presentViewController:nvc animated:YES completion:nil];
 }
 
 @end

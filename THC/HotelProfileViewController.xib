@@ -11,6 +11,7 @@
                 <outlet property="hotelImageView" destination="fGb-kw-Z48" id="HWV-S4-ueR"/>
                 <outlet property="tableView" destination="4E0-lh-QkY" id="4mk-ob-buk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="violationCountLabel" destination="g8E-ci-PcY" id="f1n-d0-GE5"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -52,6 +53,29 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7d-t1-me1" customClass="CreateReportButton">
+                    <rect key="frame" x="20" y="143" width="280" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="dTJ-6D-zQc"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCreateReport:" destination="-1" eventType="touchUpInside" id="a1w-2D-Rri"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8E-ci-PcY">
+                    <rect key="frame" x="20" y="201" width="280" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="4TP-P5-dY8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -61,11 +85,17 @@
                 <constraint firstAttribute="trailing" secondItem="4E0-lh-QkY" secondAttribute="trailing" id="7oz-DX-rdZ"/>
                 <constraint firstAttribute="bottom" secondItem="4E0-lh-QkY" secondAttribute="bottom" id="FVR-L8-Uou"/>
                 <constraint firstItem="7Du-Ux-hAJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="LK6-HR-Wc0"/>
+                <constraint firstItem="m7d-t1-me1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="PFh-UR-Yyg"/>
                 <constraint firstItem="4E0-lh-QkY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TqY-ha-mfz"/>
                 <constraint firstAttribute="trailing" secondItem="fGb-kw-Z48" secondAttribute="trailing" id="ahX-4D-k0N"/>
                 <constraint firstItem="4E0-lh-QkY" firstAttribute="top" secondItem="fGb-kw-Z48" secondAttribute="bottom" id="chq-tg-Y8N"/>
+                <constraint firstItem="g8E-ci-PcY" firstAttribute="top" secondItem="m7d-t1-me1" secondAttribute="bottom" constant="8" id="dYQ-te-c0r"/>
                 <constraint firstItem="cof-lI-Okv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="h2o-kY-JHB"/>
                 <constraint firstItem="7Du-Ux-hAJ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="cof-lI-Okv" secondAttribute="trailing" constant="71" id="ks0-9E-Xql"/>
+                <constraint firstItem="4E0-lh-QkY" firstAttribute="top" secondItem="g8E-ci-PcY" secondAttribute="bottom" constant="25" id="niQ-RG-hbu"/>
+                <constraint firstItem="g8E-ci-PcY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="oPs-2r-5SB"/>
+                <constraint firstItem="m7d-t1-me1" firstAttribute="top" secondItem="7Du-Ux-hAJ" secondAttribute="bottom" constant="96" id="srY-IJ-Nca"/>
+                <constraint firstAttribute="trailing" secondItem="m7d-t1-me1" secondAttribute="trailing" constant="20" id="uzK-Rh-xen"/>
                 <constraint firstItem="cof-lI-Okv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xRS-1O-V25"/>
                 <constraint firstItem="4E0-lh-QkY" firstAttribute="top" secondItem="fGb-kw-Z48" secondAttribute="bottom" id="zqf-ST-DK3"/>
             </constraints>
