@@ -1514,11 +1514,28 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
               didPostComment:(NSString *)comment
              forPhotoAtIndex:(NSInteger)index
 {
+    NSString *user = @"Guest User";
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        if ([currentUser.username isEqualToString:@"hunaid@hotmail.com"]) {
+            user = @"Hunaid Hussain";
+        } else if ([currentUser.username isEqualToString:@"melo.nicolas@gmail.com"]) {
+            user = @"Nicolas Melo";
+        } else if ([currentUser.username isEqualToString:@"rosejonescolour@yahoo.com"]) {
+            user = @"Rose Jones";
+        } else if ([currentUser.username isEqualToString:@"test@gmail.com"]) {
+            user = @"Test Bot";
+        } else {
+            user = currentUser.username;
+        }
+
+    }
+    
     PhotoComment *newComment = [PhotoComment
                                commentWithProperties:@{@"commentText": comment,
                                                        @"commentDate": [NSDate date],
                                                        @"authorImage": [UIImage imageNamed:@"ic_reports_fullname"],
-                                                       @"authorName" : @"Guest User"}];
+                                                       @"authorName" : user}];
     [newComment setUserCreated:YES];
     
     ViolationPhoto *photo = self.violationPhotos[index];
