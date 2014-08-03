@@ -152,7 +152,7 @@
     PhotoCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     if (indexPath.row == 0) {
-        UIImage *cameraImage = [UIImage imageNamed:@"ic_camera"];
+        UIImage *cameraImage = [UIImage imageNamed:@"ic_camera_add"];
         //NSLog(@"camera image %@", cameraImage);
         cell.imageView.image = cameraImage;
         cell.imageView.contentMode = UIViewContentModeScaleAspectFit;

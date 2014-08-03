@@ -902,11 +902,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         }
         
         // ScrollView setup.
-        CGFloat padding = 5.0;
-        CGFloat width   = 70.0;
+        CGFloat padding = 7.0;
+        CGFloat width   = 86.0;
 
         CGSize contentSize = CGSizeZero;
-        contentSize.width = (width + padding) * (assets.count) + padding;
+        contentSize.width = (width + padding) * (assets.count);
 
         contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
         self.photoPickerCell.photoScrollView.contentSize = contentSize;
@@ -931,8 +931,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
-            imageViewFrame.origin.x = (width + padding) * index + padding;
-
+            imageViewFrame.origin.x = (width + padding) * index;
             
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
             
@@ -949,9 +948,9 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
                 imageView.frame = imageViewFrame;
                 //imageView.contentMode = UIViewContentModeCenter;
                 imageView.contentMode = UIViewContentModeScaleAspectFit;
-                imageView.layer.cornerRadius = 4.f;
-                imageView.layer.borderWidth = 1.f;
-                
+//                imageView.layer.cornerRadius = 4.f;
+//                imageView.layer.borderWidth = 1.f;
+            
                 imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
                 imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
                 [imageView setClipsToBounds:YES];
@@ -1029,7 +1028,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         // ScrollView setup.
         CGFloat padding = 5.0;
-        CGFloat width   = 70.0;
+        CGFloat width   = 86.0;
         
         CGSize contentSize = CGSizeZero;
         contentSize.width = (width + padding) * (selectedImages.count + 1);
@@ -1066,8 +1065,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageView.frame = imageViewFrame;
             //imageView.contentMode = UIViewContentModeCenter;
             //imageView.contentMode = UIViewContentModeCenter;
-            imageView.layer.cornerRadius = 4.f;
-            imageView.layer.borderWidth = 1.f;
+//            imageView.layer.cornerRadius = 4.f;
+//            imageView.layer.borderWidth = 1.f;
             
             imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
@@ -1199,8 +1198,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             deleteImageView.tag = i;
             
             
-            CGFloat padding = 5.0;
-            CGFloat width   = 70.0;
+            CGFloat padding = 0.0;
+            CGFloat width   = 86.0;
             
             CGSize contentSize = CGSizeZero;
             contentSize.width = (width + padding) * ([self.imagesInScroll count] + 1);

@@ -29,7 +29,7 @@
                         </state>
                     </button>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" directionalLockEnabled="YES" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YE-qU-m3d">
-                        <rect key="frame" x="143" y="7" width="177" height="86"/>
+                        <rect key="frame" x="142" y="0.0" width="178" height="99"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </scrollView>
                 </subviews>
