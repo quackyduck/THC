@@ -27,6 +27,12 @@
 #import "MBProgressHUD.h"
 #import "PhotoPickerCell.h"
 #import "PhotoViewerController.h"
+#import "EBPhotoPagesController.h"
+#import "EBPhotoPagesFactory.h"
+#import "EBTagPopover.h"
+#import "ViolationPhoto.h"
+#import "PhotoComment.h"
+#import "PhotoTag.h"
 
 
 #define greyColor   [UIColor colorWithRed: 247.0f/255.0f green: 247.0f/255.0f blue: 247.0f/255.0f alpha: 1]
@@ -57,6 +63,7 @@
 @property (strong, nonatomic) NSMutableArray          *imagesInScroll;
 @property (strong, nonatomic) NSMutableArray          *imagesToSubmit;
 @property (strong, nonatomic) NSMutableArray          *imagesToShow;
+@property (strong, nonatomic) NSMutableArray          *violationPhotos;
 @property (strong, nonatomic) NSMutableArray          *imagesToSubmitOrientation;
 @property (strong, nonatomic) NSMutableArray          *deleteImagesInScroll;
 @property (strong, nonatomic) UIImagePickerController *picker;
@@ -206,9 +213,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
-        self.imagesInScroll = [NSMutableArray array];
-        self.imagesToSubmit = [NSMutableArray array];
-        self.imagesToShow   = [NSMutableArray array];
+        self.imagesInScroll   = [NSMutableArray array];
+        self.imagesToSubmit   = [NSMutableArray array];
+        self.imagesToShow     = [NSMutableArray array];
+        self.violationPhotos  = [NSMutableArray array];
+
         self.imagesToSubmitOrientation = [NSMutableArray array];
         self.deleteImagesInScroll = [NSMutableArray array];
         
@@ -916,6 +925,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         [self.imagesToSubmit removeAllObjects];
         [self.imagesToShow removeAllObjects];
         [self.imagesToSubmitOrientation removeAllObjects];
+        [self.violationPhotos removeAllObjects];
 
         
         __block int index = 0;
@@ -932,61 +942,65 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
             imageViewFrame.origin.x = (width + padding) * index + padding;
-
+            
             
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
             
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//                UIImage *fullResImage  = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:asset.defaultRepresentation.orientation];
-                UIImage *fullResImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:UIImageOrientationUp];
-                [self.imagesToShow addObject:fullResImage];
-                
-                NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
-                [self.imagesToSubmit addObject:imageData];
-                [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
-//                NSLog(@"image dimesntions %@", NSStringFromCGSize(asset.defaultRepresentation.dimensions));
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-                imageView.frame = imageViewFrame;
-                //imageView.contentMode = UIViewContentModeCenter;
-                imageView.contentMode = UIViewContentModeScaleAspectFit;
-                imageView.layer.cornerRadius = 4.f;
-                imageView.layer.borderWidth = 1.f;
-                
-                imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
-                imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
-                [imageView setClipsToBounds:YES];
-                
-                UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
-                imageTap.numberOfTapsRequired = 1;
-                [imageView addGestureRecognizer:imageTap];
-                imageView.userInteractionEnabled = YES;
-                
-                
-                
-                CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
-                deleteFrame.origin.x += width - 4*padding;
-                deleteFrame.origin.y -= 2*padding;
-                deleteFrame.size.height = 4*padding;
-                deleteFrame.size.width  = 4*padding;
-                UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
-                //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
-                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
-                tap.numberOfTapsRequired = 1;
-                
-                [deleteImageView addGestureRecognizer:tap];
-                deleteImageView.userInteractionEnabled = YES;
-                deleteImageView.tag = [self.imagesInScroll count];
-                
-                index++;
-                
-                
-                [self.photoPickerCell.photoScrollView addSubview:imageView];
-                
-                [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
-                [self.imagesInScroll addObject:imageView];
-                [self.deleteImagesInScroll addObject:deleteImageView];
+            //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            //                UIImage *fullResImage  = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:asset.defaultRepresentation.orientation];
+            UIImage *fullResImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:UIImageOrientationUp];
+            [self.imagesToShow addObject:fullResImage];
+            
+            ViolationPhoto *photo = [ViolationPhoto photoWithProperties:@{@"image": fullResImage
+                                                                          }];
+            [self.violationPhotos addObject:photo];
+            
+            NSData  *imageData = UIImageJPEGRepresentation(fullResImage, 0);
+            [self.imagesToSubmit addObject:imageData];
+            [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", asset.defaultRepresentation.orientation]];
+            //                NSLog(@"image dimesntions %@", NSStringFromCGSize(asset.defaultRepresentation.dimensions));
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+            imageView.frame = imageViewFrame;
+            //imageView.contentMode = UIViewContentModeCenter;
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
+            imageView.layer.cornerRadius = 4.f;
+            imageView.layer.borderWidth = 1.f;
+            
+            imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+            imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
+            [imageView setClipsToBounds:YES];
+            
+            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+            imageTap.numberOfTapsRequired = 1;
+            [imageView addGestureRecognizer:imageTap];
+            imageView.userInteractionEnabled = YES;
+            
+            
+            
+            CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
+            deleteFrame.origin.x += width - 4*padding;
+            deleteFrame.origin.y -= 2*padding;
+            deleteFrame.size.height = 4*padding;
+            deleteFrame.size.width  = 4*padding;
+            UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
+            //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
+            tap.numberOfTapsRequired = 1;
+            
+            [deleteImageView addGestureRecognizer:tap];
+            deleteImageView.userInteractionEnabled = YES;
+            deleteImageView.tag = [self.imagesInScroll count];
+            
+            index++;
+            
+            
+            [self.photoPickerCell.photoScrollView addSubview:imageView];
+            
+            [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
+            [self.imagesInScroll addObject:imageView];
+            [self.deleteImagesInScroll addObject:deleteImageView];
         }
-
+        
         [self.activityView stopAnimating];
         [self.activityView removeFromSuperview];
         
@@ -1224,12 +1238,80 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 
 }
 
+- (void)deleteImageAtIndex:(NSUInteger) index {
+    
+    for (UIView *view in self.photoPickerCell.photoScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    [self.imagesInScroll removeObjectAtIndex:index];
+    [self.imagesToSubmit removeObjectAtIndex:index];
+    [self.imagesToShow removeObjectAtIndex:index];
+    [self.imagesToSubmitOrientation removeObjectAtIndex:index];
+    
+    CGFloat padding = 5.0;
+    CGFloat width   = 70.0;
+    
+    CGSize contentSize = CGSizeZero;
+    contentSize.width = (width + padding) * (self.imagesInScroll.count) + padding;
+    
+    contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
+    self.photoPickerCell.photoScrollView.contentSize = contentSize;
+    
+    for (NSUInteger index=0; index<[self.imagesInScroll count]; index++) {
+        
+        CGRect imageViewFrame = CGRectInset(self.photoPickerCell.photoScrollView.bounds, padding, padding);
+
+        imageViewFrame.size.width = width;
+        imageViewFrame.size.height = width;
+        imageViewFrame.origin.x = (width + padding) * index + padding;
+        
+        UIImageView *imageView = [self.imagesInScroll objectAtIndex:index];
+        imageView.frame = imageViewFrame;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.layer.cornerRadius = 4.f;
+        imageView.layer.borderWidth = 1.f;
+        
+        imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
+        imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
+        [imageView setClipsToBounds:YES];
+        
+        UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+        imageTap.numberOfTapsRequired = 1;
+        [imageView addGestureRecognizer:imageTap];
+        imageView.userInteractionEnabled = YES;
+        
+        
+        
+        CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
+        deleteFrame.origin.x += width - 4*padding;
+        deleteFrame.origin.y -= 2*padding;
+        deleteFrame.size.height = 4*padding;
+        deleteFrame.size.width  = 4*padding;
+        
+        UIImageView *deleteImageView = [self.deleteImagesInScroll objectAtIndex:index];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
+        tap.numberOfTapsRequired = 1;
+        
+        [deleteImageView addGestureRecognizer:tap];
+        deleteImageView.userInteractionEnabled = YES;
+        deleteImageView.tag = index;
+        
+        
+        [self.photoPickerCell.photoScrollView addSubview:imageView];
+        
+        [self.photoPickerCell.photoScrollView addSubview:deleteImageView];
+    }
+
+}
+
 - (void)showPhotoViewer {
     
-    PhotoViewerController *pvc = [[PhotoViewerController alloc] init];
-    [pvc setImagesForViewing:self.imagesToShow withOrientations:self.imagesToSubmitOrientation];
-    [self.navigationController presentViewController:pvc animated:YES completion:nil];
-//    [self.navigationController pushViewController:pvc animated:YES];
+//    PhotoViewerController *pvc = [[PhotoViewerController alloc] init];
+//    [pvc setImagesForViewing:self.imagesToShow withOrientations:self.imagesToSubmitOrientation];
+//    [self.navigationController presentViewController:pvc animated:YES completion:nil];
+    
+    EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
+    [self presentViewController:photoPagesController animated:YES completion:nil];
 }
 
 #pragma Location
@@ -1291,6 +1373,269 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 
 -(void) setCase:(Case *) myCase {
     _myCase = myCase;
+}
+
+#pragma mark - EBPhotoPagesDataSource
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
+    shouldExpectPhotoAtIndex:(NSInteger)index
+{
+    if(index < self.violationPhotos.count){
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+                imageAtIndex:(NSInteger)index
+           completionHandler:(void (^)(UIImage *))handler
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        ViolationPhoto *photo = self.violationPhotos[index];
+        handler(photo.image);
+    });
+}
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+         tagsForPhotoAtIndex:(NSInteger)index
+           completionHandler:(void (^)(NSArray *))handler
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        ViolationPhoto *photo = self.violationPhotos[index];
+        
+        handler(photo.tags);
+    });
+}
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+     commentsForPhotoAtIndex:(NSInteger)index
+           completionHandler:(void (^)(NSArray *))handler
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        ViolationPhoto *photo = self.violationPhotos[index];
+
+        handler(photo.comments);
+    });
+}
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+     metaDataForPhotoAtIndex:(NSInteger)index
+           completionHandler:(void (^)(NSDictionary *))handler
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        ViolationPhoto *photo = self.violationPhotos[index];
+        
+        handler(photo.metaData);
+    });
+}
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+numberOfcommentsForPhotoAtIndex:(NSInteger)index
+           completionHandler:(void (^)(NSInteger))handler
+{
+    ViolationPhoto *photo = self.violationPhotos[index];
+    
+    handler(photo.comments.count);
+}
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
+       didReportPhotoAtIndex:(NSInteger)index
+{
+    NSLog(@"Reported photo at index %li", (long)index);
+    //Do something about this image someone reported.
+}
+
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+            didDeleteComment:(id<EBPhotoCommentProtocol>)deletedComment
+             forPhotoAtIndex:(NSInteger)index
+{
+    ViolationPhoto *photo = self.violationPhotos[index];
+    NSMutableArray *remainingComments = [NSMutableArray arrayWithArray:photo.comments];
+    [remainingComments removeObject:deletedComment];
+    [photo setComments:[NSArray arrayWithArray:remainingComments]];
+}
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+         didDeleteTagPopover:(EBTagPopover *)tagPopover
+              inPhotoAtIndex:(NSInteger)index
+{
+    ViolationPhoto *photo = self.violationPhotos[index];
+    NSMutableArray *remainingTags = [NSMutableArray arrayWithArray:photo.tags];
+    id<EBPhotoTagProtocol> tagData = [tagPopover dataSource];
+    [remainingTags removeObject:tagData];
+    [photo setTags:[NSArray arrayWithArray:remainingTags]];
+}
+
+- (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
+       didDeletePhotoAtIndex:(NSInteger)index
+{
+    NSLog(@"Delete photo at index %li", (long)index);
+//    ViolationPhoto *deletedPhoto = self.violationPhotos[index];
+//    NSMutableArray *remainingPhotos = [NSMutableArray arrayWithArray:self.violationPhotos];
+//    [remainingPhotos removeObject:deletedPhoto];
+    [self.violationPhotos removeObjectAtIndex:index];
+    [self deleteImageAtIndex:index];
+}
+
+- (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
+         didAddNewTagAtPoint:(CGPoint)tagLocation
+                    withText:(NSString *)tagText
+             forPhotoAtIndex:(NSInteger)index
+                     tagInfo:(NSDictionary *)tagInfo
+{
+    NSLog(@"add new tag %@", tagText);
+    
+    ViolationPhoto *photo = self.violationPhotos[index];
+    
+    PhotoTag *newTag = [PhotoTag tagWithProperties:@{
+                                                   @"tagPosition" : [NSValue valueWithCGPoint:tagLocation],
+                                                   @"tagText" : tagText}];
+    
+    NSMutableArray *mutableTags = [NSMutableArray arrayWithArray:photo.tags];
+    [mutableTags addObject:newTag];
+    
+    [photo setTags:[NSArray arrayWithArray:mutableTags]];
+    
+}
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+              didPostComment:(NSString *)comment
+             forPhotoAtIndex:(NSInteger)index
+{
+    PhotoComment *newComment = [PhotoComment
+                               commentWithProperties:@{@"commentText": comment,
+                                                       @"commentDate": [NSDate date],
+                                                       @"authorImage": [UIImage imageNamed:@"ic_reports_fullname"],
+                                                       @"authorName" : @"Guest User"}];
+    [newComment setUserCreated:YES];
+    
+    ViolationPhoto *photo = self.violationPhotos[index];
+    [photo addComment:newComment];
+    
+    [controller setComments:photo.comments forPhotoAtIndex:index];
+}
+
+
+#pragma mark - User Permissions
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowTaggingForPhotoAtIndex:(NSInteger)index
+{
+    if(!self.violationPhotos.count){
+        return NO;
+    }
+    NSLog(@"tagging enabled");
+    return YES;
+}
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)controller
+ shouldAllowDeleteForComment:(id<EBPhotoCommentProtocol>)comment
+             forPhotoAtIndex:(NSInteger)index
+{
+    //We assume all comment objects used in the demo are of type DEMOComment
+    PhotoComment *demoComment = (PhotoComment *)comment;
+    
+    if(demoComment.isUserCreated){
+        //Demo user can only delete his or her own comments.
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowCommentingForPhotoAtIndex:(NSInteger)index
+{
+    if(!self.violationPhotos.count){
+        return NO;
+    }
+    NSLog(@"commenting enabled");
+
+    return YES;
+}
+
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowActivitiesForPhotoAtIndex:(NSInteger)index
+{
+    if(!self.violationPhotos.count){
+        return NO;
+    }
+    return NO;
+//    DEMOPhoto *photo = (DEMOPhoto *)self.photos[index];
+//    if(photo.disabledActivities){
+//        return NO;
+//    } else {
+//        return YES;
+//    }
+}
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowMiscActionsForPhotoAtIndex:(NSInteger)index
+{
+    return NO;
+}
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowDeleteForPhotoAtIndex:(NSInteger)index
+{
+    return YES;
+}
+
+
+
+
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
+     shouldAllowDeleteForTag:(EBTagPopover *)tagPopover
+              inPhotoAtIndex:(NSInteger)index
+{
+    if(!self.violationPhotos.count){
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
+    shouldAllowEditingForTag:(EBTagPopover *)tagPopover
+              inPhotoAtIndex:(NSInteger)index
+{
+    if(!self.violationPhotos.count){
+        return NO;
+    }
+    
+    if(index > 0){
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowReportForPhotoAtIndex:(NSInteger)index
+{
+    return NO;
+}
+
+
+#pragma mark - EBPPhotoPagesDelegate
+
+
+- (void)photoPagesControllerDidDismiss:(EBPhotoPagesController *)photoPagesController
+{
+    NSLog(@"Finished using %@", photoPagesController);
 }
 
 @end

@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EBPhotoTagProtocol.h"
 
-@interface PhotoTag : NSObject
+@interface PhotoTag : NSObject <EBPhotoTagProtocol>
+
++ (instancetype)tagWithProperties:(NSDictionary*)tagInfo;
+- (id)initWithProperties:(NSDictionary *)tagInfo;
+
+@property (assign) CGPoint tagPosition;
+@property (strong) NSAttributedString *attributedText;
+@property (strong) NSString *text;
+@property (strong) NSDictionary *metaData;
 
 @end
