@@ -13,9 +13,8 @@
 - (id)initWithUser:(PFUser *)user andCurrentCount:(NSNumber *)count {
     self = [super init];
     if (self) {
-        self.userName = user.username;
+        self.userName = [NSString stringWithFormat:@"%@ %@", [user objectForKey:@"firstName"], [user objectForKey:@"lastName"]];
         self.userId = user.objectId;
-//        self.count = count;
     }
     return self;
 }

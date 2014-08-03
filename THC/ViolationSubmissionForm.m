@@ -140,7 +140,7 @@
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
 //    newCase.description = self.description;
-    newCase.userId = @"unassigned";
+    newCase.userId = @"No One";
     newCase.status = caseOpen;
     
     
@@ -272,7 +272,7 @@
     newCase.email = self.email;
     newCase.languageSpoken = self.languagesSpoken;
     //    newCase.description = self.description;
-    newCase.userId = @"unassigned";
+    newCase.userId = @"No One";
     newCase.status = caseOpen;
     
     

@@ -180,6 +180,7 @@
 
 - (void)showAssignmentView:(Case *)swipedCase
 {
+    UIImage *image = [UIImage imageNamed:@"ic_nav_map_selected"];
     AssignmentViewController *assignmentvc = [[AssignmentViewController alloc] initWithCase:swipedCase];
     assignmentvc.modalTransitionStyle = UIModalPresentationCustom;
     assignmentvc.transitioningDelegate = self;
