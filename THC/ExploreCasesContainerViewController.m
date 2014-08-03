@@ -52,7 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setNeedsStatusBarAppearanceUpdate];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     
     [self.containerView.layer setShadowColor:[[UIColor blackColor] CGColor]];
@@ -100,10 +100,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(UIStatusBarStyle) preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
 }
 
 - (void)selectedNearbyButton {

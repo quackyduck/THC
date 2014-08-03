@@ -47,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.tableView.backgroundColor = [UIColor colorWithRed:224/255.0f green:232/255.0f blue:234/255.0f alpha:1.0f];
     
     PFQuery *query = [Case query];
     [query whereKey:@"buildingId" equalTo:self.building.objectId];
@@ -55,12 +56,35 @@
         NSLog(@"Get the building photo");
         if (!error) {
             self.cases = objects;
-            self.violationCountLabel.text = [NSString stringWithFormat:@"Reported Violations (%lu)", self.cases.count];
+            self.violationCountLabel.text = [NSString stringWithFormat:@"Reported Violations (%lu)", (unsigned long)self.cases.count];
             [self.tableView reloadData];
         }
     }];
-    
+
     self.hotelImageView.image = self.buildingImage;
+    self.hotelImageView.backgroundColor = [UIColor clearColor];
+    
+//    CIImage *image = [[CIImage alloc] initWithImage:self.hotelImageView.image];
+//    CIFilter *gradient = [CIFilter filterWithName:kCICategoryGradient];
+//    
+//    
+//    [gradient setValue:image forKeyPath:kCIInputImageKey];
+//    
+//    self.hotelImageView.image = [UIImage imageWithCIImage:gradient.outputImage];
+    
+    CAGradientLayer *gradientMask = [CAGradientLayer layer];
+    gradientMask.frame = self.hotelImageView.bounds;
+    
+    UIColor *startingColor = [UIColor blackColor];
+    startingColor = [startingColor colorWithAlphaComponent:0.5f];
+    UIColor *middleColor = [UIColor clearColor];
+    
+    gradientMask.colors = @[(id)startingColor.CGColor, (id)middleColor.CGColor, (id)middleColor.CGColor, (id)startingColor.CGColor];
+    gradientMask.locations = @[@0.0, @0.25, @0.90, @1.0];
+
+    [self.hotelImageView.layer insertSublayer:gradientMask atIndex:0];
+    
+    
     self.buildingLabel.text = self.building.buildingName;
 
     self.tableView.delegate = self;
