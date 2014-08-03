@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HotelProfileViewController">
             <connections>
+                <outlet property="buildingLabel" destination="7Du-Ux-hAJ" id="OsQ-p6-zys"/>
                 <outlet property="closeButton" destination="cof-lI-Okv" id="X9I-D2-XFF"/>
                 <outlet property="hotelImageView" destination="fGb-kw-Z48" id="HWV-S4-ueR"/>
                 <outlet property="tableView" destination="4E0-lh-QkY" id="4mk-ob-buk"/>
@@ -44,17 +45,27 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Du-Ux-hAJ">
+                    <rect key="frame" x="113" y="25" width="95" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="7Du-Ux-hAJ" secondAttribute="trailing" constant="112" id="0hy-zI-MvK"/>
                 <constraint firstItem="fGb-kw-Z48" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="20W-yb-e2t"/>
                 <constraint firstItem="fGb-kw-Z48" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4x7-dZ-CQc"/>
                 <constraint firstAttribute="trailing" secondItem="4E0-lh-QkY" secondAttribute="trailing" id="7oz-DX-rdZ"/>
                 <constraint firstAttribute="bottom" secondItem="4E0-lh-QkY" secondAttribute="bottom" id="FVR-L8-Uou"/>
+                <constraint firstItem="7Du-Ux-hAJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="LK6-HR-Wc0"/>
                 <constraint firstItem="4E0-lh-QkY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TqY-ha-mfz"/>
                 <constraint firstAttribute="trailing" secondItem="fGb-kw-Z48" secondAttribute="trailing" id="ahX-4D-k0N"/>
                 <constraint firstItem="4E0-lh-QkY" firstAttribute="top" secondItem="fGb-kw-Z48" secondAttribute="bottom" id="chq-tg-Y8N"/>
                 <constraint firstItem="cof-lI-Okv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="h2o-kY-JHB"/>
+                <constraint firstItem="7Du-Ux-hAJ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="cof-lI-Okv" secondAttribute="trailing" constant="71" id="ks0-9E-Xql"/>
                 <constraint firstItem="cof-lI-Okv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xRS-1O-V25"/>
                 <constraint firstItem="4E0-lh-QkY" firstAttribute="top" secondItem="fGb-kw-Z48" secondAttribute="bottom" id="zqf-ST-DK3"/>
             </constraints>

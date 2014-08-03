@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) Building *building;
+@property (weak, nonatomic) IBOutlet UILabel *buildingLabel;
 @property (strong, nonatomic) UIImage *buildingImage;
 @property (strong, nonatomic) NSArray *cases;
 @property (strong, nonatomic) CaseCell *stubCell;
@@ -57,6 +58,7 @@
     }];
     
     self.hotelImageView.image = self.buildingImage;
+    self.buildingLabel.text = self.building.buildingName;
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
