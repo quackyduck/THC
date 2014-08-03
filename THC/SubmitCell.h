@@ -13,7 +13,7 @@
 @interface SubmitCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
-- (IBAction)submitTheForm:(UIButton *)sender;
+//- (IBAction)submitTheForm:(UIButton *)sender;
 
 @property (weak, nonatomic) id<FieldContent> delegate;
 

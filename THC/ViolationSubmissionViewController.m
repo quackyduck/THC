@@ -642,6 +642,13 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
         
+        [cell.submitButton addTarget:self
+                     action:@selector(submitForm)
+           forControlEvents:UIControlEventTouchUpInside];
+        cell.submitButton.userInteractionEnabled = YES;
+        [cell.submitButton becomeFirstResponder];
+
+        
         cell.delegate = self.violationForm;
         return cell;
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
@@ -749,6 +756,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         SubmitCell *cell = (SubmitCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.submitButton.userInteractionEnabled = YES;
         [cell.submitButton becomeFirstResponder];
+        [self.tapGestureRecognizer setEnabled:NO];
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
         [self.tapGestureRecognizer setEnabled:NO];
     }else {
@@ -1071,7 +1079,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             NSData  *imageData = UIImageJPEGRepresentation(image, 7);
             [self.imagesToSubmit addObject:imageData];
-            [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", UIImageOrientationUp]];
+//            [self.imagesToSubmitOrientation addObject:[NSString stringWithFormat:@"%d", UIImageOrientationUp]];
 
 //            [self.imagesToShow addObject:image];
 
@@ -1182,7 +1190,9 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         [self.imagesToSubmit removeObjectAtIndex:tap.view.tag];
 //        [self.imagesToShow removeObjectAtIndex:tap.view.tag];
 
-        [self.imagesToSubmitOrientation removeObjectAtIndex:tap.view.tag];
+        if (self.imagesToSubmitOrientation.count) {
+            [self.imagesToSubmitOrientation removeObjectAtIndex:tap.view.tag];
+        }
         
         CGRect deleteImageFrame = tap.view.frame;
         CGRect nextDeleteImageFrame;
@@ -1255,7 +1265,10 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     [self.imagesInScroll removeObjectAtIndex:index];
     [self.imagesToSubmit removeObjectAtIndex:index];
 //    [self.imagesToShow removeObjectAtIndex:index];
-    [self.imagesToSubmitOrientation removeObjectAtIndex:index];
+    
+    if (self.imagesToSubmitOrientation.count) {
+        [self.imagesToSubmitOrientation removeObjectAtIndex:index];
+    }
     
     CGFloat padding = 20.0;
     CGFloat width   = 86.0;
