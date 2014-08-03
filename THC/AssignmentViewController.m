@@ -14,6 +14,7 @@
 @interface AssignmentViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *assignmentTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *blurredBackgorundImageView;
 
 @property (nonatomic, strong) NSMutableArray* assignments;
 - (IBAction)onCancel:(id)sender;
@@ -36,6 +37,7 @@
     self = [self initWithNibName:@"AssignmentViewController" bundle:nil];
     if (self) {
         self.assignToCase = assignToCase;
+        self.blurredImage = image;
     }
     return self;
 }
@@ -53,10 +55,12 @@
     self.assignmentTableView.delegate = self;
     [self.assignmentTableView registerNib:[UINib nibWithNibName:@"AssignmentsCell" bundle:nil] forCellReuseIdentifier:@"AssignmentsCell"];
     self.assignmentTableView.backgroundColor = [UIColor blackColor];
-    self.assignmentTableView.alpha = 0.5;
+    self.assignmentTableView.alpha = 0.25;
     self.assignmentTableView.layer.borderWidth = 1.0;
     self.assignmentTableView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.assignmentTableView.layer.cornerRadius = 10;
+    
+    self.blurredBackgorundImageView.image = self.blurredImage;
     
     PFQuery *query = [PFUser query];
 //    query.cachePolicy = kPFCachePolicyCacheElseNetwork;

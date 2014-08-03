@@ -185,8 +185,8 @@
 
 - (void)showAssignmentView:(Case *)swipedCase
 {
-    UIImage *image = [UIImage imageNamed:@"ic_nav_map_selected"];
-    AssignmentViewController *assignmentvc = [[AssignmentViewController alloc] initWithCase:swipedCase];
+    UIImage *image = [UIImage imageNamed:@"ic_success"];
+    AssignmentViewController *assignmentvc = [[AssignmentViewController alloc] initWithCase:swipedCase backgroundImage:image];
     assignmentvc.modalTransitionStyle = UIModalPresentationCustom;
     assignmentvc.transitioningDelegate = self;
     assignmentvc.delegate = self;

@@ -17,9 +17,9 @@
 @interface AssignmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) Case* assignToCase;
+@property (strong, nonatomic) UIImage* blurredImage;
 @property (assign) id<AssignmentViewDelegate> delegate;
 
-- (id)initWithCase:(Case*)assignToCase;
 - (id)initWithCase:(Case*)assignToCase backgroundImage:(UIImage*)image;
 
 @end
