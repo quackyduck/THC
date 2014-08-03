@@ -20,5 +20,6 @@
 @property (assign) id<AssignmentViewDelegate> delegate;
 
 - (id)initWithCase:(Case*)assignToCase;
+- (id)initWithCase:(Case*)assignToCase backgroundImage:(UIImage*)image;
 
 @end

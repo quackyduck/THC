@@ -40,6 +40,11 @@
     return self;
 }
 
+- (id)initWithCase:(Case *)assignToCase {
+    self = [self initWithCase:assignToCase backgroundImage:nil];
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
