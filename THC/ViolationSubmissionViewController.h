@@ -12,8 +12,11 @@
 #import "AsseptPicker.h"
 #import "PhotoPicker.h"
 #import "ViolationForm.h"
+#import "EBPhotoPagesDataSource.h"
+#import "EBPhotoPagesDelegate.h"
 
-@interface ViolationSubmissionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker, CLLocationManagerDelegate>
+
+@interface ViolationSubmissionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker, CLLocationManagerDelegate, EBPhotoPagesDataSource, EBPhotoPagesDelegate>
 
 @property (nonatomic, strong) AsseptPicker *assetPicker;
 

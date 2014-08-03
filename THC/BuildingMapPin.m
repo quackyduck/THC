@@ -98,6 +98,15 @@
             UIGraphicsEndImageContext();
             
             self.image = newImage;
+            
+            self.center = CGPointMake(self.center.x, self.center.y - 20);
+            
+            [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.center = CGPointMake(self.center.x, self.center.y + 20);
+            } completion:nil];
+            
+            
+            
             [self setNeedsDisplay];
             
             

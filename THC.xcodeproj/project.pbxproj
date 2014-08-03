@@ -152,6 +152,9 @@
 		37BD75F7197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75F6197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png */; };
 		37BD75F9197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75F8197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png */; };
 		37BD75FB197E3E93004BD913 /* ic_selection_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BD75FA197E3E93004BD913 /* ic_selection_check@2x.png */; };
+		37EBFE46198DA9B500B52B54 /* ViolationPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EBFE45198DA9B500B52B54 /* ViolationPhoto.m */; };
+		37EBFE49198DA9C600B52B54 /* PhotoTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EBFE48198DA9C600B52B54 /* PhotoTag.m */; };
+		37EBFE4C198DA9D200B52B54 /* PhotoComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EBFE4B198DA9D200B52B54 /* PhotoComment.m */; };
 		44241DE75AEF4E11B2D2C50F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDC5B94E4440D4A15CFB87 /* libPods.a */; };
 		77D1988D1988C04500E200C5 /* PhotoPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D1988B1988C04500E200C5 /* PhotoPickerCell.m */; };
 		77D1988E1988C04500E200C5 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D1988C1988C04500E200C5 /* PhotoPickerCell.xib */; };
@@ -394,6 +397,12 @@
 		37BD75F6197E3A4E004BD913 /* btn_report_hintPicker_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_report_hintPicker_normal@2x.png"; sourceTree = "<group>"; };
 		37BD75F8197E3A56004BD913 /* btn_report_hintPicker_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_report_hintPicker_selected@2x.png"; sourceTree = "<group>"; };
 		37BD75FA197E3E93004BD913 /* ic_selection_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_selection_check@2x.png"; sourceTree = "<group>"; };
+		37EBFE44198DA9B500B52B54 /* ViolationPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationPhoto.h; sourceTree = "<group>"; };
+		37EBFE45198DA9B500B52B54 /* ViolationPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationPhoto.m; sourceTree = "<group>"; };
+		37EBFE47198DA9C600B52B54 /* PhotoTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTag.h; sourceTree = "<group>"; };
+		37EBFE48198DA9C600B52B54 /* PhotoTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTag.m; sourceTree = "<group>"; };
+		37EBFE4A198DA9D200B52B54 /* PhotoComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoComment.h; sourceTree = "<group>"; };
+		37EBFE4B198DA9D200B52B54 /* PhotoComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoComment.m; sourceTree = "<group>"; };
 		77D1988A1988C04500E200C5 /* PhotoPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerCell.h; sourceTree = "<group>"; };
 		77D1988B1988C04500E200C5 /* PhotoPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerCell.m; sourceTree = "<group>"; };
 		77D1988C1988C04500E200C5 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPickerCell.xib; sourceTree = "<group>"; };
@@ -779,6 +788,12 @@
 				87749378197A18420094B83E /* BuildingPhoto.m */,
 				87DCE68B19845E71005EC7E6 /* Assignment.h */,
 				87DCE68C19845E71005EC7E6 /* Assignment.m */,
+				37EBFE44198DA9B500B52B54 /* ViolationPhoto.h */,
+				37EBFE45198DA9B500B52B54 /* ViolationPhoto.m */,
+				37EBFE47198DA9C600B52B54 /* PhotoTag.h */,
+				37EBFE48198DA9C600B52B54 /* PhotoTag.m */,
+				37EBFE4A198DA9D200B52B54 /* PhotoComment.h */,
+				37EBFE4B198DA9D200B52B54 /* PhotoComment.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1045,6 +1060,7 @@
 			files = (
 				37BD74CA19742864004BD913 /* PhotoCollectionController.m in Sources */,
 				377D17131969E7D7004E4E67 /* AddressForm.m in Sources */,
+				37EBFE4C198DA9D200B52B54 /* PhotoComment.m in Sources */,
 				0A2FFB3A197A2C320064E647 /* CaseViewController.m in Sources */,
 				0A4C99841989EC0900898D1A /* HotelProfileViewController.m in Sources */,
 				878845A5197B8DD00077A27A /* ReviewReportButton.m in Sources */,
@@ -1065,6 +1081,7 @@
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
 				37BD7574197DCA3C004BD913 /* SubmitCell.m in Sources */,
 				0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */,
+				37EBFE49198DA9C600B52B54 /* PhotoTag.m in Sources */,
 				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,
 				87DCE684198459C9005EC7E6 /* AssignmentViewController.m in Sources */,
 				377D16B41967BE1D004E4E67 /* ViolationSubmissionViewController.m in Sources */,
@@ -1087,6 +1104,7 @@
 				37BD7548197CB7C1004BD913 /* HotelFieldCell.m in Sources */,
 				87A9885E1968D6EE00EDE34F /* Case.m in Sources */,
 				0A122E9B1969C2D4005894EB /* SignupViewController.m in Sources */,
+				37EBFE46198DA9B500B52B54 /* ViolationPhoto.m in Sources */,
 				0A2FFB52197C29D70064E647 /* ContactInfoButton.m in Sources */,
 				87B2002F197C90CE000D6CBD /* GetStartedButton.m in Sources */,
 				87DCE68919845D8F005EC7E6 /* AssignmentsCell.m in Sources */,
