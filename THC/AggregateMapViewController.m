@@ -168,9 +168,9 @@
                 NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
                 NSString *text = [NSString stringWithFormat:@"%lu", objects.count];
                 UIImage *pin = [UIImage imageNamed:@"btn_map_pin_normal"];
-                CGPoint point = CGPointMake(annotationView.bounds.origin.x + pin.size.width / 2.5f, annotationView.bounds.origin.y + pin.size.height / 3);
+                CGPoint point = CGPointMake(annotationView.bounds.origin.x + pin.size.width / 2.5f, annotationView.bounds.origin.y + 15);
                 
-                UIFont *font = [UIFont systemFontOfSize:14];
+                UIFont *font = [UIFont boldSystemFontOfSize:16];
                 UIGraphicsBeginImageContextWithOptions(pin.size, NO, 0);
                 [pin drawInRect:CGRectMake(0, 0, pin.size.width, pin.size.height)];
                 CGRect rect = CGRectMake(point.x, point.y, pin.size.width, pin.size.height);
