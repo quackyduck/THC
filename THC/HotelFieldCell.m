@@ -9,6 +9,8 @@
 #import "HotelFieldCell.h"
 #import "KxMenu.h"
 
+#define orangeColor [UIColor colorWithRed: 255.0f/255.0f green: 116.0f/255.0f blue: 47.0f/255.0f alpha: 1]
+
 //#define HotelList @[@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", @"Punjabi", @"Hindi", @"Gujrati"]
 #define HotelList @[@"Allstar Hotel", @"Boyd Hotel", @"Caldrake Arms Hotel", @"Edgeworth Hotel", @"Elk Hotel", @"Galvin Apartments", @"Graystone Hotel", @"Hartland Hotel", @"Hotel Union", @"Jefferson Hotel", @"Mayfair Hotel", @"Mission Hotel", @"Pierre Hotel", @"Pierre Hotel", @"Raman Hotel", @"Royan Hotel", @"Seneca Hotel", @"Vincent Hotel"]
 @implementation HotelFieldCell
@@ -46,17 +48,20 @@
     [menuItems addObject:[KxMenuItem menuItem:@"Select Your Hotel" image:nil target:nil action:nil]];
 
     for (NSString *hotel in hotels) {
-        [menuItems addObject:[KxMenuItem menuItem:hotel image:nil target:self action:@selector(pushMenuItem:)]];
+        KxMenuItem *item = [KxMenuItem menuItem:hotel image:nil target:self action:@selector(pushMenuItem:)];
+        item.foreColor = [UIColor grayColor];
+        item.alignment = NSTextAlignmentCenter;
+        [menuItems addObject:item];
     }
     
 
     KxMenuItem *first = menuItems[0];
-    //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-    first.foreColor = [UIColor greenColor];
+    first.foreColor = orangeColor;
+//    first.foreColor = [UIColor greenColor];
     
     first.alignment = NSTextAlignmentCenter;
-    
-    [KxMenu setTintColor:[UIColor orangeColor]];
+
+    [KxMenu setTintColor:[UIColor colorWithRed: 230.0f/255.0f green: 230.0f/255.0f blue: 230.0f/255.0f alpha: 1]];
     [KxMenu showMenuInView:view
                   fromRect:frame
                  menuItems:menuItems

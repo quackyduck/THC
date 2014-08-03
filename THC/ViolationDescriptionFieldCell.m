@@ -45,7 +45,7 @@
     self.violationDescriptionTextField.userInteractionEnabled = NO;
     if ([self.violationDescriptionTextField.text isEqualToString:@""]) {
         self.violationDescriptionTextField.text = @"Describe the Violation";
-        self.violationDescriptionTextField.textColor = [UIColor lightGrayColor];
+        self.violationDescriptionTextField.textColor = [UIColor colorWithRed:199.0/255.0 green:199.0/255.0 blue:205.0/255.0 alpha:1];
     } else {
         if ([self.delegate respondsToSelector:@selector(setValue:forField:)]) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
