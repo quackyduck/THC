@@ -38,8 +38,7 @@
 - (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment enableScroll:(BOOL)enable containingTable:(UITableView*)table displayDescription:(BOOL)display useGray:(BOOL)gray
 {
     if (gray) {
-        self.backgroundColor = [UIColor darkGrayColor];
-        [self setNeedsDisplay];
+        self.scrollViewContentView.backgroundColor = [UIColor colorWithRed:224/255.0f green:232/255.0f blue:234/255.0f alpha:1.0f];
     }
     
     self.cellCase = myCase;
@@ -179,6 +178,9 @@
                 }
             }];
         }
+        
+        self.caseFirstImageView.layer.borderWidth = 2.0f;
+        self.caseFirstImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
         
     } else {
     
