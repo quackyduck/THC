@@ -9,8 +9,11 @@
 #import <MapKit/MapKit.h>
 
 @class BuildingCalloutView;
+@class Building;
 
 @interface BuildingMapPin : MKAnnotationView
+
+- (void)configureAnnotationWithBuilding:(Building *)building;
 @property (strong, nonatomic) BuildingCalloutView *calloutView;
 
 @end

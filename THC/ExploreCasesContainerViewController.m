@@ -52,8 +52,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
     
     [self.containerView.layer setShadowColor:[[UIColor blackColor] CGColor]];
     [self.containerView.layer setShadowOpacity:.35f];
@@ -81,6 +79,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     NSLog(@"View will appear for the explore cases!!");
     
     if (!self.onExploreTab) {
