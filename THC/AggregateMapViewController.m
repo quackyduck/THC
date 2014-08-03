@@ -18,6 +18,7 @@
 #import "BuildingCalloutView.h"
 #import "BuildingMapPin.h"
 #import "BuildingPhoto.h"
+#import "ViolationCountLabel.h"
 
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -218,7 +219,7 @@
                         buildingCallout.imageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
                         buildingCallout.imageView.layer.borderWidth = .5f;
                         buildingCallout.violationsCountLabel.layer.cornerRadius = 5;
-                        buildingCallout.violationsCountLabel.textAlignment = NSTextAlignmentCenter;
+                        buildingCallout.violationsCountLabel.textAlignment = NSTextAlignmentLeft;
                         buildingCallout.violationsCountLabel.backgroundColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
                         
                         PFQuery *caseQuery = [Case query];
@@ -228,8 +229,17 @@
                             if (!error) {
                                 // The find succeeded.
                                 NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
-                                NSString *text = [NSString stringWithFormat:@"%lu", caseObjects.count];
+                                
+                                NSString *text;
+                                if (caseObjects.count == 1) {
+                                    text = [NSString stringWithFormat:@"1 Case"];
+                                } else {
+                                    text = [NSString stringWithFormat:@"%lu Cases", (unsigned long)caseObjects.count];
+                                }
+                                
+                                
                                 buildingCallout.violationsCountLabel.text = text;
+                                [buildingCallout.violationsCountLabel sizeToFit];
                                 
                             } else {
                                 // Log details of the failure

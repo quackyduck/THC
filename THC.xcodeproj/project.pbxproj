@@ -72,6 +72,7 @@
 		0A3C8C4F1978E76000ED1667 /* BuildingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C8C4E1978E76000ED1667 /* BuildingAnnotationView.m */; };
 		0A4C99841989EC0900898D1A /* HotelProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C99821989EC0900898D1A /* HotelProfileViewController.m */; };
 		0A4C99851989EC0900898D1A /* HotelProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4C99831989EC0900898D1A /* HotelProfileViewController.xib */; };
+		0AA90A95198E17B40046A5BC /* ViolationCountLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA90A94198E17B40046A5BC /* ViolationCountLabel.m */; };
 		0AE370B4196D16DB00E80E88 /* building.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE370B3196D16DB00E80E88 /* building.png */; };
 		0AF08BB21964EC94002761B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB11964EC94002761B9 /* Foundation.framework */; };
 		0AF08BB41964EC94002761B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF08BB31964EC94002761B9 /* CoreGraphics.framework */; };
@@ -284,6 +285,8 @@
 		0A4C99811989EC0900898D1A /* HotelProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelProfileViewController.h; sourceTree = "<group>"; };
 		0A4C99821989EC0900898D1A /* HotelProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelProfileViewController.m; sourceTree = "<group>"; };
 		0A4C99831989EC0900898D1A /* HotelProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotelProfileViewController.xib; sourceTree = "<group>"; };
+		0AA90A93198E17B40046A5BC /* ViolationCountLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViolationCountLabel.h; sourceTree = "<group>"; };
+		0AA90A94198E17B40046A5BC /* ViolationCountLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViolationCountLabel.m; sourceTree = "<group>"; };
 		0ACDC5B94E4440D4A15CFB87 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE370B3196D16DB00E80E88 /* building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = building.png; sourceTree = "<group>"; };
 		0AF08BAE1964EC94002761B9 /* THC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -761,6 +764,8 @@
 				87DCE68619845D8F005EC7E6 /* AssignmentsCell.h */,
 				87DCE68719845D8F005EC7E6 /* AssignmentsCell.m */,
 				87DCE68819845D8F005EC7E6 /* AssignmentsCell.xib */,
+				0AA90A93198E17B40046A5BC /* ViolationCountLabel.h */,
+				0AA90A94198E17B40046A5BC /* ViolationCountLabel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1081,6 +1086,7 @@
 				87749379197A18420094B83E /* BuildingPhoto.m in Sources */,
 				37BD7574197DCA3C004BD913 /* SubmitCell.m in Sources */,
 				0A2FFB55197C71590064E647 /* DetailViewTableHeader.m in Sources */,
+				0AA90A95198E17B40046A5BC /* ViolationCountLabel.m in Sources */,
 				37EBFE49198DA9C600B52B54 /* PhotoTag.m in Sources */,
 				0A2FFB3F197B0F670064E647 /* DetailContentTableViewCell.m in Sources */,
 				87DCE684198459C9005EC7E6 /* AssignmentViewController.m in Sources */,

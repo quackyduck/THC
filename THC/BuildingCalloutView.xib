@@ -10,28 +10,38 @@
             <rect key="frame" x="0.0" y="0.0" width="292" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDX-w3-Ufd">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EDX-w3-Ufd">
                     <rect key="frame" x="10" y="10" width="80" height="80"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="5ja-ha-6mj"/>
+                        <constraint firstAttribute="height" constant="80" id="oVy-sO-dap"/>
+                    </constraints>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Allstar Hotel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-au-fxe">
-                    <rect key="frame" x="98" y="20" width="181" height="24"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allstar Hotel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-au-fxe">
+                    <rect key="frame" x="98" y="15" width="109" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Random hotel address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iP5-PT-BpV">
-                    <rect key="frame" x="98" y="39" width="164" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" verticalCompressionResistancePriority="752" text="Random hotel address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iP5-PT-BpV">
+                    <rect key="frame" x="98" y="41" width="137" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="JNz-1b-wSp"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCt-Kv-ht1">
-                    <rect key="frame" x="98" y="59" width="42" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="48" placeholderIntrinsicHeight="21" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCt-Kv-ht1" customClass="ViolationCountLabel">
+                    <rect key="frame" x="98" y="65" width="60" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.99215692280000001" green="0.45490199329999997" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="LpT-8m-FLu"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -39,6 +49,19 @@
             </subviews>
             <color key="backgroundColor" red="0.96862751250000001" green="0.96862751250000001" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="EDX-w3-Ufd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="3QJ-yh-YhK"/>
+                <constraint firstItem="iP5-PT-BpV" firstAttribute="leading" secondItem="yCt-Kv-ht1" secondAttribute="leading" id="Afq-he-TC4"/>
+                <constraint firstItem="T0q-au-fxe" firstAttribute="leading" secondItem="EDX-w3-Ufd" secondAttribute="trailing" constant="8" id="DLi-cY-3x3"/>
+                <constraint firstAttribute="bottom" secondItem="EDX-w3-Ufd" secondAttribute="bottom" constant="10" id="EJf-J7-zsl"/>
+                <constraint firstItem="EDX-w3-Ufd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="N81-yQ-Add"/>
+                <constraint firstItem="iP5-PT-BpV" firstAttribute="leading" secondItem="EDX-w3-Ufd" secondAttribute="trailing" constant="8" id="OOi-if-Drx"/>
+                <constraint firstItem="iP5-PT-BpV" firstAttribute="top" secondItem="T0q-au-fxe" secondAttribute="bottom" constant="2" id="RCJ-yt-HEU"/>
+                <constraint firstItem="iP5-PT-BpV" firstAttribute="leading" secondItem="T0q-au-fxe" secondAttribute="leading" id="bHa-R0-KPb"/>
+                <constraint firstItem="T0q-au-fxe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="k4f-dC-3MY"/>
+                <constraint firstItem="yCt-Kv-ht1" firstAttribute="top" secondItem="iP5-PT-BpV" secondAttribute="bottom" constant="4" id="oBr-ed-IaA"/>
+                <constraint firstItem="yCt-Kv-ht1" firstAttribute="leading" secondItem="EDX-w3-Ufd" secondAttribute="trailing" constant="8" id="qzq-Bv-zMI"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="hotelDescriptionLabel" destination="iP5-PT-BpV" id="f4B-bM-gKM"/>
