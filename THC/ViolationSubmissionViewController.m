@@ -538,7 +538,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         [self configureCell:_stubPhotoPickerCell atIndexPath:indexPath];
         [_stubPhotoPickerCell layoutSubviews];
         height = [_stubPhotoPickerCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        height = 100;
+        height = 124;
     }else if ([fieldName isEqualToString:@"submit"]) {
         [self configureCell:_stubSubmitCell atIndexPath:indexPath];
         [_stubSubmitCell layoutSubviews];
@@ -902,11 +902,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         }
         
         // ScrollView setup.
-        CGFloat padding = 5.0;
-        CGFloat width   = 70.0;
+        CGFloat padding = 20.0;
+        CGFloat width   = 86.0;
 
         CGSize contentSize = CGSizeZero;
-        contentSize.width = (width + padding) * (assets.count) + padding;
+        contentSize.width = (width + padding) * (assets.count);
 
         contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
         self.photoPickerCell.photoScrollView.contentSize = contentSize;
@@ -931,8 +931,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
-            imageViewFrame.origin.x = (width + padding) * index + padding;
-
+            imageViewFrame.origin.x = (width + padding) * index;
             
             UIImage *image = [[UIImage alloc] initWithCGImage:asset.thumbnail];
             
@@ -949,9 +948,9 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
                 imageView.frame = imageViewFrame;
                 //imageView.contentMode = UIViewContentModeCenter;
                 imageView.contentMode = UIViewContentModeScaleAspectFit;
-                imageView.layer.cornerRadius = 4.f;
-                imageView.layer.borderWidth = 1.f;
-                
+//                imageView.layer.cornerRadius = 4.f;
+//                imageView.layer.borderWidth = 1.f;
+            
                 imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
                 imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
                 [imageView setClipsToBounds:YES];
@@ -963,11 +962,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
                 
                 
                 
-                CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
-                deleteFrame.origin.x += width - 4*padding;
-                deleteFrame.origin.y -= 2*padding;
-                deleteFrame.size.height = 4*padding;
-                deleteFrame.size.width  = 4*padding;
+                CGRect deleteFrame = CGRectInset(imageView.frame, 28, 28);
+                deleteFrame.origin.x += width / 2;
+                deleteFrame.origin.y -= width / 2;
+                deleteFrame.size.height = 28;
+                deleteFrame.size.width  = 28;
                 UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
                 //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
@@ -1028,15 +1027,15 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         }
         
         // ScrollView setup.
-        CGFloat padding = 5.0;
-        CGFloat width   = 70.0;
+        CGFloat padding = 20.0;
+        CGFloat width   = 86.0;
         
         CGSize contentSize = CGSizeZero;
         contentSize.width = (width + padding) * (selectedImages.count + 1);
         
         contentSize.height = self.photoPickerCell.photoScrollView.frame.size.height;
         self.photoPickerCell.photoScrollView.contentSize = contentSize;
-        NSLog(@"sfsdlf %f", _stubPhotoPickerCell.photoScrollView.frame.size.width);
+        
 //        // PageControl setup.
 //        self.pageControl.hidden = NO;
 //        self.pageControl.numberOfPages = selectedImages.count;
@@ -1051,7 +1050,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             CGRect imageViewFrame = CGRectInset(self.photoPickerCell.photoScrollView.bounds, padding, padding);
             imageViewFrame.size.width = width;
             imageViewFrame.size.height = width;
-            imageViewFrame.origin.x = (width + padding) * index + padding;
+            imageViewFrame.origin.x = (width + padding) * index;
 //            NSLog(@"library imageview frame: x: %f y: %f width %f height %f", imageViewFrame.origin.x, imageViewFrame.origin.y, imageViewFrame.size.width, imageViewFrame.size.height);
             
             //            UIImage *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
@@ -1066,18 +1065,18 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageView.frame = imageViewFrame;
             //imageView.contentMode = UIViewContentModeCenter;
             //imageView.contentMode = UIViewContentModeCenter;
-            imageView.layer.cornerRadius = 4.f;
-            imageView.layer.borderWidth = 1.f;
+//            imageView.layer.cornerRadius = 4.f;
+//            imageView.layer.borderWidth = 1.f;
             
             imageView.backgroundColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
             
-            CGRect deleteFrame = CGRectInset(imageView.frame, padding, padding);
-            deleteFrame.origin.x += width - 4*padding;
-            deleteFrame.origin.y -= 2*padding;
-            deleteFrame.size.height = 4*padding;
-            deleteFrame.size.width  = 4*padding;
+            CGRect deleteFrame = CGRectInset(imageView.frame, 28, 28);
+            deleteFrame.origin.x += width / 2;
+            deleteFrame.origin.y -= width / 2;
+            deleteFrame.size.height = 28;
+            deleteFrame.size.width  = 28;
             UIImageView *deleteImageView = [self createEditForImageOnFrame:deleteFrame];
 //            NSLog(@"delete view frame %@", NSStringFromCGRect(deleteImageView.frame));
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
@@ -1199,8 +1198,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             deleteImageView.tag = i;
             
             
-            CGFloat padding = 5.0;
-            CGFloat width   = 70.0;
+            CGFloat padding = 20.0;
+            CGFloat width   = 86.0;
             
             CGSize contentSize = CGSizeZero;
             contentSize.width = (width + padding) * ([self.imagesInScroll count] + 1);
@@ -1270,7 +1269,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 //    frame.size.width = 5;
 //    frame.size.height = 5;
     
-    UIImage *image = [UIImage imageNamed:@"btn_selected_remove_pressed"];
+    UIImage *image = [UIImage imageNamed:@"btn_selected_remove_normal"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.backgroundColor = [UIColor clearColor];
     imageView.frame = frame;
