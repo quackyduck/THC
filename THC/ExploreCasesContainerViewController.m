@@ -17,7 +17,7 @@
 @interface ExploreCasesContainerViewController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIButton *createReportButton;
-@property (strong, nonatomic) NSArray *tabViewControllers;
+
 @property (weak, nonatomic) IBOutlet UIView *dividerView;
 @property (weak, nonatomic) IBOutlet UIButton *casesButton;
 @property (weak, nonatomic) IBOutlet UIButton *nearbyButton;
@@ -77,8 +77,8 @@
     HotelProfileViewController *hpvc = [[HotelProfileViewController alloc] initWithBuilding:building andImage:image];
     
     hpvc.modalPresentationStyle = UIModalPresentationCustom;
-    HotelProfileTransition *transition = [[HotelProfileTransition alloc] init];
-    hpvc.transitioningDelegate = transition;
+//    HotelProfileTransition *transition = [[HotelProfileTransition alloc] init];
+//    hpvc.transitioningDelegate = transition;
 
     [self presentViewController:hpvc animated:YES completion:nil];
 }

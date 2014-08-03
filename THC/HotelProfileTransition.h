@@ -10,4 +10,5 @@
 
 @interface HotelProfileTransition : NSObject <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
+- (id)init;
 @end

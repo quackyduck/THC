@@ -12,4 +12,6 @@
 
 @interface ExploreCasesContainerViewController : UIViewController <CaseTableDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, AssignmentViewDelegate>
 
+@property (strong, nonatomic) NSArray *tabViewControllers;
+
 @end
