@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class Building;
 @interface BuildingCalloutView : UIView
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *hotelNameLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *hotelDescriptionLabel;
+@property (strong, nonatomic) Building *building;
 
 @end

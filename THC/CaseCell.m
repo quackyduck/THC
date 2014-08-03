@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "BuildingPhoto.h"
 #import "Building.h"
+#import "PhotoInfo.h"
 #import <math.h>
 
 #define optionViewWidth 140
@@ -30,8 +31,17 @@
     // Configure the view for the selected state
 }
 
-- (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment enableScroll:(BOOL)enable containingTable:(UITableView*)table;
+- (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment enableScroll:(BOOL)enable containingTable:(UITableView*)table {
+    [self initWithCase:myCase showAssignment:assignment enableScroll:enable containingTable:table displayDescription:NO useGray:NO];
+}
+
+- (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment enableScroll:(BOOL)enable containingTable:(UITableView*)table displayDescription:(BOOL)display useGray:(BOOL)gray
 {
+    if (gray) {
+        self.backgroundColor = [UIColor darkGrayColor];
+        [self setNeedsDisplay];
+    }
+    
     self.cellCase = myCase;
     self.caseIdLabel.text = [NSString stringWithFormat:@"Case #%@", myCase.objectId];
     [self.scrollView setContentOffset:CGPointZero];
@@ -108,45 +118,109 @@
     self.timestampBackgroudView.layer.cornerRadius = 3;
     self.timestampBackgroudView.layer.masksToBounds = YES;
     
-    
-    //Use buildingId to query for building name
-    PFQuery *query = [Building query];
-    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
-    [query whereKey:@"objectId" equalTo:myCase.buildingId];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            if (objects.count > 0)
-            {
-                Building* building = objects[0];
-                self.buildingNameLabel.text = building.buildingName;
-            }
+    if (display) {
+        
+        if (myCase.violationDetails == nil || [myCase.violationDetails isEqualToString:@""]) {
+            self.buildingNameLabel.text = @"No Description";
+        } else {
+            self.buildingNameLabel.text = myCase.violationDetails;
+            [self.buildingNameLabel sizeToFit];
         }
-    }];
-    
-    //Get first image to show
-    PFQuery *photoQuery = [BuildingPhoto query];
-    photoQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
-    [photoQuery whereKey:@"buildingId" equalTo:myCase.buildingId];
-    [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            if (objects.count > 0)
-            {
-                BuildingPhoto* photoObject = objects[0];
-                PFFile *photo = photoObject.image;
-                [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
-                    if (!photoError) {
-                        NSData *imageData = data;
-                        UIImage *image = [UIImage imageWithData:imageData];
-                        [self.caseFirstImageView setImage:image];
+        
+        if (myCase.photoIdList.count > 0) {
+        
+            //Get first image to show
+            PFQuery *photoQuery = [PhotoInfo query];
+            photoQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+            [photoQuery whereKey:@"objectId" equalTo:myCase.photoIdList[0]];
+            [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    if (objects.count > 0)
+                    {
+                        PhotoInfo* photoObject = objects[0];
+                        PFFile *photo = photoObject.image;
+                        [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                            if (!photoError) {
+                                NSData *imageData = data;
+                                UIImage *image = [UIImage imageWithData:imageData];
+                                [self.caseFirstImageView setImage:image];
+                                
+                                self.caseFirstImageView.layer.cornerRadius = 35;
+                                self.caseFirstImageView.layer.masksToBounds = YES;
+                            }
+                        }];
                         
-                        self.caseFirstImageView.layer.cornerRadius = 35;
-                        self.caseFirstImageView.layer.masksToBounds = YES;
                     }
-                }];
-                
-            }
+                }
+            }];
+        } else {
+            //Get first image to show
+            PFQuery *photoQuery = [BuildingPhoto query];
+            photoQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+            [photoQuery whereKey:@"buildingId" equalTo:myCase.buildingId];
+            [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    if (objects.count > 0)
+                    {
+                        BuildingPhoto* photoObject = objects[0];
+                        PFFile *photo = photoObject.image;
+                        [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                            if (!photoError) {
+                                NSData *imageData = data;
+                                UIImage *image = [UIImage imageWithData:imageData];
+                                [self.caseFirstImageView setImage:image];
+                                
+                                self.caseFirstImageView.layer.cornerRadius = 35;
+                                self.caseFirstImageView.layer.masksToBounds = YES;
+                            }
+                        }];
+                        
+                    }
+                }
+            }];
         }
-    }];
+        
+    } else {
+    
+        //Use buildingId to query for building name
+        PFQuery *query = [Building query];
+        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+        [query whereKey:@"objectId" equalTo:myCase.buildingId];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count > 0)
+                {
+                    Building* building = objects[0];
+                    self.buildingNameLabel.text = building.buildingName;
+                }
+            }
+        }];
+        
+        //Get first image to show
+        PFQuery *photoQuery = [BuildingPhoto query];
+        photoQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+        [photoQuery whereKey:@"buildingId" equalTo:myCase.buildingId];
+        [photoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count > 0)
+                {
+                    BuildingPhoto* photoObject = objects[0];
+                    PFFile *photo = photoObject.image;
+                    [photo getDataInBackgroundWithBlock:^(NSData *data, NSError *photoError) {
+                        if (!photoError) {
+                            NSData *imageData = data;
+                            UIImage *image = [UIImage imageWithData:imageData];
+                            [self.caseFirstImageView setImage:image];
+                            
+                            self.caseFirstImageView.layer.cornerRadius = 35;
+                            self.caseFirstImageView.layer.masksToBounds = YES;
+                        }
+                    }];
+                    
+                }
+            }
+        }];
+    }
 }
 
 

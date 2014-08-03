@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HotelProfileViewController">
             <connections>
+                <outlet property="closeButton" destination="cof-lI-Okv" id="X9I-D2-XFF"/>
+                <outlet property="hotelImageView" destination="fGb-kw-Z48" id="HWV-S4-ueR"/>
+                <outlet property="tableView" destination="4E0-lh-QkY" id="4mk-ob-buk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,9 +16,53 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fGb-kw-Z48">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="247" id="Lzf-iI-Gt1"/>
+                        <constraint firstAttribute="width" constant="320" id="YhL-f9-KoE"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cof-lI-Okv">
+                    <rect key="frame" x="20" y="20" width="22" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="4gO-Oc-4Tg"/>
+                        <constraint firstAttribute="height" constant="26" id="xIy-S4-bc5"/>
+                    </constraints>
+                    <state key="normal" image="ic_nav_close_normal.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClose:" destination="-1" eventType="touchUpInside" id="Ee5-M3-0fA"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4E0-lh-QkY">
+                    <rect key="frame" x="0.0" y="247" width="320" height="321"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <constraints>
+                <constraint firstItem="fGb-kw-Z48" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="20W-yb-e2t"/>
+                <constraint firstItem="fGb-kw-Z48" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4x7-dZ-CQc"/>
+                <constraint firstAttribute="trailing" secondItem="4E0-lh-QkY" secondAttribute="trailing" id="7oz-DX-rdZ"/>
+                <constraint firstAttribute="bottom" secondItem="4E0-lh-QkY" secondAttribute="bottom" id="FVR-L8-Uou"/>
+                <constraint firstItem="4E0-lh-QkY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TqY-ha-mfz"/>
+                <constraint firstAttribute="trailing" secondItem="fGb-kw-Z48" secondAttribute="trailing" id="ahX-4D-k0N"/>
+                <constraint firstItem="4E0-lh-QkY" firstAttribute="top" secondItem="fGb-kw-Z48" secondAttribute="bottom" id="chq-tg-Y8N"/>
+                <constraint firstItem="cof-lI-Okv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="h2o-kY-JHB"/>
+                <constraint firstItem="cof-lI-Okv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xRS-1O-V25"/>
+                <constraint firstItem="4E0-lh-QkY" firstAttribute="top" secondItem="fGb-kw-Z48" secondAttribute="bottom" id="zqf-ST-DK3"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_nav_close_normal.png" width="22" height="26"/>
+    </resources>
 </document>

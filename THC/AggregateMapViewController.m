@@ -166,7 +166,7 @@
             if (!error) {
                 // The find succeeded.
                 NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
-                NSString *text = [NSString stringWithFormat:@"%d", objects.count];
+                NSString *text = [NSString stringWithFormat:@"%lu", objects.count];
                 UIImage *pin = [UIImage imageNamed:@"btn_map_pin_normal"];
                 CGPoint point = CGPointMake(annotationView.bounds.origin.x + pin.size.width / 2.5f, annotationView.bounds.origin.y + pin.size.height / 3);
                 
@@ -209,7 +209,7 @@
     
     BuildingCalloutView *buildingCallout = nibs[0];
     
-    buildingCallout.frame = CGRectMake(7, 7, 292, 120);
+    buildingCallout.frame = CGRectMake(7, 7, 292, 100);
     // buildingCallout.frame = CGRectMake(7, mapView.frame.size.height - 127, 292, 120);
     [buildingCallout.layer setShadowColor:[[UIColor blackColor] CGColor]];
     [buildingCallout.layer setShadowOpacity:.35f];
@@ -224,6 +224,7 @@
     
     buildingCallout.hotelNameLabel.text = building.buildingName;
     buildingCallout.hotelDescriptionLabel.text = building.streetAddress;
+    buildingCallout.building = building;
     
     PFQuery *photoQuery = [BuildingPhoto query];
     [photoQuery whereKey:@"buildingId" equalTo:building.objectId];

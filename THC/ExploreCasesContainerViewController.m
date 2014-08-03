@@ -11,6 +11,7 @@
 #import "ViolationSubmissionViewController.h"
 #import "HappySunViewController.h"
 #import "AssignmentViewController.h"
+#import "HotelProfileViewController.h"
 
 @interface ExploreCasesContainerViewController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -64,12 +65,18 @@
     [self.createReportButton.layer setShadowRadius:1];
     [self.createReportButton.layer setShadowOffset:CGSizeMake(1, 1)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:nil selector:@selector(showHotelView:) name:@"CalloutTapped" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHotelView:) name:@"CalloutTapped" object:nil];
     
 }
 
-- (void)showHotelView:(id)obj {
+- (void)showHotelView:(NSNotification *)obj {
     
+    NSDictionary *userInfo = obj.userInfo;
+    UIImage *image = userInfo[@"image"];
+    Building *building = userInfo[@"building"];
+    
+    HotelProfileViewController *hpvc = [[HotelProfileViewController alloc] initWithBuilding:building andImage:image];
+    [self presentViewController:hpvc animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -163,10 +170,7 @@
     NSLog(@"Create new report.");
     ViolationSubmissionViewController *vsc = [[ViolationSubmissionViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vsc];
-//    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 0.196f green: 0.325f blue: 0.682f alpha: 1];
     nvc.navigationBar.barTintColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
-//    nvc.navigationBar.barTintColor = [UIColor colorWithRed: 0.667f green: 0.667f blue: 0.667f alpha: 0.35f];
-
     [self presentViewController:nvc animated:YES completion:nil];
 }
 
