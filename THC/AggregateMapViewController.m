@@ -50,10 +50,10 @@
 -(void)zoomInToTenderloin
 {
     MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
-    region.center.latitude = 37.78;
+    region.center.latitude = 37.773;
     region.center.longitude = -122.412752;
     
-    region.span.longitudeDelta = 0.05f;
+    region.span.longitudeDelta = 0.035f;
     region.span.latitudeDelta = 0.001f;
     [self.mapView setRegion:region animated:YES];
 }
@@ -179,9 +179,12 @@
                 UIGraphicsEndImageContext();
                 
                 annotationView.image = newImage;
-                [annotationView setNeedsDisplay];
-
+                annotationView.center = CGPointMake(annotationView.center.x, annotationView.center.y + 20);
                 
+                [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    annotationView.center = CGPointMake(annotationView.center.x, annotationView.center.y + 20);
+                } completion:nil];
+                [annotationView setNeedsDisplay];
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -194,6 +197,20 @@
     
     return annotationView;
 }
+
+//- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)annotationViews
+//{
+//    for (MKAnnotationView *annView in annotationViews)
+//    {
+//        NSLog(@"y! %f", annView.center.y);
+//        annView.center = CGPointMake(annView.center.x, annView.center.y - 20);
+//        annView.layer.opacity = 0;
+//        [UIView animateWithDuration:0.3 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//            annView.center = CGPointMake(annView.center.x, annView.center.y + 20);
+//            annView.alpha = 1;
+//        } completion:nil];
+//    }
+//}
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     
