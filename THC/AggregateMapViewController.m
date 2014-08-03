@@ -244,6 +244,25 @@
                         buildingCallout.imageView.layer.masksToBounds = YES;
                         buildingCallout.imageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
                         buildingCallout.imageView.layer.borderWidth = .5f;
+                        buildingCallout.violationsCountLabel.layer.cornerRadius = 5;
+                        buildingCallout.violationsCountLabel.textAlignment = NSTextAlignmentCenter;
+                        
+                        PFQuery *query = [PFQuery queryWithClassName:@"Case"];
+                        [query whereKey:@"buildingId" equalTo:building.objectId];
+                        [query whereKey:@"status" equalTo:@0];
+                        [query findObjectsInBackgroundWithBlock:^(NSArray *caseObjects, NSError *queryError) {
+                            if (!error) {
+                                // The find succeeded.
+                                NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
+                                NSString *text = [NSString stringWithFormat:@"%lu", caseObjects.count];
+                                buildingCallout.violationsCountLabel.text = text;
+                                
+                            } else {
+                                // Log details of the failure
+                                NSLog(@"Error: %@ %@", queryError, [queryError userInfo]);
+                            }
+                        }];
+
                         
                         
                         

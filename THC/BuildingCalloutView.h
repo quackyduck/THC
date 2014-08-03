@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *hotelNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *hotelDescriptionLabel;
 @property (strong, nonatomic) Building *building;
+@property (weak, nonatomic) IBOutlet UILabel *violationsCountLabel;
 
 @end
