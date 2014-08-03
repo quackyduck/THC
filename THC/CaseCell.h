@@ -34,5 +34,6 @@
 @property (assign) id<CaseCellDelegate> delegate;
 
 - (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment enableScroll:(BOOL)enable containingTable:(UITableView*)table;
+- (void)initWithCase:(Case*)myCase showAssignment:(BOOL)assignment enableScroll:(BOOL)enable containingTable:(UITableView*)table displayDescription:(BOOL)display useGray:(BOOL)gray;
 
 @end

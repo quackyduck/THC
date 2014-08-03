@@ -261,7 +261,7 @@
 - (void)configurePhotoCell:(DetailPhotoCell *)cell {
     
     NSArray *photos = self.caseInfo.photoIdList;
-    if (photos) {
+    if (photos && photos.count > 0) {
         
         PFQuery *query = [PhotoInfo query];
         [query whereKey:@"objectId" equalTo:photos[0]];

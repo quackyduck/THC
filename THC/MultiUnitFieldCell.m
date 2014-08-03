@@ -10,7 +10,7 @@
 #import "KxMenu.h"
 
 #define MultiUnitPetition @[@"YES", @"NO"]
-
+#define orangeColor [UIColor colorWithRed: 255.0f/255.0f green: 116.0f/255.0f blue: 47.0f/255.0f alpha: 1]
 
 @implementation MultiUnitFieldCell
 
@@ -47,17 +47,20 @@
     [menuItems addObject:[KxMenuItem menuItem:@"Is Multi-Unit Petition" image:nil target:nil action:nil]];
 
     for (NSString *option in multiUnitOptions) {
-        [menuItems addObject:[KxMenuItem menuItem:option image:nil target:self action:@selector(pushMenuItem:)]];
+        KxMenuItem *item = [KxMenuItem menuItem:option image:nil target:self action:@selector(pushMenuItem:)];
+        item.foreColor = [UIColor grayColor];
+        item.alignment = NSTextAlignmentCenter;
+        [menuItems addObject:item];
     }
     
     
     KxMenuItem *first = menuItems[0];
     //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-    first.foreColor = [UIColor grayColor];
+    first.foreColor = orangeColor;
 //
     first.alignment = NSTextAlignmentCenter;
     
-    [KxMenu setTintColor:[UIColor orangeColor]];
+    [KxMenu setTintColor:[UIColor whiteColor]];
     [KxMenu showMenuInView:view
                   fromRect:frame
                  menuItems:menuItems

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HotelProfileViewController : UIViewController
+@class Building;
+
+@interface HotelProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+- (id)initWithBuilding:(Building *)building andImage:(UIImage *)image;
+@property (weak, nonatomic) IBOutlet UIImageView *hotelImageView;
 
 @end

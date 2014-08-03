@@ -9,6 +9,7 @@
 #import "ViolationTypeFieldCell.h"
 #import "KxMenu.h"
 
+#define orangeColor [UIColor colorWithRed: 255.0f/255.0f green: 116.0f/255.0f blue: 47.0f/255.0f alpha: 1]
 //#define ViolationTypeList @[@"Mold", @"Leaks", @"Graffiti", @"Trash", @"Violence", @"Noise", @"Harrasment", @"Other"]
 #define ViolationTypeList @[@"Mold", @"Pests", @"Leaks", @"No working heater", @"Non functioning elevator", @"No hot Water", @"Broken Windows/Doors/Walls", @"Obstruction of Egress", @"General Maintenance", @"Security", @"Fire Detector", @"Carbon Mono Oxide Detector"]
 @implementation ViolationTypeFieldCell
@@ -46,17 +47,20 @@
     [menuItems addObject:[KxMenuItem menuItem:@"Select Violation Type" image:nil target:nil action:nil]];
 
     for (NSString *violation in violations) {
-        [menuItems addObject:[KxMenuItem menuItem:violation image:nil target:self action:@selector(pushMenuItem:)]];
+        KxMenuItem *item = [KxMenuItem menuItem:violation image:nil target:self action:@selector(pushMenuItem:)];
+        item.foreColor = [UIColor grayColor];
+        item.alignment = NSTextAlignmentCenter;
+        [menuItems addObject:item];
     }
     
     
     KxMenuItem *first = menuItems[0];
     //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-    first.foreColor = [UIColor greenColor];
+    first.foreColor = orangeColor;
     
     first.alignment = NSTextAlignmentCenter;
     
-    [KxMenu setTintColor:[UIColor orangeColor]];
+    [KxMenu setTintColor:[UIColor colorWithRed: 230.0f/255.0f green: 230.0f/255.0f blue: 230.0f/255.0f alpha: 1]];
     [KxMenu showMenuInView:view
                   fromRect:frame
                  menuItems:menuItems

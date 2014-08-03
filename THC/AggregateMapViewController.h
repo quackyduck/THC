@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Mapkit/MapKit.h>
 
+@class BuildingCalloutView;
 @interface AggregateMapViewController : UIViewController <UITextFieldDelegate, MKMapViewDelegate>
+@property (strong, nonatomic) BuildingCalloutView *currentCallout;
 
 @end

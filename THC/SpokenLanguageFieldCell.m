@@ -9,6 +9,7 @@
 #import "SpokenLanguageFieldCell.h"
 #import "KxMenu.h"
 
+#define orangeColor [UIColor colorWithRed: 255.0f/255.0f green: 116.0f/255.0f blue: 47.0f/255.0f alpha: 1]
 #define languageList @[@"English", @"Spanish", @"Chinese", @"Mandarin", @"Vietnami", @"Phillipino", @"Punjabi", @"Hindi", @"Gujrati"]
 
 @implementation SpokenLanguageFieldCell
@@ -46,16 +47,18 @@
     [menuItems addObject:[KxMenuItem menuItem:@"Select Spoken Language" image:nil target:nil action:nil]];
 
     for (NSString *language in languages) {
-        [menuItems addObject:[KxMenuItem menuItem:language image:nil target:self action:@selector(pushMenuItem:)]];
+        KxMenuItem *item = [KxMenuItem menuItem:language image:nil target:self action:@selector(pushMenuItem:)];
+        item.foreColor = [UIColor grayColor];
+        item.alignment = NSTextAlignmentCenter;
+        [menuItems addObject:item];
     }
         
     KxMenuItem *first = menuItems[0];
     //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-    first.foreColor = [UIColor greenColor];
-    
+    first.foreColor = orangeColor;
     first.alignment = NSTextAlignmentCenter;
     
-    [KxMenu setTintColor:[UIColor orangeColor]];
+    [KxMenu setTintColor:[UIColor colorWithRed: 230.0f/255.0f green: 230.0f/255.0f blue: 230.0f/255.0f alpha: 1]];
     [KxMenu showMenuInView:view
                   fromRect:frame
                  menuItems:menuItems

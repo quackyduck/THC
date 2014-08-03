@@ -35,7 +35,11 @@
 */
 - (IBAction)onTapCallout:(UITapGestureRecognizer *)sender {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalloutTapped" object:self];
+    UIImage *image = self.imageView.image;
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
+    [userInfo setObject:image forKey:@"image"];
+    [userInfo setObject:self.building forKey:@"building"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalloutTapped" object:self userInfo:userInfo];
     
 }
 
