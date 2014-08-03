@@ -15,7 +15,7 @@
 
 @interface HotelProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
-@property (weak, nonatomic) IBOutlet UIImageView *hotelImageView;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) Building *building;

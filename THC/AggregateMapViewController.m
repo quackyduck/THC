@@ -23,7 +23,7 @@
 @interface AggregateMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSMutableDictionary *buildingInfo;
-@property (strong, nonatomic) BuildingCalloutView *currentCallout;
+
 
 @end
 

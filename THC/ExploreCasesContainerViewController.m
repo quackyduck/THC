@@ -12,6 +12,7 @@
 #import "HappySunViewController.h"
 #import "AssignmentViewController.h"
 #import "HotelProfileViewController.h"
+#import "HotelProfileTransition.h"
 
 @interface ExploreCasesContainerViewController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -74,6 +75,11 @@
     Building *building = userInfo[@"building"];
     
     HotelProfileViewController *hpvc = [[HotelProfileViewController alloc] initWithBuilding:building andImage:image];
+    
+    hpvc.modalPresentationStyle = UIModalPresentationCustom;
+    HotelProfileTransition *transition = [[HotelProfileTransition alloc] init];
+    hpvc.transitioningDelegate = transition;
+
     [self presentViewController:hpvc animated:YES completion:nil];
 }
 
