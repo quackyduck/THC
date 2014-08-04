@@ -81,11 +81,12 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Case"];
     [query whereKey:@"buildingId" equalTo:building.objectId];
     [query whereKey:@"status" equalTo:@0];
+    query.cachePolicy = kPFCachePolicyNetworkElseCache;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
-            NSString *text = [NSString stringWithFormat:@"%lu", objects.count];
+            NSLog(@"Successfully got %lu cases for building %@ in pin", (unsigned long)objects.count, building.buildingName);
+            NSString *text = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
             UIImage *pin = [UIImage imageNamed:@"btn_map_pin_normal"];
             CGPoint point = CGPointMake(self.bounds.origin.x + pin.size.width / 2.5f, self.bounds.origin.y + 15);
             
@@ -101,7 +102,7 @@
             
             self.center = CGPointMake(self.center.x, self.center.y - 20);
             
-            [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [UIView animateWithDuration:0.4f delay:0 usingSpringWithDamping:0.6f initialSpringVelocity:0.7f options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.center = CGPointMake(self.center.x, self.center.y + 20);
             } completion:nil];
             

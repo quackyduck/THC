@@ -154,7 +154,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
+            NSLog(@"Successfully got %lu cases for building %@ after selection", (unsigned long)objects.count, building.buildingName);
             NSString *text = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
             UIImage *pin = [UIImage imageNamed:@"btn_map_pin_selected"];
             CGPoint point = CGPointMake(annotationView.bounds.origin.x + pin.size.width / 2.5f, annotationView.bounds.origin.y + 15);
@@ -224,14 +224,15 @@
                         buildingCallout.violationsCountLabel.textAlignment = NSTextAlignmentLeft;
                         buildingCallout.violationsCountLabel.backgroundColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
                         
-                        PFQuery *caseQuery = [Case query];
+                        PFQuery *caseQuery = [PFQuery queryWithClassName:@"Case"];
                         [caseQuery whereKey:@"buildingId" equalTo:building.objectId];
                         [caseQuery whereKey:@"status" equalTo:@0];
                         caseQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
+
                         [caseQuery findObjectsInBackgroundWithBlock:^(NSArray *caseObjects, NSError *queryError) {
                             if (!error) {
                                 // The find succeeded.
-                                NSLog(@"Successfully got %lu cases for building %@", (unsigned long)objects.count, building.buildingName);
+                                NSLog(@"Successfully got %lu cases for building %@ for callout", (unsigned long)caseObjects.count, building.buildingName);
                                 
                                 NSString *text;
                                 if (caseObjects.count == 1) {
