@@ -198,6 +198,10 @@
         
     } else {
     
+        if (myCase.buildingId == nil) {
+            myCase.buildingId = @"hmleALJfn5";
+        }
+        
         //Use buildingId to query for building name
         PFQuery *query = [Building query];
         query.cachePolicy = kPFCachePolicyCacheElseNetwork;
