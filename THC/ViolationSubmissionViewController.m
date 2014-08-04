@@ -50,7 +50,7 @@
 #define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo,  @"3": SubmitInfo}
 #define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details", @"3": @""}
 
-#define TRANSITION_DURATION 0.5
+#define TRANSITION_DURATION 0.3
 
 
 //#define FieldList    @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"address",   @"violationDescription"]
@@ -1402,6 +1402,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     }
     UIImageView *imageView = [self.imagesInScroll objectAtIndex:self.scrollImageIndex];
     CGRect imageFrame = [self.view convertRect:imageView.frame fromView:self.photoPickerCell.photoScrollView];
+    CGRect newFrame = imageFrame;
+    newFrame.origin.y = newFrame.origin.y + imageFrame.size.height-20;
 //    NSLog(@"original imageFRame %@", NSStringFromCGRect(imageFrame));
     CGPoint imageViewCenter = CGPointMake(imageFrame.size.width/2, imageFrame.size.height/2);
     CGPoint transitionCenter = [self.view convertPoint:imageViewCenter fromView:imageView];
@@ -1417,6 +1419,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         endFrame = toViewController.view.frame;
         beginFrame = imageFrame;
+        beginFrame = newFrame;
 //        NSLog(@"new beginFrame %@", NSStringFromCGRect(beginFrame));
         
 //        move = [toViewController.view snapshotViewAfterScreenUpdates:YES];
@@ -1432,6 +1435,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 //        NSLog(@"new fromViewController start frame %@", NSStringFromCGRect(beginFrame));
 
         endFrame = imageFrame;
+        endFrame = newFrame;
 //        NSLog(@"new endFrame %@", NSStringFromCGRect(endFrame));
 
         move = [fromViewController.view snapshotViewAfterScreenUpdates:YES];
