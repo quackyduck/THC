@@ -358,7 +358,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    NSLog(@"contentInset %@", NSStringFromUIEdgeInsets(self.tableView.contentInset));
+//    NSLog(@"contentInset %@", NSStringFromUIEdgeInsets(self.tableView.contentInset));
     
     CGRect kboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     //    self.tableView.contentInset = contentInsets;
@@ -377,14 +377,14 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     CGRect rectOfCellInSuperview = [self.tableView convertRect:rectOfCellInTableView toView:[self.tableView superview]];
     
     //    CGRect aRect = rectOfCellInSuperview;
-    NSLog(@"cell frame at row %d %@", self.currentIndexPath.row, NSStringFromCGRect(rectOfCellInSuperview));
-    NSLog(@"kboard frame %@", NSStringFromCGRect(kboardRect));
+//    NSLog(@"cell frame at row %d %@", self.currentIndexPath.row, NSStringFromCGRect(rectOfCellInSuperview));
+//    NSLog(@"kboard frame %@", NSStringFromCGRect(kboardRect));
     
     
     //    aRect.size.height -= kbSize.height;
     if (CGRectIntersectsRect(kboardRect, aRect) ) {
         //        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
-        NSLog(@"table row would move upwards");
+//        NSLog(@"table row would move upwards");
         self.tableView.contentInset = contentInsets;
         [self.tableView scrollToRowAtIndexPath:self.currentIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
@@ -393,7 +393,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    NSLog(@"keyboard hidden");
+//    NSLog(@"keyboard hidden");
     self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0.0, 0.0, 0.0);
 }
 
@@ -898,7 +898,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     CGPoint scrollViewCenter = CGPointMake(self.photoPickerCell.photoScrollView.frame.size.width/2, self.photoPickerCell.photoScrollView.frame.size.height/2);
     CGPoint activityCenter = [self.view convertPoint:scrollViewCenter fromView:self.photoPickerCell.photoScrollView];
     
-    NSLog(@"scroll view centre %@ :  %@", NSStringFromCGPoint(scrollViewCenter), NSStringFromCGPoint(activityCenter));
+//    NSLog(@"scroll view centre %@ :  %@", NSStringFromCGPoint(scrollViewCenter), NSStringFromCGPoint(activityCenter));
 //
 //    
     self.activityView.center = activityCenter;
@@ -1162,7 +1162,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 #pragma mark - button actions
 
 - (void)launchPhotoPicker:(id)sender {
-    NSLog(@"launch photo picker");
+//    NSLog(@"launch photo picker");
     AlbumListController *alc = [[AlbumListController alloc] init];
     alc.delegate = self;
     
@@ -1654,7 +1654,7 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
              forPhotoAtIndex:(NSInteger)index
                      tagInfo:(NSDictionary *)tagInfo
 {
-    NSLog(@"add new tag %@", tagText);
+//    NSLog(@"add new tag %@", tagText);
     
     ViolationPhoto *photo = self.violationPhotos[index];
     
@@ -1712,7 +1712,7 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
     if(!self.violationPhotos.count){
         return NO;
     }
-    NSLog(@"tagging enabled");
+//    NSLog(@"tagging enabled");
     return YES;
 }
 
@@ -1737,7 +1737,7 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
     if(!self.violationPhotos.count){
         return NO;
     }
-    NSLog(@"commenting enabled");
+//    NSLog(@"commenting enabled");
 
     return YES;
 }
@@ -1812,7 +1812,7 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
 
 - (void)photoPagesControllerDidDismiss:(EBPhotoPagesController *)photoPagesController
 {
-    NSLog(@"Finished using %@", photoPagesController);
+//    NSLog(@"Finished using %@", photoPagesController);
 }
 
 @end
