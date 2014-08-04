@@ -14,9 +14,10 @@
 #import "ViolationForm.h"
 #import "EBPhotoPagesDataSource.h"
 #import "EBPhotoPagesDelegate.h"
+#import "SubmitCell.h"
 
 
-@interface ViolationSubmissionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker, CLLocationManagerDelegate, EBPhotoPagesDataSource, EBPhotoPagesDelegate>
+@interface ViolationSubmissionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoPicker, CLLocationManagerDelegate, EBPhotoPagesDataSource, EBPhotoPagesDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, SubmitForm>
 
 @property (nonatomic, strong) AsseptPicker *assetPicker;
 

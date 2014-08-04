@@ -50,6 +50,7 @@
 #define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo,  @"3": SubmitInfo}
 #define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details", @"3": @""}
 
+#define TRANSITION_DURATION 1.0
 
 
 //#define FieldList    @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"address",   @"violationDescription"]
@@ -75,10 +76,11 @@
 @property (strong, nonatomic) NSIndexPath             *currentIndexPath;
 @property (strong, nonatomic) ViolationForm           *violationForm;
 @property (assign)            BOOL                    showFilledForm;
+@property (assign)            BOOL                    isPresenting;
 @property (strong, nonatomic) CLLocationManager       *locationManager;
 @property (strong, nonatomic) PhotoPickerCell         *photoPickerCell;
-@property (nonatomic) CLLocationDegrees currentLatitude;
-@property (nonatomic) CLLocationDegrees currentLongitude;
+@property (nonatomic)         CLLocationDegrees       currentLatitude;
+@property (nonatomic)         CLLocationDegrees       currentLongitude;
 
 
 @end
@@ -193,7 +195,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
+                                                              message:@"Device has no camera library"
                                                              delegate:nil
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles: nil];
@@ -212,6 +214,8 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         
         
         self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        self.isPresenting = YES;
         
         self.imagesInScroll   = [NSMutableArray array];
         self.imagesToSubmit   = [NSMutableArray array];
@@ -641,10 +645,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         return cell;
     } else if ([fieldName isEqualToString:@"submit"]) {
         SubmitCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"SubmitCell" ];
-        
-        [cell.submitButton addTarget:self
-                     action:@selector(submitForm)
-           forControlEvents:UIControlEventTouchUpInside];
+        cell.submitDelegate = self;
+
+//        [cell.submitButton addTarget:self
+//                     action:@selector(submitForm)
+//           forControlEvents:UIControlEventTouchUpInside];
         cell.submitButton.userInteractionEnabled = YES;
         [cell.submitButton becomeFirstResponder];
 
@@ -756,7 +761,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         SubmitCell *cell = (SubmitCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.submitButton.userInteractionEnabled = YES;
         [cell.submitButton becomeFirstResponder];
-        [self.tapGestureRecognizer setEnabled:NO];
+//        [self.tapGestureRecognizer setEnabled:NO];
     } else if ([fieldName isEqualToString:@"photoPicker"]) {
         [self.tapGestureRecognizer setEnabled:NO];
     }else {
@@ -1343,7 +1348,130 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 //    [self.navigationController presentViewController:pvc animated:YES completion:nil];
     
     EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
+    
+//    photoPagesController.modalPresentationStyle = UIModalPresentationCustom;
+//    photoPagesController.transitioningDelegate = self;
+    
     [self presentViewController:photoPagesController animated:YES completion:nil];
+}
+
+#pragma Mark - Transition Delegate
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    
+    self.isPresenting = YES;
+
+    return self;
+    
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+ 
+    self.isPresenting = NO;
+
+    return self;
+}
+
+
+// This is used for percent driven interactive transitions, as well as for container controllers that have companion animations that might need to
+// synchronize with the main animation.
+- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
+    
+    return TRANSITION_DURATION;
+}
+// This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.
+- (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
+    
+    UIView *containerView = [transitionContext containerView];
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewController   = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    toViewController.view.frame = containerView.frame;
+    [containerView addSubview:toViewController.view];
+    
+    toViewController.view.alpha = 0;
+//    toViewController.view.transform = CGAffineTransformMakeScale(0, 0);
+    [UIView animateWithDuration:TRANSITION_DURATION animations:^{
+        toViewController.view.alpha = 1;
+//        toViewController.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
+
+    } completion:^(BOOL finished) {
+        [transitionContext completeTransition:YES];
+    }];
+    
+//    CGRect beginFrame;
+//    CGRect endFrame;
+//    
+//    UIView *move = nil;
+//    ViolationSubmissionViewController *first = nil;
+//    EBPhotoPagesController *second = nil;
+//    
+//    if (self.isPresenting) {
+//        
+//        first = (ViolationSubmissionViewController *)fromViewController;
+//        second = (EBPhotoPagesController *)toViewController;
+//        UIImageView *moveImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[self.imagesToSubmit objectAtIndex:0] ]];
+//        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
+//        CGRect imageFrame = [self.view convertRect:imageView.frame fromView:self.photoPickerCell.photoScrollView];
+//        NSLog(@"image view frame frame %@", NSStringFromCGRect(imageView.frame));
+//        NSLog(@"new frame %@", NSStringFromCGRect(imageFrame));
+//        
+//        CGRect newRect = CGRectInset(imageFrame, -10, -10);
+//        NSLog(@"new rect %@", NSStringFromCGRect(newRect));
+//
+//        UIView *moveView = [[UIView alloc] initWithFrame:newRect];
+//        [moveView addSubview:moveImageView];
+//        
+//        
+//
+//        
+//        beginFrame = imageFrame;
+//        endFrame = second.view.frame;
+//        
+//        move = [moveView snapshotViewAfterScreenUpdates:YES];
+//        move.frame = beginFrame;
+//        imageView.alpha = 0;
+//        first.view.alpha = 1;
+//        
+//    } else {
+//        
+//        first = (ViolationSubmissionViewController *)toViewController;
+//        second = (EBPhotoPagesController *)fromViewController;
+//        
+//        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
+//
+//        endFrame = imageView.frame;
+//        beginFrame = second.view.frame;
+//        
+//        move = [imageView snapshotViewAfterScreenUpdates:YES];
+//        move.frame = beginFrame;
+//        second.view.alpha = 0;
+////        second.view.alpha = 1;
+//        
+//    }
+//    
+//    [containerView addSubview:move];
+//    
+//    [UIView animateWithDuration:TRANSITION_DURATION animations:^{
+//        NSLog(@"Animation...");
+//        move.frame = endFrame;
+//        fromViewController.view.alpha = 0;
+//        toViewController.view.alpha = 1;
+//        
+//        
+//    } completion:^(BOOL finished) {
+//        NSLog(@"Completion...");
+//        [move removeFromSuperview];
+//        [containerView addSubview:toViewController.view];
+//        [transitionContext completeTransition: YES];
+    
+//        if (self.isPresenting) {
+//            second.imageView.alpha = 1;
+//        } else {
+//            first.imageView.alpha = 1;
+//        }
+        
+        
+//    }];
 }
 
 #pragma Location

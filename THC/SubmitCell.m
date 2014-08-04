@@ -22,7 +22,8 @@
     // Configure the view for the selected state
 }
 
-//- (IBAction)submitTheForm:(UIButton *)sender {
+- (IBAction)submitTheForm:(UIButton *)sender {
 //    NSLog(@"To implement submit");
-//}
+    [self.submitDelegate submitForm];
+}
 @end
