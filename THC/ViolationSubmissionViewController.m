@@ -50,7 +50,7 @@
 #define FormFields    @{@"0": PersonalInfo, @"1": HotelInfo, @"2": ViolationInfo,  @"3": SubmitInfo}
 #define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details", @"3": @""}
 
-#define TRANSITION_DURATION 1.0
+#define TRANSITION_DURATION 0.5
 
 
 //#define FieldList    @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"address",   @"violationDescription"]
