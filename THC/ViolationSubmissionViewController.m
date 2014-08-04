@@ -77,6 +77,7 @@
 @property (strong, nonatomic) ViolationForm           *violationForm;
 @property (assign)            BOOL                    showFilledForm;
 @property (assign)            BOOL                    isPresenting;
+@property (assign)            NSUInteger              scrollImageIndex;
 @property (strong, nonatomic) CLLocationManager       *locationManager;
 @property (strong, nonatomic) PhotoPickerCell         *photoPickerCell;
 @property (nonatomic)         CLLocationDegrees       currentLatitude;
@@ -982,10 +983,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
             
-            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer:)];
             imageTap.numberOfTapsRequired = 1;
             [imageView addGestureRecognizer:imageTap];
             imageView.userInteractionEnabled = YES;
+            imageView.tag = index;
             
             
             
@@ -1104,7 +1106,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
             imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
             [imageView setClipsToBounds:YES];
             
-            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+            UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer:)];
             imageTap.numberOfTapsRequired = 1;
             [imageView addGestureRecognizer:imageTap];
             imageView.userInteractionEnabled = YES;
@@ -1306,7 +1308,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         imageView.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.5].CGColor;
         [imageView setClipsToBounds:YES];
         
-        UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer)];
+        UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotoViewer:)];
         imageTap.numberOfTapsRequired = 1;
         [imageView addGestureRecognizer:imageTap];
         imageView.userInteractionEnabled = YES;
@@ -1341,16 +1343,18 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 
 }
 
-- (void)showPhotoViewer {
+- (void)showPhotoViewer:(UITapGestureRecognizer *)tap {
     
 //    PhotoViewerController *pvc = [[PhotoViewerController alloc] init];
 //    [pvc setImagesForViewing:self.imagesToShow withOrientations:self.imagesToSubmitOrientation];
 //    [self.navigationController presentViewController:pvc animated:YES completion:nil];
     
+    self.scrollImageIndex = tap.view.tag;
+//    NSLog(@"scroll Image index %d", self.scrollImageIndex);
     EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
     
-//    photoPagesController.modalPresentationStyle = UIModalPresentationCustom;
-//    photoPagesController.transitioningDelegate = self;
+    photoPagesController.modalPresentationStyle = UIModalPresentationCustom;
+    photoPagesController.transitioningDelegate = self;
     
     [self presentViewController:photoPagesController animated:YES completion:nil];
 }
@@ -1388,90 +1392,163 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     toViewController.view.frame = containerView.frame;
     [containerView addSubview:toViewController.view];
     
+    CGRect beginFrame;
+    CGRect endFrame;
+    UIView *move = nil;
+    
+//    NSLog(@"container tag %d", containerView.tag);
+    if (self.scrollImageIndex >= self.imagesInScroll.count) {
+        self.scrollImageIndex = self.imagesInScroll.count - 1;
+    }
+    UIImageView *imageView = [self.imagesInScroll objectAtIndex:self.scrollImageIndex];
+    CGRect imageFrame = [self.view convertRect:imageView.frame fromView:self.photoPickerCell.photoScrollView];
+//    NSLog(@"original imageFRame %@", NSStringFromCGRect(imageFrame));
+    CGPoint imageViewCenter = CGPointMake(imageFrame.size.width/2, imageFrame.size.height/2);
+    CGPoint transitionCenter = [self.view convertPoint:imageViewCenter fromView:imageView];
+    transitionCenter.y = transitionCenter.y + imageFrame.size.height/2;
+    imageFrame =   CGRectMake(transitionCenter.x, transitionCenter.y, 0, 0);
+
+
     toViewController.view.alpha = 0;
+    
+    if (self.isPresenting) {
+        
+ 
+        
+        endFrame = toViewController.view.frame;
+        beginFrame = imageFrame;
+//        NSLog(@"new beginFrame %@", NSStringFromCGRect(beginFrame));
+        
+//        move = [toViewController.view snapshotViewAfterScreenUpdates:YES];
+//        move.frame = beginFrame;
+//        [containerView addSubview:move];
+
+
+
+        toViewController.view.frame = beginFrame;
+    } else {
+        
+        beginFrame = fromViewController.view.frame;
+//        NSLog(@"new fromViewController start frame %@", NSStringFromCGRect(beginFrame));
+
+        endFrame = imageFrame;
+//        NSLog(@"new endFrame %@", NSStringFromCGRect(endFrame));
+
+        move = [fromViewController.view snapshotViewAfterScreenUpdates:YES];
+        move.frame = beginFrame;
+        fromViewController.view.alpha = 0;
+        
+        [containerView addSubview:move];
+
+        
+//        toViewController.view.alpha = 0;
+
+    }
+    
 //    toViewController.view.transform = CGAffineTransformMakeScale(0, 0);
     [UIView animateWithDuration:TRANSITION_DURATION animations:^{
-        toViewController.view.alpha = 1;
+        if (self.isPresenting) {
+            
+            toViewController.view.alpha = 1;
+            toViewController.view.frame = endFrame;
+//            move.frame = endFrame;
+            
+        } else {
+            move.frame = endFrame;
+//            fromViewController.view.frame = endFrame;
+//            fromViewController.view.alpha = 0;
+            toViewController.view.alpha = 1;
+//            toViewController.view.frame = beginFrame;
+
+        }
 //        toViewController.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
 
     } completion:^(BOOL finished) {
+        [move removeFromSuperview];
         [transitionContext completeTransition:YES];
     }];
     
-//    CGRect beginFrame;
-//    CGRect endFrame;
-//    
-//    UIView *move = nil;
-//    ViolationSubmissionViewController *first = nil;
-//    EBPhotoPagesController *second = nil;
-//    
-//    if (self.isPresenting) {
-//        
-//        first = (ViolationSubmissionViewController *)fromViewController;
-//        second = (EBPhotoPagesController *)toViewController;
-//        UIImageView *moveImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[self.imagesToSubmit objectAtIndex:0] ]];
-//        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
-//        CGRect imageFrame = [self.view convertRect:imageView.frame fromView:self.photoPickerCell.photoScrollView];
-//        NSLog(@"image view frame frame %@", NSStringFromCGRect(imageView.frame));
-//        NSLog(@"new frame %@", NSStringFromCGRect(imageFrame));
-//        
+    
+    /*
+    CGRect beginFrame;
+    CGRect endFrame;
+    
+    UIView *move = nil;
+    ViolationSubmissionViewController *first = nil;
+    EBPhotoPagesController *second = nil;
+    
+    if (self.isPresenting) {
+        
+        first = (ViolationSubmissionViewController *)fromViewController;
+        second = (EBPhotoPagesController *)toViewController;
+        UIImageView *moveImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[self.imagesToSubmit objectAtIndex:0] ]];
+        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
+        CGRect imageFrame = [self.view convertRect:imageView.frame fromView:self.photoPickerCell.photoScrollView];
+        NSLog(@"image view frame frame %@", NSStringFromCGRect(imageView.frame));
+        NSLog(@"new frame %@", NSStringFromCGRect(imageFrame));
+        
 //        CGRect newRect = CGRectInset(imageFrame, -10, -10);
 //        NSLog(@"new rect %@", NSStringFromCGRect(newRect));
 //
 //        UIView *moveView = [[UIView alloc] initWithFrame:newRect];
 //        [moveView addSubview:moveImageView];
-//        
-//        
-//
-//        
-//        beginFrame = imageFrame;
+        
+        endFrame = second.view.frame;
+        second.view.frame = imageFrame;
+        
+        
+
+        
+        beginFrame = imageFrame;
 //        endFrame = second.view.frame;
-//        
+        
 //        move = [moveView snapshotViewAfterScreenUpdates:YES];
 //        move.frame = beginFrame;
 //        imageView.alpha = 0;
-//        first.view.alpha = 1;
-//        
-//    } else {
-//        
-//        first = (ViolationSubmissionViewController *)toViewController;
-//        second = (EBPhotoPagesController *)fromViewController;
-//        
-//        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
+        first.view.alpha = 1;
+        
+    } else {
+        
+        first = (ViolationSubmissionViewController *)toViewController;
+        second = (EBPhotoPagesController *)fromViewController;
+        
+        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
+
+        endFrame = imageView.frame;
+        beginFrame = second.view.frame;
+        
+        move = [imageView snapshotViewAfterScreenUpdates:YES];
+        move.frame = beginFrame;
+        second.view.alpha = 0;
+//        second.view.alpha = 1;
+        
+    }
 //
-//        endFrame = imageView.frame;
-//        beginFrame = second.view.frame;
-//        
-//        move = [imageView snapshotViewAfterScreenUpdates:YES];
-//        move.frame = beginFrame;
-//        second.view.alpha = 0;
-////        second.view.alpha = 1;
-//        
-//    }
-//    
 //    [containerView addSubview:move];
 //    
-//    [UIView animateWithDuration:TRANSITION_DURATION animations:^{
+    [UIView animateWithDuration:TRANSITION_DURATION animations:^{
 //        NSLog(@"Animation...");
-//        move.frame = endFrame;
-//        fromViewController.view.alpha = 0;
-//        toViewController.view.alpha = 1;
-//        
-//        
-//    } completion:^(BOOL finished) {
+        move.frame = endFrame;
+        second.view.frame = endFrame;
+        fromViewController.view.alpha = 0;
+        toViewController.view.alpha = 1;
+    
+
+    } completion:^(BOOL finished) {
 //        NSLog(@"Completion...");
-//        [move removeFromSuperview];
-//        [containerView addSubview:toViewController.view];
-//        [transitionContext completeTransition: YES];
+        [move removeFromSuperview];
+        [containerView addSubview:toViewController.view];
+        [transitionContext completeTransition: YES];
     
 //        if (self.isPresenting) {
 //            second.imageView.alpha = 1;
 //        } else {
 //            first.imageView.alpha = 1;
 //        }
+    
         
-        
-//    }];
+    }];
+     */
 }
 
 #pragma Location
@@ -1501,7 +1578,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     
     if (self.violationForm) {
         [self.violationForm computeHotelDistancesFromLocation:newLocation ];
-        NSLog(@"Done with computeHotelDistancesFromLocation");
+//        NSLog(@"Done with computeHotelDistancesFromLocation");
     }
 }
 
