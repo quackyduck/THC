@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubmissionValidationViewController">
             <connections>
                 <outlet property="checkMarkImageView" destination="Srk-Xk-CZc" id="wqN-KC-YFG"/>
+                <outlet property="cloudsView" destination="OJx-vP-B0n" id="1lX-1i-U6R"/>
                 <outlet property="summaryLabel" destination="UDQ-98-0AP" id="j6t-7N-Sjk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="violationImageView" destination="PiB-cT-Dww" id="0b6-Zn-H1V"/>
@@ -18,6 +19,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OJx-vP-B0n">
+                    <rect key="frame" x="0.0" y="104" width="320" height="205"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PiB-cT-Dww">
                     <rect key="frame" x="63" y="109" width="194" height="194"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

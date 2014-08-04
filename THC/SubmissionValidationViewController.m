@@ -17,9 +17,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *violationImageView;
 @property (weak, nonatomic) IBOutlet UILabel *violationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
+@property (weak, nonatomic) IBOutlet UIView *cloudsView;
 
 @property (strong, nonatomic) Case *myCase;
 @property (strong, nonatomic) UIImage *firstPhoto;
+@property(strong, nonatomic) UIImageView *cloudImageView3;
+@property(strong, nonatomic) UIImageView *cloudImageView4;
+@property(assign, nonatomic) CGFloat screenWidth;
 
 - (IBAction)onDownSwipe:(UISwipeGestureRecognizer *)sender;
 
@@ -49,6 +53,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    self.screenWidth = screenRect.size.width;
     
     UIColor * orangeNavBarColor = [UIColor colorWithRed: 1 green: 0.455f blue: 0.184f alpha: 1];
     
@@ -87,12 +94,45 @@
     }];
     
     self.summaryLabel.text = [NSString stringWithFormat:@"Summary of Case #%@", self.myCase.caseId];
+    
+    UIImage *cloud1 = [UIImage imageNamed:@"clouds2"];
+    self.cloudImageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cloud1.size.width, cloud1.size.height)];
+    self.cloudImageView3.image = cloud1;
+    
+    self.cloudImageView4 = [[UIImageView alloc] initWithFrame:CGRectMake(320, 0, cloud1.size.width, cloud1.size.height)];
+    self.cloudImageView4.image = cloud1;
+    
+    self.cloudImageView3.alpha = 0;
+    self.cloudImageView4.alpha = 0;
+    
+    [self.cloudsView addSubview:self.cloudImageView3];
+    [self.cloudsView addSubview:self.cloudImageView4];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [self cloudAnimation:self.cloudImageView3 firstDuration:8 secondDuration:16];
+    [self cloudAnimation:self.cloudImageView4 firstDuration:16 secondDuration:16];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)cloudAnimation:(UIImageView *)cloud firstDuration:(NSInteger)firstDuration secondDuration:(NSInteger)secondDuration   {
+    [UIView animateWithDuration:firstDuration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        NSLog(@"current x %f, %f", cloud.center.x, -cloud.frame.size.width / 2);
+        cloud.alpha = 0.3f;
+        cloud.center = CGPointMake(-cloud.frame.size.width / 2, cloud.center.y);
+    } completion:^(BOOL finished) {
+        NSLog(@"skdfjsdf %f", cloud.center.x);
+        cloud.center = CGPointMake(self.screenWidth + cloud.frame.size.width / 2, cloud.center.y);
+        [UIView animateWithDuration:secondDuration delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionRepeat animations:^{
+            cloud.center = CGPointMake(-cloud.frame.size.width / 2, cloud.center.y);
+        } completion:nil];
+    }];
 }
 
 - (IBAction)dismissView:(id)sender

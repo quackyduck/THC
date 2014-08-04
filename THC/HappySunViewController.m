@@ -47,12 +47,29 @@
 -(void)viewDidAppear:(BOOL)animated {
     if(!self.animating) {
         self.animating = YES;
+        
+        self.cloudImageView3.frame = CGRectMake(0, self.cloudImageView3.frame.origin.y, self.cloudImageView3.frame.size.width,self.cloudImageView3.frame.size.height);
+        self.cloudImageView4.frame = CGRectMake(320, self.cloudImageView4.frame.origin.y, self.cloudImageView4.frame.size.width,self.cloudImageView4.frame.size.height);
+        
+        [UIView animateWithDuration:1 animations:^{
+            self.cloudImageView3.alpha = 1;
+            self.cloudImageView4.alpha = 1;
+        }];
+        
+        [self cloudAnimation:self.cloudImageView3 firstDuration:8 secondDuration:16];
+        [self cloudAnimation:self.cloudImageView4 firstDuration:16 secondDuration:16];
         [self rayRotateWithOptions:UIViewAnimationOptionCurveLinear];
     }
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     self.animating = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.cloudImageView3.alpha = 0;
+        self.cloudImageView4.alpha = 0;
+    }];
+    
 }
 
 - (void)viewDidLoad
@@ -112,8 +129,8 @@
     UIView *mainContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 306, 416)];
     mainContainer.backgroundColor = [UIColor colorWithRed:247.0f/255.0f green:230.0f/255.0f blue:195.0f/255.0f alpha:1];
     
-    [cloudBackContainer addSubview:self.cloudImageView1];
-    [cloudBackContainer addSubview:self.cloudImageView2];
+//    [cloudBackContainer addSubview:self.cloudImageView1];
+//    [cloudBackContainer addSubview:self.cloudImageView2];
     [cloudFrontContainer addSubview:self.cloudImageView3];
     [cloudFrontContainer addSubview:self.cloudImageView4];
     
@@ -138,10 +155,10 @@
     
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:(arc4random() % 3) + 5 target:self selector:@selector(blinking) userInfo:nil repeats:YES];
     
-    [self cloudAnimation:self.cloudImageView1 firstDuration:12 secondDuration:24 delay:0];
-    [self cloudAnimation:self.cloudImageView2 firstDuration:24 secondDuration:24 delay:0];
-    [self cloudAnimation:self.cloudImageView3 firstDuration:8 secondDuration:16 delay:0];
-    [self cloudAnimation:self.cloudImageView4 firstDuration:16 secondDuration:16 delay:0];
+//    [self cloudAnimation:self.cloudImageView1 firstDuration:12 secondDuration:24];
+//    [self cloudAnimation:self.cloudImageView2 firstDuration:24 secondDuration:24];
+    [self cloudAnimation:self.cloudImageView3 firstDuration:8 secondDuration:16];
+    [self cloudAnimation:self.cloudImageView4 firstDuration:16 secondDuration:16];
     
     [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
         self.rayRotate.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
@@ -182,9 +199,10 @@
                      }];
 }
 
-- (void)cloudAnimation:(UIImageView *)cloud firstDuration:(NSInteger)firstDuration secondDuration:(NSInteger)secondDuration delay:(NSInteger)delay {
-    [UIView animateWithDuration:firstDuration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
+- (void)cloudAnimation:(UIImageView *)cloud firstDuration:(NSInteger)firstDuration secondDuration:(NSInteger)secondDuration   {
+    [UIView animateWithDuration:firstDuration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         cloud.center = CGPointMake(-cloud.frame.size.width / 2, cloud.center.y);
+        NSLog(@"cloud position %f ", cloud.center.x);
     } completion:^(BOOL finished) {
         cloud.center = CGPointMake(self.screenWidth + cloud.frame.size.width / 2, cloud.center.y);
         [UIView animateWithDuration:secondDuration delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionRepeat animations:^{
