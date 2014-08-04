@@ -1,0 +1,49 @@
+THC Final Public Demo Script
+
+--------------------------------
+
+Introduction
+ - 3 use cases (map exploration, case creation, and case management)
+ - 2 roles (tenant/public, THS staff)
+ - focus on clean functionality over visual flourish (something like that)
+
+ 1) Tenant (not yet logged in)
+ - splash screen
+ - explore view
+    - aggregate view for all hotels
+    - can be used to find hotels with minimal # of violations
+- tap specific hotel to zoom in, mention case number
+- hit hotel image to go to...
+- hotel profile view
+    - can see all cases for that particular hotel
+    - no private info shown in public view
+    - show that creating a report from this screen populates the correct hotel
+- exit back to explore, switch to Cases tab
+- Log in
+
+2) Staff (logged in)
+- mention how, to more fully explain the case management, we will first create a case ourself
+- Create report
+    - tap bottom button
+    - Some fields pre-populate based on user, leave other fields blank for speed purposes
+    - Add rat photo
+    - Comment and tag photo, then delete (to show all functionality, of course)
+    - Submit, go to validation screen, and dismiss back to case table
+- Case management workflow
+    a) Assign new cases
+        - call out presence of newly created case in the 'New' tab (remember case id)
+        - swipe to assign it to self
+        - swipe to assign another case to someone else
+    b) Work on cases assigned to you
+        - go to 'My Cases' tab
+        - tap our case to see detail view
+        - in detail view, show all fields that were created previously
+        - tap Email button to show email view (mention how THC specifically requested that)
+        - go back to 'My Tab'
+        - swipe case to close it
+    c) Browse all cases
+        - go to 'All' tab
+        - show how the case we closed is marked here
+        - show how we can see the case assigned to someone else earlier
+        - search for either above cases or random predetermined case
+- Celebrate  

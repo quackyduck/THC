@@ -116,10 +116,10 @@ typedef enum {
             self.assignInstructionView.alpha = 1;
         } completion:^(BOOL finished) {
             [self animateArrows:nil];
-            [NSTimer scheduledTimerWithTimeInterval:0.7
+            [NSTimer scheduledTimerWithTimeInterval:1.5
                                              target:self selector:@selector(animateArrows:)
                                            userInfo:nil repeats:YES];
-            [NSTimer scheduledTimerWithTimeInterval:3
+            [NSTimer scheduledTimerWithTimeInterval:2.5
                                              target:self selector:@selector(closeAssignArrowView:)
                                            userInfo:nil repeats:YES];
         }];
@@ -279,7 +279,7 @@ typedef enum {
         [UIView animateWithDuration:0.5 animations:^{
             self.closeInstructionView.alpha = 1;
         } completion:^(BOOL finished) {
-            [NSTimer scheduledTimerWithTimeInterval:3
+            [NSTimer scheduledTimerWithTimeInterval:2.5
                                              target:self selector:@selector(closeCloseArrowView:)
                                            userInfo:nil repeats:YES];
         }];
@@ -394,11 +394,9 @@ typedef enum {
 
 - (void)animateArrows:(NSTimer *)timer
 {
-    if (YES)
-    {
-        self.assignArrowImageView.frame = CGRectMake(53, 15, 21, 19);
-        self.closeArrowImageView.frame = CGRectMake(53, 15, 21, 19);
-        [UIView animateWithDuration:0.2
+    self.assignArrowImageView.frame = CGRectMake(53, 15, 21, 19);
+    self.closeArrowImageView.frame = CGRectMake(53, 15, 21, 19);
+    [UIView animateWithDuration:0.2
                           delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
@@ -407,14 +405,13 @@ typedef enum {
                      }
                      completion:^(BOOL finished){
                      }];
-    }
     
     
     CGRect endingArrowFrame = self.assignArrowImageView.frame;
     endingArrowFrame.origin.x = endingArrowFrame.origin.x - endingArrowFrame.size.width * 2;
     CGRect endingCloseArrowFrame = self.closeArrowImageView.frame;
     endingCloseArrowFrame.origin.x = endingCloseArrowFrame.origin.x - endingCloseArrowFrame.size.width * 2;
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:0.9
                           delay:0.2
                         options: UIViewAnimationOptionTransitionNone
                      animations:^{
