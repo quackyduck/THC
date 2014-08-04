@@ -54,11 +54,11 @@
     self.assignmentTableView.dataSource = self;
     self.assignmentTableView.delegate = self;
     [self.assignmentTableView registerNib:[UINib nibWithNibName:@"AssignmentsCell" bundle:nil] forCellReuseIdentifier:@"AssignmentsCell"];
-    self.assignmentTableView.backgroundColor = [UIColor blackColor];
-    self.assignmentTableView.alpha = 0.25;
-    self.assignmentTableView.layer.borderWidth = 1.0;
+    self.assignmentTableView.backgroundColor = [UIColor clearColor];
+    self.assignmentTableView.alpha = 0.80;
+    self.assignmentTableView.layer.borderWidth = 2.0;
     self.assignmentTableView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.assignmentTableView.layer.cornerRadius = 10;
+    self.assignmentTableView.layer.cornerRadius = 20;
     
     self.blurredBackgorundImageView.image = self.blurredImage;
     

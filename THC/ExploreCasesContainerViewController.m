@@ -185,8 +185,13 @@
 
 - (void)showAssignmentView:(Case *)swipedCase
 {
-    UIImage *image = [UIImage imageNamed:@"ic_success"];
-    AssignmentViewController *assignmentvc = [[AssignmentViewController alloc] initWithCase:swipedCase backgroundImage:image];
+    // Get blurred image of screen
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, self.view.window.screen.scale);
+    [self.view drawViewHierarchyInRect:self.view.frame afterScreenUpdates:NO];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    AssignmentViewController *assignmentvc = [[AssignmentViewController alloc] initWithCase:swipedCase backgroundImage:snapshotImage];
     assignmentvc.modalTransitionStyle = UIModalPresentationCustom;
     assignmentvc.transitioningDelegate = self;
     assignmentvc.delegate = self;

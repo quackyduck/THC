@@ -44,6 +44,7 @@ typedef enum {
 
 @property BOOL showAssignments;
 @property BOOL showInstructions;
+@property BOOL firstAnimation;
 @property caseTab currentTab;
 
 @end
@@ -65,12 +66,11 @@ typedef enum {
     [super viewDidLoad];
     
     self.searchBar.hidden = YES;
+    self.firstAnimation = YES;
     
     self.searchImage.image = [UIImage imageNamed:@"Search"];
-    self.assignArrowImageView.image = [UIImage imageNamed:@"ic_nav_back_normal"];
     self.assignInstructionView.alpha = 0;
     self.assignInstructionView.layer.cornerRadius = 20;
-    self.closeArrowImageView.image = [UIImage imageNamed:@"ic_nav_back_normal"];
     self.closeInstructionView.alpha = 0;
     self.closeInstructionView.layer.cornerRadius = 20;
     
@@ -112,13 +112,16 @@ typedef enum {
     [self getNew];
     
     if (self.showInstructions && self.currentTab == new) {
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionTransitionNone animations:^{
             self.assignInstructionView.alpha = 1;
         } completion:^(BOOL finished) {
-            sleep(2);
-            [UIView animateWithDuration:0.5 animations:^{
-                self.assignInstructionView.alpha = 0;
-            } completion:nil];
+            [self animateArrows:nil];
+            [NSTimer scheduledTimerWithTimeInterval:0.7
+                                             target:self selector:@selector(animateArrows:)
+                                           userInfo:nil repeats:YES];
+            [NSTimer scheduledTimerWithTimeInterval:3
+                                             target:self selector:@selector(closeAssignArrowView:)
+                                           userInfo:nil repeats:YES];
         }];
     }
 }
@@ -276,10 +279,9 @@ typedef enum {
         [UIView animateWithDuration:0.5 animations:^{
             self.closeInstructionView.alpha = 1;
         } completion:^(BOOL finished) {
-            sleep(2);
-            [UIView animateWithDuration:0.5 animations:^{
-                self.closeInstructionView.alpha = 0;
-            } completion:nil];
+            [NSTimer scheduledTimerWithTimeInterval:3
+                                             target:self selector:@selector(closeCloseArrowView:)
+                                           userInfo:nil repeats:YES];
         }];
     }
     self.showInstructions = NO;
@@ -376,39 +378,61 @@ typedef enum {
         
 }
 
-////Closing code
-//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (self.currentTab == myCases)
-//        return UITableViewCellEditingStyleDelete;
-//    else
-//        return UITableViewCellEditingStyleNone;
-//}
-//
-//- (void) setEditing:(BOOL)editing animated:(BOOL)animated
-//{
-//    [super setEditing:editing animated:animated];
-//    [self.caseTableView setEditing:editing animated:animated];
-//}
-//
-//- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (editingStyle == UITableViewCellEditingStyleDelete){
-//        //Close the case
-//        Case *caseInfo = self.cases[indexPath.row];
-//        caseInfo.status = caseClosed;
-//        [caseInfo saveInBackground];
-//        
-//        [self.cases removeObjectAtIndex:indexPath.row];
-//        
-//        /* Then remove the associated cell from the Table View */
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-//    }
-//    
-//}
-//-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return @"Close";
-//}
+- (void)closeAssignArrowView:(NSTimer *)timer
+{
+    [UIView animateWithDuration:0.5 animations:^{
+            self.assignInstructionView.alpha = 0;
+     } completion:nil];
+}
 
+- (void)closeCloseArrowView:(NSTimer *)timer
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.closeInstructionView.alpha = 0;
+    } completion:nil];
+}
+
+- (void)animateArrows:(NSTimer *)timer
+{
+    if (YES)
+    {
+        self.assignArrowImageView.frame = CGRectMake(53, 15, 21, 19);
+        self.closeArrowImageView.frame = CGRectMake(53, 15, 21, 19);
+        [UIView animateWithDuration:0.2
+                          delay:0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         self.assignArrowImageView.alpha = 1;
+                         self.closeArrowImageView.alpha = 1;
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    }
+    
+    
+    CGRect endingArrowFrame = self.assignArrowImageView.frame;
+    endingArrowFrame.origin.x = endingArrowFrame.origin.x - endingArrowFrame.size.width * 2;
+    CGRect endingCloseArrowFrame = self.closeArrowImageView.frame;
+    endingCloseArrowFrame.origin.x = endingCloseArrowFrame.origin.x - endingCloseArrowFrame.size.width * 2;
+    [UIView animateWithDuration:0.4
+                          delay:0.2
+                        options: UIViewAnimationOptionTransitionNone
+                     animations:^{
+                         self.assignArrowImageView.frame = endingArrowFrame;
+                         self.closeArrowImageView.frame = endingCloseArrowFrame;
+                     }
+                     completion:^(BOOL finished){
+                         [UIView animateWithDuration:0.1
+                                               delay:0
+                                             options: UIViewAnimationOptionTransitionNone
+                                          animations:^{
+                                              self.assignArrowImageView.alpha = 0;
+                                              self.closeArrowImageView.alpha = 0;
+                                          }
+                                          completion:^(BOOL finished){
+                                              self.firstAnimation = NO;
+                                          }];
+                     }];
+}
 
 @end
