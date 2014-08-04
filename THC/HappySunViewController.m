@@ -44,6 +44,17 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    if(!self.animating) {
+        self.animating = YES;
+        [self rayRotateWithOptions:UIViewAnimationOptionCurveLinear];
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    self.animating = NO;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -133,7 +144,7 @@
     [self cloudAnimation:self.cloudImageView4 firstDuration:16 secondDuration:16 delay:0];
     
     [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
-        self.rayRotate.transform = CGAffineTransformMakeScale(1.05, 1.05);
+        self.rayRotate.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
     } completion:^(BOOL finished) {
         
     }];
@@ -147,7 +158,7 @@
 - (void)cloudAddShadow:(UIImageView *) cloud {
     cloud.layer.shadowColor = [UIColor grayColor].CGColor;
     cloud.layer.shadowOffset = CGRectMake(0, 0, 5, 5).size;
-    cloud.layer.shadowOpacity = 0.2;
+    cloud.layer.shadowOpacity = 0.2f;
     cloud.layer.shadowRadius = 10;
 }
 
@@ -156,7 +167,7 @@
                           delay:0
                         options:options
                      animations:^{
-                         self.rayImageView.transform = CGAffineTransformRotate(self.rayImageView.transform, M_PI / 2);
+                         self.rayImageView.transform = CGAffineTransformRotate(self.rayImageView.transform, M_PI / 2.0f);
                      }
                      completion:^(BOOL finished) {
                          if (finished) {
@@ -185,8 +196,8 @@
 - (void)blinking {
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionRepeat animations:^{
         [UIView setAnimationRepeatCount:1];
-        self.leftEyeImageView.transform = CGAffineTransformMakeScale(1, 0.1);
-        self.rightEyeImageView.transform = CGAffineTransformMakeScale(1, 0.1);
+        self.leftEyeImageView.transform = CGAffineTransformMakeScale(1.0f, 0.1f);
+        self.rightEyeImageView.transform = CGAffineTransformMakeScale(1.0f, 0.1f);
     } completion:^(BOOL finished) {
         
         [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{

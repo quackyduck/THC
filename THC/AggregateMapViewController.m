@@ -186,6 +186,7 @@
     BuildingCalloutView *buildingCallout = nibs[0];
     
     buildingCallout.frame = CGRectMake(7, 7, 292, 100);
+    buildingCallout.alpha = 0;
     // buildingCallout.frame = CGRectMake(7, mapView.frame.size.height - 127, 292, 120);
     [buildingCallout.layer setShadowColor:[[UIColor blackColor] CGColor]];
     [buildingCallout.layer setShadowOpacity:.35f];
@@ -253,13 +254,25 @@
         }
     }];
 
-    self.currentCallout = buildingCallout;
+    
+    buildingCallout.center = CGPointMake(buildingCallout.center.x, buildingCallout.center.y + 30);
     [mapView addSubview:buildingCallout];
+    [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        buildingCallout.alpha = 1;
+        buildingCallout.center = CGPointMake(buildingCallout.center.x, buildingCallout.center.y - 30);
+    } completion:^(BOOL finished) {
+        self.currentCallout = buildingCallout;
+    }];
 
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    [self.currentCallout removeFromSuperview];
+    
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.currentCallout.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.currentCallout removeFromSuperview];
+    }];
 
 //    [mapView removeAnnotation:view.annotation];
 //    [mapView addAnnotation:view.annotation];
