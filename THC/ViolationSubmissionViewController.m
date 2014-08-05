@@ -51,7 +51,9 @@
 #define FormSectionHeader    @{@"0": @"Tenant Information", @"1": @"Hotel Information", @"2": @"Violation Details", @"3": @""}
 
 #define TRANSITION_DURATION 0.3
+#define DEGREES_TO_RADIANS(degree) (M_PI * degree / 180.0)
 
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
 //#define FieldList    @[@"name", @"languageSpoken", @"phone", @"email", @"hotel", @"address",   @"violationDescription"]
 
@@ -77,6 +79,7 @@
 @property (strong, nonatomic) ViolationForm           *violationForm;
 @property (assign)            BOOL                    showFilledForm;
 @property (assign)            BOOL                    isPresenting;
+@property (assign)            BOOL                    showPresentingImage;
 @property (assign)            NSUInteger              scrollImageIndex;
 @property (strong, nonatomic) CLLocationManager       *locationManager;
 @property (strong, nonatomic) PhotoPickerCell         *photoPickerCell;
@@ -1363,6 +1366,7 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
     
     self.isPresenting = YES;
+    self.showPresentingImage = YES;
 
     return self;
     
@@ -1470,6 +1474,28 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
     } completion:^(BOOL finished) {
         [move removeFromSuperview];
         [transitionContext completeTransition:YES];
+        
+//        CABasicAnimation *animation =
+//        [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+//        [animation setDuration:0.1];
+//        [animation setRepeatCount:3];
+//        [animation setAutoreverses:YES];
+//
+//        [animation setFromValue:[NSNumber numberWithFloat: 0.95 ]];
+//        [animation setToValue:[NSNumber numberWithFloat: +1.05 ]];
+//        
+//        [[imageView layer] addAnimation:animation forKey:@"transform.scale"];
+        
+        CABasicAnimation *rotationAnimation;
+        rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        rotationAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(10)];
+        rotationAnimation.duration = 0.05;
+        rotationAnimation.repeatCount = 2;
+        rotationAnimation.autoreverses = YES;
+        rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+        
+        [imageView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+        
     }];
     
     
@@ -1634,7 +1660,19 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        ViolationPhoto *photo = self.violationPhotos[index];
+        
+        ViolationPhoto *photo = nil;
+        if (self.showPresentingImage) {
+            photo = self.violationPhotos[self.scrollImageIndex];
+//            if (self.scrollImageIndex != 0) {
+//                ViolationPhoto *photoAtIndex0 = self.violationPhotos[0];
+//                self.violationPhotos[self.scrollImageIndex] = photoAtIndex0;
+//                self.violationPhotos[0] = photo;
+//            }
+            self.showPresentingImage = NO;
+        } else {
+        photo = self.violationPhotos[index];
+        }
         handler(photo.image);
     });
 }
