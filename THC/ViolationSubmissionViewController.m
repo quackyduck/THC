@@ -1424,19 +1424,11 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         endFrame = toViewController.view.frame;
         beginFrame = imageFrame;
         beginFrame = newFrame;
-//        NSLog(@"new beginFrame %@", NSStringFromCGRect(beginFrame));
         
-//        move = [toViewController.view snapshotViewAfterScreenUpdates:YES];
-//        move.frame = beginFrame;
-//        [containerView addSubview:move];
-
-
-
         toViewController.view.frame = beginFrame;
     } else {
         
         beginFrame = fromViewController.view.frame;
-//        NSLog(@"new fromViewController start frame %@", NSStringFromCGRect(beginFrame));
 
         endFrame = imageFrame;
         endFrame = newFrame;
@@ -1447,9 +1439,6 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
         fromViewController.view.alpha = 0;
         
         [containerView addSubview:move];
-
-        
-//        toViewController.view.alpha = 0;
 
     }
     
@@ -1486,99 +1475,23 @@ PhotoPickerCell                 *_stubPhotoPickerCell;
 //        
 //        [[imageView layer] addAnimation:animation forKey:@"transform.scale"];
         
-        CABasicAnimation *rotationAnimation;
-        rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-        rotationAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(10)];
-        rotationAnimation.duration = 0.05;
-        rotationAnimation.repeatCount = 2;
-        rotationAnimation.autoreverses = YES;
-        rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-        
-        [imageView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+        // Shake the imageView
+        if (!self.isPresenting) {
+            CABasicAnimation *rotationAnimation;
+            rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+            rotationAnimation.toValue = [NSNumber numberWithDouble:DEGREES_TO_RADIANS(10)];
+            rotationAnimation.duration = 0.05;
+            rotationAnimation.repeatCount = 2;
+            rotationAnimation.autoreverses = YES;
+            rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+            
+            [imageView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+        }
+
         
     }];
     
     
-    /*
-    CGRect beginFrame;
-    CGRect endFrame;
-    
-    UIView *move = nil;
-    ViolationSubmissionViewController *first = nil;
-    EBPhotoPagesController *second = nil;
-    
-    if (self.isPresenting) {
-        
-        first = (ViolationSubmissionViewController *)fromViewController;
-        second = (EBPhotoPagesController *)toViewController;
-        UIImageView *moveImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[self.imagesToSubmit objectAtIndex:0] ]];
-        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
-        CGRect imageFrame = [self.view convertRect:imageView.frame fromView:self.photoPickerCell.photoScrollView];
-        NSLog(@"image view frame frame %@", NSStringFromCGRect(imageView.frame));
-        NSLog(@"new frame %@", NSStringFromCGRect(imageFrame));
-        
-//        CGRect newRect = CGRectInset(imageFrame, -10, -10);
-//        NSLog(@"new rect %@", NSStringFromCGRect(newRect));
-//
-//        UIView *moveView = [[UIView alloc] initWithFrame:newRect];
-//        [moveView addSubview:moveImageView];
-        
-        endFrame = second.view.frame;
-        second.view.frame = imageFrame;
-        
-        
-
-        
-        beginFrame = imageFrame;
-//        endFrame = second.view.frame;
-        
-//        move = [moveView snapshotViewAfterScreenUpdates:YES];
-//        move.frame = beginFrame;
-//        imageView.alpha = 0;
-        first.view.alpha = 1;
-        
-    } else {
-        
-        first = (ViolationSubmissionViewController *)toViewController;
-        second = (EBPhotoPagesController *)fromViewController;
-        
-        UIImageView *imageView = [self.imagesInScroll objectAtIndex:0];
-
-        endFrame = imageView.frame;
-        beginFrame = second.view.frame;
-        
-        move = [imageView snapshotViewAfterScreenUpdates:YES];
-        move.frame = beginFrame;
-        second.view.alpha = 0;
-//        second.view.alpha = 1;
-        
-    }
-//
-//    [containerView addSubview:move];
-//    
-    [UIView animateWithDuration:TRANSITION_DURATION animations:^{
-//        NSLog(@"Animation...");
-        move.frame = endFrame;
-        second.view.frame = endFrame;
-        fromViewController.view.alpha = 0;
-        toViewController.view.alpha = 1;
-    
-
-    } completion:^(BOOL finished) {
-//        NSLog(@"Completion...");
-        [move removeFromSuperview];
-        [containerView addSubview:toViewController.view];
-        [transitionContext completeTransition: YES];
-    
-//        if (self.isPresenting) {
-//            second.imageView.alpha = 1;
-//        } else {
-//            first.imageView.alpha = 1;
-//        }
-    
-        
-    }];
-     */
 }
 
 #pragma Location
